@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Prácticas de Estadística con R",
+    "section": "",
+    "text": "¡Bienvenido a Prácticas de Estadística con R!\nEste libro presenta una recopilación de prácticas de Estadística Descriptiva e Inferencial con el lenguaje de programación R, con problemas aplicados a las Ciencias y las Ingenierías.\nNo es un libro para aprender a programar con R, ya que solo enseña el uso del lenguaje y de algunos de sus paquetes para resolver problemas de Estadística. Para quienes estén interesados en aprender a programar en este lenguaje, os recomiendo leer este manual de R."
+  },
+  {
+    "objectID": "index.html#licencia",
+    "href": "index.html#licencia",
+    "title": "Prácticas de Estadística con R",
+    "section": "Licencia",
+    "text": "Licencia\nEsta obra está bajo una licencia Reconocimiento – No comercial – Compartir bajo la misma licencia 3.0 España de Creative Commons. Para ver una copia de esta licencia, visite https://creativecommons.org/licenses/by-nc-sa/3.0/es/.\nCon esta licencia eres libre de:\n\nCopiar, distribuir y mostrar este trabajo.\nRealizar modificaciones de este trabajo.\n\nBajo las siguientes condiciones:\n\nReconocimiento. Debe reconocer los créditos de la obra de la manera especificada por el autor o el licenciador (pero no de una manera que sugiera que tiene su apoyo o apoyan el uso que hace de su obra).\nNo comercial. No puede utilizar esta obra para fines comerciales.\nCompartir bajo la misma licencia. Si altera o transforma esta obra, o genera una obra derivada, sólo puede distribuir la obra generada bajo una licencia idéntica a ésta.\n\nAl reutilizar o distribuir la obra, tiene que dejar bien claro los términos de la licencia de esta obra.\nEstas condiciones pueden no aplicarse si se obtiene el permiso del titular de los derechos de autor.\nNada en esta licencia menoscaba o restringe los derechos morales del autor."
+  },
+  {
+    "objectID": "01-intro.html#instalación-de-r",
+    "href": "01-intro.html#instalación-de-r",
+    "title": "1  Introducción a R",
+    "section": "1.1 Instalación de R",
+    "text": "1.1 Instalación de R\nR puede descargarse desde el sitio web oficial de R o desde el repositorio principal de paquetes de R CRAN. Basta con descargar el archivo de instalación correspondiente al sistema operativo de nuestro ordenador y realizar la instalación como cualquier otro programa.\nEl intérprete de R se arranca desde la terminal, aunque en Windows incorpora su propia aplicación, pero es muy básica. En general, para trabajos serios, conviene utilizar un entorno de desarrollo para R."
+  },
+  {
+    "objectID": "01-intro.html#entornos-de-desarrollo",
+    "href": "01-intro.html#entornos-de-desarrollo",
+    "title": "1  Introducción a R",
+    "section": "1.2 Entornos de desarrollo",
+    "text": "1.2 Entornos de desarrollo\nPor defecto el entorno de trabajo de R es en línea de comandos, lo que significa que los cálculos y los análisis se realizan mediante comandos o instrucciones que el usuario teclea en una ventana de texto. No obstante, existen distintas interfaces gráficas de usuario que facilitan su uso, sobre todo para usuarios noveles. Algunas de ellas, como las que se enumeran a continuación, son completos entornos de desarrollo que facilitan la gestión de cualquier proyecto:\n\nRStudio. Probablemente el entorno de desarrollo más extendido para programar con R ya que incorpora multitud de utilidades para facilitar la programación con R.\nRKWard. Es otra otro de los entornos de desarrollo más completos que además incluye a posibilidad de añadir nuevos menús y cuadros de diálogo personalizados.\nVisual Studio Code. Es un entorno de desarrollo de propósito general ampliamente extendido. Aunque no es un entorno de desarrollo específico para R, incluye una extensión con utilidades que facilitan mucho el desarrollo con R."
+  },
+  {
+    "objectID": "02-descriptiva.html",
+    "href": "02-descriptiva.html",
+    "title": "2  Estadística Descriptiva",
+    "section": "",
+    "text": "Prueba."
+  }
+]

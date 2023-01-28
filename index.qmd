@@ -1,0 +1,34 @@
+---
+lang: es
+---
+
+# Prefacio {.unnumbered}
+
+¡Bienvenido a Prácticas de Estadística con R!
+
+Este libro presenta una recopilación de prácticas de Estadística Descriptiva e Inferencial con el lenguaje de programación [R](https://www.r-project.org/), con problemas aplicados a las Ciencias y las Ingenierías.
+
+No es un libro para aprender a programar con R, ya que solo enseña el uso del lenguaje y de algunos de sus paquetes para resolver problemas de Estadística. Para quienes estén interesados en aprender a programar en este lenguaje, os recomiendo leer este [manual de R](https://aprendeconalf.es/manual-r/).
+
+## Licencia
+
+Esta obra está bajo una licencia Reconocimiento – No comercial – Compartir bajo la misma licencia 3.0 España de Creative Commons. Para ver una copia de esta licencia, visite [https://creativecommons.org/licenses/by-nc-sa/3.0/es/](https://creativecommons.org/licenses/by-nc-sa/3.0/es/).
+
+Con esta licencia eres libre de:
+
+- Copiar, distribuir y mostrar este trabajo.
+- Realizar modificaciones de este trabajo.
+
+Bajo las siguientes condiciones:
+
+- **Reconocimiento**. Debe reconocer los créditos de la obra de la manera especificada por el autor o el licenciador (pero no de una manera que sugiera que tiene su apoyo o apoyan el uso que hace de su obra).
+
+- **No comercial**. No puede utilizar esta obra para fines comerciales.
+
+- **Compartir bajo la misma licencia**. Si altera o transforma esta obra, o genera una obra derivada, sólo puede distribuir la obra generada bajo una licencia idéntica a ésta.
+
+Al reutilizar o distribuir la obra, tiene que dejar bien claro los términos de la licencia de esta obra.
+
+Estas condiciones pueden no aplicarse si se obtiene el permiso del titular de los derechos de autor.
+
+Nada en esta licencia menoscaba o restringe los derechos morales del autor.

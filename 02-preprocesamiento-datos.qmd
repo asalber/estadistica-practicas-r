@@ -353,11 +353,46 @@ a. Crear un data frame con los datos del curso a partir del fichero [`notas-curs
 ## Solución
 
 ```{r}
-#df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/hipertension/notas-curso2.csv")
+df <- read_csv("https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/notas-curso2.csv")
 df
 ```
 :::
 
+b. Convertir el data frame a formato largo. 
+
+:::{.callout-tip collapse="true"}
+## Solución
+
+```{r}
+df_largo <- df %>% pivot_longer(notaA:notaE, names_to = "Asignatura", values_to = "Nota")
+df_largo
+```
+:::
+
+c. Crear una nueva columna con la variable `calificación` que contenga las calificaciones de cada asignatura.
+
+:::{.callout-tip collapse="true"}
+## Solución
+
+```{r}
+df_largo <- df_largo %>%
+    mutate(Califiación = cut(Nota, breaks = c(0, 4.99, 6.99, 8.99, 10), labels = c("SS", "AP", "NT", "SB")))
+df_largo
+```
+:::
+
+d. Filtrar el conjunto de datos para obtener las asignaturas y las notas de las mujeres del grupo A, ordenadas de mayor a menor.
+
+:::{.callout-tip collapse="true"}
+## Solución
+
+```{r}
+df_largo %>%
+    filter(sexo == "Mujer", grupo == "A") %>%
+    select(Asignatura, Nota) %>%
+    arrange(desc(Nota))
+```
+:::
 :::
 
 ## Ejercicios Propuestos

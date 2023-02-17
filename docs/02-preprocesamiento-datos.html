@@ -726,7 +726,7 @@ Solución 1
 <div class="callout-body-container callout-body">
 <p>Con las funciones básicas de R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/asalber/manual-r/master/datos/colesterol.csv"</span>)</span>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/colesterol.csv"</span>)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                            nombre edad sexo peso altura colesterol
@@ -763,7 +763,7 @@ Solución 2
 <div class="callout-body-container callout-body">
 <p>Con las funciones del paquete <code>readr</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/asalber/manual-r/master/datos/colesterol.csv"</span>)</span>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/colesterol.csv"</span>)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 14 × 6
@@ -1594,7 +1594,7 @@ Solución
 </div>
 </div>
 <div id="exr-preprocesamiento-5" class="theorem exercise">
-<p><span class="theorem-title"><strong>Ejercicio 2.5 </strong></span>Se ha diseñado un ensayo clínico leatorizado, doble-ciego y controlado con placebo, para estudiar el efecto de dos alternativas terapéuticas en el control de la hipertensión arterial. Se han reclutado 100 pacientes hipertensos y estos han sido distribuidos aleatoriamente en tres grupos de tratamiento. A uno de los grupos (control) se le administró un placebo, a otro grupo se le administró un inhibidor de la enzima conversora de la angiotensina (IECA) y al otro un tratamiento combinado de un diurético y un Antagonista del Calcio. Las variables respuesta final fueron las presiones arteriales sistólica y diastólica.</p>
+<p><span class="theorem-title"><strong>Ejercicio 2.5 </strong></span>Se ha diseñado un ensayo clínico aleatorizado, doble-ciego y controlado con placebo, para estudiar el efecto de dos alternativas terapéuticas en el control de la hipertensión arterial. Se han reclutado 100 pacientes hipertensos y estos han sido distribuidos aleatoriamente en tres grupos de tratamiento. A uno de los grupos (control) se le administró un placebo, a otro grupo se le administró un inhibidor de la enzima conversora de la angiotensina (IECA) y al otro un tratamiento combinado de un diurético y un Antagonista del Calcio. Las variables respuesta final fueron las presiones arteriales sistólica y diastólica.</p>
 <p>Los datos con las claves de aleatorización han sido introducidos en una base de datos que reside en la central de aleatorización, mientras que los datos clínicos han sido archivados en dos archivos distintos, uno para cada uno de los dos centros participantes en el estudio.</p>
 <p>Las variables almacenadas en estos archivos clínicos son las siguientes:</p>
 <ul>
@@ -1616,29 +1616,8 @@ Solución
 <li>FARMACO: Fármaco administrado (0: Placebo, 1: IECA, 2:Ca Antagonista + diurético)</li>
 </ul>
 <ol type="a">
-<li>Crear un data frame con los datos de los pacientes del hospital A (fichero de Excel <a href="datos/hipertension/datos-hospital-a.xls">datos-hospital-a.xls</a>).</li>
-</ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-35-contents" aria-controls="callout-35" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Solución
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-35" class="callout-35-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dfa &lt;- read_excel()</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-<ol start="2" type="a">
-<li><p>Crear un data frame con los datos de los pacientes del hosptial B (fichero csv <a href="datos/hipertension/datos-hospital-b.csv">datos-hospital-b.csv</a>).</p></li>
+<li><p>Crear un data frame con los datos de los pacientes del hospital A (fichero de csv <a href="datos/hipertension/datos-hospital-a.csv">datos-hospital-a.csv</a>).</p></li>
+<li><p>Crear un data frame con los datos de los pacientes del hospital B (fichero csv <a href="datos/hipertension/datos-hospital-b.csv">datos-hospital-b.csv</a>).</p></li>
 <li><p>Fusionar los datos de los dos hospitales en un nuevo data frame.</p></li>
 <li><p>Crear un data frame con los datos de las claves de aleatorización (fichero csv <a href="datos/hipertension/claves-aleatorizacion.csv">claves-aleatorizacion.csv</a>)</p></li>
 <li><p>Fusionar el data frame con los datos clínicos y el data frame con claves de aleatorización en un nuevo data frame.</p></li>

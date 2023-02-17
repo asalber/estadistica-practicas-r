@@ -205,7 +205,7 @@ a. Crear un data frame con los datos de todos los pacientes del estudio a partir
 Con las funciones básicas de R.
 
 ```{r}
-df <- read.csv("https://raw.githubusercontent.com/asalber/manual-r/master/datos/colesterol.csv")
+df <- read.csv("https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/colesterol.csv")
 df
 ```
 :::
@@ -215,7 +215,7 @@ df
 Con las funciones del paquete `readr`.
 
 ```{r}
-df <- read_csv("https://raw.githubusercontent.com/asalber/manual-r/master/datos/colesterol.csv")
+df <- read_csv("https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/colesterol.csv")
 df
 ```
 :::
@@ -473,7 +473,7 @@ df[df$sexo == "M" & df$media >= 5, c("nombre", "media")]
 
 
 :::{#exr-preprocesamiento-5}
-Se ha diseñado un ensayo clínico leatorizado, doble-ciego y controlado con placebo, para estudiar el efecto de dos alternativas terapéuticas en el control de la hipertensión
+Se ha diseñado un ensayo clínico aleatorizado, doble-ciego y controlado con placebo, para estudiar el efecto de dos alternativas terapéuticas en el control de la hipertensión
 arterial. Se han reclutado 100 pacientes hipertensos y estos han sido distribuidos aleatoriamente en tres grupos de tratamiento. A uno de los grupos (control) se le administró un placebo, a otro grupo se le administró un inhibidor de la enzima conversora de la angiotensina (IECA) y al otro un tratamiento combinado de un diurético y un Antagonista del Calcio. Las variables respuesta final fueron las presiones arteriales sistólica y diastólica.
 
 
@@ -501,17 +501,9 @@ El archivo de claves de aleatorización contiene sólo dos variables.
 - CLAVE: Clave de aleatorización
 - FARMACO: Fármaco administrado (0: Placebo, 1: IECA,  2:Ca Antagonista + diurético)
 
-a. Crear un data frame con los datos de los pacientes del hospital A (fichero de Excel [datos-hospital-a.xls](datos/hipertension/datos-hospital-a.xls)).
+a. Crear un data frame con los datos de los pacientes del hospital A (fichero de csv [datos-hospital-a.csv](datos/hipertension/datos-hospital-a.csv)).
 
-:::{.callout-tip collapse="true"}
-## Solución 
-```{r}
-library(readxl)
-#dfa <- read_excel()
-```
-:::
-
-b. Crear un data frame con los datos de los pacientes del hosptial B (fichero csv [datos-hospital-b.csv](datos/hipertension/datos-hospital-b.csv)).
+b. Crear un data frame con los datos de los pacientes del hospital B (fichero csv [datos-hospital-b.csv](datos/hipertension/datos-hospital-b.csv)).
 
 c. Fusionar los datos de los dos hospitales en un nuevo data frame.
 

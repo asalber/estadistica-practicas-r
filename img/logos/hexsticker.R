@@ -20,7 +20,7 @@ img <- image_read("img/logos/gauss-bell-r.png")
 
 # Creación del hex sticker
 sticker <- sticker(img,
-    package = "", p_size = 30, p_y = 1.5,
+    package = "Estadística\nPrácticas", p_size = 17, p_y = 1,
     s_x = 1, s_y = 1,
     s_width = 1.5, s_height = 1.5,
     h_fill = color4, h_color = darken(color4, 0.2),

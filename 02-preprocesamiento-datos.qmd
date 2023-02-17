@@ -196,16 +196,16 @@ df %>%
 :::
 
 :::{#exr-preprocesamiento-2}
-El fichero [`colesterol.csv`]('https://raw.githubusercontent.com/asalber/manual-r/master/datos/colesterol.csv') contiene información de una muestra de pacientes donde se han medido la edad, el sexo, el peso, la altura y el nivel de colesterol, además de su nombre.
+El fichero [`colesterol.csv`](datos/colesterol.csv) contiene información de una muestra de pacientes donde se han medido la edad, el sexo, el peso, la altura y el nivel de colesterol, además de su nombre.
 
-a. Crear un data frame con los datos de todos los pacientes del estudio a partir del fichero [`colesterol.csv`](('https://raw.githubusercontent.com/asalber/manual-r/master/datos/colesterol.csv')).
+a. Crear un data frame con los datos de todos los pacientes del estudio a partir del fichero [`colesterol.csv`](datos/colesterol.csv).
 
 :::{.callout-tip collapse="true"}
 ## Solución 1
 Con las funciones básicas de R.
 
 ```{r}
-df <- read.csv('https://raw.githubusercontent.com/asalber/manual-r/master/datos/colesterol.csv')
+df <- read.csv("https://raw.githubusercontent.com/asalber/manual-r/master/datos/colesterol.csv")
 df
 ```
 :::
@@ -215,7 +215,7 @@ df
 Con las funciones del paquete `readr`.
 
 ```{r}
-df <- read_csv('https://raw.githubusercontent.com/asalber/manual-r/master/datos/colesterol.csv')
+df <- read_csv("https://raw.githubusercontent.com/asalber/manual-r/master/datos/colesterol.csv")
 df
 ```
 :::
@@ -344,7 +344,21 @@ df %>%
 :::
 :::
 
+:::{#exr-preprocesamiento-3}
+El fichero [`notas-curso2.csv`](datos/notas-curso2.csv) contiene las notas de las asignaturas de un curso en varios grupos de alumnos.
 
+a. Crear un data frame con los datos del curso a partir del fichero [`notas-curso2.csv`](datos/notas-curso2.csv).
+
+:::{.callout-tip collapse="true"}
+## Solución
+
+```{r}
+#df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/hipertension/notas-curso2.csv")
+df
+```
+:::
+
+:::
 
 ## Ejercicios Propuestos
 

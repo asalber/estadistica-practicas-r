@@ -34,7 +34,9 @@ book:
   chapters:
     - index.qmd
     - 01-intro.qmd
-    - 02-descriptiva.qmd
+    - 02-preprocesamiento-datos.qmd
+    #- 03-frecuencias-graficos.qmd
+    #- 04-descriptiva.qmd
     
 #bibliography: references.bib
 

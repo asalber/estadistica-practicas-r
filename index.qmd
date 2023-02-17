@@ -1,5 +1,11 @@
 ---
 lang: es
+listing: 
+    id: toc
+    type: grid
+    fields: [title]
+    sort-ui: false
+    filter-ui: false
 ---
 
 # Prefacio {.unnumbered}
@@ -9,6 +15,11 @@ lang: es
 Este libro presenta una recopilación de prácticas de Estadística Descriptiva e Inferencial con el lenguaje de programación [R](https://www.r-project.org/), con problemas aplicados a las Ciencias y las Ingenierías.
 
 No es un libro para aprender a programar con R, ya que solo enseña el uso del lenguaje y de algunos de sus paquetes para resolver problemas de Estadística. Para quienes estén interesados en aprender a programar en este lenguaje, os recomiendo leer este [manual de R](https://aprendeconalf.es/manual-r/).
+
+## Capítulos
+
+::: {#toc}
+:::
 
 ## Licencia
 

@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.313">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Prácticas de Estadística con R - 2&nbsp; Preprocesamiento de datos</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./01-intro.html" rel="prev">
+<link href="./img/logos/favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar"
+  }
+}</script>
+
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta property="og:title" content="Prácticas de Estadística con R - 2&nbsp; Preprocesamiento de datos">
+<meta property="og:description" content="Para la realización de esta práctica se requieren los paquetes readr y dplyr de la colección de paquetes tidyverse.">
+<meta property="og:site-name" content="Prácticas de Estadística con R">
+<meta name="twitter:title" content="Prácticas de Estadística con R - 2&nbsp; Preprocesamiento de datos">
+<meta name="twitter:description" content="Para la realización de esta práctica se requieren los paquetes readr y dplyr de la colección de paquetes tidyverse.">
+<meta name="twitter:site" content="@aprendeconalf">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preprocesamiento de datos</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./img/logos/aprendeconalf.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Prácticas de Estadística con R</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://aprendeconalf.es" title="" class="sidebar-tool px-1"><i class="bi bi-house-fill"></i></a>
+    <a href="" title="Download" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-download"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./estadistica-practicas-r.pdf">
+            <i class="bi bi-bi-file-pdf pe-1"></i>
+          Download PDF
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="./estadistica-practicas-r.epub">
+            <i class="bi bi-bi-journal pe-1"></i>
+          Download ePub
+          </a>
+        </li>
+    </ul>
+    <a href="" title="Share" id="sidebar-tool-dropdown-1" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-1">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+            <i class="bi bi-bi-twitter pe-1"></i>
+          Twitter
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+            <i class="bi bi-bi-linkedin pe-1"></i>
+          LinkedIn
+          </a>
+        </li>
+    </ul>
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Prefacio</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción a R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-preprocesamiento-datos.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preprocesamiento de datos</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#ejercicios-resueltos" id="toc-ejercicios-resueltos" class="nav-link active" data-scroll-target="#ejercicios-resueltos"><span class="toc-section-number">2.1</span>  Ejercicios Resueltos</a></li>
+  <li><a href="#ejercicios-propuestos" id="toc-ejercicios-propuestos" class="nav-link" data-scroll-target="#ejercicios-propuestos"><span class="toc-section-number">2.2</span>  Ejercicios Propuestos</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preprocesamiento de datos</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+
+</div>
+<section id="ejercicios-resueltos" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="ejercicios-resueltos"><span class="header-section-number">2.1</span> Ejercicios Resueltos</h2>
+<p>Para la realización de esta práctica se requieren los paquetes <code>readr</code> y <a href="https://aprendeconalf.es/manual-r/06-preprocesamiento.html#el-paquete-dplyr"><code>dplyr</code></a> de la colección de paquetes <a href="https://aprendeconalf.es/manual-r/06-preprocesamiento.html#la-colecci%C3%B3n-de-paquetes-tidyverse"><code>tidyverse</code></a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Incluye los siguientes paquetes:</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - readr: para la lectura de ficheros csv. </span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - dplyr: para el preprocesamiento y manipulación de datos.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="exr-preprocesamiento-1" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 2.1 </strong></span>La siguiente tabla contiene los ingresos y gastos de una empresa durante el primer trimestre del año.</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Mes </th>
+   <th style="text-align:right;"> Ingresos </th>
+   <th style="text-align:right;"> Gastos </th>
+   <th style="text-align:right;"> Impuestos </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Enero </td>
+   <td style="text-align:right;"> 45000 </td>
+   <td style="text-align:right;"> 33400 </td>
+   <td style="text-align:right;"> 6450 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Febrero </td>
+   <td style="text-align:right;"> 41500 </td>
+   <td style="text-align:right;"> 35400 </td>
+   <td style="text-align:right;"> 6300 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Marzo </td>
+   <td style="text-align:right;"> 51200 </td>
+   <td style="text-align:right;"> 35600 </td>
+   <td style="text-align:right;"> 7100 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<ol type="a">
+<li>Crear un data frame con los datos de la tabla.</li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mes =</span> <span class="fu">c</span>(<span class="st">"Enero"</span>, <span class="st">"Febrero"</span>, <span class="st">"Marzo"</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Ingresos =</span> <span class="fu">c</span>(<span class="dv">45000</span>, <span class="dv">41500</span>, <span class="dv">51200</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Gastos =</span> <span class="fu">c</span>(<span class="dv">33400</span>, <span class="dv">35400</span>, <span class="dv">35600</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>df </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Mes Ingresos Gastos
+1   Enero    45000  33400
+2 Febrero    41500  35400
+3   Marzo    51200  35600</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="2" type="a">
+<li>Añadir una nueva columna con los siguientes impuestos pagados.</li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Mes </th>
+   <th style="text-align:right;"> Impuestos </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Enero </td>
+   <td style="text-align:right;"> 6450 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Febrero </td>
+   <td style="text-align:right;"> 6300 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Marzo </td>
+   <td style="text-align:right;"> 7100 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Con las funciones básicas de R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Impuestos <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">6450</span>, <span class="dv">6300</span>, <span class="dv">7100</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Mes Ingresos Gastos Impuestos
+1   Enero    45000  33400      6450
+2 Febrero    41500  35400      6300
+3   Marzo    51200  35600      7100</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución 2
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Con las funciones del paquete <code>dplyr</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Impuestos =</span> <span class="fu">c</span>(<span class="dv">6450</span>, <span class="dv">6300</span>, <span class="dv">7100</span>))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Mes Ingresos Gastos Impuestos
+1   Enero    45000  33400      6450
+2 Febrero    41500  35400      6300
+3   Marzo    51200  35600      7100</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="3" type="a">
+<li>Añadir una nueva fila con los siguientes datos de Abril.</li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Mes </th>
+   <th style="text-align:right;"> Ingresos </th>
+   <th style="text-align:right;"> Gastos </th>
+   <th style="text-align:right;"> Impuestos </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Abril </td>
+   <td style="text-align:right;"> 49700 </td>
+   <td style="text-align:right;"> 36300 </td>
+   <td style="text-align:right;"> 6850 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Con las funciones básicas de R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(df, <span class="fu">list</span>(<span class="at">Mes =</span> <span class="st">"Abril"</span>, <span class="at">Ingresos =</span> <span class="dv">49700</span>, <span class="at">Gastos =</span> <span class="dv">36300</span>, <span class="at">Impuestos =</span> <span class="dv">6850</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Mes Ingresos Gastos Impuestos
+1   Enero    45000  33400      6450
+2 Febrero    41500  35400      6300
+3   Marzo    51200  35600      7100
+4   Abril    49700  36300      6850</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución 2
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Con las funciones del paquete <code>dplyr</code>.</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_row</span>(<span class="at">Mes =</span> <span class="st">"Abril"</span>, <span class="at">Ingresos =</span> <span class="dv">49700</span>, <span class="at">Gastos =</span> <span class="dv">36300</span>, <span class="at">Impuestos =</span> <span class="dv">6850</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Mes Ingresos Gastos Impuestos
+1   Enero    45000  33400      6450
+2 Febrero    41500  35400      6300
+3   Marzo    51200  35600      7100
+4   Abril    49700  36300      6850</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="4" type="a">
+<li>Cambiar los ingresos de Marzo por 50400.</li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">3</span>, <span class="st">"Ingresos"</span>] <span class="ot">&lt;-</span> <span class="dv">50400</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Mes Ingresos Gastos Impuestos
+1   Enero    45000  33400      6450
+2 Febrero    41500  35400      6300
+3   Marzo    50400  35600      7100
+4   Abril    49700  36300      6850</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="5" type="a">
+<li>Crear una nueva columna con los beneficios de cada mes (ingresos - gastos - impuestos).</li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Con las funciones básicas de R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Beneficios <span class="ot">&lt;-</span> df<span class="sc">$</span>Ingresos <span class="sc">-</span> df<span class="sc">$</span>Gastos <span class="sc">-</span> df<span class="sc">$</span>Impuestos</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Mes Ingresos Gastos Impuestos Beneficios
+1   Enero    45000  33400      6450       5150
+2 Febrero    41500  35400      6300       -200
+3   Marzo    50400  35600      7100       7700
+4   Abril    49700  36300      6850       6550</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución 2
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Con las funciones del paquete <code>dplyr</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Beneficios =</span> Ingresos <span class="sc">-</span> Gastos <span class="sc">-</span> Impuestos)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Mes Ingresos Gastos Impuestos Beneficios
+1   Enero    45000  33400      6450       5150
+2 Febrero    41500  35400      6300       -200
+3   Marzo    50400  35600      7100       7700
+4   Abril    49700  36300      6850       6550</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="6" type="a">
+<li>Crear una nueva columna con el factor <code>Balance</code> con dos posibles categorías: <code>positivo</code> si ha habido beneficios y <code>negativo</code> si ha habido pérdidas.</li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Con las funciones básicas de R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Balance <span class="ot">&lt;-</span> <span class="fu">cut</span>(df<span class="sc">$</span>Beneficios, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">0</span>, <span class="cn">Inf</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"negativo"</span>, <span class="st">"positivo"</span>))</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Mes Ingresos Gastos Impuestos Beneficios  Balance
+1   Enero    45000  33400      6450       5150 positivo
+2 Febrero    41500  35400      6300       -200 negativo
+3   Marzo    50400  35600      7100       7700 positivo
+4   Abril    49700  36300      6850       6550 positivo</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución 2
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Con las funciones del paquete <code>dplyr</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Balance =</span> <span class="fu">cut</span>(Beneficios, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">0</span>, <span class="cn">Inf</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"negativo"</span>, <span class="st">"positivo"</span>)))</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Mes Ingresos Gastos Impuestos Beneficios  Balance
+1   Enero    45000  33400      6450       5150 positivo
+2 Febrero    41500  35400      6300       -200 negativo
+3   Marzo    50400  35600      7100       7700 positivo
+4   Abril    49700  36300      6850       6550 positivo</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="7" type="a">
+<li>Filtrar el conjunto de datos para quedarse con los nombres de los meses y los beneficios de los meses con balance positivo.</li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Con las funciones básicas de R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>Balance <span class="sc">==</span> <span class="st">"positivo"</span>, <span class="fu">c</span>(<span class="st">"Mes"</span>, <span class="st">"Beneficios"</span>)]</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Mes Beneficios
+1 Enero       5150
+3 Marzo       7700
+4 Abril       6550</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución 2
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Con las funciones del paquete <code>dplyr</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Balance <span class="sc">==</span> <span class="st">"positivo"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Mes, Beneficios)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Mes Beneficios
+1 Enero       5150
+2 Marzo       7700
+3 Abril       6550</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="exr-preprocesamiento-2" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 2.2 </strong></span>El fichero <a href="'https://raw.githubusercontent.com/asalber/manual-r/master/datos/colesterol.csv'"><code>colesterol.csv</code></a> contiene información de una muestra de pacientes donde se han medido la edad, el sexo, el peso, la altura y el nivel de colesterol, además de su nombre.</p>
+<ol type="a">
+<li>Crear un data frame con los datos de todos los pacientes del estudio a partir del fichero <a href="('https://raw.githubusercontent.com/asalber/manual-r/master/datos/colesterol.csv')"><code>colesterol.csv</code></a>.</li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Con las funciones básicas de R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'https://raw.githubusercontent.com/asalber/manual-r/master/datos/colesterol.csv'</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            nombre edad sexo peso altura colesterol
+1     José Luis Martínez Izquierdo   18    H   85   1.79        182
+2                   Rosa Díaz Díaz   32    M   65   1.73        232
+3            Javier García Sánchez   24    H   NA   1.81        191
+4              Carmen López Pinzón   35    M   65   1.70        200
+5             Marisa López Collado   46    M   51   1.58        148
+6                Antonio Ruiz Cruz   68    H   66   1.74        249
+7          Antonio Fernández Ocaña   51    H   62   1.72        276
+8            Pilar Martín González   22    M   60   1.66         NA
+9             Pedro Gálvez Tenorio   35    H   90   1.94        241
+10         Santiago Reillo Manzano   46    H   75   1.85        280
+11           Macarena Álvarez Luna   53    M   55   1.62        262
+12      José María de la Guía Sanz   58    H   78   1.87        198
+13 Miguel Angel Cuadrado Gutiérrez   27    H  109   1.98        210
+14           Carolina Rubio Moreno   20    M   61   1.77        194</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución 2
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Con las funciones del paquete <code>readr</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/asalber/manual-r/master/datos/colesterol.csv'</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 14 × 6
+   nombre                           edad sexo   peso altura colesterol
+   &lt;chr&gt;                           &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;
+ 1 José Luis Martínez Izquierdo       18 H        85   1.79        182
+ 2 Rosa Díaz Díaz                     32 M        65   1.73        232
+ 3 Javier García Sánchez              24 H        NA   1.81        191
+ 4 Carmen López Pinzón                35 M        65   1.7         200
+ 5 Marisa López Collado               46 M        51   1.58        148
+ 6 Antonio Ruiz Cruz                  68 H        66   1.74        249
+ 7 Antonio Fernández Ocaña            51 H        62   1.72        276
+ 8 Pilar Martín González              22 M        60   1.66         NA
+ 9 Pedro Gálvez Tenorio               35 H        90   1.94        241
+10 Santiago Reillo Manzano            46 H        75   1.85        280
+11 Macarena Álvarez Luna              53 M        55   1.62        262
+12 José María de la Guía Sanz         58 H        78   1.87        198
+13 Miguel Angel Cuadrado Gutiérrez    27 H       109   1.98        210
+14 Carolina Rubio Moreno              20 M        61   1.77        194</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="2" type="a">
+<li>Crear una nueva columna con el índice de masa corporal, usando la siguiente fórmula</li>
+</ol>
+<p><span class="math display">\[
+\mbox{IMC} = \frac{\mbox{Peso (kg)}}{\mbox{Altura (cm)}^2}
+\]</span></p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">imc =</span> <span class="fu">round</span>(peso<span class="sc">/</span>altura<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 14 × 7
+   nombre                           edad sexo   peso altura colesterol   imc
+   &lt;chr&gt;                           &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;
+ 1 José Luis Martínez Izquierdo       18 H        85   1.79        182    27
+ 2 Rosa Díaz Díaz                     32 M        65   1.73        232    22
+ 3 Javier García Sánchez              24 H        NA   1.81        191    NA
+ 4 Carmen López Pinzón                35 M        65   1.7         200    22
+ 5 Marisa López Collado               46 M        51   1.58        148    20
+ 6 Antonio Ruiz Cruz                  68 H        66   1.74        249    22
+ 7 Antonio Fernández Ocaña            51 H        62   1.72        276    21
+ 8 Pilar Martín González              22 M        60   1.66         NA    22
+ 9 Pedro Gálvez Tenorio               35 H        90   1.94        241    24
+10 Santiago Reillo Manzano            46 H        75   1.85        280    22
+11 Macarena Álvarez Luna              53 M        55   1.62        262    21
+12 José María de la Guía Sanz         58 H        78   1.87        198    22
+13 Miguel Angel Cuadrado Gutiérrez    27 H       109   1.98        210    28
+14 Carolina Rubio Moreno              20 M        61   1.77        194    19</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="3" type="a">
+<li>Crear una nueva columna con la variable <code>obesidad</code> recodificando la columna <code>imc</code> en las siguientes categorías.</li>
+</ol>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Rango IMC</th>
+<th style="text-align: left;">Categoría</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Menor de 18.5</td>
+<td style="text-align: left;">Bajo peso</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">De 18.5 a 24.5</td>
+<td style="text-align: left;">Saludable</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">De 24.5 a 30</td>
+<td style="text-align: left;">Sobrepeso</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mayor de 30</td>
+<td style="text-align: left;">Obeso</td>
+</tr>
+</tbody>
+</table>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Obesidad =</span> <span class="fu">cut</span>(imc, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">18.5</span>, <span class="fl">24.5</span>, <span class="dv">30</span>, <span class="cn">Inf</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Bajo peso"</span>, <span class="st">"Saludable"</span>, <span class="st">"Sobrepeso"</span>, <span class="st">"Obeso"</span>)))</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 14 × 8
+   nombre                      edad sexo   peso altura colesterol   imc Obesidad
+   &lt;chr&gt;                      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;   
+ 1 José Luis Martínez Izquie…    18 H        85   1.79        182    27 Sobrepe…
+ 2 Rosa Díaz Díaz                32 M        65   1.73        232    22 Saludab…
+ 3 Javier García Sánchez         24 H        NA   1.81        191    NA &lt;NA&gt;    
+ 4 Carmen López Pinzón           35 M        65   1.7         200    22 Saludab…
+ 5 Marisa López Collado          46 M        51   1.58        148    20 Saludab…
+ 6 Antonio Ruiz Cruz             68 H        66   1.74        249    22 Saludab…
+ 7 Antonio Fernández Ocaña       51 H        62   1.72        276    21 Saludab…
+ 8 Pilar Martín González         22 M        60   1.66         NA    22 Saludab…
+ 9 Pedro Gálvez Tenorio          35 H        90   1.94        241    24 Saludab…
+10 Santiago Reillo Manzano       46 H        75   1.85        280    22 Saludab…
+11 Macarena Álvarez Luna         53 M        55   1.62        262    21 Saludab…
+12 José María de la Guía Sanz    58 H        78   1.87        198    22 Saludab…
+13 Miguel Angel Cuadrado Gut…    27 H       109   1.98        210    28 Sobrepe…
+14 Carolina Rubio Moreno         20 M        61   1.77        194    19 Saludab…</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="4" type="a">
+<li>Seleccionar las columnas <code>nombre</code>, <code>sexo</code> y <code>edad</code>.</li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(nombre, sexo, edad)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 14 × 3
+   nombre                          sexo   edad
+   &lt;chr&gt;                           &lt;chr&gt; &lt;dbl&gt;
+ 1 José Luis Martínez Izquierdo    H        18
+ 2 Rosa Díaz Díaz                  M        32
+ 3 Javier García Sánchez           H        24
+ 4 Carmen López Pinzón             M        35
+ 5 Marisa López Collado            M        46
+ 6 Antonio Ruiz Cruz               H        68
+ 7 Antonio Fernández Ocaña         H        51
+ 8 Pilar Martín González           M        22
+ 9 Pedro Gálvez Tenorio            H        35
+10 Santiago Reillo Manzano         H        46
+11 Macarena Álvarez Luna           M        53
+12 José María de la Guía Sanz      H        58
+13 Miguel Angel Cuadrado Gutiérrez H        27
+14 Carolina Rubio Moreno           M        20</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="5" type="a">
+<li>Anonimizar los datos eliminando la columna <code>nombre</code>.</li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>nombre)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 14 × 7
+    edad sexo   peso altura colesterol   imc Obesidad 
+   &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;    
+ 1    18 H        85   1.79        182    27 Sobrepeso
+ 2    32 M        65   1.73        232    22 Saludable
+ 3    24 H        NA   1.81        191    NA &lt;NA&gt;     
+ 4    35 M        65   1.7         200    22 Saludable
+ 5    46 M        51   1.58        148    20 Saludable
+ 6    68 H        66   1.74        249    22 Saludable
+ 7    51 H        62   1.72        276    21 Saludable
+ 8    22 M        60   1.66         NA    22 Saludable
+ 9    35 H        90   1.94        241    24 Saludable
+10    46 H        75   1.85        280    22 Saludable
+11    53 M        55   1.62        262    21 Saludable
+12    58 H        78   1.87        198    22 Saludable
+13    27 H       109   1.98        210    28 Sobrepeso
+14    20 M        61   1.77        194    19 Saludable</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="6" type="a">
+<li>Reordenar las columnas poniendo la columna <code>sexo</code> antes que la columna <code>edad</code>.</li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(nombre, sexo, edad, <span class="fu">everything</span>())</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 14 × 8
+   nombre                     sexo   edad  peso altura colesterol   imc Obesidad
+   &lt;chr&gt;                      &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;   
+ 1 José Luis Martínez Izquie… H        18    85   1.79        182    27 Sobrepe…
+ 2 Rosa Díaz Díaz             M        32    65   1.73        232    22 Saludab…
+ 3 Javier García Sánchez      H        24    NA   1.81        191    NA &lt;NA&gt;    
+ 4 Carmen López Pinzón        M        35    65   1.7         200    22 Saludab…
+ 5 Marisa López Collado       M        46    51   1.58        148    20 Saludab…
+ 6 Antonio Ruiz Cruz          H        68    66   1.74        249    22 Saludab…
+ 7 Antonio Fernández Ocaña    H        51    62   1.72        276    21 Saludab…
+ 8 Pilar Martín González      M        22    60   1.66         NA    22 Saludab…
+ 9 Pedro Gálvez Tenorio       H        35    90   1.94        241    24 Saludab…
+10 Santiago Reillo Manzano    H        46    75   1.85        280    22 Saludab…
+11 Macarena Álvarez Luna      M        53    55   1.62        262    21 Saludab…
+12 José María de la Guía Sanz H        58    78   1.87        198    22 Saludab…
+13 Miguel Angel Cuadrado Gut… H        27   109   1.98        210    28 Sobrepe…
+14 Carolina Rubio Moreno      M        20    61   1.77        194    19 Saludab…</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="7" type="a">
+<li>Filtrar el data frame para quedarse con las mujeres.</li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(sexo <span class="sc">==</span> <span class="st">"M"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 8
+  nombre                 edad sexo   peso altura colesterol   imc Obesidad 
+  &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;    
+1 Rosa Díaz Díaz           32 M        65   1.73        232    22 Saludable
+2 Carmen López Pinzón      35 M        65   1.7         200    22 Saludable
+3 Marisa López Collado     46 M        51   1.58        148    20 Saludable
+4 Pilar Martín González    22 M        60   1.66         NA    22 Saludable
+5 Macarena Álvarez Luna    53 M        55   1.62        262    21 Saludable
+6 Carolina Rubio Moreno    20 M        61   1.77        194    19 Saludable</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="8" type="a">
+<li>Filtrar el data frame para quedarse con los hombres mayores de 30 años.</li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>( sexo <span class="sc">==</span> <span class="st">"H"</span> <span class="sc">&amp;</span> edad <span class="sc">&gt;</span> <span class="dv">30</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 8
+  nombre                      edad sexo   peso altura colesterol   imc Obesidad 
+  &lt;chr&gt;                      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;    
+1 Antonio Ruiz Cruz             68 H        66   1.74        249    22 Saludable
+2 Antonio Fernández Ocaña       51 H        62   1.72        276    21 Saludable
+3 Pedro Gálvez Tenorio          35 H        90   1.94        241    24 Saludable
+4 Santiago Reillo Manzano       46 H        75   1.85        280    22 Saludable
+5 José María de la Guía Sanz    58 H        78   1.87        198    22 Saludable</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol type="i">
+<li>Filtrar el data frame para eliminar las filas con datos perdidos en la columna <code>colesterol</code>.</li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(colesterol))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 13 × 8
+   nombre                      edad sexo   peso altura colesterol   imc Obesidad
+   &lt;chr&gt;                      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;   
+ 1 José Luis Martínez Izquie…    18 H        85   1.79        182    27 Sobrepe…
+ 2 Rosa Díaz Díaz                32 M        65   1.73        232    22 Saludab…
+ 3 Javier García Sánchez         24 H        NA   1.81        191    NA &lt;NA&gt;    
+ 4 Carmen López Pinzón           35 M        65   1.7         200    22 Saludab…
+ 5 Marisa López Collado          46 M        51   1.58        148    20 Saludab…
+ 6 Antonio Ruiz Cruz             68 H        66   1.74        249    22 Saludab…
+ 7 Antonio Fernández Ocaña       51 H        62   1.72        276    21 Saludab…
+ 8 Pedro Gálvez Tenorio          35 H        90   1.94        241    24 Saludab…
+ 9 Santiago Reillo Manzano       46 H        75   1.85        280    22 Saludab…
+10 Macarena Álvarez Luna         53 M        55   1.62        262    21 Saludab…
+11 José María de la Guía Sanz    58 H        78   1.87        198    22 Saludab…
+12 Miguel Angel Cuadrado Gut…    27 H       109   1.98        210    28 Sobrepe…
+13 Carolina Rubio Moreno         20 M        61   1.77        194    19 Saludab…</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="10" type="a">
+<li>Ordenar el data frame según la columna <code>nombre</code>.</li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(nombre)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 14 × 8
+   nombre                      edad sexo   peso altura colesterol   imc Obesidad
+   &lt;chr&gt;                      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;   
+ 1 Antonio Fernández Ocaña       51 H        62   1.72        276    21 Saludab…
+ 2 Antonio Ruiz Cruz             68 H        66   1.74        249    22 Saludab…
+ 3 Carmen López Pinzón           35 M        65   1.7         200    22 Saludab…
+ 4 Carolina Rubio Moreno         20 M        61   1.77        194    19 Saludab…
+ 5 Javier García Sánchez         24 H        NA   1.81        191    NA &lt;NA&gt;    
+ 6 José Luis Martínez Izquie…    18 H        85   1.79        182    27 Sobrepe…
+ 7 José María de la Guía Sanz    58 H        78   1.87        198    22 Saludab…
+ 8 Macarena Álvarez Luna         53 M        55   1.62        262    21 Saludab…
+ 9 Marisa López Collado          46 M        51   1.58        148    20 Saludab…
+10 Miguel Angel Cuadrado Gut…    27 H       109   1.98        210    28 Sobrepe…
+11 Pedro Gálvez Tenorio          35 H        90   1.94        241    24 Saludab…
+12 Pilar Martín González         22 M        60   1.66         NA    22 Saludab…
+13 Rosa Díaz Díaz                32 M        65   1.73        232    22 Saludab…
+14 Santiago Reillo Manzano       46 H        75   1.85        280    22 Saludab…</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="11" type="a">
+<li>Ordenar el data frame ascendentemente por la columna <code>sexo</code> y descendentemente por la columna <code>edad</code>.</li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(sexo, <span class="fu">desc</span>(edad))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 14 × 8
+   nombre                      edad sexo   peso altura colesterol   imc Obesidad
+   &lt;chr&gt;                      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;   
+ 1 Antonio Ruiz Cruz             68 H        66   1.74        249    22 Saludab…
+ 2 José María de la Guía Sanz    58 H        78   1.87        198    22 Saludab…
+ 3 Antonio Fernández Ocaña       51 H        62   1.72        276    21 Saludab…
+ 4 Santiago Reillo Manzano       46 H        75   1.85        280    22 Saludab…
+ 5 Pedro Gálvez Tenorio          35 H        90   1.94        241    24 Saludab…
+ 6 Miguel Angel Cuadrado Gut…    27 H       109   1.98        210    28 Sobrepe…
+ 7 Javier García Sánchez         24 H        NA   1.81        191    NA &lt;NA&gt;    
+ 8 José Luis Martínez Izquie…    18 H        85   1.79        182    27 Sobrepe…
+ 9 Macarena Álvarez Luna         53 M        55   1.62        262    21 Saludab…
+10 Marisa López Collado          46 M        51   1.58        148    20 Saludab…
+11 Carmen López Pinzón           35 M        65   1.7         200    22 Saludab…
+12 Rosa Díaz Díaz                32 M        65   1.73        232    22 Saludab…
+13 Pilar Martín González         22 M        60   1.66         NA    22 Saludab…
+14 Carolina Rubio Moreno         20 M        61   1.77        194    19 Saludab…</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicios-propuestos" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="ejercicios-propuestos"><span class="header-section-number">2.2</span> Ejercicios Propuestos</h2>
+<div id="exr-preprocesaimento-5" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 2.3 </strong></span>La siguiente tabla recoge las notas de los alumnos de un curso con dos asignaturas.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Alumno</th>
+<th style="text-align: center;">Sexo</th>
+<th style="text-align: center;">Física</th>
+<th style="text-align: center;">Química</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Carlos</td>
+<td style="text-align: center;">H</td>
+<td style="text-align: center;">6.7</td>
+<td style="text-align: center;">8.1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">María</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">7.2</td>
+<td style="text-align: center;">9.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Carmen</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">5.5</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pedro</td>
+<td style="text-align: center;">H</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">4.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Luis</td>
+<td style="text-align: center;">H</td>
+<td style="text-align: center;">3.5</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sara</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">6.2</td>
+<td style="text-align: center;">4</td>
+</tr>
+</tbody>
+</table>
+<ol type="a">
+<li>Definir cuatro vectores con el nombre, el sexo y las notas de Física y Química.</li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>nombre <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Carlos"</span>, <span class="st">"María"</span>, <span class="st">"Carmen"</span>, <span class="st">"Pedro"</span>, <span class="st">"Luis"</span>, <span class="st">"Sara"</span>)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>sexo <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"H"</span>, <span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"H"</span>, <span class="st">"H"</span>, <span class="st">"M"</span>)</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>fisica <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">6.7</span>, <span class="fl">7.2</span>, <span class="fl">5.5</span>, <span class="cn">NA</span>, <span class="fl">3.5</span>, <span class="fl">6.2</span>)</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>quimica <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">8.1</span>, <span class="fl">9.5</span>, <span class="dv">5</span>, <span class="fl">4.5</span>, <span class="dv">5</span>, <span class="dv">4</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<ol start="2" type="a">
+<li>Convertir el sexo en un factor y mostrar sus niveles.</li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>sexo <span class="ot">&lt;-</span> <span class="fu">factor</span>(sexo)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(sexo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "H" "M"</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="3" type="a">
+<li>Crear un data frame con el nombre, sexo y las notas de Física y Química.</li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-27" class="callout-27-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(nombre, sexo, fisica, quimica)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  nombre sexo fisica quimica
+1 Carlos    H    6.7     8.1
+2  María    M    7.2     9.5
+3 Carmen    M    5.5     5.0
+4  Pedro    H     NA     4.5
+5   Luis    H    3.5     5.0
+6   Sara    M    6.2     4.0</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="4" type="a">
+<li>Crear una nueva columna con la nota media de Física y Química.</li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-28" class="callout-28-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>media <span class="ot">&lt;-</span> (df<span class="sc">$</span>fisica <span class="sc">+</span> df<span class="sc">$</span>quimica) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  nombre sexo fisica quimica media
+1 Carlos    H    6.7     8.1  7.40
+2  María    M    7.2     9.5  8.35
+3 Carmen    M    5.5     5.0  5.25
+4  Pedro    H     NA     4.5    NA
+5   Luis    H    3.5     5.0  4.25
+6   Sara    M    6.2     4.0  5.10</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="5" type="a">
+<li>Crear una nueva columna booleana <code>aprobado</code> que tenga el valor <code>TRUE</code> si la media es mayor o igual que 5 y <code>FALSE</code> en caso contrario.</li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-29" class="callout-29-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>aprobado <span class="ot">&lt;-</span> df<span class="sc">$</span>media <span class="sc">&gt;=</span> <span class="dv">5</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  nombre sexo fisica quimica media aprobado
+1 Carlos    H    6.7     8.1  7.40     TRUE
+2  María    M    7.2     9.5  8.35     TRUE
+3 Carmen    M    5.5     5.0  5.25     TRUE
+4  Pedro    H     NA     4.5    NA       NA
+5   Luis    H    3.5     5.0  4.25    FALSE
+6   Sara    M    6.2     4.0  5.10     TRUE</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ol start="6" type="a">
+<li>Filtrar el data frame para quedarse con el nombre y la media de las mujeres que han aprobado.</li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-30" class="callout-30-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>sexo <span class="sc">==</span> <span class="st">"M"</span> <span class="sc">&amp;</span> df<span class="sc">$</span>media <span class="sc">&gt;=</span> <span class="dv">5</span>, <span class="fu">c</span>(<span class="st">"nombre"</span>, <span class="st">"media"</span>)]</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  nombre media
+2  María  8.35
+3 Carmen  5.25
+6   Sara  5.10</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="exr-preprocesamiento-5" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 2.4 </strong></span>Se ha diseñado un ensayo clínico leatorizado, doble-ciego y controlado con placebo, para estudiar el efecto de dos alternativas terapéuticas en el control de la hipertensión arterial. Se han reclutado 100 pacientes hipertensos y estos han sido distribuidos aleatoriamente en tres grupos de tratamiento. A uno de los grupos (control) se le administró un placebo, a otro grupo se le administró un inhibidor de la enzima conversora de la angiotensina (IECA) y al otro un tratamiento combinado de un diurético y un Antagonista del Calcio. Las variables respuesta final fueron las presiones arteriales sistólica y diastólica.</p>
+<p>Los datos con las claves de aleatorización han sido introducidos en una base de datos que reside en la central de aleatorización, mientras que los datos clínicos han sido archivados en dos archivos distintos, uno para cada uno de los dos centros participantes en el estudio.</p>
+<p>Las variables almacenadas en estos archivos clínicos son las siguientes:</p>
+<ul>
+<li>CLAVE: Clave de aleatorización</li>
+<li>NOMBRE: Iniciales del paciente</li>
+<li>F_NACIM: Fecha de Nacimiento</li>
+<li>F_INCLUS: Fecha de inclusión</li>
+<li>SEXO: Sexo (0: Hombre 1: Mujer)</li>
+<li>ALTURA: Altura en cm.</li>
+<li>PESO: Peso en Kg.</li>
+<li>PAD_INI: Presión diastólica basal (inicial)</li>
+<li>PAD_FIN: Presión diastólica final</li>
+<li>PAS_INI: Presión sistólica basal (inicial)</li>
+<li>PAS_FIN: Presión sistólica final</li>
+</ul>
+<p>El archivo de claves de aleatorización contiene sólo dos variables.</p>
+<ul>
+<li>CLAVE: Clave de aleatorización</li>
+<li>FARMACO: Fármaco administrado (0: Placebo, 1: IECA, 2:Ca Antagonista + diurético)</li>
+</ul>
+<ol type="a">
+<li>Crear un data frame con los datos de los pacientes del hospital A (fichero de Excel <a href="datos/hipertension/datos-hospital-a.xls">datos-hospital-a.xls</a>).</li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-31" class="callout-31-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="co">#dfa &lt;- read_excel()</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<ol start="2" type="a">
+<li><p>Crear un data frame con los datos de los pacientes del hosptial B (fichero csv <a href="datos/hipertension/datos-hospital-b.csv">datos-hospital-b.csv</a>).</p></li>
+<li><p>Fusionar los datos de los dos hospitales en un nuevo data frame.</p></li>
+<li><p>Crear un data frame con los datos de las claves de aleatorización (fichero csv <a href="datos/hipertension/claves-aleatorizacion.csv">claves-aleatorizacion.csv</a>)</p></li>
+<li><p>Fusionar el data frame con los datos clínicos y el data frame con claves de aleatorización en un nuevo data frame.</p></li>
+<li><p>Convertir en un factor el sexo.</p></li>
+<li><p>Crear una nueva columna para la evolución de la presión arterial diastólica restando las columnas <code>PAS_FIN</code> y <code>PAS_FIN</code>.</p></li>
+</ol>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./01-intro.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción a R</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

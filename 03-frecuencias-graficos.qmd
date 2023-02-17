@@ -1,0 +1,106 @@
+---
+title: Distribuciones de frecuencias y representaciones gráficas
+lang: es
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+## Ejercicios Resueltos
+
+Para la realización de esta práctica se requieren los siguientes paquetes:
+
+```{r}
+library(tidyverse) 
+# Incluye los siguientes paquetes:
+# - readr: para la lectura de ficheros csv. 
+# - dplyr: para el preprocesamiento y manipulación de datos.
+# - ggplot2: para la representación gráfica.
+```
+
+:::{#exr-1}
+En una encuesta a 25 matrimonios sobre el número de hijos que tenían se obtuvieron los siguientes datos:
+
+    1, 2, 4, 2, 2, 2, 3, 2, 1, 1, 0, 2, 2,  
+    0, 2, 2, 1, 2, 2, 3, 1, 2, 2, 1, 2
+
+a. Crear un conjunto de datos con la variable `hijos`.
+
+:::{.callout-tip collapse="true"}
+## Solución
+```{r}
+df <- data.frame(hijos = c(1, 2, 4, 2, 2, 2, 3, 2, 1, 1, 0, 2, 2, 0, 2, 2, 1, 2, 2, 3, 1, 2, 2, 1, 2))
+```
+:::
+
+b. Construir la tabla de frecuencias.
+
+
+c. Dibujar el diagrama de barras de las frecuencias absolutas.
+
+
+e. Dibujar también el diagrama de barras de las frecuencias relativas, el de absolutas acumuladas y el de relativas acumuladas.
+
+f. Dibujar el polígono de frecuencias relativas.
+:::
+
+
+
+:::{exr-2}
+En un servicio de atención al cliente se han registrado el número de llamadas de clientes cada día del mes de noviembre, obteniendo los siguientes datos:
+
+    15, 23, 12, 10, 28, 50, 12, 17, 20, 21, 18, 13, 11, 12, 26   
+    30, 6, 16, 19, 22, 14, 17, 21, 28, 9, 16, 13, 11, 16, 20
+
+a. Crear un conjunto de datos con la variable `llamadas`.
+
+b. Dibujar el diagrama de cajas. ¿Existe algún dato atípico? En el caso de que exista, eliminarlo y proceder con los
+siguientes apartados.
+
+c. Construir la tabla de frecuencias agrupando en 5 clases.
+
+d. Dibujar el histograma de frecuencias absolutas  correspondiente a la tabla anterior.
+
+e. Dibujar también el histograma de las frecuencias relativas, el de absolutas acumuladas y el de relativas acumuladas.
+
+f. Dibujar el polígono de frecuencias relativas acumuladas (ojiva).
+:::
+
+:::{#exr-3}
+Los grupos sanguíneos de una muestra de 30 personas son:
+
+    A, B, B, A, AB, 0, 0, A, B, B, A, A, A, A, AB,  
+    A, A, A, B, 0, B, B, B, A, A, A, 0, A, AB, 0. 
+
+a. Crear un conjunto de datos con la variable `grupo.sanguíneo`.
+
+b. Construir la tabla de frecuencias.
+
+c. Dibujar el diagrama de sectores.
+:::
+
+:::{#exr-4}
+En un estudio de población se tomó una muestra de 27 personas, y se les preguntó por su edad y estado civil,
+obteniendo los siguientes resultados:
+
+
+|Estado civil | Edad|
+|:-|:-|
+|Soltero |  31, 45, 35, 65, 21, 38, 62, 22, 31|
+|Casado |    62, 39, 62, 59, 21, 62          |
+|Viudo |     80, 68, 65, 40, 78, 69, 75       |
+|Divorciado | 31, 65, 59, 49, 65             |
+
+a. Crear un conjunto de datos con la variables `estado.civil` y `edad`.
+
+b. Construir la tabla de frecuencias de la variable `edad` para cada categoría de la variable `estado.civil`.
+
+c. Dibujar los diagramas de cajas de la edad según el estado civil. ¿Existen datos atípicos? ¿En qué grupo hay mayor
+dispersión?
+
+d. Dibujar los histogramas de la edad según el estado civil.
+:::
+
+## Cuestionario
+

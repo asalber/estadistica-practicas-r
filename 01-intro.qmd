@@ -1,8 +1,7 @@
 ---
+title: Introducción a R
 lang: es
 ---
-
-# Introducción a R
 
 La gran potencia de cómputo alcanzada por los ordenadores ha convertido a los mismos en poderosas herramientas al
 servicio de todas aquellas disciplinas que, como la Estadística, requieren manejar un gran volumen de datos.

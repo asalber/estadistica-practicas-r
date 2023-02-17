@@ -48,6 +48,46 @@
   \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
@@ -86,6 +126,36 @@
 \DeclareMathOperator{\Adh}{Adh}
 \DeclareMathOperator{\Ac}{Ac}
 \DeclareMathOperator{\sen}{sen}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
 \makeatletter
 \makeatother
 \makeatletter
@@ -125,6 +195,13 @@
 \@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
 \floatname{codelisting}{Listado}
 \newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{exercise}{Ejercicio}[chapter]
+\theoremstyle{remark}
+\renewcommand*{\proofname}{Prueba}
+\newtheorem*{remark}{Observación}
+\newtheorem*{solution}{Solución}
 \makeatother
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
@@ -196,7 +273,7 @@ Sánchez
 Alberca}\\ \textsf{asalber@ceu.es} \\ \textsf{https://aprendeconalf.es}}
 \end{tabular}
 \end{flushleft}
-\end{titlepage}\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, frame hidden, interior hidden, borderline west={3pt}{0pt}{shadecolor}, breakable, enhanced, sharp corners]}{\end{tcolorbox}}\fi
+\end{titlepage}\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, sharp corners, breakable, interior hidden, frame hidden, enhanced]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Tabla de contenidos}
 {
@@ -224,6 +301,14 @@ uso del lenguaje y de algunos de sus paquetes para resolver problemas de
 Estadística. Para quienes estén interesados en aprender a programar en
 este lenguaje, os recomiendo leer este
 \href{https://aprendeconalf.es/manual-r/}{manual de R}.
+
+\hypertarget{capuxedtulos}{%
+\section*{Capítulos}\label{capuxedtulos}}
+\addcontentsline{toc}{section}{Capítulos}
+
+\markright{Capítulos}
+
+\hypertarget{toc}{}
 
 \hypertarget{licencia}{%
 \section*{Licencia}\label{licencia}}
@@ -330,9 +415,6 @@ datos, como pueden ser SPSS, SAS o Matlab, son múltiples:
   Biología, la Psicología, la Medicina, etc.
 \end{itemize}
 
-\hypertarget{instalaciuxf3n-de-r}{%
-\section{Instalación de R}\label{instalaciuxf3n-de-r}}
-
 R puede descargarse desde el \href{https://www.r-project.org/}{sitio web
 oficial de R} o desde el repositorio principal de paquetes de R
 \href{https://cran.r-project.org/}{CRAN}. Basta con descargar el archivo
@@ -372,10 +454,1144 @@ facilitan la gestión de cualquier proyecto:
 
 \bookmarksetup{startatroot}
 
-\hypertarget{estaduxedstica-descriptiva}{%
-\chapter{Estadística Descriptiva}\label{estaduxedstica-descriptiva}}
+\hypertarget{preprocesamiento-de-datos}{%
+\chapter{Preprocesamiento de datos}\label{preprocesamiento-de-datos}}
 
-Prueba.
+Para la realización de esta práctica se requieren los paquetes
+\texttt{readr} y
+\href{https://aprendeconalf.es/manual-r/06-preprocesamiento.html\#el-paquete-dplyr}{\texttt{dplyr}}
+de la colección de paquetes
+\href{https://aprendeconalf.es/manual-r/06-preprocesamiento.html\#la-colecci\%C3\%B3n-de-paquetes-tidyverse}{\texttt{tidyverse}}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse) }
+\CommentTok{\# Incluye los siguientes paquetes:}
+\CommentTok{\# {-} readr: para la lectura de ficheros csv. }
+\CommentTok{\# {-} dplyr: para el preprocesamiento y manipulación de datos.}
+\end{Highlighting}
+\end{Shaded}
+
+\leavevmode\vadjust pre{\hypertarget{exr-preprocesamiento-1}{}}%
+\begin{exercise}[]\label{exr-preprocesamiento-1}
+
+La siguiente tabla contiene los ingresos y gastos de una empresa durante
+el primer trimestre del año.
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X}
+\hline
+Mes & Ingresos & Gastos & Impuestos\\
+\hline
+Enero & 45000 & 33400 & 6450\\
+\hline
+Febrero & 41500 & 35400 & 6300\\
+\hline
+Marzo & 51200 & 35600 & 7100\\
+\hline
+\end{tabu}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Crear un data frame con los datos de la tabla.
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+    \AttributeTok{Mes =} \FunctionTok{c}\NormalTok{(}\StringTok{"Enero"}\NormalTok{, }\StringTok{"Febrero"}\NormalTok{, }\StringTok{"Marzo"}\NormalTok{),}
+    \AttributeTok{Ingresos =} \FunctionTok{c}\NormalTok{(}\DecValTok{45000}\NormalTok{, }\DecValTok{41500}\NormalTok{, }\DecValTok{51200}\NormalTok{),}
+    \AttributeTok{Gastos =} \FunctionTok{c}\NormalTok{(}\DecValTok{33400}\NormalTok{, }\DecValTok{35400}\NormalTok{, }\DecValTok{35600}\NormalTok{)}
+\NormalTok{    )}
+\NormalTok{df }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+      Mes Ingresos Gastos
+1   Enero    45000  33400
+2 Febrero    41500  35400
+3   Marzo    51200  35600
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Añadir una nueva columna con los siguientes impuestos pagados.
+\end{enumerate}
+
+\begin{table}
+\centering
+\begin{tabular}{l|r}
+\hline
+Mes & Impuestos\\
+\hline
+Enero & 6450\\
+\hline
+Febrero & 6300\\
+\hline
+Marzo & 7100\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución 1}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+Con las funciones básicas de R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df}\SpecialCharTok{$}\NormalTok{Impuestos }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{6450}\NormalTok{, }\DecValTok{6300}\NormalTok{, }\DecValTok{7100}\NormalTok{)}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+      Mes Ingresos Gastos Impuestos
+1   Enero    45000  33400      6450
+2 Febrero    41500  35400      6300
+3   Marzo    51200  35600      7100
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución 2}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+Con las funciones del paquete \texttt{dplyr}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Impuestos =} \FunctionTok{c}\NormalTok{(}\DecValTok{6450}\NormalTok{, }\DecValTok{6300}\NormalTok{, }\DecValTok{7100}\NormalTok{))}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+      Mes Ingresos Gastos Impuestos
+1   Enero    45000  33400      6450
+2 Febrero    41500  35400      6300
+3   Marzo    51200  35600      7100
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Añadir una nueva fila con los siguientes datos de Abril.
+\end{enumerate}
+
+\begin{tabu} to \linewidth {>{\raggedright}X>{\raggedleft}X>{\raggedleft}X>{\raggedleft}X}
+\hline
+Mes & Ingresos & Gastos & Impuestos\\
+\hline
+Abril & 49700 & 36300 & 6850\\
+\hline
+\end{tabu}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución 1}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+Con las funciones básicas de R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(df, }\FunctionTok{list}\NormalTok{(}\AttributeTok{Mes =} \StringTok{"Abril"}\NormalTok{, }\AttributeTok{Ingresos =} \DecValTok{49700}\NormalTok{, }\AttributeTok{Gastos =} \DecValTok{36300}\NormalTok{, }\AttributeTok{Impuestos =} \DecValTok{6850}\NormalTok{))}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+      Mes Ingresos Gastos Impuestos
+1   Enero    45000  33400      6450
+2 Febrero    41500  35400      6300
+3   Marzo    51200  35600      7100
+4   Abril    49700  36300      6850
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución 2}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+Con las funciones del paquete \texttt{dplyr}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{add\_row}\NormalTok{(}\AttributeTok{Mes =} \StringTok{"Abril"}\NormalTok{, }\AttributeTok{Ingresos =} \DecValTok{49700}\NormalTok{, }\AttributeTok{Gastos =} \DecValTok{36300}\NormalTok{, }\AttributeTok{Impuestos =} \DecValTok{6850}\NormalTok{)}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+      Mes Ingresos Gastos Impuestos
+1   Enero    45000  33400      6450
+2 Febrero    41500  35400      6300
+3   Marzo    51200  35600      7100
+4   Abril    49700  36300      6850
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Cambiar los ingresos de Marzo por 50400.
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df[}\DecValTok{3}\NormalTok{, }\StringTok{"Ingresos"}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{50400}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+      Mes Ingresos Gastos Impuestos
+1   Enero    45000  33400      6450
+2 Febrero    41500  35400      6300
+3   Marzo    50400  35600      7100
+4   Abril    49700  36300      6850
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Crear una nueva columna con los beneficios de cada mes (ingresos -
+  gastos - impuestos).
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución 1}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+Con las funciones básicas de R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df}\SpecialCharTok{$}\NormalTok{Beneficios }\OtherTok{\textless{}{-}}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{Ingresos }\SpecialCharTok{{-}}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{Gastos }\SpecialCharTok{{-}}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{Impuestos}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+      Mes Ingresos Gastos Impuestos Beneficios
+1   Enero    45000  33400      6450       5150
+2 Febrero    41500  35400      6300       -200
+3   Marzo    50400  35600      7100       7700
+4   Abril    49700  36300      6850       6550
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución 2}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+Con las funciones del paquete \texttt{dplyr}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Beneficios =}\NormalTok{ Ingresos }\SpecialCharTok{{-}}\NormalTok{ Gastos }\SpecialCharTok{{-}}\NormalTok{ Impuestos)}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+      Mes Ingresos Gastos Impuestos Beneficios
+1   Enero    45000  33400      6450       5150
+2 Febrero    41500  35400      6300       -200
+3   Marzo    50400  35600      7100       7700
+4   Abril    49700  36300      6850       6550
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Crear una nueva columna con el factor \texttt{Balance} con dos
+  posibles categorías: \texttt{positivo} si ha habido beneficios y
+  \texttt{negativo} si ha habido pérdidas.
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución 1}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+Con las funciones básicas de R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df}\SpecialCharTok{$}\NormalTok{Balance }\OtherTok{\textless{}{-}} \FunctionTok{cut}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{Beneficios, }\AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\DecValTok{0}\NormalTok{, }\ConstantTok{Inf}\NormalTok{), }\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"negativo"}\NormalTok{, }\StringTok{"positivo"}\NormalTok{))}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+      Mes Ingresos Gastos Impuestos Beneficios  Balance
+1   Enero    45000  33400      6450       5150 positivo
+2 Febrero    41500  35400      6300       -200 negativo
+3   Marzo    50400  35600      7100       7700 positivo
+4   Abril    49700  36300      6850       6550 positivo
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución 2}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+Con las funciones del paquete \texttt{dplyr}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Balance =} \FunctionTok{cut}\NormalTok{(Beneficios, }\AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\DecValTok{0}\NormalTok{, }\ConstantTok{Inf}\NormalTok{), }\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"negativo"}\NormalTok{, }\StringTok{"positivo"}\NormalTok{)))}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+      Mes Ingresos Gastos Impuestos Beneficios  Balance
+1   Enero    45000  33400      6450       5150 positivo
+2 Febrero    41500  35400      6300       -200 negativo
+3   Marzo    50400  35600      7100       7700 positivo
+4   Abril    49700  36300      6850       6550 positivo
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Filtrar el conjunto de datos para quedarse con los nombres de los
+  meses y los beneficios de los meses con balance positivo.
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución 1}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+Con las funciones básicas de R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df[df}\SpecialCharTok{$}\NormalTok{Balance }\SpecialCharTok{==} \StringTok{"positivo"}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"Mes"}\NormalTok{, }\StringTok{"Beneficios"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+    Mes Beneficios
+1 Enero       5150
+3 Marzo       7700
+4 Abril       6550
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución 2}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+Con las funciones del paquete \texttt{dplyr}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{filter}\NormalTok{(Balance }\SpecialCharTok{==} \StringTok{"positivo"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{select}\NormalTok{(Mes, Beneficios)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+    Mes Beneficios
+1 Enero       5150
+2 Marzo       7700
+3 Abril       6550
+\end{verbatim}
+
+\end{tcolorbox}
+
+\end{exercise}
+
+\leavevmode\vadjust pre{\hypertarget{exr-preprocesamiento-2}{}}%
+\begin{exercise}[]\label{exr-preprocesamiento-2}
+
+El fichero
+\href{\textquotesingle{}https://raw.githubusercontent.com/asalber/manual-r/master/datos/colesterol.csv\textquotesingle{}}{\texttt{colesterol.csv}}
+contiene información de una muestra de pacientes donde se han medido la
+edad, el sexo, el peso, la altura y el nivel de colesterol, además de su
+nombre.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Crear un data frame con los datos de todos los pacientes del estudio a
+  partir del fichero
+  \href{(\textquotesingle{}https://raw.githubusercontent.com/asalber/manual-r/master/datos/colesterol.csv\textquotesingle{})}{\texttt{colesterol.csv}}.
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución 1}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+Con las funciones básicas de R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}https://raw.githubusercontent.com/asalber/manual{-}r/master/datos/colesterol.csv\textquotesingle{}}\NormalTok{)}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                            nombre edad sexo peso altura colesterol
+1     José Luis Martínez Izquierdo   18    H   85   1.79        182
+2                   Rosa Díaz Díaz   32    M   65   1.73        232
+3            Javier García Sánchez   24    H   NA   1.81        191
+4              Carmen López Pinzón   35    M   65   1.70        200
+5             Marisa López Collado   46    M   51   1.58        148
+6                Antonio Ruiz Cruz   68    H   66   1.74        249
+7          Antonio Fernández Ocaña   51    H   62   1.72        276
+8            Pilar Martín González   22    M   60   1.66         NA
+9             Pedro Gálvez Tenorio   35    H   90   1.94        241
+10         Santiago Reillo Manzano   46    H   75   1.85        280
+11           Macarena Álvarez Luna   53    M   55   1.62        262
+12      José María de la Guía Sanz   58    H   78   1.87        198
+13 Miguel Angel Cuadrado Gutiérrez   27    H  109   1.98        210
+14           Carolina Rubio Moreno   20    M   61   1.77        194
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución 2}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+Con las funciones del paquete \texttt{readr}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{\textquotesingle{}https://raw.githubusercontent.com/asalber/manual{-}r/master/datos/colesterol.csv\textquotesingle{}}\NormalTok{)}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 14 x 6
+   nombre                           edad sexo   peso altura colesterol
+   <chr>                           <dbl> <chr> <dbl>  <dbl>      <dbl>
+ 1 José Luis Martínez Izquierdo       18 H        85   1.79        182
+ 2 Rosa Díaz Díaz                     32 M        65   1.73        232
+ 3 Javier García Sánchez              24 H        NA   1.81        191
+ 4 Carmen López Pinzón                35 M        65   1.7         200
+ 5 Marisa López Collado               46 M        51   1.58        148
+ 6 Antonio Ruiz Cruz                  68 H        66   1.74        249
+ 7 Antonio Fernández Ocaña            51 H        62   1.72        276
+ 8 Pilar Martín González              22 M        60   1.66         NA
+ 9 Pedro Gálvez Tenorio               35 H        90   1.94        241
+10 Santiago Reillo Manzano            46 H        75   1.85        280
+11 Macarena Álvarez Luna              53 M        55   1.62        262
+12 José María de la Guía Sanz         58 H        78   1.87        198
+13 Miguel Angel Cuadrado Gutiérrez    27 H       109   1.98        210
+14 Carolina Rubio Moreno              20 M        61   1.77        194
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Crear una nueva columna con el índice de masa corporal, usando la
+  siguiente fórmula
+\end{enumerate}
+
+\[
+\mbox{IMC} = \frac{\mbox{Peso (kg)}}{\mbox{Altura (cm)}^2}
+\]
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{imc =} \FunctionTok{round}\NormalTok{(peso}\SpecialCharTok{/}\NormalTok{altura}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{))}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 14 x 7
+   nombre                           edad sexo   peso altura colesterol   imc
+   <chr>                           <dbl> <chr> <dbl>  <dbl>      <dbl> <dbl>
+ 1 José Luis Martínez Izquierdo       18 H        85   1.79        182    27
+ 2 Rosa Díaz Díaz                     32 M        65   1.73        232    22
+ 3 Javier García Sánchez              24 H        NA   1.81        191    NA
+ 4 Carmen López Pinzón                35 M        65   1.7         200    22
+ 5 Marisa López Collado               46 M        51   1.58        148    20
+ 6 Antonio Ruiz Cruz                  68 H        66   1.74        249    22
+ 7 Antonio Fernández Ocaña            51 H        62   1.72        276    21
+ 8 Pilar Martín González              22 M        60   1.66         NA    22
+ 9 Pedro Gálvez Tenorio               35 H        90   1.94        241    24
+10 Santiago Reillo Manzano            46 H        75   1.85        280    22
+11 Macarena Álvarez Luna              53 M        55   1.62        262    21
+12 José María de la Guía Sanz         58 H        78   1.87        198    22
+13 Miguel Angel Cuadrado Gutiérrez    27 H       109   1.98        210    28
+14 Carolina Rubio Moreno              20 M        61   1.77        194    19
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Crear una nueva columna con la variable \texttt{obesidad}
+  recodificando la columna \texttt{imc} en las siguientes categorías.
+\end{enumerate}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule()
+Rango IMC & Categoría \\
+\midrule()
+\endhead
+Menor de 18.5 & Bajo peso \\
+De 18.5 a 24.5 & Saludable \\
+De 24.5 a 30 & Sobrepeso \\
+Mayor de 30 & Obeso \\
+\bottomrule()
+\end{longtable}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Obesidad =} \FunctionTok{cut}\NormalTok{(imc, }\AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FloatTok{18.5}\NormalTok{, }\FloatTok{24.5}\NormalTok{, }\DecValTok{30}\NormalTok{, }\ConstantTok{Inf}\NormalTok{), }\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Bajo peso"}\NormalTok{, }\StringTok{"Saludable"}\NormalTok{, }\StringTok{"Sobrepeso"}\NormalTok{, }\StringTok{"Obeso"}\NormalTok{)))}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 14 x 8
+   nombre                      edad sexo   peso altura colesterol   imc Obesidad
+   <chr>                      <dbl> <chr> <dbl>  <dbl>      <dbl> <dbl> <fct>   
+ 1 José Luis Martínez Izquie~    18 H        85   1.79        182    27 Sobrepe~
+ 2 Rosa Díaz Díaz                32 M        65   1.73        232    22 Saludab~
+ 3 Javier García Sánchez         24 H        NA   1.81        191    NA <NA>    
+ 4 Carmen López Pinzón           35 M        65   1.7         200    22 Saludab~
+ 5 Marisa López Collado          46 M        51   1.58        148    20 Saludab~
+ 6 Antonio Ruiz Cruz             68 H        66   1.74        249    22 Saludab~
+ 7 Antonio Fernández Ocaña       51 H        62   1.72        276    21 Saludab~
+ 8 Pilar Martín González         22 M        60   1.66         NA    22 Saludab~
+ 9 Pedro Gálvez Tenorio          35 H        90   1.94        241    24 Saludab~
+10 Santiago Reillo Manzano       46 H        75   1.85        280    22 Saludab~
+11 Macarena Álvarez Luna         53 M        55   1.62        262    21 Saludab~
+12 José María de la Guía Sanz    58 H        78   1.87        198    22 Saludab~
+13 Miguel Angel Cuadrado Gut~    27 H       109   1.98        210    28 Sobrepe~
+14 Carolina Rubio Moreno         20 M        61   1.77        194    19 Saludab~
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Seleccionar las columnas \texttt{nombre}, \texttt{sexo} y
+  \texttt{edad}.
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{select}\NormalTok{(nombre, sexo, edad)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 14 x 3
+   nombre                          sexo   edad
+   <chr>                           <chr> <dbl>
+ 1 José Luis Martínez Izquierdo    H        18
+ 2 Rosa Díaz Díaz                  M        32
+ 3 Javier García Sánchez           H        24
+ 4 Carmen López Pinzón             M        35
+ 5 Marisa López Collado            M        46
+ 6 Antonio Ruiz Cruz               H        68
+ 7 Antonio Fernández Ocaña         H        51
+ 8 Pilar Martín González           M        22
+ 9 Pedro Gálvez Tenorio            H        35
+10 Santiago Reillo Manzano         H        46
+11 Macarena Álvarez Luna           M        53
+12 José María de la Guía Sanz      H        58
+13 Miguel Angel Cuadrado Gutiérrez H        27
+14 Carolina Rubio Moreno           M        20
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Anonimizar los datos eliminando la columna \texttt{nombre}.
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{nombre)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 14 x 7
+    edad sexo   peso altura colesterol   imc Obesidad 
+   <dbl> <chr> <dbl>  <dbl>      <dbl> <dbl> <fct>    
+ 1    18 H        85   1.79        182    27 Sobrepeso
+ 2    32 M        65   1.73        232    22 Saludable
+ 3    24 H        NA   1.81        191    NA <NA>     
+ 4    35 M        65   1.7         200    22 Saludable
+ 5    46 M        51   1.58        148    20 Saludable
+ 6    68 H        66   1.74        249    22 Saludable
+ 7    51 H        62   1.72        276    21 Saludable
+ 8    22 M        60   1.66         NA    22 Saludable
+ 9    35 H        90   1.94        241    24 Saludable
+10    46 H        75   1.85        280    22 Saludable
+11    53 M        55   1.62        262    21 Saludable
+12    58 H        78   1.87        198    22 Saludable
+13    27 H       109   1.98        210    28 Sobrepeso
+14    20 M        61   1.77        194    19 Saludable
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Reordenar las columnas poniendo la columna \texttt{sexo} antes que la
+  columna \texttt{edad}.
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{select}\NormalTok{(nombre, sexo, edad, }\FunctionTok{everything}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 14 x 8
+   nombre                     sexo   edad  peso altura colesterol   imc Obesidad
+   <chr>                      <chr> <dbl> <dbl>  <dbl>      <dbl> <dbl> <fct>   
+ 1 José Luis Martínez Izquie~ H        18    85   1.79        182    27 Sobrepe~
+ 2 Rosa Díaz Díaz             M        32    65   1.73        232    22 Saludab~
+ 3 Javier García Sánchez      H        24    NA   1.81        191    NA <NA>    
+ 4 Carmen López Pinzón        M        35    65   1.7         200    22 Saludab~
+ 5 Marisa López Collado       M        46    51   1.58        148    20 Saludab~
+ 6 Antonio Ruiz Cruz          H        68    66   1.74        249    22 Saludab~
+ 7 Antonio Fernández Ocaña    H        51    62   1.72        276    21 Saludab~
+ 8 Pilar Martín González      M        22    60   1.66         NA    22 Saludab~
+ 9 Pedro Gálvez Tenorio       H        35    90   1.94        241    24 Saludab~
+10 Santiago Reillo Manzano    H        46    75   1.85        280    22 Saludab~
+11 Macarena Álvarez Luna      M        53    55   1.62        262    21 Saludab~
+12 José María de la Guía Sanz H        58    78   1.87        198    22 Saludab~
+13 Miguel Angel Cuadrado Gut~ H        27   109   1.98        210    28 Sobrepe~
+14 Carolina Rubio Moreno      M        20    61   1.77        194    19 Saludab~
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Filtrar el data frame para quedarse con las mujeres.
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{filter}\NormalTok{(sexo }\SpecialCharTok{==} \StringTok{"M"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 6 x 8
+  nombre                 edad sexo   peso altura colesterol   imc Obesidad 
+  <chr>                 <dbl> <chr> <dbl>  <dbl>      <dbl> <dbl> <fct>    
+1 Rosa Díaz Díaz           32 M        65   1.73        232    22 Saludable
+2 Carmen López Pinzón      35 M        65   1.7         200    22 Saludable
+3 Marisa López Collado     46 M        51   1.58        148    20 Saludable
+4 Pilar Martín González    22 M        60   1.66         NA    22 Saludable
+5 Macarena Álvarez Luna    53 M        55   1.62        262    21 Saludable
+6 Carolina Rubio Moreno    20 M        61   1.77        194    19 Saludable
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  Filtrar el data frame para quedarse con los hombres mayores de 30
+  años.
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{filter}\NormalTok{( sexo }\SpecialCharTok{==} \StringTok{"H"} \SpecialCharTok{\&}\NormalTok{ edad }\SpecialCharTok{\textgreater{}} \DecValTok{30}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 5 x 8
+  nombre                      edad sexo   peso altura colesterol   imc Obesidad 
+  <chr>                      <dbl> <chr> <dbl>  <dbl>      <dbl> <dbl> <fct>    
+1 Antonio Ruiz Cruz             68 H        66   1.74        249    22 Saludable
+2 Antonio Fernández Ocaña       51 H        62   1.72        276    21 Saludable
+3 Pedro Gálvez Tenorio          35 H        90   1.94        241    24 Saludable
+4 Santiago Reillo Manzano       46 H        75   1.85        280    22 Saludable
+5 José María de la Guía Sanz    58 H        78   1.87        198    22 Saludable
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{enumerate}
+\def\labelenumi{\roman{enumi}.}
+\tightlist
+\item
+  Filtrar el data frame para eliminar las filas con datos perdidos en la
+  columna \texttt{colesterol}.
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(colesterol))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 13 x 8
+   nombre                      edad sexo   peso altura colesterol   imc Obesidad
+   <chr>                      <dbl> <chr> <dbl>  <dbl>      <dbl> <dbl> <fct>   
+ 1 José Luis Martínez Izquie~    18 H        85   1.79        182    27 Sobrepe~
+ 2 Rosa Díaz Díaz                32 M        65   1.73        232    22 Saludab~
+ 3 Javier García Sánchez         24 H        NA   1.81        191    NA <NA>    
+ 4 Carmen López Pinzón           35 M        65   1.7         200    22 Saludab~
+ 5 Marisa López Collado          46 M        51   1.58        148    20 Saludab~
+ 6 Antonio Ruiz Cruz             68 H        66   1.74        249    22 Saludab~
+ 7 Antonio Fernández Ocaña       51 H        62   1.72        276    21 Saludab~
+ 8 Pedro Gálvez Tenorio          35 H        90   1.94        241    24 Saludab~
+ 9 Santiago Reillo Manzano       46 H        75   1.85        280    22 Saludab~
+10 Macarena Álvarez Luna         53 M        55   1.62        262    21 Saludab~
+11 José María de la Guía Sanz    58 H        78   1.87        198    22 Saludab~
+12 Miguel Angel Cuadrado Gut~    27 H       109   1.98        210    28 Sobrepe~
+13 Carolina Rubio Moreno         20 M        61   1.77        194    19 Saludab~
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{9}
+\tightlist
+\item
+  Ordenar el data frame según la columna \texttt{nombre}.
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{arrange}\NormalTok{(nombre)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 14 x 8
+   nombre                      edad sexo   peso altura colesterol   imc Obesidad
+   <chr>                      <dbl> <chr> <dbl>  <dbl>      <dbl> <dbl> <fct>   
+ 1 Antonio Fernández Ocaña       51 H        62   1.72        276    21 Saludab~
+ 2 Antonio Ruiz Cruz             68 H        66   1.74        249    22 Saludab~
+ 3 Carmen López Pinzón           35 M        65   1.7         200    22 Saludab~
+ 4 Carolina Rubio Moreno         20 M        61   1.77        194    19 Saludab~
+ 5 Javier García Sánchez         24 H        NA   1.81        191    NA <NA>    
+ 6 José Luis Martínez Izquie~    18 H        85   1.79        182    27 Sobrepe~
+ 7 José María de la Guía Sanz    58 H        78   1.87        198    22 Saludab~
+ 8 Macarena Álvarez Luna         53 M        55   1.62        262    21 Saludab~
+ 9 Marisa López Collado          46 M        51   1.58        148    20 Saludab~
+10 Miguel Angel Cuadrado Gut~    27 H       109   1.98        210    28 Sobrepe~
+11 Pedro Gálvez Tenorio          35 H        90   1.94        241    24 Saludab~
+12 Pilar Martín González         22 M        60   1.66         NA    22 Saludab~
+13 Rosa Díaz Díaz                32 M        65   1.73        232    22 Saludab~
+14 Santiago Reillo Manzano       46 H        75   1.85        280    22 Saludab~
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{10}
+\tightlist
+\item
+  Ordenar el data frame ascendentemente por la columna \texttt{sexo} y
+  descendentemente por la columna \texttt{edad}.
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{arrange}\NormalTok{(sexo, }\FunctionTok{desc}\NormalTok{(edad))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 14 x 8
+   nombre                      edad sexo   peso altura colesterol   imc Obesidad
+   <chr>                      <dbl> <chr> <dbl>  <dbl>      <dbl> <dbl> <fct>   
+ 1 Antonio Ruiz Cruz             68 H        66   1.74        249    22 Saludab~
+ 2 José María de la Guía Sanz    58 H        78   1.87        198    22 Saludab~
+ 3 Antonio Fernández Ocaña       51 H        62   1.72        276    21 Saludab~
+ 4 Santiago Reillo Manzano       46 H        75   1.85        280    22 Saludab~
+ 5 Pedro Gálvez Tenorio          35 H        90   1.94        241    24 Saludab~
+ 6 Miguel Angel Cuadrado Gut~    27 H       109   1.98        210    28 Sobrepe~
+ 7 Javier García Sánchez         24 H        NA   1.81        191    NA <NA>    
+ 8 José Luis Martínez Izquie~    18 H        85   1.79        182    27 Sobrepe~
+ 9 Macarena Álvarez Luna         53 M        55   1.62        262    21 Saludab~
+10 Marisa López Collado          46 M        51   1.58        148    20 Saludab~
+11 Carmen López Pinzón           35 M        65   1.7         200    22 Saludab~
+12 Rosa Díaz Díaz                32 M        65   1.73        232    22 Saludab~
+13 Pilar Martín González         22 M        60   1.66         NA    22 Saludab~
+14 Carolina Rubio Moreno         20 M        61   1.77        194    19 Saludab~
+\end{verbatim}
+
+\end{tcolorbox}
+
+\end{exercise}
+
+\hypertarget{ejercicios-propuestos}{%
+\section{Ejercicios Propuestos}\label{ejercicios-propuestos}}
+
+\leavevmode\vadjust pre{\hypertarget{exr-preprocesaimento-5}{}}%
+\begin{exercise}[]\label{exr-preprocesaimento-5}
+
+La siguiente tabla recoge las notas de los alumnos de un curso con dos
+asignaturas.
+
+\begin{longtable}[]{@{}lccc@{}}
+\toprule()
+Alumno & Sexo & Física & Química \\
+\midrule()
+\endhead
+Carlos & H & 6.7 & 8.1 \\
+María & M & 7.2 & 9.5 \\
+Carmen & M & 5.5 & 5 \\
+Pedro & H & & 4.5 \\
+Luis & H & 3.5 & 5 \\
+Sara & M & 6.2 & 4 \\
+\bottomrule()
+\end{longtable}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Definir cuatro vectores con el nombre, el sexo y las notas de Física y
+  Química.
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nombre }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Carlos"}\NormalTok{, }\StringTok{"María"}\NormalTok{, }\StringTok{"Carmen"}\NormalTok{, }\StringTok{"Pedro"}\NormalTok{, }\StringTok{"Luis"}\NormalTok{, }\StringTok{"Sara"}\NormalTok{)}
+\NormalTok{sexo }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"H"}\NormalTok{, }\StringTok{"M"}\NormalTok{, }\StringTok{"M"}\NormalTok{, }\StringTok{"H"}\NormalTok{, }\StringTok{"H"}\NormalTok{, }\StringTok{"M"}\NormalTok{)}
+\NormalTok{fisica }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{6.7}\NormalTok{, }\FloatTok{7.2}\NormalTok{, }\FloatTok{5.5}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\FloatTok{3.5}\NormalTok{, }\FloatTok{6.2}\NormalTok{)}
+\NormalTok{quimica }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{8.1}\NormalTok{, }\FloatTok{9.5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\FloatTok{4.5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{tcolorbox}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Convertir el sexo en un factor y mostrar sus niveles.
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sexo }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(sexo)}
+\FunctionTok{levels}\NormalTok{(sexo)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "H" "M"
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Crear un data frame con el nombre, sexo y las notas de Física y
+  Química.
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(nombre, sexo, fisica, quimica)}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  nombre sexo fisica quimica
+1 Carlos    H    6.7     8.1
+2  María    M    7.2     9.5
+3 Carmen    M    5.5     5.0
+4  Pedro    H     NA     4.5
+5   Luis    H    3.5     5.0
+6   Sara    M    6.2     4.0
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Crear una nueva columna con la nota media de Física y Química.
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df}\SpecialCharTok{$}\NormalTok{media }\OtherTok{\textless{}{-}}\NormalTok{ (df}\SpecialCharTok{$}\NormalTok{fisica }\SpecialCharTok{+}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{quimica) }\SpecialCharTok{/} \DecValTok{2}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  nombre sexo fisica quimica media
+1 Carlos    H    6.7     8.1  7.40
+2  María    M    7.2     9.5  8.35
+3 Carmen    M    5.5     5.0  5.25
+4  Pedro    H     NA     4.5    NA
+5   Luis    H    3.5     5.0  4.25
+6   Sara    M    6.2     4.0  5.10
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Crear una nueva columna booleana \texttt{aprobado} que tenga el valor
+  \texttt{TRUE} si la media es mayor o igual que 5 y \texttt{FALSE} en
+  caso contrario.
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df}\SpecialCharTok{$}\NormalTok{aprobado }\OtherTok{\textless{}{-}}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{media }\SpecialCharTok{\textgreater{}=} \DecValTok{5}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  nombre sexo fisica quimica media aprobado
+1 Carlos    H    6.7     8.1  7.40     TRUE
+2  María    M    7.2     9.5  8.35     TRUE
+3 Carmen    M    5.5     5.0  5.25     TRUE
+4  Pedro    H     NA     4.5    NA       NA
+5   Luis    H    3.5     5.0  4.25    FALSE
+6   Sara    M    6.2     4.0  5.10     TRUE
+\end{verbatim}
+
+\end{tcolorbox}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Filtrar el data frame para quedarse con el nombre y la media de las
+  mujeres que han aprobado.
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df[df}\SpecialCharTok{$}\NormalTok{sexo }\SpecialCharTok{==} \StringTok{"M"} \SpecialCharTok{\&}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{media }\SpecialCharTok{\textgreater{}=} \DecValTok{5}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"nombre"}\NormalTok{, }\StringTok{"media"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  nombre media
+2  María  8.35
+3 Carmen  5.25
+6   Sara  5.10
+\end{verbatim}
+
+\end{tcolorbox}
+
+\end{exercise}
+
+\leavevmode\vadjust pre{\hypertarget{exr-preprocesamiento-5}{}}%
+\begin{exercise}[]\label{exr-preprocesamiento-5}
+
+Se ha diseñado un ensayo clínico leatorizado, doble-ciego y controlado
+con placebo, para estudiar el efecto de dos alternativas terapéuticas en
+el control de la hipertensión arterial. Se han reclutado 100 pacientes
+hipertensos y estos han sido distribuidos aleatoriamente en tres grupos
+de tratamiento. A uno de los grupos (control) se le administró un
+placebo, a otro grupo se le administró un inhibidor de la enzima
+conversora de la angiotensina (IECA) y al otro un tratamiento combinado
+de un diurético y un Antagonista del Calcio. Las variables respuesta
+final fueron las presiones arteriales sistólica y diastólica.
+
+Los datos con las claves de aleatorización han sido introducidos en una
+base de datos que reside en la central de aleatorización, mientras que
+los datos clínicos han sido archivados en dos archivos distintos, uno
+para cada uno de los dos centros participantes en el estudio.
+
+Las variables almacenadas en estos archivos clínicos son las siguientes:
+
+\begin{itemize}
+\tightlist
+\item
+  CLAVE: Clave de aleatorización
+\item
+  NOMBRE: Iniciales del paciente
+\item
+  F\_NACIM: Fecha de Nacimiento
+\item
+  F\_INCLUS: Fecha de inclusión
+\item
+  SEXO: Sexo (0: Hombre 1: Mujer)
+\item
+  ALTURA: Altura en cm.
+\item
+  PESO: Peso en Kg.
+\item
+  PAD\_INI: Presión diastólica basal (inicial)
+\item
+  PAD\_FIN: Presión diastólica final
+\item
+  PAS\_INI: Presión sistólica basal (inicial)
+\item
+  PAS\_FIN: Presión sistólica final
+\end{itemize}
+
+El archivo de claves de aleatorización contiene sólo dos variables.
+
+\begin{itemize}
+\tightlist
+\item
+  CLAVE: Clave de aleatorización
+\item
+  FARMACO: Fármaco administrado (0: Placebo, 1: IECA, 2:Ca Antagonista +
+  diurético)
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Crear un data frame con los datos de los pacientes del hospital A
+  (fichero de Excel
+  \href{datos/hipertension/datos-hospital-a.xls}{datos-hospital-a.xls}).
+\end{enumerate}
+
+\begin{tcolorbox}[enhanced jigsaw, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Solución}, coltitle=black, opacitybacktitle=0.6, rightrule=.15mm, colback=white, bottomtitle=1mm, breakable, leftrule=.75mm, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, left=2mm, colframe=quarto-callout-tip-color-frame, toptitle=1mm, titlerule=0mm, arc=.35mm, bottomrule=.15mm, toprule=.15mm]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(readxl)}
+\CommentTok{\#dfa \textless{}{-} read\_excel()}
+\end{Highlighting}
+\end{Shaded}
+
+\end{tcolorbox}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\item
+  Crear un data frame con los datos de los pacientes del hosptial B
+  (fichero csv
+  \href{datos/hipertension/datos-hospital-b.csv}{datos-hospital-b.csv}).
+\item
+  Fusionar los datos de los dos hospitales en un nuevo data frame.
+\item
+  Crear un data frame con los datos de las claves de aleatorización
+  (fichero csv
+  \href{datos/hipertension/claves-aleatorizacion.csv}{claves-aleatorizacion.csv})
+\item
+  Fusionar el data frame con los datos clínicos y el data frame con
+  claves de aleatorización en un nuevo data frame.
+\item
+  Convertir en un factor el sexo.
+\item
+  Crear una nueva columna para la evolución de la presión arterial
+  diastólica restando las columnas \texttt{PAS\_FIN} y
+  \texttt{PAS\_FIN}.
+\end{enumerate}
+
+\end{exercise}
 
 
 

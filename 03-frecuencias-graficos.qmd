@@ -17,13 +17,17 @@ library(tidyverse)
 # - readr: para la lectura de ficheros csv. 
 # - dplyr: para el preprocesamiento y manipulación de datos.
 # - ggplot2: para la representación gráfica.
+library(knitr) # para el formateo de tablas.
+library(kableExtra) # para personalizar el formato de las tablas.
 ```
 
 :::{#exr-1}
 En una encuesta a 25 matrimonios sobre el número de hijos que tenían se obtuvieron los siguientes datos:
 
-    1, 2, 4, 2, 2, 2, 3, 2, 1, 1, 0, 2, 2,  
-    0, 2, 2, 1, 2, 2, 3, 1, 2, 2, 1, 2
+| |
+|:-:|
+|1, 2, 4, 2, 2, 2, 3, 2, 1, 1, 0, 2, 2, 0, 2, 2, 1, 2, 2, 3, 1, 2, 2, 1, 2 |
+
 
 a. Crear un conjunto de datos con la variable `hijos`.
 
@@ -36,48 +40,373 @@ df <- data.frame(hijos = c(1, 2, 4, 2, 2, 2, 3, 2, 1, 1, 0, 2, 2, 0, 2, 2, 1, 2,
 
 b. Construir la tabla de frecuencias.
 
+:::{.callout-tip collapse="true"}
+## Solución 1
 
-c. Dibujar el diagrama de barras de las frecuencias absolutas.
+Para obtener las frecuencias absolutas se puede usar la función [`table`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/table), y para las frecuencias relativas la función  [`prop.table`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/prop.table) ambas del paquete base de R.
 
-
-e. Dibujar también el diagrama de barras de las frecuencias relativas, el de absolutas acumuladas y el de relativas acumuladas.
-
-f. Dibujar el polígono de frecuencias relativas.
+```{r}
+# Frecuencias absolutas.
+ni <- table(df$hijos)
+# Frecuencias relativas
+fi <- prop.table(ni)
+# Frecuencias acumuladas.
+Ni <- cumsum(ni)
+# Frecuencias relativas acumuladas.
+Fi <- cumsum(fi)
+# Creación de un data frame con las frecuencias.
+tabla_frec <- cbind(ni, fi, Ni, Fi)
+tabla_frec
+```
 :::
 
+:::{.callout-tip collapse="true"}
+## Solución 2
 
+Otra alternativa es usar la fución [`count`](https://aprendeconalf.es/manual-r/06-preprocesamiento.html#conteo-del-n%C3%BAmero-de-observaciones) del paquete `dplyr`.
 
-:::{exr-2}
+```{r}
+library(dplyr)
+library(knitr)
+library(kableExtra)
+count(df, hijos) %>% 
+    mutate(fi = n/sum(n), Ni = cumsum(n), Fi = cumsum(n)/sum(n)) %>%
+    kable() %>%
+    kable_styling(bootstrap_options = "hover", full_width = F)
+```
+:::
+
+c. Dibujar el diagrama de barras de las frecuencias absolutas, relativas, absolutas acumuladas y relativas acumuladas.
+
+:::{.callout-tip collapse="true"}
+## Solución 1
+
+Para dibujar un diagrama de barras se puede usar la función [`barplot`](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/barplot) del paquete `graphics`.
+
+```{r}
+# Diagrama de barras de frecuencias absolutas.
+barplot(ni, col = "steelblue", main="Distribución del número de hijos", xlab="Hijos", ylab="Frecuencia absoluta")
+# Diagrama de barras de frecuencias relativas.
+barplot(fi, col = "steelblue", main="Distribución del número de hijos", xlab="Hijos", ylab="Frecuencia relativa")
+# Diagrama de barras de frecuencias absolutas acumuladas.
+barplot(Ni, col = "steelblue", main="Distribución acumulada del número de hijos", xlab="Hijos", ylab="Frecuencia absoluta acumulada")
+# Diagrama de barras de frecuencias relativas acumuladas.
+barplot(Fi, col = "steelblue", main="Distribución acumulada del número de hijos", xlab="Hijos", ylab="Frecuencia relativa acumulada")
+```
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución 2
+
+Otra alternativa es usar la función la función [`geom_bar`](https://aprendeconalf.es/manual-r/07-graficos.html#diagramas-de-barras) del paquete `ggplot2`.
+
+```{r}
+library(ggplot2)
+# Diagarma de barras de frecuencias absolutas
+ggplot(df, aes(x = hijos)) +
+    geom_bar(fill = "steelblue") + 
+    labs(title = "Distribución del número de hijos", y = "Frecuencia absoluta")
+# Diagarma de barras de frecuencias relativas
+ggplot(df, aes(x = hijos)) +
+    geom_bar(aes(y = (..count..)/sum(..count..)), fill = "steelblue") +
+    labs(title = "Distribución del número de hijos", y = "Frecuencia relativa")
+# Diagarma de barras de frecuencias acumuladas
+ggplot(df, aes(x = hijos)) +
+    geom_bar(aes(y = cumsum(..count..)), fill = "steelblue") +
+    labs(title = "Distribución acumulada del número de hijos", y = "Frecuencia absoluta acumulada")
+# Diagarma de barras de frecuencias acumuladas
+ggplot(df, aes(x = hijos)) +
+    geom_bar(aes(y = cumsum(..count..)/sum(..count..)), fill = "steelblue") +
+    labs(title = "Distribución acumulada del número de hijos", y = "Frecuencia relativa acumulada")
+```
+:::
+
+d. Dibujar el polígono de frecuencias relativas.
+
+:::{.callout-tip collapse="true"}
+## Solución 1
+
+Para dibujar un diagrama de lineas se puede usar la función [`plot`](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot) del paquete `graphics`.
+
+```{r}
+# Frecuencias relativas.
+plot(names(fi), fi, type = "l", col = "steelblue", main="Distribución del número de hijos", xlab="Hijos", ylab="Frecuencia relativa")
+```
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución 2
+Otra alternativa es usar la función la función [`geom_line`](https://aprendeconalf.es/manual-r/07-graficos.html#diagramas-de-lineas) del paquete `ggplot2`.
+
+```{r}
+library(ggplot2)
+count(df, hijos) %>% 
+    mutate(fi = n/sum(n)) %>%
+    ggplot(aes(x=hijos, y=fi)) +
+    geom_line(col = "steelblue") +
+    labs(title = "Distribución del número de hijos", y = "Frecuencia relativa")
+```
+:::
+:::
+
+:::{#exr-2}
 En un servicio de atención al cliente se han registrado el número de llamadas de clientes cada día del mes de noviembre, obteniendo los siguientes datos:
 
-    15, 23, 12, 10, 28, 50, 12, 17, 20, 21, 18, 13, 11, 12, 26   
-    30, 6, 16, 19, 22, 14, 17, 21, 28, 9, 16, 13, 11, 16, 20
+| |
+|:-:|
+| 15, 23, 12, 10, 28, 50, 12, 17, 20, 21, 18, 13, 11, 12, 26,<br> 30, 6, 16, 19, 22, 14, 17, 21, 28, 9, 16, 13, 11, 16, 20 |
 
 a. Crear un conjunto de datos con la variable `llamadas`.
 
-b. Dibujar el diagrama de cajas. ¿Existe algún dato atípico? En el caso de que exista, eliminarlo y proceder con los
-siguientes apartados.
+:::{.callout-tip collapse="true"}
+## Solución
+```{r}
+df <- data.frame(llamadas = c(15, 23, 12, 10, 28, 50, 12, 17, 20, 21, 18, 13, 11, 12, 26, 30, 6, 16, 19, 22, 14, 17, 21, 28, 9, 16, 13, 11, 16, 20))
+```
+:::
+
+b. Dibujar el diagrama de cajas. ¿Existe algún dato atípico? En el caso de que exista, eliminarlo y proceder con los siguientes apartados.
+
+:::{.callout-tip collapse="true"}
+## Solución 1
+
+Para dibujar un diagrama de cajas se puede usar la función [`boxplot`](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/boxplot) del paquete `graphics`.
+
+```{r}
+# Frecuencias relativas.
+boxplot(df$llamadas, col = "steelblue", main="Distribución del número de llamadas", horizontal = T, xlab="Número de llamadas")
+```
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución 2
+Otra alternativa es usar la función la función [`geom_boxplot`](https://aprendeconalf.es/manual-r/07-graficos.html#diagramas-de-cajas) del paquete `ggplot2`.
+
+```{r}
+library(ggplot2)
+ggplot(df, aes(x = llamadas)) +
+    geom_boxplot(fill = "steelblue") +
+    labs(title = "Distribución del número de llamadas", x = "Número de llamadas")
+```
+
+Hay un día con 50 llamadas, que es un valor atípico en comparación con el resto de días.
+
+:::{.callout-tip collapse="true"}
+## Solución
+
+La función `cut` 
+```{r}
+# Eliminación del dato atípico.
+df <- df[df$llamadas != 50, , drop = F]
+```
+:::
+:::
 
 c. Construir la tabla de frecuencias agrupando en 5 clases.
 
-d. Dibujar el histograma de frecuencias absolutas  correspondiente a la tabla anterior.
+:::{.callout-tip collapse="true"}
+## Solución 1
 
-e. Dibujar también el histograma de las frecuencias relativas, el de absolutas acumuladas y el de relativas acumuladas.
+Para agrupar los datos en intervalos se puede utilizar la función [`cut`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/cut) del paquete base de R, y para contar las frecuencias absolutas y relativas las funciones [`table`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/table), y [`prop.table`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/prop.table) respectivamente.
 
-f. Dibujar el polígono de frecuencias relativas acumuladas (ojiva).
+```{r}
+# Frecuencias absolutas. Creación automática de 5 clases con intervalos cerrados a la izquierda.
+```{r}
+ni <- table(cut(df$llamadas, breaks = 5, right = F))
+# Creación manual de 5 clases.
+ni <- table(cut(df$llamadas, breaks = seq(5, 30, 5)))
+# Frecuencias relativas
+fi <- prop.table(ni)
+# Frecuencias acumuladas.
+Ni <- cumsum(ni)
+# Frecuencias relativas acumuladas.
+Fi <- cumsum(fi)
+# Creación de un data frame con las frecuencias.
+tabla_frec <- cbind(ni, fi, Ni, Fi)
+tabla_frec
+```
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución 2
+
+Otra alternativa es usar la fución [`count`](https://aprendeconalf.es/manual-r/06-preprocesamiento.html#conteo-del-n%C3%BAmero-de-observaciones) del paquete `dplyr`.
+
+```{r}
+library(dplyr)
+library(knitr)
+library(kableExtra)
+mutate(df, llamadas_int = cut(llamadas, breaks = seq(5, 30, 5))) %>% 
+    count(llamadas_int) %>%
+    mutate(fi = n/sum(n), Ni = cumsum(n), Fi = cumsum(n)/sum(n)) %>%
+    kable() %>%
+    kable_styling(bootstrap_options = "hover", full_width = F)
+```
+:::
+
+d. Dibujar el histograma de frecuencias absolutas, relativas, absolutas acumuladas y relativas acumuladas correspondiente a la tabla anterior.
+
+:::{.callout-tip collapse="true"}
+## Solución 1
+
+Para dibujar un histograma se puede usar la función [`hist`](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/hist) del paquete `graphics`.
+
+```{r}
+# Histograma de frecuencias absolutas.
+histo <- hist(df$llamadas, breaks = seq(5, 30, 5), col = "steelblue", main="Distribución del número de llamadas", xlab="Llamadas", ylab="Frecuencia absoluta")
+ni <- histo$counts
+# Histograma de frecuencias relativas.
+histo$counts <- ni/sum(ni)
+plot(histo, col = "steelblue", main="Distribución del número de llamadas", xlab="Llamadas", ylab="Frecuencia relativa")
+# Histograma de frecuencias absolutas acumuladas.
+histo$counts <- cumsum(ni)
+plot(histo, col = "steelblue", main="Distribución acumulada del número de llamadas", xlab="Llamadas", ylab="Frecuencia absoluta acumulada")
+# Histograma de frecuencias relativas acumuladas.
+histo$counts <- cumsum(ni)/sum(ni)
+plot(histo, col = "steelblue", main="Distribución acumulada del número de llamadas", xlab="Llamadas", ylab="Frecuencia relativa acumulada", )
+```
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución 2
+
+Otra alternativa es usar la función la función [`geom_histogram`](https://aprendeconalf.es/manual-r/07-graficos.html#histogramas) del paquete `ggplot2`.
+
+```{r}
+library(ggplot2)
+# Histograma de frecuencias absolutas
+ggplot(df, aes(x = llamadas)) +
+    geom_histogram(breaks = seq(5, 30, 5), fill = "steelblue", col = "white") + 
+    labs(title = "Distribución del número de llamadas", x = "Número de llamadas", y = "Frecuencia absoluta")
+# Histograma de frecuencias relativas
+ggplot(df, aes(x = llamadas)) +
+    geom_histogram(aes(y = (..count..)/sum(..count..)), breaks = seq(5, 30, 5), fill = "steelblue", col = "white") +
+    labs(title = "Distribución del número de llamadas", x = "Número de llamadas", y = "Frecuencia relativa")
+# Histograma de frecuencias acumuladas
+ggplot(df, aes(x = llamadas)) +
+    geom_histogram(aes(y = cumsum(..count..)), breaks = seq(5, 30, 5), fill = "steelblue", col = "white") +
+    labs(title = "Distribución acumulada del número de llamadas", x = "Número de llamadas", y = "Frecuencia absoluta acumulada")
+# Histograma de frecuencias relativas acumuladas
+ggplot(df, aes(x = llamadas)) +
+    geom_histogram(aes(y = cumsum(..count..)/sum(..count..)),  breaks = seq(5, 30, 5), fill = "steelblue", col = "white") +
+    labs(title = "Distribución acumulada del número de llamadas", x = "Número de llamadas", y = "Frecuencia relativa acumulada")
+```
+:::
+
+
+e. Dibujar el polígono de frecuencias relativas acumuladas (ojiva).
+
+:::{.callout-tip collapse="true"}
+## Solución 1
+
+Para dibujar la ojiva se puede usar la función [`plot`](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot) del paquete `graphics`.
+
+```{r}
+# Ojiva
+cortes = seq(5, 30, 5)
+ni <- table(cut(df$llamadas, breaks = cortes))
+Fi <- c(0, cumsum(ni)/sum(ni))
+plot(cortes, Fi, type = "l", col = "steelblue", main = "Distribución acumulada del número de llamadas", xlab = "Número de llamadas", ylab = "Frecuencia relativa acumulada")
+```
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución 2
+
+Otra alternativa es usar la función la función [`geom_line`](https://aprendeconalf.es/manual-r/07-graficos.html#histogramas) del paquete `ggplot2`.
+
+```{r}
+library(ggplot2)
+# Ojiva
+cortes <- seq(5, 30, 5)
+tabla_frec <- mutate(df, llamadas_int = cut(df$llamadas, breaks = cortes)) %>% 
+    count(llamadas_int) %>%
+    mutate(cortes = cortes[-1], Fi = cumsum(n)/sum(n)) %>%
+    select(cortes, Fi) 
+tabla_frec <- rbind(data.frame(cortes = cortes[1], Fi = 0), tabla_frec)
+ggplot(tabla_frec, aes(x = cortes , y = Fi)) +
+    geom_line(col = "steelblue") +
+    labs(title = "Distribución del número de llamadas", x = "Número de llamadas", y = "Frecuencia relativa acumulada")
+```
+:::
 :::
 
 :::{#exr-3}
 Los grupos sanguíneos de una muestra de 30 personas son:
 
-    A, B, B, A, AB, 0, 0, A, B, B, A, A, A, A, AB,  
-    A, A, A, B, 0, B, B, B, A, A, A, 0, A, AB, 0. 
+| |
+|:-:|
+|A, B, B, A, AB, 0, 0, A, B, B, A, A, A, A, AB, A, A, A, B, 0, B, B, B, A, A, A, 0, A, AB, 0 | 
 
-a. Crear un conjunto de datos con la variable `grupo.sanguíneo`.
+a. Crear un conjunto de datos con la variable `grupo_sanguíneo`.
+
+:::{.callout-tip collapse="true"}
+## Solución
+```{r}
+df <- data.frame(grupo_sanguineo = c("A", "B", "B", "A", "AB", "0", "0", "A", "B", "B", "A", "A", "A", "A", "AB", "A", "A", "A", "B", "0", "B", "B", "B", "A", "A", "A", "0", "A", "AB", "0"))
+```
+:::
 
 b. Construir la tabla de frecuencias.
 
+:::{.callout-tip collapse="true"}
+## Solución 1
+
+Para obtener las frecuencias absolutas se puede usar la función [`table`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/table), y para las frecuencias relativas la función  [`prop.table`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/prop.table) ambas del paquete base de R.
+
+```{r}
+# Frecuencias absolutas.
+ni <- table(df$grupo_sanguineo)
+# Frecuencias relativas
+fi <- prop.table(ni)
+tabla_frec <- cbind(ni, fi)
+tabla_frec
+```
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución 2
+
+Otra alternativa es usar la fución [`count`](https://aprendeconalf.es/manual-r/06-preprocesamiento.html#conteo-del-n%C3%BAmero-de-observaciones) del paquete `dplyr`.
+
+```{r}
+library(dplyr)
+library(knitr)
+library(kableExtra)
+count(df, grupo_sanguineo) %>% 
+    mutate(fi = n/sum(n)) %>%
+    kable() %>%
+    kable_styling(bootstrap_options = "hover", full_width = F)
+```
+:::
+
 c. Dibujar el diagrama de sectores.
+
+:::{.callout-tip collapse="true"}
+## Solución 1
+
+Para dibujar el diagrama de sectores se puede usar la función [`pie`](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/pie) del paquete `graphics`.
+
+```{r}
+# Diagrama de sectores
+pie(ni, col = 1:length(ni), main = "Distribución de los grupos sanguíneos")
+```
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución 2
+
+Otra alternativa es usar las fuciones [`geom_bar`](https://aprendeconalf.es/manual-r/07-graficos.html#diagrama-de-sectores) y `coor_polar` del paquete `ggplot2`.
+
+```{r}
+ggplot(df, aes(x = "", fill = grupo_sanguineo)) +
+    # Añadir la capa de las barras.
+    geom_bar() +
+    # Añadir el sistema de coordenadas polares
+    coord_polar(theta = "y") +
+    labs(title = "Distribución de los grupos sanguíneos")
+```
+:::
 :::
 
 :::{#exr-4}
@@ -92,15 +421,99 @@ obteniendo los siguientes resultados:
 |Viudo |     80, 68, 65, 40, 78, 69, 75       |
 |Divorciado | 31, 65, 59, 49, 65             |
 
-a. Crear un conjunto de datos con la variables `estado.civil` y `edad`.
+a. Crear un conjunto de datos con la variables `estado_civil` y `edad`.
 
-b. Construir la tabla de frecuencias de la variable `edad` para cada categoría de la variable `estado.civil`.
+:::{.callout-tip collapse="true"}
+## Solución
+```{r}
+df <- data.frame(
+    edad = c(31, 45, 35, 65, 21, 38, 62, 22, 31, 62, 39, 62, 59, 21, 62, 80, 68, 65, 40, 78, 69, 75, 31, 65, 59, 49, 65), 
+    estado_civil = rep(c("Soltero", "Casado", "Viudo", "Divorciado"), c(9, 6, 7, 5)))
+```
+:::
+
+b. Construir la tabla de frecuencias de la variable `edad` para cada categoría de la variable `estado_civil`.
+
+:::{.callout-tip collapse="true"}
+## Solución
+
+Para dividir la muestra en grupos se puede usar la función [`group-by`](https://aprendeconalf.es/manual-r/06-preprocesamiento.html#res%C3%BAmenes-por-grupos) del paquete `dplyr`.
+
+```{r}
+library(dplyr)
+library(knitr)
+library(kableExtra)
+mutate(df, edad_int = cut(edad, breaks = seq(20, 80, 10))) %>%
+    group_by(estado_civil) %>%
+    count(edad_int) %>% 
+    mutate(fi = n/sum(n), Ni = cumsum(n), Fi = cumsum(n)/sum(n)) %>%
+    kable() %>%
+    kable_styling(bootstrap_options = "hover", full_width = F)
+```
+:::
 
 c. Dibujar los diagramas de cajas de la edad según el estado civil. ¿Existen datos atípicos? ¿En qué grupo hay mayor
 dispersión?
 
-d. Dibujar los histogramas de la edad según el estado civil.
+:::{.callout-tip collapse="true"}
+## Solución
+
+```{r}
+library(ggplot2)
+ggplot(df, aes(x = edad, fill = estado_civil)) +
+    geom_boxplot()
+```
 :::
 
-## Cuestionario
+d. Dibujar los histogramas de la edad según el estado civil.
 
+:::{.callout-tip collapse="true"}
+## Solución
+
+```{r}
+ggplot(df, aes(x = edad, fill = estado_civil)) +
+    geom_histogram(breaks = seq(20, 80, 10), position = "identity", alpha=0.4)
+```
+
+Para dibujar cada histograma por separado se puede usar la función [`facet_wrap`](https://aprendeconalf.es/manual-r/07-graficos.html#facetas) o `facet_grid` del paquete `ggplot2`.
+
+```{r}
+ggplot(df, aes(x = edad, fill = estado_civil)) +
+    geom_histogram(breaks = seq(20, 80, 10)) +
+    # Añadir la faceta del estado civil
+    facet_grid(rows = vars(estado_civil))
+```
+:::
+:::
+
+## Ejercicios propuestos
+
+El conjunto de datos [neonatos](datos/neonatos.csv) contiene información sobre una muestra de 320 recién nacidos en un hospital durante un año que cumplieron el tiempo normal de gestación.
+
+a. Construir la tabla de frecuencias de la puntuación Apgar al minuto de nacer. Si se considera que una puntuación Apgar de 3 o menos indica que el neonato está deprimido, ¿qué porcentaje de niños está deprimido en la muestra?
+
+b. Comparar las distribuciones de frecuencias de las puntuaciones Apgar al minuto de nacer según si la madre es mayor o menor de 20 años. ¿En qué grupo hay más neonatos deprimidos?
+
+c. Construir la tabla de frecuencias para el peso de los neonatos, agrupando en clases de amplitud $0.5$ desde el $2$ hasta el $4.5$. ¿En qué intervalo de peso hay más neonatos?
+
+d. Comparar la distribución de frecuencias relativas del peso de los neonatos según si la madre fuma o no. Si se considera como peso bajo un peso menor de $2.5$ kg, ¿En qué grupo hay un mayor porcentaje de niños con peso bajo?
+
+e. Si en los recién nacidos se considera como peso bajo un peso menor de $2.5$ kg, calcular la prevalencia del bajo peso de recién nacidos en el grupo de madres fumadoras y en el de no fumadoras.
+
+f. Construir el diagrama de barras de la puntuación Apgar al minuto. ¿Qué puntuación Apgar es la más frecuente?
+
+g. Construir el diagrama de frecuencias relativas acumuladas de la puntuación Apgar al minuto. ¿Por debajo de que puntuación estarán la mitad de los niños?
+
+h. Comparar mediante diagramas de barras de frecuencias relativas las distribuciones de las puntuaciones Apgar al minuto según si la madre ha fumado o no durante el embarazo. ¿Qué se puede concluir?
+
+i. Construir el histograma de pesos, agrupando en clases de amplitud $0.5$ desde el $2$ hasta el $4.5$. ¿En qué intervalo de peso hay más niños?
+
+j. Comparar la distribución de frecuencias relativas del peso de los neonatos según si la madre fuma o no. ¿En qué grupo se aprecia menor peso de los niños de la muestra?
+
+k. Comparar la distribución de frecuencias relativas del peso de los neonatos según si la madre fumaba o no antes del embarazo. ¿Qué se puede concluir?
+
+l. Construir el diagrama de caja y bigotes del peso. ¿Entre qué valores se considera que el peso de un neonato es normal? ¿Existen datos atípicos?
+
+m. Comparar el diagrama de cajas y bigotes del peso, según si la madre fumó o no durante el embarazo y si era mayor o no de 20 años. ¿En qué grupo el peso tiene más dispersión central? ¿En qué grupo pesan menos los niños de la muestra?
+
+n. Comparar el diagrama de cajas de la puntuación Apgar al minuto y a los cinco minutos. ¿En qué variable hay más dispersión central?

@@ -476,7 +476,6 @@ df[df$sexo == "M" & df$media >= 5, c("nombre", "media")]
 Se ha diseñado un ensayo clínico aleatorizado, doble-ciego y controlado con placebo, para estudiar el efecto de dos alternativas terapéuticas en el control de la hipertensión
 arterial. Se han reclutado 100 pacientes hipertensos y estos han sido distribuidos aleatoriamente en tres grupos de tratamiento. A uno de los grupos (control) se le administró un placebo, a otro grupo se le administró un inhibidor de la enzima conversora de la angiotensina (IECA) y al otro un tratamiento combinado de un diurético y un Antagonista del Calcio. Las variables respuesta final fueron las presiones arteriales sistólica y diastólica.
 
-
 Los datos con las claves de aleatorización han sido introducidos en una base de datos que reside en la central de aleatorización,
 mientras que los datos clínicos han sido archivados en dos archivos distintos, uno para cada uno de los dos centros
 participantes en el estudio.
@@ -507,9 +506,19 @@ b. Crear un data frame con los datos de los pacientes del hospital B (fichero cs
 
 c. Fusionar los datos de los dos hospitales en un nuevo data frame.
 
+:::{.callout-note collapse="true"}
+## Ayuda
+Para fusionar las filas de dos data frames con las mismas columnas usar la función [`rbind`](https://aprendeconalf.es/manual-r/03-tipos-datos-estructurados.html#a%C3%B1adir-elementos-a-un-data-frame).
+:::
+
 d. Crear un data frame con los datos de las claves de aleatorización (fichero csv [claves-aleatorizacion.csv](datos/hipertension/claves-aleatorizacion.csv))
 
 e. Fusionar el data frame con los datos clínicos y el data frame con claves de aleatorización en un nuevo data frame.
+
+:::{.callout-note collapse="true"}
+## Ayuda
+Para fusionar las columnas de dos data frames usando una misma columna como clave en ambos data frames usar la función [`left_join`](https://dtplyr.tidyverse.org/reference/left_join.dtplyr_step.html) del paquete `dplyr`.
+:::
 
 f. Convertir en un factor el sexo.
 

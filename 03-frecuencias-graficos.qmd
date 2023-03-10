@@ -63,8 +63,9 @@ tabla_frec
 :::{.callout-tip collapse="true"}
 ## Solución 2
 
-Otra alternativa es usar la fución [`count`](https://aprendeconalf.es/manual-r/06-preprocesamiento.html#conteo-del-n%C3%BAmero-de-observaciones) del paquete `dplyr`.
+Otra alternativa es usar la función [`count`](https://aprendeconalf.es/manual-r/06-preprocesamiento.html#conteo-del-n%C3%BAmero-de-observaciones) del paquete `dplyr`.
 
+::: {.content-visible when-format="html"}
 ```{r}
 library(dplyr)
 library(knitr)
@@ -74,6 +75,18 @@ count(df, hijos) %>%
     kable() %>%
     kable_styling(bootstrap_options = "hover", full_width = F)
 ```
+:::
+
+::: {.content-visible unless-format="html"}
+```{r}
+library(dplyr)
+library(knitr)
+library(kableExtra)
+count(df, hijos) %>% 
+    mutate(fi = n/sum(n), Ni = cumsum(n), Fi = cumsum(n)/sum(n)) %>%
+    kable()
+```
+:::
 :::
 
 c. Dibujar el diagrama de barras de las frecuencias absolutas, relativas, absolutas acumuladas y relativas acumuladas.
@@ -232,6 +245,7 @@ tabla_frec
 
 Otra alternativa es usar la fución [`count`](https://aprendeconalf.es/manual-r/06-preprocesamiento.html#conteo-del-n%C3%BAmero-de-observaciones) del paquete `dplyr`.
 
+::: {.content-visible when-format="html"}
 ```{r}
 library(dplyr)
 library(knitr)
@@ -242,6 +256,19 @@ mutate(df, llamadas_int = cut(llamadas, breaks = seq(5, 30, 5))) %>%
     kable() %>%
     kable_styling(bootstrap_options = "hover", full_width = F)
 ```
+:::
+
+::: {.content-visible unless-format="html"}
+```{r}
+library(dplyr)
+library(knitr)
+library(kableExtra)
+mutate(df, llamadas_int = cut(llamadas, breaks = seq(5, 30, 5))) %>% 
+    count(llamadas_int) %>%
+    mutate(fi = n/sum(n), Ni = cumsum(n), Fi = cumsum(n)/sum(n)) %>%
+    kable()
+```
+:::
 :::
 
 d. Dibujar el histograma de frecuencias absolutas, relativas, absolutas acumuladas y relativas acumuladas correspondiente a la tabla anterior.
@@ -369,6 +396,7 @@ tabla_frec
 
 Otra alternativa es usar la fución [`count`](https://aprendeconalf.es/manual-r/06-preprocesamiento.html#conteo-del-n%C3%BAmero-de-observaciones) del paquete `dplyr`.
 
+::: {.content-visible when-format="html"}
 ```{r}
 library(dplyr)
 library(knitr)
@@ -378,6 +406,18 @@ count(df, grupo_sanguineo) %>%
     kable() %>%
     kable_styling(bootstrap_options = "hover", full_width = F)
 ```
+:::
+
+::: {.content-visible unless-format="html"}
+```{r}
+library(dplyr)
+library(knitr)
+library(kableExtra)
+count(df, grupo_sanguineo) %>% 
+    mutate(fi = n/sum(n)) %>%
+    kable()
+```
+:::
 :::
 
 c. Dibujar el diagrama de sectores.
@@ -439,6 +479,7 @@ b. Construir la tabla de frecuencias de la variable `edad` para cada categoría 
 
 Para dividir la muestra en grupos se puede usar la función [`group-by`](https://aprendeconalf.es/manual-r/06-preprocesamiento.html#res%C3%BAmenes-por-grupos) del paquete `dplyr`.
 
+::: {.content-visible when-format="html"}
 ```{r}
 library(dplyr)
 library(knitr)
@@ -450,6 +491,20 @@ mutate(df, edad_int = cut(edad, breaks = seq(20, 80, 10))) %>%
     kable() %>%
     kable_styling(bootstrap_options = "hover", full_width = F)
 ```
+:::
+
+::: {.content-visible unless-format="html"}
+```{r}
+library(dplyr)
+library(knitr)
+library(kableExtra)
+mutate(df, edad_int = cut(edad, breaks = seq(20, 80, 10))) %>%
+    group_by(estado_civil) %>%
+    count(edad_int) %>% 
+    mutate(fi = n/sum(n), Ni = cumsum(n), Fi = cumsum(n)/sum(n)) %>%
+    kable()
+```
+:::
 :::
 
 c. Dibujar los diagramas de cajas de la edad según el estado civil. ¿Existen datos atípicos? ¿En qué grupo hay mayor

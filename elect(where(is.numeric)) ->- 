@@ -1,0 +1,23 @@
+Help files with alias or concept or title matching ‘pivot_longer’
+using regular expression matching:
+
+
+dbplyr::pivot_longer.tbl_lazy
+                      Pivot data from wide to long
+  Aliases: pivot_longer.tbl_lazy
+dtplyr::pivot_longer.dtplyr_step
+                      Pivot data from wide to long
+  Aliases: pivot_longer.dtplyr_step
+tidyr::pivot_longer   Pivot data from wide to long
+  Aliases: pivot_longer
+tidyr::pivot_longer_spec
+                      Pivot data from wide to long using a spec
+  Aliases: pivot_longer_spec
+
+
+Type '?PKG::FOO' to inspect entries 'PKG::FOO', or 'TYPE?PKG::FOO'
+for entries like 'PKG::FOO-TYPE'.
+
+
+
+

@@ -3,6 +3,7 @@
     "listing": "/index.html",
     "items": [
       "/03-frecuencias-graficos.html",
+      "/04-descriptiva.html",
       "/01-intro.html",
       "/02-preprocesamiento-datos.html"
     ]

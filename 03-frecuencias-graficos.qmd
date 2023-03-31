@@ -472,7 +472,29 @@ df <- data.frame(
 ```
 :::
 
-b. Construir la tabla de frecuencias de la variable `edad` para cada categoría de la variable `estado_civil`.
+b. Calcular los tamaños muestrales según `estado_civil`.
+
+:::{.callout-tip collapse="true"}
+## Solución 1
+
+Usando la función `table` del paquete base de R podemos obtener las frecuencias absolutas del estado civil que es el tamaño muestral de cada grupo.
+```{r}
+table(df$estado_civil)
+```
+:::
+
+:::{.callout-tip collapse="true"}
+## Solución 1
+
+Usando las funciones `groub_by`, `summarise` y `n` del paquete `dplyr`.
+```{r}
+library(dplyr)
+df %>% group_by(estado_civil) %>%
+    summarise(n = n())
+```
+:::
+
+c. Construir la tabla de frecuencias de la variable `edad` para cada categoría de la variable `estado_civil`.
 
 :::{.callout-tip collapse="true"}
 ## Solución
@@ -507,7 +529,7 @@ mutate(df, edad_int = cut(edad, breaks = seq(20, 80, 10))) %>%
 :::
 :::
 
-c. Dibujar los diagramas de cajas de la edad según el estado civil. ¿Existen datos atípicos? ¿En qué grupo hay mayor
+d. Dibujar los diagramas de cajas de la edad según el estado civil. ¿Existen datos atípicos? ¿En qué grupo hay mayor
 dispersión?
 
 :::{.callout-tip collapse="true"}
@@ -520,7 +542,7 @@ ggplot(df, aes(x = edad, fill = estado_civil)) +
 ```
 :::
 
-d. Dibujar los histogramas de la edad según el estado civil.
+e. Dibujar los histogramas de la edad según el estado civil.
 
 :::{.callout-tip collapse="true"}
 ## Solución

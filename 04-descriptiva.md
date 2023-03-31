@@ -1391,10 +1391,10 @@ a.  Crear un data frame con los datos de las rentas medias por persona de las co
     :::{.callout-tip collapse="true"}
     ## Solución 
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-29_cf48054b542c47d7c392921bf109104f'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-29_b6778748bdb2455346f712e04e5ae955'}
     
     ```{.r .cell-code}
-    df <- read_csv2("https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/renta-media-comunidades-autonomas.csv")
+    df <- read_csv2("https://aprendeconalf.es/estadistica-practicas-r/datos/renta-media-comunidades-autonomas.csv")
     ```
     
     ::: {.cell-output .cell-output-stderr}
@@ -1425,25 +1425,25 @@ a.  Crear un data frame con los datos de las rentas medias por persona de las co
     # A tibble: 19 × 15
        Comunidad      `2021` `2020` `2019` `2018` `2017` `2016` `2015` `2014` `2013`
        <chr>           <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>
-     1 01 Andalucía     9.91   9.99   9.16   9.26   9.12   8.40   7.94   8.08   8.41
-     2 02 Aragón       13.3   13.1   12.3   12.0   12.1   11.6   12.4   12.0   12.0 
-     3 03 Asturias, …  12.9   12.8   12.5   12.1   12.2   12.1   11.4   11.3   11.2 
-     4 04 Balears, I…  11.2   12.7   12.4   13.2   12.7   12.2   10.8   10.7   10.4 
-     5 05 Canarias     10.2    9.94   9.49   8.96   8.86   8.70   8.64   8.30   8.51
-     6 06 Cantabria    12.8   12.7   12.2   11.2   11.3   10.7   10.5    9.82   9.84
-     7 07 Castilla y…  12.7   12.7   12.0   11.9   11.2   10.8   10.6   10.4   10.8 
-     8 08 Castilla -…  10.3   10.5    9.72   9.53   9.04   8.73   8.50   8.54   8.43
-     9 09 Cataluña     14.2   14.2   13.5   13.3   12.7   12.7   12.3   12.2   12.1 
-    10 10 Comunitat …  11.2   11.3   10.6   10.2    9.80   9.26   9.10   9.14   9.38
-    11 11 Extremadura   9.5    9.15   8.80   8.50   8.25   8.67   8.47   7.73   8.22
-    12 12 Galicia      11.5   11.5   11.2   11.2   10.8   10.4   10.2   10.2   10.1 
-    13 13 Madrid, Co…  14.8   14.6   14.2   13.3   13.1   12.6   12.5   12.6   12.8 
-    14 14 Murcia, Re…   9.93   9.85   8.96   9.11   8.70   8.27   7.92   7.77   8.25
-    15 15 Navarra, C…  15.3   15.1   13.9   13.6   13.6   13.4   13.3   13.2   13.6 
-    16 16 País Vasco   15.5   15.8   15.3   14.7   14.4   14.3   13.8   14.3   14.3 
-    17 17 Rioja, La    12.9   13.5   12.7   12.0   12.1   11.6   11.1   11.1   10.7 
-    18 18 Ceuta        10.4    9.85  10.2    9.78   9.68   9.44   8.51   8.71   9.34
-    19 19 Melilla      12.0   11.4   11.7   12.5   10.2   10.9   10.0   11.6   11.3 
+     1 01 Andalucía     9915   9990   9160   9258   9116   8398   7942   8079   8408
+     2 02 Aragón       13345  13097  12300  11990  12110  11649  12427  12037  12022
+     3 03 Asturias P…  12861  12786  12523  12085  12244  12060  11427  11251  11211
+     4 04 Balears Il…  11235  12658  12410  13240  12665  12222  10828  10660  10386
+     5 05 Canarias     10161   9935   9487   8964   8863   8702   8640   8302   8513
+     6 06 Cantabria    12848  12748  12205  11239  11293  10670  10494   9824   9843
+     7 07 Castilla y…  12656  12697  12003  11949  11239  10815  10570  10406  10760
+     8 08 Castilla -…  10257  10485   9715   9533   9045   8731   8498   8545   8425
+     9 09 Cataluña     14159  14170  13527  13338  12712  12660  12283  12205  12111
+    10 10 Comunitat …  11237  11332  10611  10232   9801   9265   9098   9144   9375
+    11 11 Extremadura   9500   9147   8796   8503   8250   8674   8469   7729   8224
+    12 12 Galicia      11453  11469  11218  11239  10753  10439  10212  10235  10106
+    13 13 Madrid Com…  14836  14580  14199  13279  13099  12647  12534  12597  12823
+    14 14 Murcia Reg…   9931   9850   8956   9111   8702   8273   7924   7767   8253
+    15 15 Navarra Co…  15269  15094  13937  13585  13583  13408  13300  13221  13608
+    16 16 País Vasco   15544  15813  15300  14722  14397  14345  13836  14281  14312
+    17 17 Rioja La     12913  13504  12697  12029  12131  11589  11132  11120  10686
+    18 18 Ceuta        10397   9853  10164   9784   9676   9435   8512   8712   9336
+    19 19 Melilla      12012  11427  11733  12507  10161  10883  10027  11619  11313
     # ℹ 5 more variables: `2012` <dbl>, `2011` <dbl>, `2010` <dbl>, `2009` <dbl>,
     #   `2008` <dbl>
     ```
@@ -1452,4 +1452,21 @@ a.  Crear un data frame con los datos de las rentas medias por persona de las co
 
     :::
 
+a. Realizar un resumen estadístico con la media y la desviación típica, mínimo, cuartiles y máximo de todas las rentas medias.
+
+a. Realizar un resumen estadístico con la media y la desviación típica de las rentas medias de cada año.
+
+a. ¿Qué año presenta una menor variabilidad relativa?
+
+a. ¿En qué comunidad autónoma hay menos dispersión relativa con respecto a la media?
+
+a. ¿En qué comunidad autónoma es más representativa la media de las rentas?
+
+a. ¿Qué comunidad autónoma presenta una distribución de las rentas más normal a lo largo de los años?
+
+a. ¿Qué comunidades autónomas tienen una renta media por debajo del percentil 10? ¿Y cuáles tienen una renta media por encima del percentil 90?
+
+a. Crear la variable `riqueza` que clasifique las comunidades según la media de sus rentas en `baja` (por debajo del primer cuartil), `media` (entre el primer y el tercer cuartil) y `alta` (por encima del tercer cuartil).
+
+a. Hacer un resumen estadístico con la media, cuartiles, desviación típica, coeficiente de variación, coeficiente de asimetría y coeficiente de curtosis de las rentas medias según la riqueza.
 :::

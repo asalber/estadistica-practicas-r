@@ -1383,3 +1383,73 @@ a.  Realizar un resumen estadístico con el coeficiente de asimetría y el coefi
 
 ## Ejercicios propuestos
 
+:::{#exr-descriptiva-3}
+El fichero [`renta-media-comunidades-autonomas.csv`](datos/renta-media-comunidades-autonomas.csv) contiene información sobre la renta neta media por persona de las comunidades autónomas desde 2008 a 2021. 
+
+a.  Crear un data frame con los datos de las rentas medias por persona de las comunidades a partir del fichero [`renta-media-comunidades-autonomas.csv`](datos/renta-media-comunidades-autonomas.csv).
+
+    :::{.callout-tip collapse="true"}
+    ## Solución 
+
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-29_cf48054b542c47d7c392921bf109104f'}
+    
+    ```{.r .cell-code}
+    df <- read_csv2("https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/renta-media-comunidades-autonomas.csv")
+    ```
+    
+    ::: {.cell-output .cell-output-stderr}
+    ```
+    ℹ Using "','" as decimal and "'.'" as grouping mark. Use `read_delim()` for more control.
+    ```
+    :::
+    
+    ::: {.cell-output .cell-output-stderr}
+    ```
+    Rows: 19 Columns: 15
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ";"
+    chr  (1): Comunidad
+    dbl (14): 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, ...
+    
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+    ```
+    :::
+    
+    ```{.r .cell-code}
+    df
+    ```
+    
+    ::: {.cell-output .cell-output-stdout}
+    ```
+    # A tibble: 19 × 15
+       Comunidad      `2021` `2020` `2019` `2018` `2017` `2016` `2015` `2014` `2013`
+       <chr>           <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>
+     1 01 Andalucía     9.91   9.99   9.16   9.26   9.12   8.40   7.94   8.08   8.41
+     2 02 Aragón       13.3   13.1   12.3   12.0   12.1   11.6   12.4   12.0   12.0 
+     3 03 Asturias, …  12.9   12.8   12.5   12.1   12.2   12.1   11.4   11.3   11.2 
+     4 04 Balears, I…  11.2   12.7   12.4   13.2   12.7   12.2   10.8   10.7   10.4 
+     5 05 Canarias     10.2    9.94   9.49   8.96   8.86   8.70   8.64   8.30   8.51
+     6 06 Cantabria    12.8   12.7   12.2   11.2   11.3   10.7   10.5    9.82   9.84
+     7 07 Castilla y…  12.7   12.7   12.0   11.9   11.2   10.8   10.6   10.4   10.8 
+     8 08 Castilla -…  10.3   10.5    9.72   9.53   9.04   8.73   8.50   8.54   8.43
+     9 09 Cataluña     14.2   14.2   13.5   13.3   12.7   12.7   12.3   12.2   12.1 
+    10 10 Comunitat …  11.2   11.3   10.6   10.2    9.80   9.26   9.10   9.14   9.38
+    11 11 Extremadura   9.5    9.15   8.80   8.50   8.25   8.67   8.47   7.73   8.22
+    12 12 Galicia      11.5   11.5   11.2   11.2   10.8   10.4   10.2   10.2   10.1 
+    13 13 Madrid, Co…  14.8   14.6   14.2   13.3   13.1   12.6   12.5   12.6   12.8 
+    14 14 Murcia, Re…   9.93   9.85   8.96   9.11   8.70   8.27   7.92   7.77   8.25
+    15 15 Navarra, C…  15.3   15.1   13.9   13.6   13.6   13.4   13.3   13.2   13.6 
+    16 16 País Vasco   15.5   15.8   15.3   14.7   14.4   14.3   13.8   14.3   14.3 
+    17 17 Rioja, La    12.9   13.5   12.7   12.0   12.1   11.6   11.1   11.1   10.7 
+    18 18 Ceuta        10.4    9.85  10.2    9.78   9.68   9.44   8.51   8.71   9.34
+    19 19 Melilla      12.0   11.4   11.7   12.5   10.2   10.9   10.0   11.6   11.3 
+    # ℹ 5 more variables: `2012` <dbl>, `2011` <dbl>, `2010` <dbl>, `2009` <dbl>,
+    #   `2008` <dbl>
+    ```
+    :::
+    :::
+
+    :::
+
+:::

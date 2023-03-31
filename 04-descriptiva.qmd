@@ -356,3 +356,17 @@ a.  Realizar un resumen estadístico con el coeficiente de asimetría y el coefi
 
 ## Ejercicios propuestos
 
+:::{#exr-descriptiva-3}
+El fichero [`renta-media-comunidades-autonomas.csv`](datos/renta-media-comunidades-autonomas.csv) contiene información sobre la renta neta media por persona de las comunidades autónomas desde 2008 a 2021. 
+
+a.  Crear un data frame con los datos de las rentas medias por persona de las comunidades a partir del fichero [`renta-media-comunidades-autonomas.csv`](datos/renta-media-comunidades-autonomas.csv).
+
+    :::{.callout-tip collapse="true"}
+    ## Solución 
+    ```{r}
+    df <- read_csv2("https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/renta-media-comunidades-autonomas.csv")
+    df
+    ```
+    :::
+
+:::

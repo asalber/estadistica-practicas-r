@@ -1,0 +1,621 @@
+---
+title: Regresión
+keep-md: true
+lang: es
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+## Ejercicios Resueltos
+
+Para la realización de esta práctica se requieren los siguientes paquetes:
+
+``` r
+library(tidyverse) 
+# Incluye los siguientes paquetes:
+# - readr: para la lectura de ficheros csv. 
+# - dplyr: para el preprocesamiento y manipulación de datos.
+library(vtable) # para resúmenes estadísticos.
+library(skimr) # para resúmenes estadísticos.
+library(summarytools) # para resúmenes estadísticos.
+library(knitr) # para el formateo de tablas.
+library(kableExtra) # para personalizar el formato de las tablas.
+```
+
+También se necesita conocer las ecuaciones de los principales modelos de regresión, que se resumen en la siguiente tabla.
+
+| Modelo                  |      Ecuación general      |
+|:------------------------|:--------------------------:|
+| Lineal                  |          $y=a+bx$          |
+| Parabólico              |       $y=a+bx+cx^2$        |
+| Polinómico de grado $n$ | $y=a_0+a_1x+\cdots+a_nx^n$ |
+| Potencial               |          $y=ax^b$          |
+| Exponencial             |        $y=e^{a+bx}$        |
+| Logarítmico             |       $y=a+b\log x$        |
+| Inverso                 |         $y=a+b/x$          |
+| Curva S o Sigmoidal     |       $y= e^{a+b/x}$       |
+
+
+::: {#exr-regresion-1}
+Se han medido dos variables $X$ e $Y$ en 10 individuos obteniendo los siguientes resultados:
+
+$$
+\begin{array}{lrrrrrrrrrr}
+\hline
+X & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+Y & 2 & 5 & 8 & 11 & 14 & 17 & 20 & 23 & 26 & 29\\
+\hline
+\end{array}
+$$
+
+
+a.  Crear un conjunto de datos con las variables `x` e `y`.
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    df <- data.frame(
+        x = c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9),
+        y = c(2, 5, 8, 11, 14, 17, 20, 23, 26, 29)
+    )
+    ```
+    :::
+
+a.  Dibujar el diagrama de dispersión correspondiente. ¿Qué tipo de modelo de regresión se ajusta mejor a la nube de puntos?
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución 1
+
+    Para dibujar un diagrama de dispersión se puede usar la función [`plot`](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot) del paquete `graphics`.
+    
+    ```{r}
+    plot(df$x, df$y, xlab = "X", ylab = "Y", main = "Diagrama de dispersión")
+    ```
+    :::
+
+    :::{.callout-tip collapse="true"}
+    ## Solución 2
+
+    Otra alternativa es usar la función la función [`geom_point`](https://aprendeconalf.es/manual-r/07-graficos.html#diagramas-de-puntos) del paquete `ggplot2`.
+
+    ```{r}
+    library(ggplot2)
+    ggplot(df, aes(x = x, y = y)) +
+        geom_point(col = "red") +
+        labs(title = "Diagrama de dispersión", x = "X", y = "Y")
+    ```
+
+    El tipo de modelo que mejor se ajusta es lineal, ya que todos los puntos están alineados.
+    :::
+
+a.  Calcular la recta de regresión de $Y$ sobre $X$.
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    Para ajustar un modelo de regresión se utiliza la función [`lm`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/lm) del paquete `stats`. Esta función requiere que se le pase como parámetro la fórmula del modelo de regresión que debe tener la sintaxis `y ~ f(x)`, donde `y` es la variable dependiente en el modelo, `x` es la variable independiente, y `f(x)` es una expresión matemática que describe el modelo.
+
+    ```{r}
+    recta_y_x <- lm(y ~ x, df) 
+    summary(recta_y_x)
+    ```
+
+    La recta de regresión de $Y$ sobre $X$ es $y = `r recta_y_x$coefficients[["(Intercept)"]]` + `r recta_y_x$coefficients[["x"]]` x$.
+    :::
+
+a.  Obtener el coeficiente de regresión de la recta anterior e interpretarlo.
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    El coeficiente de regresión es la pendiente de la recta de regresión
+
+    ```{r}
+    cat(paste("Coeficiente de regresión de Y sobre X:", recta_y_x$coefficients[["x"]]))
+    ```
+
+    El coeficiente de regresión de $Y$ sobre $X$ vale 3, lo que indica que $Y$ aumenta 3 unidades por cada unidad que aumenta $X$.
+    :::
+
+a.  Dibujar la recta de regresión de $Y$ sobre $X$ sobre el diagrama de dispersión. ¿Cómo son los residuos del modelo de regresión?
+
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución 1
+
+    Para dibujar la recta de regresión se puede usar la función [`abline`](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/abline) del paquete `graphics`.
+    
+    ```{r}
+    plot(df$x, df$y, xlab = "X", ylab = "Y", main = "Diagrama de dispersión")
+    abline(recta_y_x)
+    ```
+    :::
+
+    :::{.callout-tip collapse="true"}
+    ## Solución 2
+
+    Otra alternativa es usar la geometría de ajuste de regresión por mínimos cuadrados [`geom_smooth`](https://aprendeconalf.es/manual-r/07-graficos.html#interpolaci%C3%B3n-y-ajustes-de-regresi%C3%B3n) del paquete `ggplot2`.
+
+    ```{r}
+    library(ggplot2)
+    ggplot(df, aes(x = x, y = y)) +
+        geom_point(col = "red") +
+        geom_smooth(method = "lm") +
+        labs(title = "Diagrama de dispersión", x = "X", y = "Y")
+    ```
+
+    Como la recta pasa por todos los puntos del diagrama de dispersión, los residuos son nulos.
+    :::
+
+a.  Calcular el coeficiente de determinación del modelo lineal e interpretarlo.
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    cat(paste("Coeficiente de determinación lineal R²:", summary(recta_y_x)$r.squared))
+    ```
+
+    Como el coeficiente de determinación lineal vale 1, el ajuste de la recta de regresión es perfecto.
+    :::
+
+a.  Calcular la recta de regresión de $X$ sobre $Y$. ¿Coincide con la recta de regresión de $Y$ sobre $X$?
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    recta_x_y <- lm(x ~ y, df) 
+    summary(recta_x_y)
+    ```
+
+    La recta de regresión de $X$ sobre $Y$ es $x = `r recta_x_y$coefficients[["(Intercept)"]]` + `r recta_x_y$coefficients[["y"]]` x$, que es la misma que la recta de $Y$ sobre $X$, ya que el ajuste es perfecto, y tanto los residuos en $Y$ como los residuos en $X$ valen cero para esta recta.
+    :::
+:::
+
+:::{#exr-regresion-2}
+El fichero [`horas-estudio.csv`](datos/horas-estudio.csv) contiene información sobre las horas de estudio diarias de una muestra de alumnos de ingeniería, y el número de asignaturas suspendidas al final del curso.
+
+a.  Crear un data frame con los datos de las horas de estudio y los suspensos a partir del fichero [`horas-estudio.csv`](datos/horas-estudio.csv).
+
+    :::{.callout-tip collapse="true"} 
+    ## Solución
+
+    ```{r}
+    library(readr)
+    df <- read_csv("datos/horas-estudio.csv")
+    df
+    ```
+    :::
+
+a.  Dibujar el diagrama de dispersión correspondiente. ¿Qué tipo de modelo de regresión se ajusta mejor a la nube de puntos?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución 
+
+    ```{r}
+    library(ggplot2)
+    ggplot(df, aes(x = Horas, y = Suspensos)) +
+        geom_point(col = "red") +
+        labs(title = "Diagrama de dispersión", x = "Horas de estudio", y = "Asignaturas suspensas")
+    ```
+
+    El tipo de modelo que mejor se ajusta es lineal, ya que hay una tendencia lineal en la nube de puntos y además es inversa.
+    :::
+
+a.  Calcular la recta de regresión de los suspensos sobre las horas de estudio.
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    recta_suspensos_horas <- lm(Suspensos ~ Horas, df) 
+    summary(recta_suspensos_horas)
+    ```
+
+    La recta de regresión de los suspensos sobre las horas es $\textsf{suspensos}= `r recta_suspensos_horas$coefficients[["(Intercept)"]]` + `r recta_suspensos_horas$coefficients[["Horas"]]` \textsf{horas}$.
+    :::
+
+a.  Obtener el coeficiente de regresión de la recta anterior e interpretarlo.
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    cat(paste("Coeficiente de regresión de Suspensos sobre Horas:", recta_suspensos_horas$coefficients[["Horas"]]))
+    ```
+
+    El coeficiente de regresión de los suspensos sobre las horas de estudio vale  `r recta_suspensos_horas$coefficients[["Horas"]]`, lo que indica que por cada hora de estudio se obtendrán `r recta_suspensos_horas$coefficients[["Horas"]] * (-1)` suspensos menos al final del curso.
+    :::
+
+a.  Dibujar la recta de regresión  sobre el diagrama de dispersión. ¿El ajuste es mejor o peor que el del ejercicio anterior?
+
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    library(ggplot2)
+    ggplot(df, aes(x = Horas, y = Suspensos)) +
+        geom_point(col = "red") +
+        geom_smooth(method = "lm") +
+        labs(title = "Diagrama de dispersión", x = "Horas de estudio", y = "Asignaturas suspensas")
+    ```
+
+    En este caso el ajuste no es perfecto, ya que es imposible que la recta pase por todos los puntos como ocurría en el ejercicio anterior. Por tanto, el ajuste es peor.
+    :::
+
+a.  Calcular el coeficiente de determinación del modelo lineal e interpretarlo.
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    cat(paste("Coeficiente de determinación lineal R²:", summary(recta_suspensos_horas)$r.squared))
+    ```
+
+    Como el coeficiente de determinación lineal vale `r summary(recta_suspensos_horas)$r.squared` que está bastante próximo a 1, el ajuste es bueno, y el modelo puede utilizarse con fines predictivos.
+    :::
+
+a.  Utilizar la recta de regresión para predecir el número de suspensos correspondiente a 3 horas de estudio diarias. ¿Es fiable esta predicción? 
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    predict.lm(recta_suspensos_horas, newdata = list(Horas = 3))
+    ```
+
+    La predicción será fiable ya que el coeficiente de determinación está próximo a 1 y el tamaño de la muestra no es muy pequeño.
+    :::
+
+a.  Según el modelo lineal, ¿cuántas horas diarias tendrá que estudiar como mínimo un alumno si quiere aprobarlo todo?
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    Como ahora queremos predecir el número de horas de estudio, necesitamos calcular la recta de regresión de la horas sobre los suspensos.
+
+    ```{r}
+    recta_horas_suspensos <- lm(Horas ~ Suspensos, df) 
+    predict.lm(recta_horas_suspensos, newdata = list(Suspensos = 0))
+    ```
+    :::
+:::
+
+:::{#exr-regresion-3}
+Después de tomar un litro de vino se ha medido la concentración de alcohol en la sangre en distintos instantes, obteniendo los siguientes datos
+
+$$
+\begin{array}{lrrrrrrr}
+\hline 
+\mbox{Tiempo después (minutos)} & 30 & 60 & 90 & 120 & 150 & 180 & 210\\ 
+\mbox{Alcohol (gramos/litro)} & 1.6 & 1.7 & 1.5 & 1.1 & 0.7 & 0.2 & 2.1\\
+\hline
+\end{array}
+$$
+
+a.  Crear un data frame con los datos del tiempo y la concentración de alcohol.
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    df <- data.frame(
+        Tiempo = c(30, 60, 90, 120, 150, 180, 210),
+        Alcohol = c(1.6, 1.7, 1.5, 1.1, 0.7, 0.2, 2.1)
+    )
+    df
+    ```
+    :::
+
+a.  Calcular el coeficiente de correlación lineal. ¿Existe relación lineal entre la concentración de alcohol y el tiempo que pasa?
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    Para calcular el coeficiente de correlación lineal de Pearson se puede utilar la función [`cor`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor) del paquete `stats`.
+
+    ```{r}
+    cor(df$Tiempo, df$Alcohol)
+    ```
+
+    El valore del coeficiente de correlación lineal es muy bajo, por lo que aparentemente no hay relación lineal entre la concentración de alcohol en sangre y el tiempo que pasa.
+    :::
+
+a.  Dibujar el diagrama de dispersión correspondiente y la recta de regresión de la concentración de alcohol sobre el tiempo. ¿Por qué el ajuste es tan malo?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución 
+
+    ```{r}
+    library(ggplot2)
+    ggplot(df, aes(x = Tiempo, y = Alcohol)) +
+        geom_point(col = "red") +
+        geom_smooth(method = "lm") +
+        labs(title = "Diagrama de dispersión", x = "Tiempo en minutos", y = "Concentración de alcohol en sangre (g/l)")
+    ```
+
+    El ajuste es malo porque hay un dato atípico que no sigue la misma tendencia que el resto. 
+    :::
+
+a.  Eliminar el dato atípico y calcular la recta de la concentración de alcohol sobre el tiempo. ¿Ha mejorado el modelo?
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    # Eliminamos el dato atípico que está en la fila 
+    df <- df[-c(7), ]
+    recta_alcohol_tiempo <- lm(Alcohol ~ Tiempo, df) 
+    summary(recta_alcohol_tiempo)
+    ```
+
+    La recta de regresión de la concentración de alcohol en sangre sobre el tiempo es $\textsf{alcohol}= `r recta_alcohol_tiempo$coefficients[["(Intercept)"]]` + `r recta_alcohol_tiempo$coefficients[["Tiempo"]]` \textsf{tiempo}$.
+
+    El modelo ha mejorado notablemente ya que ahora el coeficiente de determinación lineal $R^2=`r summary(recta_alcohol_tiempo)$r.squared`$, que está muy próximo a 1.
+    :::
+
+a.  Según el modelo de regresión lineal, ¿a qué velocidad metaboliza esta persona el alcohol?
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    cat(paste("Coeficiente de regresión de la concentración de alchol sobre el tiempo:", recta_alcohol_tiempo$coefficients[["Tiempo"]]))
+    ```
+
+    Así pues, la velocidad de metabolización del alcohol es `r recta_alcohol_tiempo$coefficients[["Tiempo"]]*(-1)` g/l$\cdot$min.
+    :::
+
+a.  Si la concentración máxima de alcohol en la sangre que permite la ley para poder conducir es $0.3$ g/l, ¿cuánto tiempo habrá que esperar después de tomarse un litro de vino para poder conducir sin infringir la ley? ¿Es fiable esta predicción?
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    Como ahora queremos predecir el tiempo, necesitamos calcular la recta de regresión del tiempo sobre la concentración de alcohol.
+
+    ```{r}
+    recta_tiempo_alcohol <- lm(Tiempo ~ Alcohol, df) 
+    predict.lm(recta_tiempo_alcohol, newdata = list(Alcohol = 0.3))
+    ```
+
+    Aunque el coeficiente de determinación lineal está próximo a 1, el tamaño muestral es demasiado pequeño para que la predicción sea fiable.
+    :::
+:::
+
+:::{#exr-regresion-4}
+El fichero [`pib-usa.csv`](datos/pib-usa.csv) contiene información sobre el producto interior bruto de Estados Unidos en billones de dólares americanos desde 1947 hasta 2022.
+
+a.  Crear un data frame con los datos del PIB y los años a partir del fichero [`pib-usa.csv`](datos/horas-estudio.csv).
+
+    :::{.callout-tip collapse="true"} 
+    ## Solución
+
+    ```{r}
+    library(readr)
+    df <- read_csv("datos/pib-usa.csv")
+    df
+    ```
+    :::
+
+a.  Dibujar el diagrama de dispersión que represente la evolución anual del PIB. ¿Qué tipo de modelo de regresión se ajusta mejor a la nube de puntos?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución 
+
+    ```{r}
+    library(ggplot2)
+    ggplot(df, aes(x = Año, y = PIB)) +
+        geom_point(col = "red") +
+        labs(title = "Evolución del PIB de Estados Unidos", x = "Año", y = "PIB en billones dólares")
+    ```
+
+    A la vista de la forma de la nube de puntos parece que la evolución del PIB es exponencial.
+    :::
+
+a.  Dibujar el diagrama de dispersión del logaritmo del PIB y los años.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución 
+
+    ```{r}
+    library(dplyr)
+    df <- mutate(df, logPIB = log(PIB)) 
+    ggplot(df, aes(x = Año, y = logPIB)) +
+            geom_point(col = "red") +
+            labs(title = "Evolución del PIB de Estados Unidos", x = "Año", y = "Logaritmo del PIB en billones dólares")
+    ```
+
+    La nube de puntos tienen una clara forma lineal, lo que confirma que la evolución del PIB es exponencial.
+    :::
+
+a.  Calcular el modelo de regresión exponencial del PIB sobre los años.
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    recta_logPIB_años <- lm(log(PIB) ~ Año, df) 
+    summary(recta_logPIB_años)
+    ```
+
+    El modelo de regresión exponencial que mejor explica la evolución del PIB es $\textsf{PIB}= e^{`r recta_logPIB_años$coefficients[["(Intercept)"]]` + `r recta_logPIB_años$coefficients[["Año"]]` \textsf{Año}}$.
+    :::
+
+a.  ¿Cuál es la tasa de crecimiento porcentual anual del PIB?
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    cat(paste("Coeficiente de regresión del logaritmo del PIB sobre los años:", recta_logPIB_años$coefficients[["Año"]]))
+    ```
+
+    El coeficiente de regresión de los suspensos sobre las horas de estudio vale  `r recta_logPIB_años$coefficients[["Año"]]`, lo que indica que la tasa de crecimiento anual del PIB es `r 100*recta_logPIB_años$coefficients[["Año"]]`%.
+    :::
+
+a.  Dibujar el modelo de regresión exponencial sobre el diagrama de dispersión.
+
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    library(ggplot2)
+    ggplot(df, aes(x = Año, y = PIB)) +
+            geom_point(col = "red") +
+            geom_smooth(method="glm", method.args=list(family=gaussian(link="log")))
+            labs(title = "Evolución del PIB de Estados Unidos", x = "Año", y = "Logaritmo del PIB en billones dólares")
+    ```
+
+    En este caso el ajuste no es perfecto, ya que es imposible que la recta pase por todos los puntos como ocurría en el ejercicio anterior. Por tanto, el ajuste es peor.
+    :::
+
+
+a.  ¿Es el modelo de regresión exponencial un buen modelo para explicar la evolución del PIB?
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    cat(paste("Coeficiente de determinación exponencial R²:", summary(recta_logPIB_años)$r.squared))
+    ```
+
+    Como el coeficiente de determinación lineal vale `r summary(recta_logPIB_años)$r.squared` que está bastante próximo a 1, el ajuste es bueno, y el modelo exponencial explica muy bien la evolución del PIB.
+    :::
+
+a.  Utilizar el modelo de regresión exponencial para predecir el PIB del año 2024. ¿Es fiable esta predicción? 
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    exp(predict.lm(recta_logPIB_años, newdata = list(Año = 2024)))
+    ```
+
+    La predicción será fiable ya que el coeficiente de determinación está próximo a 1, el tamaño de la muestra no es muy pequeño y el año para el que se realiza la predicción no está lejos del rango de años de la muestra.
+    :::
+
+a.  ¿Cuándo se alcanzará un PIB de 50000 billones de dólares?
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    Como ahora queremos predecir el año en el que se alcanzará el PIB dado, necesitamos construir el modelo de regresión de los años sobre el PIB. Como la relación entre el PIB y los años es exponencial, la relación entre los años y el PIB será la inversa, es decir, el modelo logarítmico.
+
+    ```{r}
+    log_años_PIB <- lm(Año ~ log(PIB), df) 
+    summary(log_años_PIB)
+    ```
+
+    El modelo de regresión logarítmico de los años sobre el PIB es $\textsf{Año}= `r log_años_PIB$coefficients[["(Intercept)"]]` + `r log_años_PIB$coefficients[["log(PIB)"]]` \log(\textsf{PIB})$.
+    :::
+
+    ```{r}
+    predict.lm(log_años_PIB, newdata = list(PIB = 50000))
+    ```
+:::
+
+
+:::{#exr-regresion-5}
+El fichero [`dieta.csv`](datos/dieta.csv) contiene información sobre el los kilos perdidos con una dieta de adelgazamiento.
+
+a.  Crear un data frame con los datos de la dieta a partir del fichero [`dieta.csv`](datos/dieta.csv).
+
+    :::{.callout-tip collapse="true"} 
+    ## Solución
+
+    ```{r}
+    library(readr)
+    df <- read_csv("datos/dieta.csv")
+    df
+    ```
+    :::
+
+a.  Dibujar el diagrama de dispersión de los kilos perdidos en función del número de días con la dieta. ¿Qué tipo de modelo de regresión se ajusta mejor a la nube de puntos?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución 
+
+    ```{r}
+    library(ggplot2)
+    ggplot(df, aes(x = dias, y = peso.perdido)) +
+        geom_point(col = "red") +
+        labs(title = "Diagrama de dispersión del peso perdido y los días de dieta", x = "Días de dieta", y = "Peso perdido en Kg")
+    ```
+
+    La nube de puntos es bastante difusa aunque parece apreciarse una tendencia logarítmica o sigmoidal.
+    :::
+
+a.  Calcular el modelo de regresión sigmoidal del peso perdido sobre los días de dieta. ¿Es un buen modelo para explicar la relación entre el peso perdido y los días de dieta?
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    sigmoidal_peso_dias <- lm(log(peso.perdido) ~ I(1/dias), df) 
+    summary(sigmoidal_peso_dias)
+    ```
+
+    El modelo de regresión sigmoidal que mejor explica el peso perdido en función de los días de dieta es $\textsf{Peso}= e^{`r sigmoidal_peso_dias$coefficients[["(Intercept)"]]` `r sigmoidal_peso_dias$coefficients[["I(1/dias)"]]` / \textsf{dias}}$.
+    :::
+
+a.  Dibujar el diagrama de dispersión de los kilos perdidos en función del número de días con la dieta según si la persona hace ejercicio o no. ¿Qué conclusiones se pueden sacar?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución 
+
+    ```{r}
+    library(ggplot2)
+    ggplot(df, aes(x = dias, y = peso.perdido, color = ejercicio)) +
+        geom_point() +
+        labs(title = "Diagrama de dispersión del peso perdido y los días de dieta", x = "Días de dieta", y = "Peso perdido en Kg")
+    ```
+
+    Claramente la nube de puntos de las personas que hacen ejercicio está por encima de la de los que no hacen ejercicio, lo que indica que hacer ejercicio favorece la pérdida de peso. Los más razonable es construir modelos de regresión para cada grupo.
+    :::
+
+a.  Construir el modelo de regresión inverso del peso perdido sobre los días de dieta para los que hacen ejercicio y para los que no.
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    library(broom)
+    library(kableExtra)
+    df %>%
+        nest_by(ejercicio) %>%
+        mutate(mod = list(lm(peso.perdido ~ I(1/dias), data = data))) %>%
+        summarize(tidy(mod)) %>%
+        kable() %>%
+        kable_styling()
+    ```
+    :::
+
+a.  ¿Han mejorado los modelos con respecto al hacer la regresión por grupos?
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    library(broom)
+    library(kableExtra)
+    df %>%
+        nest_by(ejercicio) %>%
+        mutate(mod = list(lm(peso.perdido ~ I(1/dias), data = data))) %>%
+        summarize(glance(mod)) %>%
+        kable() %>%
+        kable_styling()
+    ```
+
+    El modelo de regresión ha mejorado bastante en el grupo de los que hacen ejercicio ya que el coeficiente de determinación ha aumentado bastante.
+    :::
+
+:::
+
+## Ejercicios propuestos
+

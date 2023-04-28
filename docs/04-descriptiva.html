@@ -93,6 +93,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./05-regresion.html" rel="next">
 <link href="./03-frecuencias-graficos.html" rel="prev">
 <link href="./img/logos/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -229,6 +230,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-descriptiva.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Estadística Descriptiva</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-regresion.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regresión</span></a>
   </div>
 </li>
     </ul>
@@ -1862,19 +1868,9 @@ Solución 2
 <p><span class="theorem-title"><strong>Ejercicio 4.3 </strong></span>El fichero <a href="datos/renta-media-comunidades-autonomas.csv"><code>renta-media-comunidades-autonomas.csv</code></a> contiene información sobre la renta neta media por persona de las comunidades autónomas desde 2008 a 2021.</p>
 <ol type="a">
 <li><p>Crear un data frame con los datos de las rentas medias por persona de las comunidades a partir del fichero <a href="datos/renta-media-comunidades-autonomas.csv"><code>renta-media-comunidades-autonomas.csv</code></a>.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Solución
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-29" class="callout-29-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-29_b6778748bdb2455346f712e04e5ae955">
+<p>:::{.callout-tip collapse=“true”} ## Solución</p></li>
+</ol>
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-29_9e15921ec0874bcbe602f474a2524b8f">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"https://aprendeconalf.es/estadistica-practicas-r/datos/renta-media-comunidades-autonomas.csv"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>ℹ Using "','" as decimal and "'.'" as grouping mark. Use `read_delim()` for more control.</code></pre>
@@ -1894,32 +1890,31 @@ dbl (14): 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, ...
 <pre><code># A tibble: 19 × 15
    Comunidad      `2021` `2020` `2019` `2018` `2017` `2016` `2015` `2014` `2013`
    &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
- 1 01 Andalucía     9915   9990   9160   9258   9116   8398   7942   8079   8408
- 2 02 Aragón       13345  13097  12300  11990  12110  11649  12427  12037  12022
- 3 03 Asturias P…  12861  12786  12523  12085  12244  12060  11427  11251  11211
- 4 04 Balears Il…  11235  12658  12410  13240  12665  12222  10828  10660  10386
- 5 05 Canarias     10161   9935   9487   8964   8863   8702   8640   8302   8513
- 6 06 Cantabria    12848  12748  12205  11239  11293  10670  10494   9824   9843
- 7 07 Castilla y…  12656  12697  12003  11949  11239  10815  10570  10406  10760
- 8 08 Castilla -…  10257  10485   9715   9533   9045   8731   8498   8545   8425
- 9 09 Cataluña     14159  14170  13527  13338  12712  12660  12283  12205  12111
-10 10 Comunitat …  11237  11332  10611  10232   9801   9265   9098   9144   9375
-11 11 Extremadura   9500   9147   8796   8503   8250   8674   8469   7729   8224
-12 12 Galicia      11453  11469  11218  11239  10753  10439  10212  10235  10106
-13 13 Madrid Com…  14836  14580  14199  13279  13099  12647  12534  12597  12823
-14 14 Murcia Reg…   9931   9850   8956   9111   8702   8273   7924   7767   8253
-15 15 Navarra Co…  15269  15094  13937  13585  13583  13408  13300  13221  13608
-16 16 País Vasco   15544  15813  15300  14722  14397  14345  13836  14281  14312
-17 17 Rioja La     12913  13504  12697  12029  12131  11589  11132  11120  10686
-18 18 Ceuta        10397   9853  10164   9784   9676   9435   8512   8712   9336
-19 19 Melilla      12012  11427  11733  12507  10161  10883  10027  11619  11313
+ 1 Andalucía        9915   9990   9160   9258   9116   8398   7942   8079   8408
+ 2 Aragón          13345  13097  12300  11990  12110  11649  12427  12037  12022
+ 3 Asturias Prin…  12861  12786  12523  12085  12244  12060  11427  11251  11211
+ 4 Balears Illes   11235  12658  12410  13240  12665  12222  10828  10660  10386
+ 5 Canarias        10161   9935   9487   8964   8863   8702   8640   8302   8513
+ 6 Cantabria       12848  12748  12205  11239  11293  10670  10494   9824   9843
+ 7 Castilla y Le…  12656  12697  12003  11949  11239  10815  10570  10406  10760
+ 8 Castilla - La…  10257  10485   9715   9533   9045   8731   8498   8545   8425
+ 9 Cataluña        14159  14170  13527  13338  12712  12660  12283  12205  12111
+10 Comunitat Val…  11237  11332  10611  10232   9801   9265   9098   9144   9375
+11 Extremadura      9500   9147   8796   8503   8250   8674   8469   7729   8224
+12 Galicia         11453  11469  11218  11239  10753  10439  10212  10235  10106
+13 Madrid Comuni…  14836  14580  14199  13279  13099  12647  12534  12597  12823
+14 Murcia Región…   9931   9850   8956   9111   8702   8273   7924   7767   8253
+15 Navarra Comun…  15269  15094  13937  13585  13583  13408  13300  13221  13608
+16 País Vasco      15544  15813  15300  14722  14397  14345  13836  14281  14312
+17 Rioja La        12913  13504  12697  12029  12131  11589  11132  11120  10686
+18 Ceuta           10397   9853  10164   9784   9676   9435   8512   8712   9336
+19 Melilla         12012  11427  11733  12507  10161  10883  10027  11619  11313
 # ℹ 5 more variables: `2012` &lt;dbl&gt;, `2011` &lt;dbl&gt;, `2010` &lt;dbl&gt;, `2009` &lt;dbl&gt;,
 #   `2008` &lt;dbl&gt;</code></pre>
 </div>
 </div>
 </div>
-</div>
-</div></li>
+<ol type="a">
 <li><p>Realizar un resumen estadístico con la media y la desviación típica, mínimo, cuartiles y máximo de todas las rentas medias.</p></li>
 <li><p>Realizar un resumen estadístico con la media y la desviación típica de las rentas medias de cada año.</p></li>
 <li><p>¿Qué año presenta una menor variabilidad relativa?</p></li>
@@ -1928,9 +1923,14 @@ dbl (14): 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, ...
 <li><p>¿Qué comunidad autónoma presenta una distribución de las rentas más normal a lo largo de los años?</p></li>
 <li><p>¿Qué comunidades autónomas tienen una renta media por debajo del percentil 10? ¿Y cuáles tienen una renta media por encima del percentil 90?</p></li>
 <li><p>Crear la variable <code>riqueza</code> que clasifique las comunidades según la media de sus rentas en <code>baja</code> (por debajo del primer cuartil), <code>media</code> (entre el primer y el tercer cuartil) y <code>alta</code> (por encima del tercer cuartil).</p></li>
-<li><p>Hacer un resumen estadístico con la media, cuartiles, desviación típica, coeficiente de variación, coeficiente de asimetría y coeficiente de curtosis de las rentas medias según la riqueza.</p></li>
+<li><p>Hacer un resumen estadístico con la media, cuartiles, desviación típica, coeficiente de variación, coeficiente de asimetría y coeficiente de curtosis de las rentas medias según la riqueza. ::: <!-- 
+
+
+df <- df %>% 
+    mutate(total = rowMeans(across(where(is.numeric)), na.rm = T))
+df %>% mutate(riqueza = cut(total, breaks = quantile(total, probs = c(0, 0.25, 0.75, 1)), include.lowest = T)) %>% select(riqueza)
+``` --></p></li>
 </ol>
-</div>
 
 
 </section>
@@ -2191,6 +2191,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./05-regresion.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regresión</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

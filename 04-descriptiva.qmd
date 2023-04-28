@@ -362,12 +362,12 @@ El fichero [`renta-media-comunidades-autonomas.csv`](datos/renta-media-comunidad
 a.  Crear un data frame con los datos de las rentas medias por persona de las comunidades a partir del fichero [`renta-media-comunidades-autonomas.csv`](datos/renta-media-comunidades-autonomas.csv).
 
     :::{.callout-tip collapse="true"}
-    ## Solución 
-    ```{r}
-    df <- read_csv2("https://aprendeconalf.es/estadistica-practicas-r/datos/renta-media-comunidades-autonomas.csv")
-    df
-    ```
-    :::
+## Solución 
+```{r}
+df <- read_csv2("https://aprendeconalf.es/estadistica-practicas-r/datos/renta-media-comunidades-autonomas.csv")
+df
+```
+:::
 
 a. Realizar un resumen estadístico con la media y la desviación típica, mínimo, cuartiles y máximo de todas las rentas medias.
 
@@ -387,3 +387,10 @@ a. Crear la variable `riqueza` que clasifique las comunidades según la media de
 
 a. Hacer un resumen estadístico con la media, cuartiles, desviación típica, coeficiente de variación, coeficiente de asimetría y coeficiente de curtosis de las rentas medias según la riqueza.
 :::
+<!-- 
+
+```{r}
+df <- df %>% 
+    mutate(total = rowMeans(across(where(is.numeric)), na.rm = T))
+df %>% mutate(riqueza = cut(total, breaks = quantile(total, probs = c(0, 0.25, 0.75, 1)), include.lowest = T)) %>% select(riqueza)
+``` -->

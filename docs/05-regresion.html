@@ -277,11 +277,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Incluye los siguientes paquetes:</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - readr: para la lectura de ficheros csv. </span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - dplyr: para el preprocesamiento y manipulación de datos.</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vtable) <span class="co"># para resúmenes estadísticos.</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr) <span class="co"># para resúmenes estadísticos.</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(summarytools) <span class="co"># para resúmenes estadísticos.</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co"># para el formateo de tablas.</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra) <span class="co"># para personalizar el formato de las tablas.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom) <span class="co"># para el ajuste de modelos de regresión por grupos</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co"># para el formateo de tablas.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra) <span class="co"># para personalizar el formato de las tablas.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>También se necesita conocer las ecuaciones de los principales modelos de regresión, que se resumen en la siguiente tabla.</p>
 <table class="table">
 <thead>
@@ -608,7 +606,7 @@ F-statistic: 9.153e+31 on 1 and 8 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div id="exr-regresion-2" class="theorem exercise">
 <p><span class="theorem-title"><strong>Ejercicio 5.2 </strong></span>El fichero <a href="datos/horas-estudio.csv"><code>horas-estudio.csv</code></a> contiene información sobre las horas de estudio diarias de una muestra de alumnos de ingeniería, y el número de asignaturas suspendidas al final del curso.</p>
 <ol type="a">
-<li><p>Crear un data frame con los datos de las horas de estudio y los suspensos a partir del fichero <a href="datos/horas-estudio.csv"><code>horas-estudio.csv</code></a>.</p>
+<li><p>Crear un data frame con los datos de las horas de estudio y los suspensos a partir del fichero <a href="https://aprendeconalf.es/estadistica-practicas-r/datos/horas-estudio.csv"><code>horas-estudio.csv</code></a>.</p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -621,9 +619,9 @@ Solución
 </div>
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="05-regresion_cache/html/unnamed-chunk-10_7b99793c9cd652252f876c5521b3f3b8">
+<div class="cell" data-hash="05-regresion_cache/html/unnamed-chunk-10_1ec301d74ea777d5970a259766b0cb6b">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"datos/horas-estudio.csv"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://aprendeconalf.es/estadistica-practicas-r/datos/horas-estudio.csv"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 30 Columns: 2
 ── Column specification ────────────────────────────────────────────────────────
@@ -1044,7 +1042,7 @@ Solución
 <div id="exr-regresion-4" class="theorem exercise">
 <p><span class="theorem-title"><strong>Ejercicio 5.4 </strong></span>El fichero <a href="datos/pib-usa.csv"><code>pib-usa.csv</code></a> contiene información sobre el producto interior bruto de Estados Unidos en billones de dólares americanos desde 1947 hasta 2022.</p>
 <ol type="a">
-<li><p>Crear un data frame con los datos del PIB y los años a partir del fichero <a href="datos/horas-estudio.csv"><code>pib-usa.csv</code></a>.</p>
+<li><p>Crear un data frame con los datos del PIB y los años a partir del fichero <a href="https://aprendeconalf.es/estadistica-practicas-r/datos/horas-estudio.csv"><code>pib-usa.csv</code></a>.</p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1057,9 +1055,9 @@ Solución
 </div>
 <div id="callout-24" class="callout-24-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="05-regresion_cache/html/unnamed-chunk-24_93945578b9a886c4396f66dab3801168">
+<div class="cell" data-hash="05-regresion_cache/html/unnamed-chunk-24_10251a8f535e24099a6f5567a40fe809">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"datos/pib-usa.csv"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://aprendeconalf.es/estadistica-practicas-r/datos/pib-usa.csv"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 76 Columns: 2
 ── Column specification ────────────────────────────────────────────────────────
@@ -1365,7 +1363,7 @@ F-statistic:  4407 on 1 and 74 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div id="exr-regresion-5" class="theorem exercise">
 <p><span class="theorem-title"><strong>Ejercicio 5.5 </strong></span>El fichero <a href="datos/dieta.csv"><code>dieta.csv</code></a> contiene información sobre el los kilos perdidos con una dieta de adelgazamiento.</p>
 <ol type="a">
-<li><p>Crear un data frame con los datos de la dieta a partir del fichero <a href="datos/dieta.csv"><code>dieta.csv</code></a>.</p>
+<li><p>Crear un data frame con los datos de la dieta a partir del fichero <a href="https://aprendeconalf.es/estadistica-practicas-r/datos/dieta.csv"><code>dieta.csv</code></a>.</p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-33-contents" aria-controls="callout-33" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1378,9 +1376,9 @@ Solución
 </div>
 <div id="callout-33" class="callout-33-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="05-regresion_cache/html/unnamed-chunk-34_f1a991553120d2c9c763529c6df21cb6">
+<div class="cell" data-hash="05-regresion_cache/html/unnamed-chunk-34_c9481bc4dada041efbfec44b8a8e5b79">
 <div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"datos/dieta.csv"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://aprendeconalf.es/estadistica-practicas-r/datos/dieta.csv"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 40 Columns: 3
 ── Column specification ────────────────────────────────────────────────────────

@@ -17,9 +17,7 @@ library(tidyverse)
 # Incluye los siguientes paquetes:
 # - readr: para la lectura de ficheros csv. 
 # - dplyr: para el preprocesamiento y manipulación de datos.
-library(vtable) # para resúmenes estadísticos.
-library(skimr) # para resúmenes estadísticos.
-library(summarytools) # para resúmenes estadísticos.
+library(broom) # para el ajuste de modelos de regresión por grupos
 library(knitr) # para el formateo de tablas.
 library(kableExtra) # para personalizar el formato de las tablas.
 ```
@@ -325,17 +323,17 @@ a.  Calcular la recta de regresión de $X$ sobre $Y$. ¿Coincide con la recta de
 :::{#exr-regresion-2}
 El fichero [`horas-estudio.csv`](datos/horas-estudio.csv) contiene información sobre las horas de estudio diarias de una muestra de alumnos de ingeniería, y el número de asignaturas suspendidas al final del curso.
 
-a.  Crear un data frame con los datos de las horas de estudio y los suspensos a partir del fichero [`horas-estudio.csv`](datos/horas-estudio.csv).
+a.  Crear un data frame con los datos de las horas de estudio y los suspensos a partir del fichero [`horas-estudio.csv`](https://aprendeconalf.es/estadistica-practicas-r/datos/horas-estudio.csv).
 
     :::{.callout-tip collapse="true"} 
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-10_7b99793c9cd652252f876c5521b3f3b8'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-10_1ec301d74ea777d5970a259766b0cb6b'}
     
     ```{.r .cell-code}
     library(readr)
-    df <- read_csv("datos/horas-estudio.csv")
+    df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/horas-estudio.csv")
     ```
     
     ::: {.cell-output .cell-output-stderr}
@@ -768,17 +766,17 @@ a.  Si la concentración máxima de alcohol en la sangre que permite la ley para
 :::{#exr-regresion-4}
 El fichero [`pib-usa.csv`](datos/pib-usa.csv) contiene información sobre el producto interior bruto de Estados Unidos en billones de dólares americanos desde 1947 hasta 2022.
 
-a.  Crear un data frame con los datos del PIB y los años a partir del fichero [`pib-usa.csv`](datos/horas-estudio.csv).
+a.  Crear un data frame con los datos del PIB y los años a partir del fichero [`pib-usa.csv`](https://aprendeconalf.es/estadistica-practicas-r/datos/horas-estudio.csv).
 
     :::{.callout-tip collapse="true"} 
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-24_93945578b9a886c4396f66dab3801168'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-24_10251a8f535e24099a6f5567a40fe809'}
     
     ```{.r .cell-code}
     library(readr)
-    df <- read_csv("datos/pib-usa.csv")
+    df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/pib-usa.csv")
     ```
     
     ::: {.cell-output .cell-output-stderr}
@@ -1121,17 +1119,17 @@ a.  ¿Cuándo se alcanzará un PIB de 50000 billones de dólares?
 :::{#exr-regresion-5}
 El fichero [`dieta.csv`](datos/dieta.csv) contiene información sobre el los kilos perdidos con una dieta de adelgazamiento.
 
-a.  Crear un data frame con los datos de la dieta a partir del fichero [`dieta.csv`](datos/dieta.csv).
+a.  Crear un data frame con los datos de la dieta a partir del fichero [`dieta.csv`](https://aprendeconalf.es/estadistica-practicas-r/datos/dieta.csv).
 
     :::{.callout-tip collapse="true"} 
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-34_f1a991553120d2c9c763529c6df21cb6'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-34_c9481bc4dada041efbfec44b8a8e5b79'}
     
     ```{.r .cell-code}
     library(readr)
-    df <- read_csv("datos/dieta.csv")
+    df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/dieta.csv")
     ```
     
     ::: {.cell-output .cell-output-stderr}

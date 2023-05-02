@@ -17,7 +17,9 @@ library(tidyverse)
 # Incluye los siguientes paquetes:
 # - readr: para la lectura de ficheros csv. 
 # - dplyr: para el preprocesamiento y manipulación de datos.
-library(broom) # para el ajuste de modelos de regresión por grupos
+# - tidyr: para la organización de los datos.
+# - purrr: para aplicar funciones a vectores. 
+library(broom) # para convertir las listas con los resúmenes de los modelos de regresión a formato organizado.
 library(knitr) # para el formateo de tablas.
 library(kableExtra) # para personalizar el formato de las tablas.
 ```
@@ -1037,9 +1039,10 @@ a.  Utilizar el modelo de regresión exponencial para predecir el PIB del año 2
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-31_88d704e9eeafe6014ac691bcb9b0dc7f'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-31_fceec52aa1986c2babf346cad76b8025'}
     
     ```{.r .cell-code}
+    # El modelo exponencial devuelve el logaritmo del PIB, por lo que hay que aplicar la función exponencial para obtener el PIB.
     exp(predict.lm(recta_logPIB_años, newdata = list(Año = 2024)))
     ```
     
@@ -1096,7 +1099,6 @@ a.  ¿Cuándo se alcanzará un PIB de 50000 billones de dólares?
 
 
     El modelo de regresión logarítmico de los años sobre el PIB es $\textsf{Año}= 1863.4980331 + 15.0677514 \log(\textsf{PIB})$.
-    :::
 
 
     ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-33_35c2b5a9ea36ebc95b86444735939906'}
@@ -1113,8 +1115,8 @@ a.  ¿Cuándo se alcanzará un PIB de 50000 billones de dólares?
     :::
     :::
 
+    :::
 :::
-
 
 :::{#exr-regresion-5}
 El fichero [`dieta.csv`](datos/dieta.csv) contiene información sobre el los kilos perdidos con una dieta de adelgazamiento.
@@ -1195,45 +1197,94 @@ a.  Dibujar el diagrama de dispersión de los kilos perdidos en función del nú
     La nube de puntos es bastante difusa aunque parece apreciarse una tendencia logarítmica o sigmoidal.
     :::
 
-a.  Calcular el modelo de regresión sigmoidal del peso perdido sobre los días de dieta. ¿Es un buen modelo para explicar la relación entre el peso perdido y los días de dieta?
+a.  Calcular los coeficientes de determinación lineal, cuadrático, exponencial, logarítmico, potencial, inverso y sigmoidal. ¿Qué tipo de modelo explica mejor la relación entre los kilos perdidos y el número de días de dieta? ¿Qué porcentaje de la variabilidad de peso perdido explica el mejor modelo de regresión?
 
     ::: {.callout-tip collapse="true"}
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-36_204e23ad5768519426da8e9653f3e805'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-36_68b0d855cf61165474d3dcc237cb70f5'}
     
     ```{.r .cell-code}
-    sigmoidal_peso_dias <- lm(log(peso.perdido) ~ I(1/dias), df) 
-    summary(sigmoidal_peso_dias)
+    library(dplyr)
+    library(tidyr)
+    library(purrr)
+    library(broom)
+    library(kableExtra)
+    # Construimos un data frame con el ajuste de los modelos.
+    modelos <- tibble(
+            Lineal = list(lm(peso.perdido ~ dias, df)),
+            Cuadratico = list(lm(peso.perdido ~ dias + I(dias^2), df)),
+            Exponencial = list(lm(log(peso.perdido) ~ dias, df)),
+            Logaritmico = list(lm(peso.perdido ~ log(dias), df)),
+            Potencial = list(lm(log(peso.perdido) ~ log(dias), df)),
+            Inverso = list(lm(peso.perdido ~ I(1/dias), df)),
+            Sigmoidal = list(lm(log(peso.perdido) ~ I(1/dias), df)),
+        )  %>% 
+        # 
+        # Reestructuramos el data frame para tener todos los modelos en la misma columna.
+        pivot_longer(everything(), names_to = "Tipo_Modelo", values_to = "Modelo")  %>% 
+        # Obtenemos un resumen del ajuste de cada modelo en formato organizado (se obtiene una lista con los parámetros que describen el ajuste de cada modelo).
+        mutate(Resumen = map(Modelo, glance)) %>% 
+        # Desanidamos el resumen (se obtiene una columna para cada parámetro del resumen del ajuste de los modelos).
+        unnest(Resumen)  %>% 
+        # Ordenamos el data frame por el coeficiente de determinación.
+        arrange(-r.squared)
+    modelos  %>%
+        select(Tipo_Modelo, r.squared)  %>% 
+        kable(col.names = c("Tipo de Modelo", "R²")) %>%
+        kable_styling(full_width = F)
     ```
     
-    ::: {.cell-output .cell-output-stdout}
-    ```
+    ::: {.cell-output-display}
+
+    `````{=html}
+    <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+     <thead>
+      <tr>
+       <th style="text-align:left;"> Tipo de Modelo </th>
+       <th style="text-align:right;"> R² </th>
+      </tr>
+     </thead>
+    <tbody>
+      <tr>
+       <td style="text-align:left;"> Sigmoidal </td>
+       <td style="text-align:right;"> 0.6662170 </td>
+      </tr>
+      <tr>
+       <td style="text-align:left;"> Potencial </td>
+       <td style="text-align:right;"> 0.5684490 </td>
+      </tr>
+      <tr>
+       <td style="text-align:left;"> Inverso </td>
+       <td style="text-align:right;"> 0.5583853 </td>
+      </tr>
+      <tr>
+       <td style="text-align:left;"> Cuadratico </td>
+       <td style="text-align:right;"> 0.5397848 </td>
+      </tr>
+      <tr>
+       <td style="text-align:left;"> Logaritmico </td>
+       <td style="text-align:right;"> 0.5254856 </td>
+      </tr>
+      <tr>
+       <td style="text-align:left;"> Lineal </td>
+       <td style="text-align:right;"> 0.4356390 </td>
+      </tr>
+      <tr>
+       <td style="text-align:left;"> Exponencial </td>
+       <td style="text-align:right;"> 0.4308936 </td>
+      </tr>
+    </tbody>
+    </table>
     
-    Call:
-    lm(formula = log(peso.perdido) ~ I(1/dias), data = df)
-    
-    Residuals:
-         Min       1Q   Median       3Q      Max 
-    -0.83810 -0.17537  0.06906  0.17786  0.71841 
-    
-    Coefficients:
-                 Estimate Std. Error t value Pr(>|t|)    
-    (Intercept)   3.09446    0.08819  35.088  < 2e-16 ***
-    I(1/dias)   -25.65167    2.94543  -8.709 1.37e-10 ***
-    ---
-    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    
-    Residual standard error: 0.2952 on 38 degrees of freedom
-    Multiple R-squared:  0.6662,	Adjusted R-squared:  0.6574 
-    F-statistic: 75.85 on 1 and 38 DF,  p-value: 1.374e-10
-    ```
+    `````
+
     :::
     :::
 
 
-    El modelo de regresión sigmoidal que mejor explica el peso perdido en función de los días de dieta es $\textsf{Peso}= e^{3.0944614 -25.6516729 / \textsf{dias}}$.
+    El mejor modelo es el Sigmoidal que explica el 66.6216965% de la variabilidad del peso perdido. 
     :::
 
 a.  Dibujar el diagrama de dispersión de los kilos perdidos en función del número de días con la dieta según si la persona hace ejercicio o no. ¿Qué conclusiones se pueden sacar?
@@ -1260,194 +1311,126 @@ a.  Dibujar el diagrama de dispersión de los kilos perdidos en función del nú
     Claramente la nube de puntos de las personas que hacen ejercicio está por encima de la de los que no hacen ejercicio, lo que indica que hacer ejercicio favorece la pérdida de peso. Los más razonable es construir modelos de regresión para cada grupo.
     :::
 
-a.  Construir el modelo de regresión inverso del peso perdido sobre los días de dieta para los que hacen ejercicio y para los que no.
+a.  ¿Qué tipo de modelo explica mejor la relación entre el peso perdido y los días de dieta en el grupo de las personas que hacen ejercicio? ¿Y en el grupo de las que no hacen ejercicio? ¿Han mejorado los modelos con respecto al modelo anterior?
 
     ::: {.callout-tip collapse="true"}
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-38_c35bbfe7bff4bcb2c0f445f0bad2f25f'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-38_97ced36e24115dc3138ab7b148f76da7'}
     
     ```{.r .cell-code}
-    library(broom)
-    library(kableExtra)
+    modelos <- df  %>% 
+        # Anidamos por la columna ejercicio.
+        nest_by(ejercicio)  %>% 
+        # Ajustamos los modelos de regresión.
+        mutate(
+            Lineal = list(lm(peso.perdido ~ dias, data)),
+            Cuadratico = list(lm(peso.perdido ~ dias + I(dias^2), data)),
+            Exponencial = list(lm(log(peso.perdido) ~ dias, data)),
+            Logaritmico = list(lm(peso.perdido ~ log(dias), data)),
+            Potencial = list(lm(log(peso.perdido) ~ log(dias), data)),
+            Inverso = list(lm(peso.perdido ~ I(1/dias), data)),
+            Sigmoidal = list(lm(log(peso.perdido) ~ I(1/dias), data)),
+        )  %>% 
+        # Reestructuramos el data frame para tener todos los modelos en la misma columna.
+        pivot_longer(-c(ejercicio, data), names_to = "Tipo_Modelo", values_to = "Modelo")  %>% 
+        # Obtenemos un resumen del ajuste de cada modelo en formato organizado (se obtiene una lista con los parámetros que describen el ajuste de cada modelo).
+        mutate(Resumen = map(Modelo, glance)) %>% 
+        # Desanidamos el resumen (se obtiene una columna para cada parámetro del resumen del ajuste de los modelos).
+        unnest(Resumen)  %>% 
+        # Ordenamos el data frame por la columna ejercicio y por el coeficiente de determinación.
+        arrange(ejercicio, -r.squared)  
+    modelos %>% 
+        select(ejercicio, Tipo_Modelo, r.squared)  %>% 
+        kable(col.names = c("Ejercicio", "Tipo de Modelo", "R²")) %>%
+        pack_rows(index = table(modelos$ejercicio))  %>% 
+        kable_styling(full_width = F)
     ```
-    
-    ::: {.cell-output .cell-output-stderr}
-    ```
-    
-    Attaching package: 'kableExtra'
-    ```
-    :::
-    
-    ::: {.cell-output .cell-output-stderr}
-    ```
-    The following object is masked from 'package:dplyr':
-    
-        group_rows
-    ```
-    :::
-    
-    ```{.r .cell-code}
-    df %>%
-        nest_by(ejercicio) %>%
-        mutate(mod = list(lm(peso.perdido ~ I(1/dias), data = data))) %>%
-        summarize(tidy(mod)) %>%
-        kable() %>%
-        kable_styling()
-    ```
-    
-    ::: {.cell-output .cell-output-stderr}
-    ```
-    Warning: Returning more (or less) than 1 row per `summarise()` group was deprecated in
-    dplyr 1.1.0.
-    ℹ Please use `reframe()` instead.
-    ℹ When switching from `summarise()` to `reframe()`, remember that `reframe()`
-      always returns an ungrouped data frame and adjust accordingly.
-    ```
-    :::
-    
-    ::: {.cell-output .cell-output-stderr}
-    ```
-    `summarise()` has grouped output by 'ejercicio'. You can override using the
-    `.groups` argument.
-    ```
-    :::
     
     ::: {.cell-output-display}
 
     `````{=html}
-    <table class="table" style="margin-left: auto; margin-right: auto;">
+    <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
      <thead>
       <tr>
-       <th style="text-align:left;"> ejercicio </th>
-       <th style="text-align:left;"> term </th>
-       <th style="text-align:right;"> estimate </th>
-       <th style="text-align:right;"> std.error </th>
-       <th style="text-align:right;"> statistic </th>
-       <th style="text-align:right;"> p.value </th>
+       <th style="text-align:left;"> Ejercicio </th>
+       <th style="text-align:left;"> Tipo de Modelo </th>
+       <th style="text-align:right;"> R² </th>
       </tr>
      </thead>
     <tbody>
-      <tr>
-       <td style="text-align:left;"> no </td>
-       <td style="text-align:left;"> (Intercept) </td>
-       <td style="text-align:right;"> 14.92508 </td>
-       <td style="text-align:right;"> 0.8826746 </td>
-       <td style="text-align:right;"> 16.908927 </td>
-       <td style="text-align:right;"> 0.0e+00 </td>
+      <tr grouplength="7"><td colspan="3" style="border-bottom: 1px solid;"><strong>no</strong></td></tr>
+    <tr>
+       <td style="text-align:left;padding-left: 2em;" indentlevel="1"> no </td>
+       <td style="text-align:left;"> Sigmoidal </td>
+       <td style="text-align:right;"> 0.7401212 </td>
       </tr>
       <tr>
-       <td style="text-align:left;"> no </td>
-       <td style="text-align:left;"> I(1/dias) </td>
-       <td style="text-align:right;"> -182.19025 </td>
-       <td style="text-align:right;"> 29.4795388 </td>
-       <td style="text-align:right;"> -6.180227 </td>
-       <td style="text-align:right;"> 7.8e-06 </td>
+       <td style="text-align:left;padding-left: 2em;" indentlevel="1"> no </td>
+       <td style="text-align:left;"> Cuadratico </td>
+       <td style="text-align:right;"> 0.7100610 </td>
       </tr>
       <tr>
-       <td style="text-align:left;"> si </td>
-       <td style="text-align:left;"> (Intercept) </td>
-       <td style="text-align:right;"> 21.56554 </td>
-       <td style="text-align:right;"> 0.7652517 </td>
-       <td style="text-align:right;"> 28.180978 </td>
-       <td style="text-align:right;"> 0.0e+00 </td>
-      </tr>
-      <tr>
-       <td style="text-align:left;"> si </td>
-       <td style="text-align:left;"> I(1/dias) </td>
-       <td style="text-align:right;"> -255.22492 </td>
-       <td style="text-align:right;"> 25.5578527 </td>
-       <td style="text-align:right;"> -9.986164 </td>
-       <td style="text-align:right;"> 0.0e+00 </td>
-      </tr>
-    </tbody>
-    </table>
-    
-    `````
-
-    :::
-    :::
-
-    :::
-
-a.  ¿Han mejorado los modelos con respecto al hacer la regresión por grupos?
-
-    ::: {.callout-tip collapse="true"}
-    ## Solución
-
-
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-39_64711def861109de49a4e80598e48ee2'}
-    
-    ```{.r .cell-code}
-    library(broom)
-    library(kableExtra)
-    df %>%
-        nest_by(ejercicio) %>%
-        mutate(mod = list(lm(peso.perdido ~ I(1/dias), data = data))) %>%
-        summarize(glance(mod)) %>%
-        kable() %>%
-        kable_styling()
-    ```
-    
-    ::: {.cell-output .cell-output-stderr}
-    ```
-    `summarise()` has grouped output by 'ejercicio'. You can override using the
-    `.groups` argument.
-    ```
-    :::
-    
-    ::: {.cell-output-display}
-
-    `````{=html}
-    <table class="table" style="margin-left: auto; margin-right: auto;">
-     <thead>
-      <tr>
-       <th style="text-align:left;"> ejercicio </th>
-       <th style="text-align:right;"> r.squared </th>
-       <th style="text-align:right;"> adj.r.squared </th>
-       <th style="text-align:right;"> sigma </th>
-       <th style="text-align:right;"> statistic </th>
-       <th style="text-align:right;"> p.value </th>
-       <th style="text-align:right;"> df </th>
-       <th style="text-align:right;"> logLik </th>
-       <th style="text-align:right;"> AIC </th>
-       <th style="text-align:right;"> BIC </th>
-       <th style="text-align:right;"> deviance </th>
-       <th style="text-align:right;"> df.residual </th>
-       <th style="text-align:right;"> nobs </th>
-      </tr>
-     </thead>
-    <tbody>
-      <tr>
-       <td style="text-align:left;"> no </td>
+       <td style="text-align:left;padding-left: 2em;" indentlevel="1"> no </td>
+       <td style="text-align:left;"> Inverso </td>
        <td style="text-align:right;"> 0.6796880 </td>
-       <td style="text-align:right;"> 0.6618929 </td>
-       <td style="text-align:right;"> 2.089080 </td>
-       <td style="text-align:right;"> 38.19521 </td>
-       <td style="text-align:right;"> 7.8e-06 </td>
-       <td style="text-align:right;"> 1 </td>
-       <td style="text-align:right;"> -42.05964 </td>
-       <td style="text-align:right;"> 90.11928 </td>
-       <td style="text-align:right;"> 93.10648 </td>
-       <td style="text-align:right;"> 78.55660 </td>
-       <td style="text-align:right;"> 18 </td>
-       <td style="text-align:right;"> 20 </td>
       </tr>
       <tr>
-       <td style="text-align:left;"> si </td>
+       <td style="text-align:left;padding-left: 2em;" indentlevel="1"> no </td>
+       <td style="text-align:left;"> Potencial </td>
+       <td style="text-align:right;"> 0.6700051 </td>
+      </tr>
+      <tr>
+       <td style="text-align:left;padding-left: 2em;" indentlevel="1"> no </td>
+       <td style="text-align:left;"> Logaritmico </td>
+       <td style="text-align:right;"> 0.6494521 </td>
+      </tr>
+      <tr>
+       <td style="text-align:left;padding-left: 2em;" indentlevel="1"> no </td>
+       <td style="text-align:left;"> Lineal </td>
+       <td style="text-align:right;"> 0.5286338 </td>
+      </tr>
+      <tr>
+       <td style="text-align:left;padding-left: 2em;" indentlevel="1"> no </td>
+       <td style="text-align:left;"> Exponencial </td>
+       <td style="text-align:right;"> 0.5222832 </td>
+      </tr>
+      <tr grouplength="7"><td colspan="3" style="border-bottom: 1px solid;"><strong>si</strong></td></tr>
+    <tr>
+       <td style="text-align:left;padding-left: 2em;" indentlevel="1"> si </td>
+       <td style="text-align:left;"> Inverso </td>
        <td style="text-align:right;"> 0.8470993 </td>
-       <td style="text-align:right;"> 0.8386048 </td>
-       <td style="text-align:right;"> 1.811168 </td>
-       <td style="text-align:right;"> 99.72348 </td>
-       <td style="text-align:right;"> 0.0e+00 </td>
-       <td style="text-align:right;"> 1 </td>
-       <td style="text-align:right;"> -39.20461 </td>
-       <td style="text-align:right;"> 84.40921 </td>
-       <td style="text-align:right;"> 87.39641 </td>
-       <td style="text-align:right;"> 59.04594 </td>
-       <td style="text-align:right;"> 18 </td>
-       <td style="text-align:right;"> 20 </td>
+      </tr>
+      <tr>
+       <td style="text-align:left;padding-left: 2em;" indentlevel="1"> si </td>
+       <td style="text-align:left;"> Sigmoidal </td>
+       <td style="text-align:right;"> 0.8305013 </td>
+      </tr>
+      <tr>
+       <td style="text-align:left;padding-left: 2em;" indentlevel="1"> si </td>
+       <td style="text-align:left;"> Logaritmico </td>
+       <td style="text-align:right;"> 0.7885173 </td>
+      </tr>
+      <tr>
+       <td style="text-align:left;padding-left: 2em;" indentlevel="1"> si </td>
+       <td style="text-align:left;"> Cuadratico </td>
+       <td style="text-align:right;"> 0.7791671 </td>
+      </tr>
+      <tr>
+       <td style="text-align:left;padding-left: 2em;" indentlevel="1"> si </td>
+       <td style="text-align:left;"> Potencial </td>
+       <td style="text-align:right;"> 0.6704843 </td>
+      </tr>
+      <tr>
+       <td style="text-align:left;padding-left: 2em;" indentlevel="1"> si </td>
+       <td style="text-align:left;"> Lineal </td>
+       <td style="text-align:right;"> 0.6623502 </td>
+      </tr>
+      <tr>
+       <td style="text-align:left;padding-left: 2em;" indentlevel="1"> si </td>
+       <td style="text-align:left;"> Exponencial </td>
+       <td style="text-align:right;"> 0.4945564 </td>
       </tr>
     </tbody>
     </table>
@@ -1458,10 +1441,190 @@ a.  ¿Han mejorado los modelos con respecto al hacer la regresión por grupos?
     :::
 
 
-    El modelo de regresión ha mejorado bastante en el grupo de los que hacen ejercicio ya que el coeficiente de determinación ha aumentado bastante.
+    El mejor modelo en el grupo de los que hacen ejercicio es el inverso y en el grupo de los que no el sigmoidal. Los modelos han mejorado bastante con respecto al modelo anterior, sobre todo el del grupo de personas que hace ejercicio.
     :::
 
+a.  Construir el mejor modelo de regresión del peso perdido sobre los días de dieta para el grupo de las personas que hacen ejercicio y para el grupo de las que no.
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    Construimos el modelo inverso para el grupo de las personas que hacen ejercicio.
+
+
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-39_9b1238b1e79b0ba9430c8a2424b4d050'}
+    
+    ```{.r .cell-code}
+    inverso_ejercicio <- lm(peso.perdido ~ I(1/dias), df[df$ejercicio == "si", ])
+    summary(inverso_ejercicio)
+    ```
+    
+    ::: {.cell-output .cell-output-stdout}
+    ```
+    
+    Call:
+    lm(formula = peso.perdido ~ I(1/dias), data = df[df$ejercicio == 
+        "si", ])
+    
+    Residuals:
+        Min      1Q  Median      3Q     Max 
+    -3.1866 -1.3268  0.0011  0.9810  4.1456 
+    
+    Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)    
+    (Intercept)   21.5655     0.7653  28.181 2.42e-16 ***
+    I(1/dias)   -255.2249    25.5579  -9.986 9.12e-09 ***
+    ---
+    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    
+    Residual standard error: 1.811 on 18 degrees of freedom
+    Multiple R-squared:  0.8471,	Adjusted R-squared:  0.8386 
+    F-statistic: 99.72 on 1 and 18 DF,  p-value: 9.123e-09
+    ```
+    :::
+    :::
+
+
+    <!-- ```{r}
+    df %>%
+        nest_by(ejercicio) %>% 
+        filter(ejercicio == "si") %>%
+        mutate(modelo = list(lm(peso.perdido ~ I(1/dias), df))) %>%
+        summarize(tidy(modelo)) %>%
+        kable() %>%
+        kable_styling()
+    ``` -->
+
+    Y ahora el modelo sigmoidal para el grupo de las personas que no hacen ejercicio.
+    
+
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-40_e4a4c148423e7a94b26d36dfcde098a3'}
+    
+    ```{.r .cell-code}
+    sigmoidal_no_ejercicio <- lm(log(peso.perdido) ~ I(1/dias), df[df$ejercicio == "no", ])
+    summary(sigmoidal_no_ejercicio)
+    ```
+    
+    ::: {.cell-output .cell-output-stdout}
+    ```
+    
+    Call:
+    lm(formula = log(peso.perdido) ~ I(1/dias), data = df[df$ejercicio == 
+        "no", ])
+    
+    Residuals:
+         Min       1Q   Median       3Q      Max 
+    -0.66026 -0.07192  0.04678  0.13142  0.29633 
+    
+    Coefficients:
+                Estimate Std. Error t value Pr(>|t|)    
+    (Intercept)   2.8694     0.1021   28.09 2.55e-16 ***
+    I(1/dias)   -24.4226     3.4111   -7.16 1.15e-06 ***
+    ---
+    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    
+    Residual standard error: 0.2417 on 18 degrees of freedom
+    Multiple R-squared:  0.7401,	Adjusted R-squared:  0.7257 
+    F-statistic: 51.26 on 1 and 18 DF,  p-value: 1.146e-06
+    ```
+    :::
+    :::
+
+    :::
+
+a.  Según los mejores modelos de regresión en cada caso, ¿cuántos kilos perderá una persona que hace ejercicio tras 100 días de dieta? ¿Y una que no hace ejercicio?
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    Hacemos primero la predicción del peso perdido para la persona que hace ejercicio usando el modelo inverso.
+
+
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-41_6eb60a1c167aed570503c861b1ee077c'}
+    
+    ```{.r .cell-code}
+    predict.lm(inverso_ejercicio, newdata = list(dias = 100))
+    ```
+    
+    ::: {.cell-output .cell-output-stdout}
+    ```
+           1 
+    19.01329 
+    ```
+    :::
+    :::
+
+
+    Y ahora hacemos la predicción del peso perdido para la persona que no hace ejercicio usando el modelo sigmoidal.
+    
+
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-42_7251ccd86ce02caccf342863b5d42df2'}
+    
+    ```{.r .cell-code}
+    # El modelo sigmoidal devuelve el logaritmo del peso perdido por lo que hay que aplicar la función exponencial para obtener el peso perdido.
+    exp(predict.lm(sigmoidal_no_ejercicio, newdata = list(dias = 100)))
+    ```
+    
+    ::: {.cell-output .cell-output-stdout}
+    ```
+           1 
+    13.80634 
+    ```
+    :::
+    :::
+
+    :::
 :::
 
 ## Ejercicios propuestos
 
+:::{#exr-regresion-6}
+El conjunto de datos [`neonatos`](https://aprendeconalf.es/estadistica-practicas-r/datos/neonatos.csv) contiene información sobre una muestra de 320 recién nacidos en un hospital durante un año que cumplieron el tiempo normal de gestación. 
+
+a.  Crear un data frame a con los datos de los neonatos a partir del fichero anterior.
+
+a.  Construir la recta de regresión del peso de los recién nacidos sobre el número de cigarros fumados al día por las madres. ¿Existe una relación lineal fuerte entre el peso y el número de cigarros?
+
+a.  Dibujar la recta de regresión calculada en el apartado anterior. ¿Por qué la recta no se ajusta bien a la nube de puntos?
+
+a.  Calcular y dibujar la recta de regresión del peso de los recién nacidos sobre el número de cigarros fumados al día por las madres en el grupo de las madres que si fumaron durante el embarazo. ¿Es este modelo mejor o pero que la recta
+del apartado anterior? 
+
+a.  Según este modelo, ¿cuánto disminuirá el peso del recién nacido por cada cigarro más diario que fume la madre? 
+
+a.  Según el modelo anterior, ¿qué peso tendrá un recién nacido de una madre que ha fumado 5 cigarros diarios durante el embarazo? ¿Y si la madre ha fumado 30 cigarros diarios durante el embarazo? ¿Son fiables estas predicciones?
+
+a.  ¿Existe la misma relación lineal entre el peso de los recién nacidos y el número de cigarros fumados al día por las madres que fumaron durante el embarazo en el grupo de las madres menores de 20 y en el grupo de las madres mayores de
+20? ¿Qué se puede concluir?
+:::
+
+:::{#exr-regresion-7}
+El conjunto de datos [`edad.estatura`](https://aprendeconalf.es/estadistica-practicas-r/datos/edad-estatura.csv) contiene la edad y la estatura de 30 personas. 
+
+a.  Crear un data frame con los datos de las edades y las estaturas a partir del fichero anterior.
+
+a.  Calcular la recta de regresión de la estatura sobre la edad. ¿Es un buen modelo la recta de regresión?
+
+a. Dibujar el diagrama de dispersión de la estatura sobre la edad. ¿Alrededor de qué edad se observa un cambio en la tendencia? 
+
+a.  Recodificar la variable edad en dos grupos para mayores y menores de 20 años.
+
+a.  Calcular la recta de regresión de la estatura sobre la edad para cada grupo de edad. 
+¿En qué grupo explica mejor la recta de regresión la relación entre la estatura y la edad? 
+
+a.  Dibujar las rectas de regresión anteriores.
+
+a.  ¿Qué estatura se espera que tenga una persona de 14 años? ¿Y una de 38?
+:::
+
+:::{#exr-regresion-8}
+El conjunto de datos `gapminder` del paquete `gapminder` contiene infomración sobre la esperanza de vida, la población, y el PIB per cápita en dólares PPP de los principales países en un rango de años.
+
+a. Instalar el paquete `gapminder` y cargarlo.
+
+a. ¿Qué tipo de modelo explica mejor la evolución de la población con los años? Construir ese modelo. 
+
+b. ¿Qué tipo de modelo explica mejor la relación entre la esperanza de vida y el PIB per cápita?
+
+c. ¿Qué tipo de modelo explica mejor la relación entre la esperanza de vida y el PIB r cápita para cada continente? Construir el mejor modelo en cada caso y utilizarlo para predecir la esperanza de vida de una persona de cada continente con un PIB per cápita de 1000 dólares PPP.
+:::

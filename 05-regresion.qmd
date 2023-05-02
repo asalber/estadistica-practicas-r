@@ -17,7 +17,9 @@ library(tidyverse)
 # Incluye los siguientes paquetes:
 # - readr: para la lectura de ficheros csv. 
 # - dplyr: para el preprocesamiento y manipulación de datos.
-library(broom) # para el ajuste de modelos de regresión por grupos
+# - tidyr: para la organización de los datos.
+# - purrr: para aplicar funciones a vectores. 
+library(broom) # para convertir las listas con los resúmenes de los modelos de regresión a formato organizado.
 library(knitr) # para el formateo de tablas.
 library(kableExtra) # para personalizar el formato de las tablas.
 ```
@@ -492,6 +494,7 @@ a.  Utilizar el modelo de regresión exponencial para predecir el PIB del año 2
     ## Solución
 
     ```{r}
+    # El modelo exponencial devuelve el logaritmo del PIB, por lo que hay que aplicar la función exponencial para obtener el PIB.
     exp(predict.lm(recta_logPIB_años, newdata = list(Año = 2024)))
     ```
 
@@ -511,13 +514,12 @@ a.  ¿Cuándo se alcanzará un PIB de 50000 billones de dólares?
     ```
 
     El modelo de regresión logarítmico de los años sobre el PIB es $\textsf{Año}= `r log_años_PIB$coefficients[["(Intercept)"]]` + `r log_años_PIB$coefficients[["log(PIB)"]]` \log(\textsf{PIB})$.
-    :::
 
     ```{r}
     predict.lm(log_años_PIB, newdata = list(PIB = 50000))
     ```
+    :::
 :::
-
 
 :::{#exr-regresion-5}
 El fichero [`dieta.csv`](datos/dieta.csv) contiene información sobre el los kilos perdidos con una dieta de adelgazamiento.
@@ -549,17 +551,43 @@ a.  Dibujar el diagrama de dispersión de los kilos perdidos en función del nú
     La nube de puntos es bastante difusa aunque parece apreciarse una tendencia logarítmica o sigmoidal.
     :::
 
-a.  Calcular el modelo de regresión sigmoidal del peso perdido sobre los días de dieta. ¿Es un buen modelo para explicar la relación entre el peso perdido y los días de dieta?
+a.  Calcular los coeficientes de determinación lineal, cuadrático, exponencial, logarítmico, potencial, inverso y sigmoidal. ¿Qué tipo de modelo explica mejor la relación entre los kilos perdidos y el número de días de dieta? ¿Qué porcentaje de la variabilidad de peso perdido explica el mejor modelo de regresión?
 
     ::: {.callout-tip collapse="true"}
     ## Solución
 
     ```{r}
-    sigmoidal_peso_dias <- lm(log(peso.perdido) ~ I(1/dias), df) 
-    summary(sigmoidal_peso_dias)
+    library(dplyr)
+    library(tidyr)
+    library(purrr)
+    library(broom)
+    library(kableExtra)
+    # Construimos un data frame con el ajuste de los modelos.
+    modelos <- tibble(
+            Lineal = list(lm(peso.perdido ~ dias, df)),
+            Cuadratico = list(lm(peso.perdido ~ dias + I(dias^2), df)),
+            Exponencial = list(lm(log(peso.perdido) ~ dias, df)),
+            Logaritmico = list(lm(peso.perdido ~ log(dias), df)),
+            Potencial = list(lm(log(peso.perdido) ~ log(dias), df)),
+            Inverso = list(lm(peso.perdido ~ I(1/dias), df)),
+            Sigmoidal = list(lm(log(peso.perdido) ~ I(1/dias), df)),
+        )  %>% 
+        # 
+        # Reestructuramos el data frame para tener todos los modelos en la misma columna.
+        pivot_longer(everything(), names_to = "Tipo_Modelo", values_to = "Modelo")  %>% 
+        # Obtenemos un resumen del ajuste de cada modelo en formato organizado (se obtiene una lista con los parámetros que describen el ajuste de cada modelo).
+        mutate(Resumen = map(Modelo, glance)) %>% 
+        # Desanidamos el resumen (se obtiene una columna para cada parámetro del resumen del ajuste de los modelos).
+        unnest(Resumen)  %>% 
+        # Ordenamos el data frame por el coeficiente de determinación.
+        arrange(-r.squared)
+    modelos  %>%
+        select(Tipo_Modelo, r.squared)  %>% 
+        kable(col.names = c("Tipo de Modelo", "R²")) %>%
+        kable_styling(full_width = F)
     ```
 
-    El modelo de regresión sigmoidal que mejor explica el peso perdido en función de los días de dieta es $\textsf{Peso}= e^{`r sigmoidal_peso_dias$coefficients[["(Intercept)"]]` `r sigmoidal_peso_dias$coefficients[["I(1/dias)"]]` / \textsf{dias}}$.
+    El mejor modelo es el Sigmoidal que explica el `r modelos[1, "r.squared"]*100`% de la variabilidad del peso perdido. 
     :::
 
 a.  Dibujar el diagrama de dispersión de los kilos perdidos en función del número de días con la dieta según si la persona hace ejercicio o no. ¿Qué conclusiones se pueden sacar?
@@ -577,43 +605,142 @@ a.  Dibujar el diagrama de dispersión de los kilos perdidos en función del nú
     Claramente la nube de puntos de las personas que hacen ejercicio está por encima de la de los que no hacen ejercicio, lo que indica que hacer ejercicio favorece la pérdida de peso. Los más razonable es construir modelos de regresión para cada grupo.
     :::
 
-a.  Construir el modelo de regresión inverso del peso perdido sobre los días de dieta para los que hacen ejercicio y para los que no.
+a.  ¿Qué tipo de modelo explica mejor la relación entre el peso perdido y los días de dieta en el grupo de las personas que hacen ejercicio? ¿Y en el grupo de las que no hacen ejercicio? ¿Han mejorado los modelos con respecto al modelo anterior?
 
     ::: {.callout-tip collapse="true"}
     ## Solución
 
     ```{r}
-    library(broom)
-    library(kableExtra)
-    df %>%
-        nest_by(ejercicio) %>%
-        mutate(mod = list(lm(peso.perdido ~ I(1/dias), data = data))) %>%
-        summarize(tidy(mod)) %>%
-        kable() %>%
-        kable_styling()
+    modelos <- df  %>% 
+        # Anidamos por la columna ejercicio.
+        nest_by(ejercicio)  %>% 
+        # Ajustamos los modelos de regresión.
+        mutate(
+            Lineal = list(lm(peso.perdido ~ dias, data)),
+            Cuadratico = list(lm(peso.perdido ~ dias + I(dias^2), data)),
+            Exponencial = list(lm(log(peso.perdido) ~ dias, data)),
+            Logaritmico = list(lm(peso.perdido ~ log(dias), data)),
+            Potencial = list(lm(log(peso.perdido) ~ log(dias), data)),
+            Inverso = list(lm(peso.perdido ~ I(1/dias), data)),
+            Sigmoidal = list(lm(log(peso.perdido) ~ I(1/dias), data)),
+        )  %>% 
+        # Reestructuramos el data frame para tener todos los modelos en la misma columna.
+        pivot_longer(-c(ejercicio, data), names_to = "Tipo_Modelo", values_to = "Modelo")  %>% 
+        # Obtenemos un resumen del ajuste de cada modelo en formato organizado (se obtiene una lista con los parámetros que describen el ajuste de cada modelo).
+        mutate(Resumen = map(Modelo, glance)) %>% 
+        # Desanidamos el resumen (se obtiene una columna para cada parámetro del resumen del ajuste de los modelos).
+        unnest(Resumen)  %>% 
+        # Ordenamos el data frame por la columna ejercicio y por el coeficiente de determinación.
+        arrange(ejercicio, -r.squared)  
+    modelos %>% 
+        select(ejercicio, Tipo_Modelo, r.squared)  %>% 
+        kable(col.names = c("Ejercicio", "Tipo de Modelo", "R²")) %>%
+        pack_rows(index = table(modelos$ejercicio))  %>% 
+        kable_styling(full_width = F)
     ```
+
+    El mejor modelo en el grupo de los que hacen ejercicio es el inverso y en el grupo de los que no el sigmoidal. Los modelos han mejorado bastante con respecto al modelo anterior, sobre todo el del grupo de personas que hace ejercicio.
     :::
 
-a.  ¿Han mejorado los modelos con respecto al hacer la regresión por grupos?
+a.  Construir el mejor modelo de regresión del peso perdido sobre los días de dieta para el grupo de las personas que hacen ejercicio y para el grupo de las que no.
 
     ::: {.callout-tip collapse="true"}
     ## Solución
 
+    Construimos el modelo inverso para el grupo de las personas que hacen ejercicio.
+
     ```{r}
-    library(broom)
-    library(kableExtra)
-    df %>%
-        nest_by(ejercicio) %>%
-        mutate(mod = list(lm(peso.perdido ~ I(1/dias), data = data))) %>%
-        summarize(glance(mod)) %>%
-        kable() %>%
-        kable_styling()
+    inverso_ejercicio <- lm(peso.perdido ~ I(1/dias), df[df$ejercicio == "si", ])
+    summary(inverso_ejercicio)
     ```
 
-    El modelo de regresión ha mejorado bastante en el grupo de los que hacen ejercicio ya que el coeficiente de determinación ha aumentado bastante.
+    <!-- ```{r}
+    df %>%
+        nest_by(ejercicio) %>% 
+        filter(ejercicio == "si") %>%
+        mutate(modelo = list(lm(peso.perdido ~ I(1/dias), df))) %>%
+        summarize(tidy(modelo)) %>%
+        kable() %>%
+        kable_styling()
+    ``` -->
+
+    Y ahora el modelo sigmoidal para el grupo de las personas que no hacen ejercicio.
+    
+    ```{r}
+    sigmoidal_no_ejercicio <- lm(log(peso.perdido) ~ I(1/dias), df[df$ejercicio == "no", ])
+    summary(sigmoidal_no_ejercicio)
+    ```
     :::
 
+a.  Según los mejores modelos de regresión en cada caso, ¿cuántos kilos perderá una persona que hace ejercicio tras 100 días de dieta? ¿Y una que no hace ejercicio?
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    Hacemos primero la predicción del peso perdido para la persona que hace ejercicio usando el modelo inverso.
+
+    ```{r}
+    predict.lm(inverso_ejercicio, newdata = list(dias = 100))
+    ```
+
+    Y ahora hacemos la predicción del peso perdido para la persona que no hace ejercicio usando el modelo sigmoidal.
+    
+    ```{r}
+    # El modelo sigmoidal devuelve el logaritmo del peso perdido por lo que hay que aplicar la función exponencial para obtener el peso perdido.
+    exp(predict.lm(sigmoidal_no_ejercicio, newdata = list(dias = 100)))
+    ```
+    :::
 :::
 
 ## Ejercicios propuestos
 
+:::{#exr-regresion-6}
+El conjunto de datos [`neonatos`](https://aprendeconalf.es/estadistica-practicas-r/datos/neonatos.csv) contiene información sobre una muestra de 320 recién nacidos en un hospital durante un año que cumplieron el tiempo normal de gestación. 
+
+a.  Crear un data frame a con los datos de los neonatos a partir del fichero anterior.
+
+a.  Construir la recta de regresión del peso de los recién nacidos sobre el número de cigarros fumados al día por las madres. ¿Existe una relación lineal fuerte entre el peso y el número de cigarros?
+
+a.  Dibujar la recta de regresión calculada en el apartado anterior. ¿Por qué la recta no se ajusta bien a la nube de puntos?
+
+a.  Calcular y dibujar la recta de regresión del peso de los recién nacidos sobre el número de cigarros fumados al día por las madres en el grupo de las madres que si fumaron durante el embarazo. ¿Es este modelo mejor o pero que la recta
+del apartado anterior? 
+
+a.  Según este modelo, ¿cuánto disminuirá el peso del recién nacido por cada cigarro más diario que fume la madre? 
+
+a.  Según el modelo anterior, ¿qué peso tendrá un recién nacido de una madre que ha fumado 5 cigarros diarios durante el embarazo? ¿Y si la madre ha fumado 30 cigarros diarios durante el embarazo? ¿Son fiables estas predicciones?
+
+a.  ¿Existe la misma relación lineal entre el peso de los recién nacidos y el número de cigarros fumados al día por las madres que fumaron durante el embarazo en el grupo de las madres menores de 20 y en el grupo de las madres mayores de
+20? ¿Qué se puede concluir?
+:::
+
+:::{#exr-regresion-7}
+El conjunto de datos [`edad.estatura`](https://aprendeconalf.es/estadistica-practicas-r/datos/edad-estatura.csv) contiene la edad y la estatura de 30 personas. 
+
+a.  Crear un data frame con los datos de las edades y las estaturas a partir del fichero anterior.
+
+a.  Calcular la recta de regresión de la estatura sobre la edad. ¿Es un buen modelo la recta de regresión?
+
+a. Dibujar el diagrama de dispersión de la estatura sobre la edad. ¿Alrededor de qué edad se observa un cambio en la tendencia? 
+
+a.  Recodificar la variable edad en dos grupos para mayores y menores de 20 años.
+
+a.  Calcular la recta de regresión de la estatura sobre la edad para cada grupo de edad. 
+¿En qué grupo explica mejor la recta de regresión la relación entre la estatura y la edad? 
+
+a.  Dibujar las rectas de regresión anteriores.
+
+a.  ¿Qué estatura se espera que tenga una persona de 14 años? ¿Y una de 38?
+:::
+
+:::{#exr-regresion-8}
+El conjunto de datos `gapminder` del paquete `gapminder` contiene infomración sobre la esperanza de vida, la población, y el PIB per cápita en dólares PPP de los principales países en un rango de años.
+
+a. Instalar el paquete `gapminder` y cargarlo.
+
+a. ¿Qué tipo de modelo explica mejor la evolución de la población con los años? Construir ese modelo. 
+
+b. ¿Qué tipo de modelo explica mejor la relación entre la esperanza de vida y el PIB per cápita?
+
+c. ¿Qué tipo de modelo explica mejor la relación entre la esperanza de vida y el PIB r cápita para cada continente? Construir el mejor modelo en cada caso y utilizarlo para predecir la esperanza de vida de una persona de cada continente con un PIB per cápita de 1000 dólares PPP.
+:::

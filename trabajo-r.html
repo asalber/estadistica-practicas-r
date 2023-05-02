@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.475">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Trabajo con R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="trabajo-r_files/libs/clipboard/clipboard.min.js"></script>
+<script src="trabajo-r_files/libs/quarto-html/quarto.js"></script>
+<script src="trabajo-r_files/libs/quarto-html/popper.min.js"></script>
+<script src="trabajo-r_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="trabajo-r_files/libs/quarto-html/anchor.min.js"></script>
+<link href="trabajo-r_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="trabajo-r_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="trabajo-r_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="trabajo-r_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="trabajo-r_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Trabajo con R</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="trabajo-de-estadística-con-r" class="level1">
+<h1>Trabajo de Estadística con R</h1>
+<p>El objetivo de este trabajo es poner en práctica los conocimientos y destrezas adquiridas en el manejo de R - Cada grupo tendrá que realizar un plan de Marketing distinto para un producto o servicio en un contexto real de manera que las decisiones de ese plan estén basada en el análisis de datos con Python. - Los alumnos tendrán que buscar una base de datos o varias bases de datos con suficiente información para poder tomar decisiones de Marketing a partir de su análisis. Por otro lado, para garantizar que la parte de programación tuviese un mínimo de complejidad para poder poner en práctica la mayoría de lo aprendido durante el curso, se establecieron los siguientes requisitos para esas bases de datos: Un mínimo de 8 o 10 variables, que incluyesen tanto variables cualitativas como cuantitativas, un mínimo de 500 registros. Antes de empezar a trabajar con las bases de datos, estas deben ser validadas tanto por los profesores de Marketing como de Fundamentos de Computadores.<br>
+Dado que la obtención de datos en abierto no es fácil, se planteó a los alumnos varios portales con bases de datos abiertas para facilitar su búsqueda: - https://data.world/datasets/marketing - https://www.kaggle.com/datasets - https://datasetsearch.research.google.com/ - https://www.cmswire.com/digital-marketing/6-datasets-for-marketers-should-know-about/ - https://www.census.gov/data.html<br>
+- https://www.census.gov/acs/www/data/data-tables-and-tools/ - https://catalog.data.gov/dataset?res_format=CSV</p>
+<p>Por otro lado, también se seleccionan varias bases de datos que satisfacen los requisitos anteriores para que los alumnos que no consigan encontrar una base de datos adecuada pudieran usarlas:</p>
+<ul>
+<li><p>Datos sobre clientes de varias campañas de marketing: https://www.kaggle.com/rodsaldanha/arketing-campaign Este conjunto de datos se ha utilizado para un trabajo final de un curso en Business Analytics (https://www.kaggle.com/jackdaoud/marketing-data)</p></li>
+<li><p>Datos sobre los clientes de un banco y las campañas de créditos: https://www.kaggle.com/henriqueyamahata/bank-marketing</p></li>
+<li><p>Datos sociodemográficos sobre los clientes y su valor para una empresa (pude ser útil para diseñar estrategias para fidelizar clientes): https://www.kaggle.com/pankajjsh06/ibm-watson-marketing-customer-value-data</p></li>
+<li><p>Datos de productos vendidos en la plataforma Wish: https://www.kaggle.com/jmmvutu/summer-products-and-sales-in-ecommerce-wish</p></li>
+<li><p>Datos sobre abandono de clientes: https://www.kaggle.com/blastchar/telco-customer-churn</p></li>
+<li><p>Datos sociodemográficos para la segmentación de clientes de una compañía de automóviles: https://www.kaggle.com/vetrirah/customer</p></li>
+<li><p>Datos sobre campañas de publicidad en Facebook: https://www.kaggle.com/loveall/clicks-conversion-tracking</p></li>
+<li><p>Datos AIRBNB de Madrid (estos son los datos que utilizaron en el trabajo del año pasado): https://www.kaggle.com/rusiano/madrid-airbnb-data</p></li>
+<li><p>Una vez elegida la temática del plan de Marketing y la base de datos. Los grupos empezarían por definir los objetivos del plan de Marketing y concretar las preguntas que tenían que responder a partir del análisis de la base de datos.</p></li>
+<li><p>A partir de esas preguntas, se definirán las tareas concretas de programación que deberían desarrollar.</p></li>
+<li><p>La parte de programación se realizará en el entorno de desarrollo <a href="https://replit.com/">Replit</a>. Esta plataforma permite la creación de proyectos de programación compartidos por grupos de manera que los alumnos de un mismo grupo pueden compartir el código. Al mismo tiempo permite la supervisión del profesor y la realización de comentarios por parte de este. Finalmente también dispone de control de versiones.</p></li>
+<li><p>Cada grupo tendrá asignado como tutor uno de los profesores de Fundamentos de Computadores, y tendrán al menos una tutoría semanal para supervisar la marcha del trabajo.</p></li>
+<li><p>La evaluación del trabajo será independiente para Marketing y Fundamentos de Computadores, ya en cada asignatura se evalúan desempeños distintos. De esta manera un alumno podría aprobar el trabajo en una de las asignaturas y suspenderlo en la otra.</p></li>
+<li><p>La evaluación de la parte de programación en Fundamentos de computadores será grupal, es decir, se otorgará una nota al trabajo y no a cada alumno. Serán los integrantes del grupo quienes se distribuyan la nota del trabajo en función de sus méritos. Los alumnos remitirán a su tutor un documento consensuado con el reparto de la nota.</p></li>
+<li><p>El trabajo se evaluará de acuerdo a la siguiente rúbrica:<br>
+<strong>Mínimos</strong></p>
+<ul>
+<li>Definir funciones lógicas con el número de parámetros adecuado.</li>
+<li>Crear un DataFrame a partir de un fichero csv o excel con el índice, separador de campos y separador de decimales adecuado.</li>
+<li>Preprocesar el fichero para seleccionar las columnas necesarias y eliminar las filas con valores desconocidos.</li>
+<li>Generar columnas nuevas a partir de la aplicación de fórmulas a las columnas existentes (tanto numéricas, como cadena y booleanas).</li>
+<li>Aplicar filtros de al menos dos condiciones.</li>
+<li>Calcular tablas de frecuencias simples y agrupadas según una o varias variables cualitativas.</li>
+<li>Calcular estadísticos de variables cualitativas y cuantitativas simples y agrupando según una o varias variables cualitativas.</li>
+<li>Diagramas de barras o lineas simples y agrupando según una o varias variables cualitativas.</li>
+<li>Histogramas.</li>
+<li>Diagrama de sectores.</li>
+<li>Poner título a los gráficos, a los ejes y añadir una leyenda.</li>
+<li>Documentación de código y código legible.</li>
+<li>Definir una interfaz de usuario sencilla que permita realizar las principales tareas invocando a las funciones correspondientes.</li>
+<li>Documentación del proyecto.</li>
+</ul>
+<p><strong>Extras</strong></p>
+<ul>
+<li>Fusionar varios Data Frames.</li>
+<li>Definir funciones complejas.</li>
+<li>Nuevas columnas a partir de fórmulas complejas.</li>
+<li>Aplicar filtros complejos con más de dos condiciones.</li>
+<li>Análisis estadísticos más complejos (regresión, tests hipótesis, …).</li>
+<li>Pivotar el Data Frame de formato ancho a largo o viceversa.</li>
+<li>Dibujar más tipos de gráficos (dispersión, cajas, etc.)</li>
+<li>Dibujar gráficos más complejos.</li>
+<li>Combinar varios diagramas en un mismo gráfico.</li>
+<li>Personalizar el aspecto de los gráficos con colores, tipos de marcadores y tipos de líneas.</li>
+<li>Usar otras librerías</li>
+<li>Leer un fichero csv por líneas separando su información por campos.</li>
+<li>Convertir los valores numéricos de tipo cadena en objetos de tipo int o float.</li>
+<li>Generar un diccionario que tenga como claves los encabezados de las columnas y como valores listas con los datos de la columnas correspondientes.</li>
+<li>Generar un diccionario que tenga como claves los índices y como valores otros diccionarios con los datos de las filas correspondientes.</li>
+<li>Crear funciones para obtener los valores de una fila o columna usando los diccionarios anteriores.</li>
+<li>Crear funciones para hacer filtros usando los diccionarios anteriores.</li>
+<li>Crear funciones para hacer resúmenes estadísticos de las variables.</li>
+</ul></li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

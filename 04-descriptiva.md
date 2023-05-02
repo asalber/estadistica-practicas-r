@@ -1389,86 +1389,86 @@ El fichero [`renta-media-comunidades-autonomas.csv`](datos/renta-media-comunidad
 a.  Crear un data frame con los datos de las rentas medias por persona de las comunidades a partir del fichero [`renta-media-comunidades-autonomas.csv`](datos/renta-media-comunidades-autonomas.csv).
 
     :::{.callout-tip collapse="true"}
-## Solución 
+    ## Solución 
 
-::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-29_9e15921ec0874bcbe602f474a2524b8f'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-29_b6778748bdb2455346f712e04e5ae955'}
+    
+    ```{.r .cell-code}
+    df <- read_csv2("https://aprendeconalf.es/estadistica-practicas-r/datos/renta-media-comunidades-autonomas.csv")
+    ```
+    
+    ::: {.cell-output .cell-output-stderr}
+    ```
+    ℹ Using "','" as decimal and "'.'" as grouping mark. Use `read_delim()` for more control.
+    ```
+    :::
+    
+    ::: {.cell-output .cell-output-stderr}
+    ```
+    Rows: 19 Columns: 15
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ";"
+    chr  (1): Comunidad
+    dbl (14): 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, ...
+    
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+    ```
+    :::
+    
+    ```{.r .cell-code}
+    df
+    ```
+    
+    ::: {.cell-output .cell-output-stdout}
+    ```
+    # A tibble: 19 × 15
+       Comunidad      `2021` `2020` `2019` `2018` `2017` `2016` `2015` `2014` `2013`
+       <chr>           <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>
+     1 Andalucía        9915   9990   9160   9258   9116   8398   7942   8079   8408
+     2 Aragón          13345  13097  12300  11990  12110  11649  12427  12037  12022
+     3 Asturias Prin…  12861  12786  12523  12085  12244  12060  11427  11251  11211
+     4 Balears Illes   11235  12658  12410  13240  12665  12222  10828  10660  10386
+     5 Canarias        10161   9935   9487   8964   8863   8702   8640   8302   8513
+     6 Cantabria       12848  12748  12205  11239  11293  10670  10494   9824   9843
+     7 Castilla y Le…  12656  12697  12003  11949  11239  10815  10570  10406  10760
+     8 Castilla - La…  10257  10485   9715   9533   9045   8731   8498   8545   8425
+     9 Cataluña        14159  14170  13527  13338  12712  12660  12283  12205  12111
+    10 Comunitat Val…  11237  11332  10611  10232   9801   9265   9098   9144   9375
+    11 Extremadura      9500   9147   8796   8503   8250   8674   8469   7729   8224
+    12 Galicia         11453  11469  11218  11239  10753  10439  10212  10235  10106
+    13 Madrid Comuni…  14836  14580  14199  13279  13099  12647  12534  12597  12823
+    14 Murcia Región…   9931   9850   8956   9111   8702   8273   7924   7767   8253
+    15 Navarra Comun…  15269  15094  13937  13585  13583  13408  13300  13221  13608
+    16 País Vasco      15544  15813  15300  14722  14397  14345  13836  14281  14312
+    17 Rioja La        12913  13504  12697  12029  12131  11589  11132  11120  10686
+    18 Ceuta           10397   9853  10164   9784   9676   9435   8512   8712   9336
+    19 Melilla         12012  11427  11733  12507  10161  10883  10027  11619  11313
+    # ℹ 5 more variables: `2012` <dbl>, `2011` <dbl>, `2010` <dbl>, `2009` <dbl>,
+    #   `2008` <dbl>
+    ```
+    :::
+    :::
 
-```{.r .cell-code}
-df <- read_csv2("https://aprendeconalf.es/estadistica-practicas-r/datos/renta-media-comunidades-autonomas.csv")
-```
+    :::
 
-::: {.cell-output .cell-output-stderr}
-```
-ℹ Using "','" as decimal and "'.'" as grouping mark. Use `read_delim()` for more control.
-```
-:::
+a.  Realizar un resumen estadístico con la media y la desviación típica, mínimo, cuartiles y máximo de todas las rentas medias.
 
-::: {.cell-output .cell-output-stderr}
-```
-Rows: 19 Columns: 15
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ";"
-chr  (1): Comunidad
-dbl (14): 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, ...
+a.  Realizar un resumen estadístico con la media y la desviación típica de las rentas medias de cada año.
 
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-```
-:::
+a.  ¿Qué año presenta una menor variabilidad relativa?
 
-```{.r .cell-code}
-df
-```
+a.  ¿En qué comunidad autónoma hay menos dispersión relativa con respecto a la media?
 
-::: {.cell-output .cell-output-stdout}
-```
-# A tibble: 19 × 15
-   Comunidad      `2021` `2020` `2019` `2018` `2017` `2016` `2015` `2014` `2013`
-   <chr>           <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>
- 1 Andalucía        9915   9990   9160   9258   9116   8398   7942   8079   8408
- 2 Aragón          13345  13097  12300  11990  12110  11649  12427  12037  12022
- 3 Asturias Prin…  12861  12786  12523  12085  12244  12060  11427  11251  11211
- 4 Balears Illes   11235  12658  12410  13240  12665  12222  10828  10660  10386
- 5 Canarias        10161   9935   9487   8964   8863   8702   8640   8302   8513
- 6 Cantabria       12848  12748  12205  11239  11293  10670  10494   9824   9843
- 7 Castilla y Le…  12656  12697  12003  11949  11239  10815  10570  10406  10760
- 8 Castilla - La…  10257  10485   9715   9533   9045   8731   8498   8545   8425
- 9 Cataluña        14159  14170  13527  13338  12712  12660  12283  12205  12111
-10 Comunitat Val…  11237  11332  10611  10232   9801   9265   9098   9144   9375
-11 Extremadura      9500   9147   8796   8503   8250   8674   8469   7729   8224
-12 Galicia         11453  11469  11218  11239  10753  10439  10212  10235  10106
-13 Madrid Comuni…  14836  14580  14199  13279  13099  12647  12534  12597  12823
-14 Murcia Región…   9931   9850   8956   9111   8702   8273   7924   7767   8253
-15 Navarra Comun…  15269  15094  13937  13585  13583  13408  13300  13221  13608
-16 País Vasco      15544  15813  15300  14722  14397  14345  13836  14281  14312
-17 Rioja La        12913  13504  12697  12029  12131  11589  11132  11120  10686
-18 Ceuta           10397   9853  10164   9784   9676   9435   8512   8712   9336
-19 Melilla         12012  11427  11733  12507  10161  10883  10027  11619  11313
-# ℹ 5 more variables: `2012` <dbl>, `2011` <dbl>, `2010` <dbl>, `2009` <dbl>,
-#   `2008` <dbl>
-```
-:::
-:::
+a.  ¿En qué comunidad autónoma es más representativa la media de las rentas?
 
-:::
+a.  ¿Qué comunidad autónoma presenta una distribución de las rentas más normal a lo largo de los años?
 
-a. Realizar un resumen estadístico con la media y la desviación típica, mínimo, cuartiles y máximo de todas las rentas medias.
+a.  ¿Qué comunidades autónomas tienen una renta media por debajo del percentil 10? ¿Y cuáles tienen una renta media por encima del percentil 90?
 
-a. Realizar un resumen estadístico con la media y la desviación típica de las rentas medias de cada año.
+a.  Crear la variable `riqueza` que clasifique las comunidades según la media de sus rentas en `baja` (por debajo del primer cuartil), `media` (entre el primer y el tercer cuartil) y `alta` (por encima del tercer cuartil).
 
-a. ¿Qué año presenta una menor variabilidad relativa?
-
-a. ¿En qué comunidad autónoma hay menos dispersión relativa con respecto a la media?
-
-a. ¿En qué comunidad autónoma es más representativa la media de las rentas?
-
-a. ¿Qué comunidad autónoma presenta una distribución de las rentas más normal a lo largo de los años?
-
-a. ¿Qué comunidades autónomas tienen una renta media por debajo del percentil 10? ¿Y cuáles tienen una renta media por encima del percentil 90?
-
-a. Crear la variable `riqueza` que clasifique las comunidades según la media de sus rentas en `baja` (por debajo del primer cuartil), `media` (entre el primer y el tercer cuartil) y `alta` (por encima del tercer cuartil).
-
-a. Hacer un resumen estadístico con la media, cuartiles, desviación típica, coeficiente de variación, coeficiente de asimetría y coeficiente de curtosis de las rentas medias según la riqueza.
+a.  Hacer un resumen estadístico con la media, cuartiles, desviación típica, coeficiente de variación, coeficiente de asimetría y coeficiente de curtosis de las rentas medias según la riqueza.
 :::
 <!-- 
 

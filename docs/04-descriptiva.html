@@ -1868,9 +1868,19 @@ Solución 2
 <p><span class="theorem-title"><strong>Ejercicio 4.3 </strong></span>El fichero <a href="datos/renta-media-comunidades-autonomas.csv"><code>renta-media-comunidades-autonomas.csv</code></a> contiene información sobre la renta neta media por persona de las comunidades autónomas desde 2008 a 2021.</p>
 <ol type="a">
 <li><p>Crear un data frame con los datos de las rentas medias por persona de las comunidades a partir del fichero <a href="datos/renta-media-comunidades-autonomas.csv"><code>renta-media-comunidades-autonomas.csv</code></a>.</p>
-<p>:::{.callout-tip collapse=“true”} ## Solución</p></li>
-</ol>
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-29_9e15921ec0874bcbe602f474a2524b8f">
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-29" class="callout-29-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-29_b6778748bdb2455346f712e04e5ae955">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"https://aprendeconalf.es/estadistica-practicas-r/datos/renta-media-comunidades-autonomas.csv"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>ℹ Using "','" as decimal and "'.'" as grouping mark. Use `read_delim()` for more control.</code></pre>
@@ -1914,7 +1924,8 @@ dbl (14): 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, ...
 </div>
 </div>
 </div>
-<ol type="a">
+</div>
+</div></li>
 <li><p>Realizar un resumen estadístico con la media y la desviación típica, mínimo, cuartiles y máximo de todas las rentas medias.</p></li>
 <li><p>Realizar un resumen estadístico con la media y la desviación típica de las rentas medias de cada año.</p></li>
 <li><p>¿Qué año presenta una menor variabilidad relativa?</p></li>
@@ -1923,14 +1934,16 @@ dbl (14): 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, ...
 <li><p>¿Qué comunidad autónoma presenta una distribución de las rentas más normal a lo largo de los años?</p></li>
 <li><p>¿Qué comunidades autónomas tienen una renta media por debajo del percentil 10? ¿Y cuáles tienen una renta media por encima del percentil 90?</p></li>
 <li><p>Crear la variable <code>riqueza</code> que clasifique las comunidades según la media de sus rentas en <code>baja</code> (por debajo del primer cuartil), <code>media</code> (entre el primer y el tercer cuartil) y <code>alta</code> (por encima del tercer cuartil).</p></li>
-<li><p>Hacer un resumen estadístico con la media, cuartiles, desviación típica, coeficiente de variación, coeficiente de asimetría y coeficiente de curtosis de las rentas medias según la riqueza. ::: <!-- 
+<li><p>Hacer un resumen estadístico con la media, cuartiles, desviación típica, coeficiente de variación, coeficiente de asimetría y coeficiente de curtosis de las rentas medias según la riqueza.</p></li>
+</ol>
+</div>
+<!-- 
 
 
 df <- df %>% 
     mutate(total = rowMeans(across(where(is.numeric)), na.rm = T))
 df %>% mutate(riqueza = cut(total, breaks = quantile(total, probs = c(0, 0.25, 0.75, 1)), include.lowest = T)) %>% select(riqueza)
-``` --></p></li>
-</ol>
+``` -->
 
 
 </section>

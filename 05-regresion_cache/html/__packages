@@ -3,3 +3,5 @@ readr
 dplyr
 broom
 kableExtra
+tidyr
+purrr

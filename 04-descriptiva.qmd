@@ -362,30 +362,30 @@ El fichero [`renta-media-comunidades-autonomas.csv`](datos/renta-media-comunidad
 a.  Crear un data frame con los datos de las rentas medias por persona de las comunidades a partir del fichero [`renta-media-comunidades-autonomas.csv`](datos/renta-media-comunidades-autonomas.csv).
 
     :::{.callout-tip collapse="true"}
-## Solución 
-```{r}
-df <- read_csv2("https://aprendeconalf.es/estadistica-practicas-r/datos/renta-media-comunidades-autonomas.csv")
-df
-```
-:::
+    ## Solución 
+    ```{r}
+    df <- read_csv2("https://aprendeconalf.es/estadistica-practicas-r/datos/renta-media-comunidades-autonomas.csv")
+    df
+    ```
+    :::
 
-a. Realizar un resumen estadístico con la media y la desviación típica, mínimo, cuartiles y máximo de todas las rentas medias.
+a.  Realizar un resumen estadístico con la media y la desviación típica, mínimo, cuartiles y máximo de todas las rentas medias.
 
-a. Realizar un resumen estadístico con la media y la desviación típica de las rentas medias de cada año.
+a.  Realizar un resumen estadístico con la media y la desviación típica de las rentas medias de cada año.
 
-a. ¿Qué año presenta una menor variabilidad relativa?
+a.  ¿Qué año presenta una menor variabilidad relativa?
 
-a. ¿En qué comunidad autónoma hay menos dispersión relativa con respecto a la media?
+a.  ¿En qué comunidad autónoma hay menos dispersión relativa con respecto a la media?
 
-a. ¿En qué comunidad autónoma es más representativa la media de las rentas?
+a.  ¿En qué comunidad autónoma es más representativa la media de las rentas?
 
-a. ¿Qué comunidad autónoma presenta una distribución de las rentas más normal a lo largo de los años?
+a.  ¿Qué comunidad autónoma presenta una distribución de las rentas más normal a lo largo de los años?
 
-a. ¿Qué comunidades autónomas tienen una renta media por debajo del percentil 10? ¿Y cuáles tienen una renta media por encima del percentil 90?
+a.  ¿Qué comunidades autónomas tienen una renta media por debajo del percentil 10? ¿Y cuáles tienen una renta media por encima del percentil 90?
 
-a. Crear la variable `riqueza` que clasifique las comunidades según la media de sus rentas en `baja` (por debajo del primer cuartil), `media` (entre el primer y el tercer cuartil) y `alta` (por encima del tercer cuartil).
+a.  Crear la variable `riqueza` que clasifique las comunidades según la media de sus rentas en `baja` (por debajo del primer cuartil), `media` (entre el primer y el tercer cuartil) y `alta` (por encima del tercer cuartil).
 
-a. Hacer un resumen estadístico con la media, cuartiles, desviación típica, coeficiente de variación, coeficiente de asimetría y coeficiente de curtosis de las rentas medias según la riqueza.
+a.  Hacer un resumen estadístico con la media, cuartiles, desviación típica, coeficiente de variación, coeficiente de asimetría y coeficiente de curtosis de las rentas medias según la riqueza.
 :::
 <!-- 
 

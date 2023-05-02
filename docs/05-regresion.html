@@ -277,9 +277,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Incluye los siguientes paquetes:</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - readr: para la lectura de ficheros csv. </span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - dplyr: para el preprocesamiento y manipulación de datos.</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom) <span class="co"># para el ajuste de modelos de regresión por grupos</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co"># para el formateo de tablas.</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra) <span class="co"># para personalizar el formato de las tablas.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># - tidyr: para la organización de los datos.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># - purrr: para aplicar funciones a vectores. </span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom) <span class="co"># para convertir las listas con los resúmenes de los modelos de regresión a formato organizado.</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co"># para el formateo de tablas.</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra) <span class="co"># para personalizar el formato de las tablas.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>También se necesita conocer las ecuaciones de los principales modelos de regresión, que se resumen en la siguiente tabla.</p>
 <table class="table">
 <thead>
@@ -1298,8 +1300,9 @@ Solución
 </div>
 <div id="callout-31" class="callout-31-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="05-regresion_cache/html/unnamed-chunk-31_88d704e9eeafe6014ac691bcb9b0dc7f">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">predict.lm</span>(recta_logPIB_años, <span class="at">newdata =</span> <span class="fu">list</span>(Año <span class="ot">=</span> <span class="dv">2024</span>)))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="05-regresion_cache/html/unnamed-chunk-31_fceec52aa1986c2babf346cad76b8025">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># El modelo exponencial devuelve el logaritmo del PIB, por lo que hay que aplicar la función exponencial para obtener el PIB.</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">predict.lm</span>(recta_logPIB_años, <span class="at">newdata =</span> <span class="fu">list</span>(Año <span class="ot">=</span> <span class="dv">2024</span>)))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      1 
 40486.8 </code></pre>
@@ -1348,14 +1351,14 @@ F-statistic:  4407 on 1 and 74 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>El modelo de regresión logarítmico de los años sobre el PIB es <span class="math inline">\(\textsf{Año}= 1863.4980331 + 15.0677514 \log(\textsf{PIB})\)</span>.</p>
-</div>
-</div>
-</div>
 <div class="cell" data-hash="05-regresion_cache/html/unnamed-chunk-33_35c2b5a9ea36ebc95b86444735939906">
 <div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict.lm</span>(log_años_PIB, <span class="at">newdata =</span> <span class="fu">list</span>(<span class="at">PIB =</span> <span class="dv">50000</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       1 
 2026.528 </code></pre>
+</div>
+</div>
+</div>
 </div>
 </div></li>
 </ol>
@@ -1436,7 +1439,7 @@ Solución
 </div>
 </div>
 </div></li>
-<li><p>Calcular el modelo de regresión sigmoidal del peso perdido sobre los días de dieta. ¿Es un buen modelo para explicar la relación entre el peso perdido y los días de dieta?</p>
+<li><p>Calcular los coeficientes de determinación lineal, cuadrático, exponencial, logarítmico, potencial, inverso y sigmoidal. ¿Qué tipo de modelo explica mejor la relación entre los kilos perdidos y el número de días de dieta? ¿Qué porcentaje de la variabilidad de peso perdido explica el mejor modelo de regresión?</p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-35-contents" aria-controls="callout-35" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1449,31 +1452,79 @@ Solución
 </div>
 <div id="callout-35" class="callout-35-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="05-regresion_cache/html/unnamed-chunk-36_204e23ad5768519426da8e9653f3e805">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>sigmoidal_peso_dias <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(peso.perdido) <span class="sc">~</span> <span class="fu">I</span>(<span class="dv">1</span><span class="sc">/</span>dias), df) </span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sigmoidal_peso_dias)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = log(peso.perdido) ~ I(1/dias), data = df)
+<div class="cell" data-hash="05-regresion_cache/html/unnamed-chunk-36_68b0d855cf61165474d3dcc237cb70f5">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Construimos un data frame con el ajuste de los modelos.</span></span>
+<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a>modelos <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">Lineal =</span> <span class="fu">list</span>(<span class="fu">lm</span>(peso.perdido <span class="sc">~</span> dias, df)),</span>
+<span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">Cuadratico =</span> <span class="fu">list</span>(<span class="fu">lm</span>(peso.perdido <span class="sc">~</span> dias <span class="sc">+</span> <span class="fu">I</span>(dias<span class="sc">^</span><span class="dv">2</span>), df)),</span>
+<span id="cb79-10"><a href="#cb79-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">Exponencial =</span> <span class="fu">list</span>(<span class="fu">lm</span>(<span class="fu">log</span>(peso.perdido) <span class="sc">~</span> dias, df)),</span>
+<span id="cb79-11"><a href="#cb79-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">Logaritmico =</span> <span class="fu">list</span>(<span class="fu">lm</span>(peso.perdido <span class="sc">~</span> <span class="fu">log</span>(dias), df)),</span>
+<span id="cb79-12"><a href="#cb79-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">Potencial =</span> <span class="fu">list</span>(<span class="fu">lm</span>(<span class="fu">log</span>(peso.perdido) <span class="sc">~</span> <span class="fu">log</span>(dias), df)),</span>
+<span id="cb79-13"><a href="#cb79-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">Inverso =</span> <span class="fu">list</span>(<span class="fu">lm</span>(peso.perdido <span class="sc">~</span> <span class="fu">I</span>(<span class="dv">1</span><span class="sc">/</span>dias), df)),</span>
+<span id="cb79-14"><a href="#cb79-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">Sigmoidal =</span> <span class="fu">list</span>(<span class="fu">lm</span>(<span class="fu">log</span>(peso.perdido) <span class="sc">~</span> <span class="fu">I</span>(<span class="dv">1</span><span class="sc">/</span>dias), df)),</span>
+<span id="cb79-15"><a href="#cb79-15" aria-hidden="true" tabindex="-1"></a>    )  <span class="sc">%&gt;%</span> </span>
+<span id="cb79-16"><a href="#cb79-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span></span>
+<span id="cb79-17"><a href="#cb79-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Reestructuramos el data frame para tener todos los modelos en la misma columna.</span></span>
+<span id="cb79-18"><a href="#cb79-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"Tipo_Modelo"</span>, <span class="at">values_to =</span> <span class="st">"Modelo"</span>)  <span class="sc">%&gt;%</span> </span>
+<span id="cb79-19"><a href="#cb79-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Obtenemos un resumen del ajuste de cada modelo en formato organizado (se obtiene una lista con los parámetros que describen el ajuste de cada modelo).</span></span>
+<span id="cb79-20"><a href="#cb79-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Resumen =</span> <span class="fu">map</span>(Modelo, glance)) <span class="sc">%&gt;%</span> </span>
+<span id="cb79-21"><a href="#cb79-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Desanidamos el resumen (se obtiene una columna para cada parámetro del resumen del ajuste de los modelos).</span></span>
+<span id="cb79-22"><a href="#cb79-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unnest</span>(Resumen)  <span class="sc">%&gt;%</span> </span>
+<span id="cb79-23"><a href="#cb79-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ordenamos el data frame por el coeficiente de determinación.</span></span>
+<span id="cb79-24"><a href="#cb79-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="sc">-</span>r.squared)</span>
+<span id="cb79-25"><a href="#cb79-25" aria-hidden="true" tabindex="-1"></a>modelos  <span class="sc">%&gt;%</span></span>
+<span id="cb79-26"><a href="#cb79-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Tipo_Modelo, r.squared)  <span class="sc">%&gt;%</span> </span>
+<span id="cb79-27"><a href="#cb79-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Tipo de Modelo"</span>, <span class="st">"R²"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb79-28"><a href="#cb79-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(<span class="at">full_width =</span> F)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
 
-Residuals:
-     Min       1Q   Median       3Q      Max 
--0.83810 -0.17537  0.06906  0.17786  0.71841 
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Tipo de Modelo </th>
+   <th style="text-align:right;"> R² </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Sigmoidal </td>
+   <td style="text-align:right;"> 0.6662170 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Potencial </td>
+   <td style="text-align:right;"> 0.5684490 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Inverso </td>
+   <td style="text-align:right;"> 0.5583853 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Cuadratico </td>
+   <td style="text-align:right;"> 0.5397848 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Logaritmico </td>
+   <td style="text-align:right;"> 0.5254856 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Lineal </td>
+   <td style="text-align:right;"> 0.4356390 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Exponencial </td>
+   <td style="text-align:right;"> 0.4308936 </td>
+  </tr>
+</tbody>
+</table>
 
-Coefficients:
-             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)   3.09446    0.08819  35.088  &lt; 2e-16 ***
-I(1/dias)   -25.65167    2.94543  -8.709 1.37e-10 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.2952 on 38 degrees of freedom
-Multiple R-squared:  0.6662,    Adjusted R-squared:  0.6574 
-F-statistic: 75.85 on 1 and 38 DF,  p-value: 1.374e-10</code></pre>
 </div>
 </div>
-<p>El modelo de regresión sigmoidal que mejor explica el peso perdido en función de los días de dieta es <span class="math inline">\(\textsf{Peso}= e^{3.0944614 -25.6516729 / \textsf{dias}}\)</span>.</p>
+<p>El mejor modelo es el Sigmoidal que explica el 66.6216965% de la variabilidad del peso perdido.</p>
 </div>
 </div>
 </div></li>
@@ -1491,10 +1542,10 @@ Solución
 <div id="callout-36" class="callout-36-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell" data-hash="05-regresion_cache/html/unnamed-chunk-37_51fcd669e5a64ca7f5aa7eef944669c6">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> dias, <span class="at">y =</span> peso.perdido, <span class="at">color =</span> ejercicio)) <span class="sc">+</span></span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Diagrama de dispersión del peso perdido y los días de dieta"</span>, <span class="at">x =</span> <span class="st">"Días de dieta"</span>, <span class="at">y =</span> <span class="st">"Peso perdido en Kg"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> dias, <span class="at">y =</span> peso.perdido, <span class="at">color =</span> ejercicio)) <span class="sc">+</span></span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Diagrama de dispersión del peso perdido y los días de dieta"</span>, <span class="at">x =</span> <span class="st">"Días de dieta"</span>, <span class="at">y =</span> <span class="st">"Peso perdido en Kg"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="05-regresion_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1503,7 +1554,7 @@ Solución
 </div>
 </div>
 </div></li>
-<li><p>Construir el modelo de regresión inverso del peso perdido sobre los días de dieta para los que hacen ejercicio y para los que no.</p>
+<li><p>¿Qué tipo de modelo explica mejor la relación entre el peso perdido y los días de dieta en el grupo de las personas que hacen ejercicio? ¿Y en el grupo de las que no hacen ejercicio? ¿Han mejorado los modelos con respecto al modelo anterior?</p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-37-contents" aria-controls="callout-37" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1516,90 +1567,126 @@ Solución
 </div>
 <div id="callout-37" class="callout-37-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="05-regresion_cache/html/unnamed-chunk-38_c35bbfe7bff4bcb2c0f445f0bad2f25f">
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
-<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'kableExtra'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:dplyr':
-
-    group_rows</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">nest_by</span>(ejercicio) <span class="sc">%&gt;%</span></span>
-<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mod =</span> <span class="fu">list</span>(<span class="fu">lm</span>(peso.perdido <span class="sc">~</span> <span class="fu">I</span>(<span class="dv">1</span><span class="sc">/</span>dias), <span class="at">data =</span> data))) <span class="sc">%&gt;%</span></span>
-<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="fu">tidy</span>(mod)) <span class="sc">%&gt;%</span></span>
-<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Returning more (or less) than 1 row per `summarise()` group was deprecated in
-dplyr 1.1.0.
-ℹ Please use `reframe()` instead.
-ℹ When switching from `summarise()` to `reframe()`, remember that `reframe()`
-  always returns an ungrouped data frame and adjust accordingly.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`summarise()` has grouped output by 'ejercicio'. You can override using the
-`.groups` argument.</code></pre>
-</div>
+<div class="cell" data-hash="05-regresion_cache/html/unnamed-chunk-38_97ced36e24115dc3138ab7b148f76da7">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>modelos <span class="ot">&lt;-</span> df  <span class="sc">%&gt;%</span> </span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Anidamos por la columna ejercicio.</span></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">nest_by</span>(ejercicio)  <span class="sc">%&gt;%</span> </span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ajustamos los modelos de regresión.</span></span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">Lineal =</span> <span class="fu">list</span>(<span class="fu">lm</span>(peso.perdido <span class="sc">~</span> dias, data)),</span>
+<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">Cuadratico =</span> <span class="fu">list</span>(<span class="fu">lm</span>(peso.perdido <span class="sc">~</span> dias <span class="sc">+</span> <span class="fu">I</span>(dias<span class="sc">^</span><span class="dv">2</span>), data)),</span>
+<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">Exponencial =</span> <span class="fu">list</span>(<span class="fu">lm</span>(<span class="fu">log</span>(peso.perdido) <span class="sc">~</span> dias, data)),</span>
+<span id="cb81-9"><a href="#cb81-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">Logaritmico =</span> <span class="fu">list</span>(<span class="fu">lm</span>(peso.perdido <span class="sc">~</span> <span class="fu">log</span>(dias), data)),</span>
+<span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">Potencial =</span> <span class="fu">list</span>(<span class="fu">lm</span>(<span class="fu">log</span>(peso.perdido) <span class="sc">~</span> <span class="fu">log</span>(dias), data)),</span>
+<span id="cb81-11"><a href="#cb81-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">Inverso =</span> <span class="fu">list</span>(<span class="fu">lm</span>(peso.perdido <span class="sc">~</span> <span class="fu">I</span>(<span class="dv">1</span><span class="sc">/</span>dias), data)),</span>
+<span id="cb81-12"><a href="#cb81-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">Sigmoidal =</span> <span class="fu">list</span>(<span class="fu">lm</span>(<span class="fu">log</span>(peso.perdido) <span class="sc">~</span> <span class="fu">I</span>(<span class="dv">1</span><span class="sc">/</span>dias), data)),</span>
+<span id="cb81-13"><a href="#cb81-13" aria-hidden="true" tabindex="-1"></a>    )  <span class="sc">%&gt;%</span> </span>
+<span id="cb81-14"><a href="#cb81-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Reestructuramos el data frame para tener todos los modelos en la misma columna.</span></span>
+<span id="cb81-15"><a href="#cb81-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">-</span><span class="fu">c</span>(ejercicio, data), <span class="at">names_to =</span> <span class="st">"Tipo_Modelo"</span>, <span class="at">values_to =</span> <span class="st">"Modelo"</span>)  <span class="sc">%&gt;%</span> </span>
+<span id="cb81-16"><a href="#cb81-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Obtenemos un resumen del ajuste de cada modelo en formato organizado (se obtiene una lista con los parámetros que describen el ajuste de cada modelo).</span></span>
+<span id="cb81-17"><a href="#cb81-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Resumen =</span> <span class="fu">map</span>(Modelo, glance)) <span class="sc">%&gt;%</span> </span>
+<span id="cb81-18"><a href="#cb81-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Desanidamos el resumen (se obtiene una columna para cada parámetro del resumen del ajuste de los modelos).</span></span>
+<span id="cb81-19"><a href="#cb81-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unnest</span>(Resumen)  <span class="sc">%&gt;%</span> </span>
+<span id="cb81-20"><a href="#cb81-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ordenamos el data frame por la columna ejercicio y por el coeficiente de determinación.</span></span>
+<span id="cb81-21"><a href="#cb81-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(ejercicio, <span class="sc">-</span>r.squared)  </span>
+<span id="cb81-22"><a href="#cb81-22" aria-hidden="true" tabindex="-1"></a>modelos <span class="sc">%&gt;%</span> </span>
+<span id="cb81-23"><a href="#cb81-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(ejercicio, Tipo_Modelo, r.squared)  <span class="sc">%&gt;%</span> </span>
+<span id="cb81-24"><a href="#cb81-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Ejercicio"</span>, <span class="st">"Tipo de Modelo"</span>, <span class="st">"R²"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb81-25"><a href="#cb81-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pack_rows</span>(<span class="at">index =</span> <span class="fu">table</span>(modelos<span class="sc">$</span>ejercicio))  <span class="sc">%&gt;%</span> </span>
+<span id="cb81-26"><a href="#cb81-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(<span class="at">full_width =</span> F)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<table class="table" style="margin-left: auto; margin-right: auto;">
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
  <thead>
   <tr>
-   <th style="text-align:left;"> ejercicio </th>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> estimate </th>
-   <th style="text-align:right;"> std.error </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
+   <th style="text-align:left;"> Ejercicio </th>
+   <th style="text-align:left;"> Tipo de Modelo </th>
+   <th style="text-align:right;"> R² </th>
   </tr>
  </thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> no </td>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 14.92508 </td>
-   <td style="text-align:right;"> 0.8826746 </td>
-   <td style="text-align:right;"> 16.908927 </td>
-   <td style="text-align:right;"> 0.0e+00 </td>
+  <tr grouplength="7"><td colspan="3" style="border-bottom: 1px solid;"><strong>no</strong></td></tr>
+<tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> no </td>
+   <td style="text-align:left;"> Sigmoidal </td>
+   <td style="text-align:right;"> 0.7401212 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> no </td>
-   <td style="text-align:left;"> I(1/dias) </td>
-   <td style="text-align:right;"> -182.19025 </td>
-   <td style="text-align:right;"> 29.4795388 </td>
-   <td style="text-align:right;"> -6.180227 </td>
-   <td style="text-align:right;"> 7.8e-06 </td>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> no </td>
+   <td style="text-align:left;"> Cuadratico </td>
+   <td style="text-align:right;"> 0.7100610 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> si </td>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 21.56554 </td>
-   <td style="text-align:right;"> 0.7652517 </td>
-   <td style="text-align:right;"> 28.180978 </td>
-   <td style="text-align:right;"> 0.0e+00 </td>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> no </td>
+   <td style="text-align:left;"> Inverso </td>
+   <td style="text-align:right;"> 0.6796880 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> si </td>
-   <td style="text-align:left;"> I(1/dias) </td>
-   <td style="text-align:right;"> -255.22492 </td>
-   <td style="text-align:right;"> 25.5578527 </td>
-   <td style="text-align:right;"> -9.986164 </td>
-   <td style="text-align:right;"> 0.0e+00 </td>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> no </td>
+   <td style="text-align:left;"> Potencial </td>
+   <td style="text-align:right;"> 0.6700051 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> no </td>
+   <td style="text-align:left;"> Logaritmico </td>
+   <td style="text-align:right;"> 0.6494521 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> no </td>
+   <td style="text-align:left;"> Lineal </td>
+   <td style="text-align:right;"> 0.5286338 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> no </td>
+   <td style="text-align:left;"> Exponencial </td>
+   <td style="text-align:right;"> 0.5222832 </td>
+  </tr>
+  <tr grouplength="7"><td colspan="3" style="border-bottom: 1px solid;"><strong>si</strong></td></tr>
+<tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> si </td>
+   <td style="text-align:left;"> Inverso </td>
+   <td style="text-align:right;"> 0.8470993 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> si </td>
+   <td style="text-align:left;"> Sigmoidal </td>
+   <td style="text-align:right;"> 0.8305013 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> si </td>
+   <td style="text-align:left;"> Logaritmico </td>
+   <td style="text-align:right;"> 0.7885173 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> si </td>
+   <td style="text-align:left;"> Cuadratico </td>
+   <td style="text-align:right;"> 0.7791671 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> si </td>
+   <td style="text-align:left;"> Potencial </td>
+   <td style="text-align:right;"> 0.6704843 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> si </td>
+   <td style="text-align:left;"> Lineal </td>
+   <td style="text-align:right;"> 0.6623502 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;padding-left: 2em;" indentlevel="1"> si </td>
+   <td style="text-align:left;"> Exponencial </td>
+   <td style="text-align:right;"> 0.4945564 </td>
   </tr>
 </tbody>
 </table>
 
 </div>
 </div>
+<p>El mejor modelo en el grupo de los que hacen ejercicio es el inverso y en el grupo de los que no el sigmoidal. Los modelos han mejorado bastante con respecto al modelo anterior, sobre todo el del grupo de personas que hace ejercicio.</p>
 </div>
 </div>
 </div></li>
-<li><p>¿Han mejorado los modelos con respecto al hacer la regresión por grupos?</p>
+<li><p>Construir el mejor modelo de regresión del peso perdido sobre los días de dieta para el grupo de las personas que hacen ejercicio y para el grupo de las que no.</p>
 <div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-38-contents" aria-controls="callout-38" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1612,76 +1699,100 @@ Solución
 </div>
 <div id="callout-38" class="callout-38-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="05-regresion_cache/html/unnamed-chunk-39_64711def861109de49a4e80598e48ee2">
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
-<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">nest_by</span>(ejercicio) <span class="sc">%&gt;%</span></span>
-<span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">mod =</span> <span class="fu">list</span>(<span class="fu">lm</span>(peso.perdido <span class="sc">~</span> <span class="fu">I</span>(<span class="dv">1</span><span class="sc">/</span>dias), <span class="at">data =</span> data))) <span class="sc">%&gt;%</span></span>
-<span id="cb88-6"><a href="#cb88-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="fu">glance</span>(mod)) <span class="sc">%&gt;%</span></span>
-<span id="cb88-7"><a href="#cb88-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb88-8"><a href="#cb88-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`summarise()` has grouped output by 'ejercicio'. You can override using the
-`.groups` argument.</code></pre>
-</div>
-<div class="cell-output-display">
+<p>Construimos el modelo inverso para el grupo de las personas que hacen ejercicio.</p>
+<div class="cell" data-hash="05-regresion_cache/html/unnamed-chunk-39_9b1238b1e79b0ba9430c8a2424b4d050">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>inverso_ejercicio <span class="ot">&lt;-</span> <span class="fu">lm</span>(peso.perdido <span class="sc">~</span> <span class="fu">I</span>(<span class="dv">1</span><span class="sc">/</span>dias), df[df<span class="sc">$</span>ejercicio <span class="sc">==</span> <span class="st">"si"</span>, ])</span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(inverso_ejercicio)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = peso.perdido ~ I(1/dias), data = df[df$ejercicio == 
+    "si", ])
 
-<table class="table" style="margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> ejercicio </th>
-   <th style="text-align:right;"> r.squared </th>
-   <th style="text-align:right;"> adj.r.squared </th>
-   <th style="text-align:right;"> sigma </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
-   <th style="text-align:right;"> df </th>
-   <th style="text-align:right;"> logLik </th>
-   <th style="text-align:right;"> AIC </th>
-   <th style="text-align:right;"> BIC </th>
-   <th style="text-align:right;"> deviance </th>
-   <th style="text-align:right;"> df.residual </th>
-   <th style="text-align:right;"> nobs </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> no </td>
-   <td style="text-align:right;"> 0.6796880 </td>
-   <td style="text-align:right;"> 0.6618929 </td>
-   <td style="text-align:right;"> 2.089080 </td>
-   <td style="text-align:right;"> 38.19521 </td>
-   <td style="text-align:right;"> 7.8e-06 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> -42.05964 </td>
-   <td style="text-align:right;"> 90.11928 </td>
-   <td style="text-align:right;"> 93.10648 </td>
-   <td style="text-align:right;"> 78.55660 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 20 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> si </td>
-   <td style="text-align:right;"> 0.8470993 </td>
-   <td style="text-align:right;"> 0.8386048 </td>
-   <td style="text-align:right;"> 1.811168 </td>
-   <td style="text-align:right;"> 99.72348 </td>
-   <td style="text-align:right;"> 0.0e+00 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> -39.20461 </td>
-   <td style="text-align:right;"> 84.40921 </td>
-   <td style="text-align:right;"> 87.39641 </td>
-   <td style="text-align:right;"> 59.04594 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 20 </td>
-  </tr>
-</tbody>
-</table>
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.1866 -1.3268  0.0011  0.9810  4.1456 
 
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   21.5655     0.7653  28.181 2.42e-16 ***
+I(1/dias)   -255.2249    25.5579  -9.986 9.12e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.811 on 18 degrees of freedom
+Multiple R-squared:  0.8471,    Adjusted R-squared:  0.8386 
+F-statistic: 99.72 on 1 and 18 DF,  p-value: 9.123e-09</code></pre>
 </div>
 </div>
-<p>El modelo de regresión ha mejorado bastante en el grupo de los que hacen ejercicio ya que el coeficiente de determinación ha aumentado bastante.</p>
+<!-- ```{r}
+df %>%
+    nest_by(ejercicio) %>% 
+    filter(ejercicio == "si") %>%
+    mutate(modelo = list(lm(peso.perdido ~ I(1/dias), df))) %>%
+    summarize(tidy(modelo)) %>%
+    kable() %>%
+    kable_styling()
+``` -->
+<p>Y ahora el modelo sigmoidal para el grupo de las personas que no hacen ejercicio.</p>
+<div class="cell" data-hash="05-regresion_cache/html/unnamed-chunk-40_e4a4c148423e7a94b26d36dfcde098a3">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>sigmoidal_no_ejercicio <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(peso.perdido) <span class="sc">~</span> <span class="fu">I</span>(<span class="dv">1</span><span class="sc">/</span>dias), df[df<span class="sc">$</span>ejercicio <span class="sc">==</span> <span class="st">"no"</span>, ])</span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sigmoidal_no_ejercicio)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log(peso.perdido) ~ I(1/dias), data = df[df$ejercicio == 
+    "no", ])
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.66026 -0.07192  0.04678  0.13142  0.29633 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   2.8694     0.1021   28.09 2.55e-16 ***
+I(1/dias)   -24.4226     3.4111   -7.16 1.15e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.2417 on 18 degrees of freedom
+Multiple R-squared:  0.7401,    Adjusted R-squared:  0.7257 
+F-statistic: 51.26 on 1 and 18 DF,  p-value: 1.146e-06</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div></li>
+<li><p>Según los mejores modelos de regresión en cada caso, ¿cuántos kilos perderá una persona que hace ejercicio tras 100 días de dieta? ¿Y una que no hace ejercicio?</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-39-contents" aria-controls="callout-39" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-39" class="callout-39-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Hacemos primero la predicción del peso perdido para la persona que hace ejercicio usando el modelo inverso.</p>
+<div class="cell" data-hash="05-regresion_cache/html/unnamed-chunk-41_6eb60a1c167aed570503c861b1ee077c">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict.lm</span>(inverso_ejercicio, <span class="at">newdata =</span> <span class="fu">list</span>(<span class="at">dias =</span> <span class="dv">100</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       1 
+19.01329 </code></pre>
+</div>
+</div>
+<p>Y ahora hacemos la predicción del peso perdido para la persona que no hace ejercicio usando el modelo sigmoidal.</p>
+<div class="cell" data-hash="05-regresion_cache/html/unnamed-chunk-42_7251ccd86ce02caccf342863b5d42df2">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># El modelo sigmoidal devuelve el logaritmo del peso perdido por lo que hay que aplicar la función exponencial para obtener el peso perdido.</span></span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">predict.lm</span>(sigmoidal_no_ejercicio, <span class="at">newdata =</span> <span class="fu">list</span>(<span class="at">dias =</span> <span class="dv">100</span>)))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       1 
+13.80634 </code></pre>
+</div>
+</div>
 </div>
 </div>
 </div></li>
@@ -1690,6 +1801,39 @@ Solución
 </section>
 <section id="ejercicios-propuestos" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="ejercicios-propuestos"><span class="header-section-number">5.2</span> Ejercicios propuestos</h2>
+<div id="exr-regresion-6" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 5.6 </strong></span>El conjunto de datos <a href="https://aprendeconalf.es/estadistica-practicas-r/datos/neonatos.csv"><code>neonatos</code></a> contiene información sobre una muestra de 320 recién nacidos en un hospital durante un año que cumplieron el tiempo normal de gestación.</p>
+<ol type="a">
+<li><p>Crear un data frame a con los datos de los neonatos a partir del fichero anterior.</p></li>
+<li><p>Construir la recta de regresión del peso de los recién nacidos sobre el número de cigarros fumados al día por las madres. ¿Existe una relación lineal fuerte entre el peso y el número de cigarros?</p></li>
+<li><p>Dibujar la recta de regresión calculada en el apartado anterior. ¿Por qué la recta no se ajusta bien a la nube de puntos?</p></li>
+<li><p>Calcular y dibujar la recta de regresión del peso de los recién nacidos sobre el número de cigarros fumados al día por las madres en el grupo de las madres que si fumaron durante el embarazo. ¿Es este modelo mejor o pero que la recta del apartado anterior?</p></li>
+<li><p>Según este modelo, ¿cuánto disminuirá el peso del recién nacido por cada cigarro más diario que fume la madre?</p></li>
+<li><p>Según el modelo anterior, ¿qué peso tendrá un recién nacido de una madre que ha fumado 5 cigarros diarios durante el embarazo? ¿Y si la madre ha fumado 30 cigarros diarios durante el embarazo? ¿Son fiables estas predicciones?</p></li>
+<li><p>¿Existe la misma relación lineal entre el peso de los recién nacidos y el número de cigarros fumados al día por las madres que fumaron durante el embarazo en el grupo de las madres menores de 20 y en el grupo de las madres mayores de 20? ¿Qué se puede concluir?</p></li>
+</ol>
+</div>
+<div id="exr-regresion-7" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 5.7 </strong></span>El conjunto de datos <a href="https://aprendeconalf.es/estadistica-practicas-r/datos/edad-estatura.csv"><code>edad.estatura</code></a> contiene la edad y la estatura de 30 personas.</p>
+<ol type="a">
+<li><p>Crear un data frame con los datos de las edades y las estaturas a partir del fichero anterior.</p></li>
+<li><p>Calcular la recta de regresión de la estatura sobre la edad. ¿Es un buen modelo la recta de regresión?</p></li>
+<li><p>Dibujar el diagrama de dispersión de la estatura sobre la edad. ¿Alrededor de qué edad se observa un cambio en la tendencia?</p></li>
+<li><p>Recodificar la variable edad en dos grupos para mayores y menores de 20 años.</p></li>
+<li><p>Calcular la recta de regresión de la estatura sobre la edad para cada grupo de edad. ¿En qué grupo explica mejor la recta de regresión la relación entre la estatura y la edad?</p></li>
+<li><p>Dibujar las rectas de regresión anteriores.</p></li>
+<li><p>¿Qué estatura se espera que tenga una persona de 14 años? ¿Y una de 38?</p></li>
+</ol>
+</div>
+<div id="exr-regresion-8" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 5.8 </strong></span>El conjunto de datos <code>gapminder</code> del paquete <code>gapminder</code> contiene infomración sobre la esperanza de vida, la población, y el PIB per cápita en dólares PPP de los principales países en un rango de años.</p>
+<ol type="a">
+<li><p>Instalar el paquete <code>gapminder</code> y cargarlo.</p></li>
+<li><p>¿Qué tipo de modelo explica mejor la evolución de la población con los años? Construir ese modelo.</p></li>
+<li><p>¿Qué tipo de modelo explica mejor la relación entre la esperanza de vida y el PIB per cápita?</p></li>
+<li><p>¿Qué tipo de modelo explica mejor la relación entre la esperanza de vida y el PIB r cápita para cada continente? Construir el mejor modelo en cada caso y utilizarlo para predecir la esperanza de vida de una persona de cada continente con un PIB per cápita de 1000 dólares PPP.</p></li>
+</ol>
+</div>
 
 
 </section>

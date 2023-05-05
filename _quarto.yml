@@ -42,9 +42,9 @@ book:
     - 03-frecuencias-graficos.qmd
     - 04-descriptiva.qmd
     - 05-regresion.qmd
+    - 06-distribuciones-probabilidad.qmd
     
 #bibliography: references.bib
-
 
 format:
   html:

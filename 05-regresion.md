@@ -965,13 +965,13 @@ a.  Dibujar el modelo de regresión exponencial sobre el diagrama de dispersión
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-29_c20880e825e3e7be1627252c52537b81'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-29_42730dda66fdf2586a53d20259254683'}
     
     ```{.r .cell-code}
     library(ggplot2)
     ggplot(df, aes(x = Año, y = PIB)) +
             geom_point(col = "red") +
-            geom_smooth(method="glm", method.args=list(family=gaussian(link="log")))
+            geom_smooth(method = "glm", method.args = list(family=gaussian(link="log")))
     ```
     
     ::: {.cell-output .cell-output-stderr}
@@ -1575,6 +1575,16 @@ a.  Según los mejores modelos de regresión en cada caso, ¿cuántos kilos perd
 
     :::
 :::
+
+<!-- ```{r}
+library(ggplot2)
+ggplot(df, aes(x = dias, y = peso.perdido, color = ejercicio)) +
+    geom_point() +
+    geom_smooth(method = "lm", formula = y ~ I(1/x)) +
+    geom_smooth(method = "glm", formula = y ~ I(1/x), method.args = list(family=gaussian(link="log")), linetype = 2) +
+    labs(title = "Diagrama de dispersión del peso perdido y los días de dieta", x = "Días de dieta", y = "Peso perdido en Kg") +
+    scale_linetype_manual(values = c("solid", "dashed"), name  ="Tipo de modelo", breaks=c("Inverso", "Sigmoidal"), labels=c("Inv", "Sig"))
+``` -->
 
 ## Ejercicios propuestos
 

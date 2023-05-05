@@ -21,7 +21,7 @@ library(knitr) # para el formateo de tablas.
 library(kableExtra) # para personalizar el formato de las tablas.
 ```
 
-:::{#exr-1}
+:::{#exr-frecuencias-graficos-1}
 En una encuesta a 25 matrimonios sobre el número de hijos que tenían se obtuvieron los siguientes datos:
 
 | |
@@ -121,15 +121,15 @@ ggplot(df, aes(x = hijos)) +
     labs(title = "Distribución del número de hijos", y = "Frecuencia absoluta")
 # Diagarma de barras de frecuencias relativas
 ggplot(df, aes(x = hijos)) +
-    geom_bar(aes(y = (..count..)/sum(..count..)), fill = "steelblue") +
+    geom_bar(aes(y = after_stat(count/sum(count))), fill = "steelblue") +
     labs(title = "Distribución del número de hijos", y = "Frecuencia relativa")
 # Diagarma de barras de frecuencias acumuladas
 ggplot(df, aes(x = hijos)) +
-    geom_bar(aes(y = cumsum(..count..)), fill = "steelblue") +
+    geom_bar(aes(y = after_stat(cumsum(count))), fill = "steelblue") +
     labs(title = "Distribución acumulada del número de hijos", y = "Frecuencia absoluta acumulada")
 # Diagarma de barras de frecuencias acumuladas
 ggplot(df, aes(x = hijos)) +
-    geom_bar(aes(y = cumsum(..count..)/sum(..count..)), fill = "steelblue") +
+    geom_bar(aes(y = after_stat(cumsum(count)/sum(count))), fill = "steelblue") +
     labs(title = "Distribución acumulada del número de hijos", y = "Frecuencia relativa acumulada")
 ```
 :::
@@ -162,7 +162,7 @@ count(df, hijos) %>%
 :::
 :::
 
-:::{#exr-2}
+:::{#exr-frecuencias-graficos-2}
 En un servicio de atención al cliente se han registrado el número de llamadas de clientes cada día del mes de noviembre, obteniendo los siguientes datos:
 
 | |
@@ -307,15 +307,15 @@ ggplot(df, aes(x = llamadas)) +
     labs(title = "Distribución del número de llamadas", x = "Número de llamadas", y = "Frecuencia absoluta")
 # Histograma de frecuencias relativas
 ggplot(df, aes(x = llamadas)) +
-    geom_histogram(aes(y = (..count..)/sum(..count..)), breaks = seq(5, 30, 5), fill = "steelblue", col = "white") +
+    geom_histogram(aes(y = after_stat(count/sum(count))), breaks = seq(5, 30, 5), fill = "steelblue", col = "white") +
     labs(title = "Distribución del número de llamadas", x = "Número de llamadas", y = "Frecuencia relativa")
 # Histograma de frecuencias acumuladas
 ggplot(df, aes(x = llamadas)) +
-    geom_histogram(aes(y = cumsum(..count..)), breaks = seq(5, 30, 5), fill = "steelblue", col = "white") +
+    geom_histogram(aes(y = after_stat(cumsum(count))), breaks = seq(5, 30, 5), fill = "steelblue", col = "white") +
     labs(title = "Distribución acumulada del número de llamadas", x = "Número de llamadas", y = "Frecuencia absoluta acumulada")
 # Histograma de frecuencias relativas acumuladas
 ggplot(df, aes(x = llamadas)) +
-    geom_histogram(aes(y = cumsum(..count..)/sum(..count..)),  breaks = seq(5, 30, 5), fill = "steelblue", col = "white") +
+    geom_histogram(aes(y = after_stat(cumsum(count)/sum(count))),  breaks = seq(5, 30, 5), fill = "steelblue", col = "white") +
     labs(title = "Distribución acumulada del número de llamadas", x = "Número de llamadas", y = "Frecuencia relativa acumulada")
 ```
 :::
@@ -358,7 +358,7 @@ ggplot(tabla_frec, aes(x = cortes , y = Fi)) +
 :::
 :::
 
-:::{#exr-3}
+:::{#exr-frecuencias-graficos-3}
 Los grupos sanguíneos de una muestra de 30 personas son:
 
 | |
@@ -449,7 +449,7 @@ ggplot(df, aes(x = "", fill = grupo_sanguineo)) +
 :::
 :::
 
-:::{#exr-4}
+:::{#exr-frecuencias-graficos-4}
 En un estudio de población se tomó una muestra de 27 personas, y se les preguntó por su edad y estado civil,
 obteniendo los siguientes resultados:
 

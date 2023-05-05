@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.475">
+<meta name="generator" content="quarto-1.3.340">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -130,26 +101,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <meta property="og:title" content="Prácticas de Estadística con R - 3&nbsp; Distribuciones de frecuencias y representaciones gráficas">
-<meta property="og:description" content="Para la realización de esta práctica se requieren los siguientes paquetes:">
+<meta property="og:description" content="">
+<meta property="og:image" content="03-frecuencias-graficos_files/figure-html/unnamed-chunk-6-1.png">
 <meta property="og:site-name" content="Prácticas de Estadística con R">
 <meta name="twitter:title" content="Prácticas de Estadística con R - 3&nbsp; Distribuciones de frecuencias y representaciones gráficas">
-<meta name="twitter:description" content="Para la realización de esta práctica se requieren los siguientes paquetes:">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="03-frecuencias-graficos_files/figure-html/unnamed-chunk-6-1.png">
 <meta name="twitter:site" content="@aprendeconalf">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Distribuciones de frecuencias y representaciones gráficas</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-frecuencias-graficos.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Distribuciones de frecuencias y representaciones gráficas</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -157,7 +136,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="./index.html" class="sidebar-logo-link">
       <img src="./img/logos/aprendeconalf.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -165,89 +144,106 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Prácticas de Estadística con R</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://aprendeconalf.es" title="" class="sidebar-tool px-1"><i class="bi bi-house-fill"></i></a>
-    <a href="" title="Download" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-download"></i></a>
-    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="./estadistica-practicas-r.pdf">
-            <i class="bi bi-bi-file-pdf pe-1"></i>
-          Download PDF
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="./estadistica-practicas-r.epub">
-            <i class="bi bi-bi-journal pe-1"></i>
-          Download ePub
-          </a>
-        </li>
-    </ul>
-    <a href="" title="Share" id="sidebar-tool-dropdown-1" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
-    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-1">
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-            <i class="bi bi-bi-twitter pe-1"></i>
-          Twitter
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-            <i class="bi bi-bi-linkedin pe-1"></i>
-          LinkedIn
-          </a>
-        </li>
-    </ul>
-  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+    <a href="https://aprendeconalf.es" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-house-fill"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./estadistica-practicas-r.pdf">
+              <i class="bi bi-bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./estadistica-practicas-r.epub">
+              <i class="bi bi-bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-1" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-1">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class="" title="Buscar"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Prefacio</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefacio</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción a R</span></a>
+  <a href="./01-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción a R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-preprocesamiento-datos.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preprocesamiento de datos</span></a>
+  <a href="./02-preprocesamiento-datos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preprocesamiento de datos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-frecuencias-graficos.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Distribuciones de frecuencias y representaciones gráficas</span></a>
+  <a href="./03-frecuencias-graficos.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Distribuciones de frecuencias y representaciones gráficas</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-descriptiva.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Estadística Descriptiva</span></a>
+  <a href="./04-descriptiva.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Estadística Descriptiva</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-regresion.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regresión</span></a>
+  <a href="./05-regresion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regresión</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-distribuciones-probabilidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Distribuciones de probabilidad</span></span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#ejercicios-resueltos" id="toc-ejercicios-resueltos" class="nav-link active" data-scroll-target="#ejercicios-resueltos"><span class="toc-section-number">3.1</span>  Ejercicios Resueltos</a></li>
-  <li><a href="#ejercicios-propuestos" id="toc-ejercicios-propuestos" class="nav-link" data-scroll-target="#ejercicios-propuestos"><span class="toc-section-number">3.2</span>  Ejercicios propuestos</a></li>
+  <li><a href="#ejercicios-resueltos" id="toc-ejercicios-resueltos" class="nav-link active" data-scroll-target="#ejercicios-resueltos"><span class="header-section-number">3.1</span> Ejercicios Resueltos</a></li>
+  <li><a href="#ejercicios-propuestos" id="toc-ejercicios-propuestos" class="nav-link" data-scroll-target="#ejercicios-propuestos"><span class="header-section-number">3.2</span> Ejercicios propuestos</a></li>
   </ul>
 </nav>
     </div>
@@ -256,7 +252,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Distribuciones de frecuencias y representaciones gráficas</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Distribuciones de frecuencias y representaciones gráficas</span></h1>
 </div>
 
 
@@ -283,7 +279,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co"># para el formateo de tablas.</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra) <span class="co"># para personalizar el formato de las tablas.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="exr-1" class="theorem exercise">
+<div id="exr-frecuencias-graficos-1" class="theorem exercise">
 <p><span class="theorem-title"><strong>Ejercicio 3.1 </strong></span>En una encuesta a 25 matrimonios sobre el número de hijos que tenían se obtuvieron los siguientes datos:</p>
 <table class="table">
 <colgroup>
@@ -298,12 +294,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol type="a">
 <li>Crear un conjunto de datos con la variable <code>hijos</code>.</li>
 </ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -319,12 +315,12 @@ Solución
 <ol start="2" type="a">
 <li>Construir la tabla de frecuencias.</li>
 </ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución 1
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -356,12 +352,12 @@ Solución 1
 </div>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución 2
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -369,7 +365,6 @@ Solución 2
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Otra alternativa es usar la función <a href="https://aprendeconalf.es/manual-r/06-preprocesamiento.html#conteo-del-n%C3%BAmero-de-observaciones"><code>count</code></a> del paquete <code>dplyr</code>.</p>
-<div>
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-4_9fa516b3cd81374a432ebada439b279b">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
@@ -379,57 +374,56 @@ Solución 2
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">"hover"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<table class="table table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:right;"> hijos </th>
-   <th style="text-align:right;"> n </th>
-   <th style="text-align:right;"> fi </th>
-   <th style="text-align:right;"> Ni </th>
-   <th style="text-align:right;"> Fi </th>
-  </tr>
- </thead>
+<table class="table table-hover table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">hijos</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">n</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">fi</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Ni</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Fi</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.08 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.08 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 0.24 </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 0.32 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 0.56 </td>
-   <td style="text-align:right;"> 22 </td>
-   <td style="text-align:right;"> 0.88 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.08 </td>
-   <td style="text-align:right;"> 24 </td>
-   <td style="text-align:right;"> 0.96 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.04 </td>
-   <td style="text-align:right;"> 25 </td>
-   <td style="text-align:right;"> 1.00 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.08</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.08</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.24</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.32</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0.56</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">0.88</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.08</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">0.96</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">1.00</td>
+</tr>
 </tbody>
 </table>
 
-</div>
+
 </div>
 </div>
 </div>
@@ -438,12 +432,12 @@ Solución 2
 <ol start="3" type="a">
 <li>Dibujar el diagrama de barras de las frecuencias absolutas, relativas, absolutas acumuladas y relativas acumuladas.</li>
 </ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución 1
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -476,12 +470,12 @@ Solución 1
 </div>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución 2
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -489,7 +483,7 @@ Solución 2
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Otra alternativa es usar la función la función <a href="https://aprendeconalf.es/manual-r/07-graficos.html#diagramas-de-barras"><code>geom_bar</code></a> del paquete <code>ggplot2</code>.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-7_0cf059ae0bcedeb6a5d98942d2fb7f15">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-7_b4b19117de763a10b8d009b99da0afb5">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagarma de barras de frecuencias absolutas</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> hijos)) <span class="sc">+</span></span>
@@ -500,26 +494,22 @@ Solución 2
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagarma de barras de frecuencias relativas</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> hijos)) <span class="sc">+</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> (..count..)<span class="sc">/</span><span class="fu">sum</span>(..count..)), <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(count<span class="sc">/</span><span class="fu">sum</span>(count))), <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución del número de hijos"</span>, <span class="at">y =</span> <span class="st">"Frecuencia relativa"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: The dot-dot notation (`..count..`) was deprecated in ggplot2 3.4.0.
-ℹ Please use `after_stat(count)` instead.</code></pre>
-</div>
 <div class="cell-output-display">
 <p><img src="03-frecuencias-graficos_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagarma de barras de frecuencias acumuladas</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> hijos)) <span class="sc">+</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">cumsum</span>(..count..)), <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución acumulada del número de hijos"</span>, <span class="at">y =</span> <span class="st">"Frecuencia absoluta acumulada"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagarma de barras de frecuencias acumuladas</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> hijos)) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(<span class="fu">cumsum</span>(count))), <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución acumulada del número de hijos"</span>, <span class="at">y =</span> <span class="st">"Frecuencia absoluta acumulada"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-frecuencias-graficos_files/figure-html/unnamed-chunk-7-3.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagarma de barras de frecuencias acumuladas</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> hijos)) <span class="sc">+</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">cumsum</span>(..count..)<span class="sc">/</span><span class="fu">sum</span>(..count..)), <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución acumulada del número de hijos"</span>, <span class="at">y =</span> <span class="st">"Frecuencia relativa acumulada"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagarma de barras de frecuencias acumuladas</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> hijos)) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(<span class="fu">cumsum</span>(count)<span class="sc">/</span><span class="fu">sum</span>(count))), <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución acumulada del número de hijos"</span>, <span class="at">y =</span> <span class="st">"Frecuencia relativa acumulada"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-frecuencias-graficos_files/figure-html/unnamed-chunk-7-4.png" class="img-fluid" width="672"></p>
 </div>
@@ -530,12 +520,12 @@ Solución 2
 <ol start="4" type="a">
 <li>Dibujar el polígono de frecuencias relativas.</li>
 </ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución 1
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -544,8 +534,8 @@ Solución 1
 <div class="callout-body-container callout-body">
 <p>Para dibujar un diagrama de lineas se puede usar la función <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot"><code>plot</code></a> del paquete <code>graphics</code>.</p>
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-8_a2a27dac44f9d5a7ee1a333ee8ec181b">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias relativas.</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">names</span>(fi), fi, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">main=</span><span class="st">"Distribución del número de hijos"</span>, <span class="at">xlab=</span><span class="st">"Hijos"</span>, <span class="at">ylab=</span><span class="st">"Frecuencia relativa"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias relativas.</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">names</span>(fi), fi, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">main=</span><span class="st">"Distribución del número de hijos"</span>, <span class="at">xlab=</span><span class="st">"Hijos"</span>, <span class="at">ylab=</span><span class="st">"Frecuencia relativa"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-frecuencias-graficos_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -553,12 +543,12 @@ Solución 1
 </div>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución 2
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -567,12 +557,12 @@ Solución 2
 <div class="callout-body-container callout-body">
 <p>Otra alternativa es usar la función la función <a href="https://aprendeconalf.es/manual-r/07-graficos.html#diagramas-de-lineas"><code>geom_line</code></a> del paquete <code>ggplot2</code>.</p>
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-9_ebfd68054fd4da6fcd81cd847c33b383">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(df, hijos) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">fi =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>hijos, <span class="at">y=</span>fi)) <span class="sc">+</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">col =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución del número de hijos"</span>, <span class="at">y =</span> <span class="st">"Frecuencia relativa"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(df, hijos) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">fi =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>hijos, <span class="at">y=</span>fi)) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">col =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución del número de hijos"</span>, <span class="at">y =</span> <span class="st">"Frecuencia relativa"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-frecuencias-graficos_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -581,7 +571,7 @@ Solución 2
 </div>
 </div>
 </div>
-<div id="exr-2" class="theorem exercise">
+<div id="exr-frecuencias-graficos-2" class="theorem exercise">
 <p><span class="theorem-title"><strong>Ejercicio 3.2 </strong></span>En un servicio de atención al cliente se han registrado el número de llamadas de clientes cada día del mes de noviembre, obteniendo los siguientes datos:</p>
 <table class="table">
 <colgroup>
@@ -596,12 +586,12 @@ Solución 2
 <ol type="a">
 <li>Crear un conjunto de datos con la variable <code>llamadas</code>.</li>
 </ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -609,7 +599,7 @@ Solución
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-10_73453effe2410a0ea85785c1b837cd57">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">llamadas =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">23</span>, <span class="dv">12</span>, <span class="dv">10</span>, <span class="dv">28</span>, <span class="dv">50</span>, <span class="dv">12</span>, <span class="dv">17</span>, <span class="dv">20</span>, <span class="dv">21</span>, <span class="dv">18</span>, <span class="dv">13</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">26</span>, <span class="dv">30</span>, <span class="dv">6</span>, <span class="dv">16</span>, <span class="dv">19</span>, <span class="dv">22</span>, <span class="dv">14</span>, <span class="dv">17</span>, <span class="dv">21</span>, <span class="dv">28</span>, <span class="dv">9</span>, <span class="dv">16</span>, <span class="dv">13</span>, <span class="dv">11</span>, <span class="dv">16</span>, <span class="dv">20</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">llamadas =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">23</span>, <span class="dv">12</span>, <span class="dv">10</span>, <span class="dv">28</span>, <span class="dv">50</span>, <span class="dv">12</span>, <span class="dv">17</span>, <span class="dv">20</span>, <span class="dv">21</span>, <span class="dv">18</span>, <span class="dv">13</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">26</span>, <span class="dv">30</span>, <span class="dv">6</span>, <span class="dv">16</span>, <span class="dv">19</span>, <span class="dv">22</span>, <span class="dv">14</span>, <span class="dv">17</span>, <span class="dv">21</span>, <span class="dv">28</span>, <span class="dv">9</span>, <span class="dv">16</span>, <span class="dv">13</span>, <span class="dv">11</span>, <span class="dv">16</span>, <span class="dv">20</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -617,12 +607,12 @@ Solución
 <ol start="2" type="a">
 <li>Dibujar el diagrama de cajas. ¿Existe algún dato atípico? En el caso de que exista, eliminarlo y proceder con los siguientes apartados.</li>
 </ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución 1
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -631,8 +621,8 @@ Solución 1
 <div class="callout-body-container callout-body">
 <p>Para dibujar un diagrama de cajas se puede usar la función <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/boxplot"><code>boxplot</code></a> del paquete <code>graphics</code>.</p>
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-11_1b2fe103b150715c2177064745e2b386">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias relativas.</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(df<span class="sc">$</span>llamadas, <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">main=</span><span class="st">"Distribución del número de llamadas"</span>, <span class="at">horizontal =</span> T, <span class="at">xlab=</span><span class="st">"Número de llamadas"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias relativas.</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(df<span class="sc">$</span>llamadas, <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">main=</span><span class="st">"Distribución del número de llamadas"</span>, <span class="at">horizontal =</span> T, <span class="at">xlab=</span><span class="st">"Número de llamadas"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-frecuencias-graficos_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -640,12 +630,12 @@ Solución 1
 </div>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución 2
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -654,21 +644,21 @@ Solución 2
 <div class="callout-body-container callout-body">
 <p>Otra alternativa es usar la función la función <a href="https://aprendeconalf.es/manual-r/07-graficos.html#diagramas-de-cajas"><code>geom_boxplot</code></a> del paquete <code>ggplot2</code>.</p>
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-12_eb64dc95311c23caec8b58e10e08c26d">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> llamadas)) <span class="sc">+</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución del número de llamadas"</span>, <span class="at">x =</span> <span class="st">"Número de llamadas"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> llamadas)) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución del número de llamadas"</span>, <span class="at">x =</span> <span class="st">"Número de llamadas"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-frecuencias-graficos_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Hay un día con 50 llamadas, que es un valor atípico en comparación con el resto de días.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -677,8 +667,8 @@ Solución
 <div class="callout-body-container callout-body">
 <p>La función <code>cut</code></p>
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-13_40c065fcf591504a6cdde396e807e63a">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Eliminación del dato atípico.</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[df<span class="sc">$</span>llamadas <span class="sc">!=</span> <span class="dv">50</span>, , drop <span class="ot">=</span> F]</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Eliminación del dato atípico.</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[df<span class="sc">$</span>llamadas <span class="sc">!=</span> <span class="dv">50</span>, , drop <span class="ot">=</span> F]</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -689,12 +679,12 @@ Solución
 <ol start="3" type="a">
 <li>Construir la tabla de frecuencias agrupando en 5 clases.</li>
 </ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución 1
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -703,21 +693,21 @@ Solución 1
 <div class="callout-body-container callout-body">
 <p>Para agrupar los datos en intervalos se puede utilizar la función <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/cut"><code>cut</code></a> del paquete base de R, y para contar las frecuencias absolutas y relativas las funciones <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/table"><code>table</code></a>, y <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/prop.table"><code>prop.table</code></a> respectivamente.</p>
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-14_6476e0b3711af7ace90ef513c586dc78">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias absolutas. Creación automática de 5 clases con intervalos cerrados a la izquierda.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias absolutas. Creación automática de 5 clases con intervalos cerrados a la izquierda.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-15_b32c16b39bf148806cd34ca2e2785ae1">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="fu">cut</span>(df<span class="sc">$</span>llamadas, <span class="at">breaks =</span> <span class="dv">5</span>, <span class="at">right =</span> F))</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación manual de 5 clases.</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="fu">cut</span>(df<span class="sc">$</span>llamadas, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">5</span>)))</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias relativas</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>fi <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(ni)</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias acumuladas.</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>Ni <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(ni)</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias relativas acumuladas.</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>Fi <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(fi)</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación de un data frame con las frecuencias.</span></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>tabla_frec <span class="ot">&lt;-</span> <span class="fu">cbind</span>(ni, fi, Ni, Fi)</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>tabla_frec</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="fu">cut</span>(df<span class="sc">$</span>llamadas, <span class="at">breaks =</span> <span class="dv">5</span>, <span class="at">right =</span> F))</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación manual de 5 clases.</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="fu">cut</span>(df<span class="sc">$</span>llamadas, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">5</span>)))</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias relativas</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>fi <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(ni)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias acumuladas.</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>Ni <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(ni)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias relativas acumuladas.</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>Fi <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(fi)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación de un data frame con las frecuencias.</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>tabla_frec <span class="ot">&lt;-</span> <span class="fu">cbind</span>(ni, fi, Ni, Fi)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>tabla_frec</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        ni        fi Ni        Fi
 (5,10]   3 0.1034483  3 0.1034483
@@ -730,12 +720,12 @@ Solución 1
 </div>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución 2
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -743,68 +733,66 @@ Solución 2
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Otra alternativa es usar la fución <a href="https://aprendeconalf.es/manual-r/06-preprocesamiento.html#conteo-del-n%C3%BAmero-de-observaciones"><code>count</code></a> del paquete <code>dplyr</code>.</p>
-<div>
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-16_64c787370b692491054d28ab685cc024">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(df, <span class="at">llamadas_int =</span> <span class="fu">cut</span>(llamadas, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">5</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(llamadas_int) <span class="sc">%&gt;%</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">fi =</span> n<span class="sc">/</span><span class="fu">sum</span>(n), <span class="at">Ni =</span> <span class="fu">cumsum</span>(n), <span class="at">Fi =</span> <span class="fu">cumsum</span>(n)<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">"hover"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(df, <span class="at">llamadas_int =</span> <span class="fu">cut</span>(llamadas, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">5</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(llamadas_int) <span class="sc">%&gt;%</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">fi =</span> n<span class="sc">/</span><span class="fu">sum</span>(n), <span class="at">Ni =</span> <span class="fu">cumsum</span>(n), <span class="at">Fi =</span> <span class="fu">cumsum</span>(n)<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">"hover"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<table class="table table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> llamadas_int </th>
-   <th style="text-align:right;"> n </th>
-   <th style="text-align:right;"> fi </th>
-   <th style="text-align:right;"> Ni </th>
-   <th style="text-align:right;"> Fi </th>
-  </tr>
- </thead>
+<table class="table table-hover table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">llamadas_int</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">n</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">fi</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Ni</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Fi</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> (5,10] </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0.1034483 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0.1034483 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> (10,15] </td>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 0.3103448 </td>
-   <td style="text-align:right;"> 12 </td>
-   <td style="text-align:right;"> 0.4137931 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> (15,20] </td>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 0.3103448 </td>
-   <td style="text-align:right;"> 21 </td>
-   <td style="text-align:right;"> 0.7241379 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> (20,25] </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 0.1379310 </td>
-   <td style="text-align:right;"> 25 </td>
-   <td style="text-align:right;"> 0.8620690 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> (25,30] </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 0.1379310 </td>
-   <td style="text-align:right;"> 29 </td>
-   <td style="text-align:right;"> 1.0000000 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">(5,10]</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.1034483</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.1034483</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">(10,15]</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.3103448</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.4137931</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">(15,20]</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.3103448</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">0.7241379</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">(20,25]</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.1379310</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">0.8620690</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">(25,30]</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.1379310</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">1.0000000</td>
+</tr>
 </tbody>
 </table>
 
-</div>
+
 </div>
 </div>
 </div>
@@ -813,12 +801,12 @@ Solución 2
 <ol start="4" type="a">
 <li>Dibujar el histograma de frecuencias absolutas, relativas, absolutas acumuladas y relativas acumuladas correspondiente a la tabla anterior.</li>
 </ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución 1
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -827,27 +815,27 @@ Solución 1
 <div class="callout-body-container callout-body">
 <p>Para dibujar un histograma se puede usar la función <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/hist"><code>hist</code></a> del paquete <code>graphics</code>.</p>
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-18_7a327697de162863da7b773703ad4e1f">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma de frecuencias absolutas.</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>histo <span class="ot">&lt;-</span> <span class="fu">hist</span>(df<span class="sc">$</span>llamadas, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">5</span>), <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">main=</span><span class="st">"Distribución del número de llamadas"</span>, <span class="at">xlab=</span><span class="st">"Llamadas"</span>, <span class="at">ylab=</span><span class="st">"Frecuencia absoluta"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma de frecuencias absolutas.</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>histo <span class="ot">&lt;-</span> <span class="fu">hist</span>(df<span class="sc">$</span>llamadas, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">5</span>), <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">main=</span><span class="st">"Distribución del número de llamadas"</span>, <span class="at">xlab=</span><span class="st">"Llamadas"</span>, <span class="at">ylab=</span><span class="st">"Frecuencia absoluta"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-frecuencias-graficos_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> histo<span class="sc">$</span>counts</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma de frecuencias relativas.</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>histo<span class="sc">$</span>counts <span class="ot">&lt;-</span> ni<span class="sc">/</span><span class="fu">sum</span>(ni)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(histo, <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">main=</span><span class="st">"Distribución del número de llamadas"</span>, <span class="at">xlab=</span><span class="st">"Llamadas"</span>, <span class="at">ylab=</span><span class="st">"Frecuencia relativa"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> histo<span class="sc">$</span>counts</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma de frecuencias relativas.</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>histo<span class="sc">$</span>counts <span class="ot">&lt;-</span> ni<span class="sc">/</span><span class="fu">sum</span>(ni)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(histo, <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">main=</span><span class="st">"Distribución del número de llamadas"</span>, <span class="at">xlab=</span><span class="st">"Llamadas"</span>, <span class="at">ylab=</span><span class="st">"Frecuencia relativa"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-frecuencias-graficos_files/figure-html/unnamed-chunk-18-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma de frecuencias absolutas acumuladas.</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>histo<span class="sc">$</span>counts <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(ni)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(histo, <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">main=</span><span class="st">"Distribución acumulada del número de llamadas"</span>, <span class="at">xlab=</span><span class="st">"Llamadas"</span>, <span class="at">ylab=</span><span class="st">"Frecuencia absoluta acumulada"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma de frecuencias absolutas acumuladas.</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>histo<span class="sc">$</span>counts <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(ni)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(histo, <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">main=</span><span class="st">"Distribución acumulada del número de llamadas"</span>, <span class="at">xlab=</span><span class="st">"Llamadas"</span>, <span class="at">ylab=</span><span class="st">"Frecuencia absoluta acumulada"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-frecuencias-graficos_files/figure-html/unnamed-chunk-18-3.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma de frecuencias relativas acumuladas.</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>histo<span class="sc">$</span>counts <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(ni)<span class="sc">/</span><span class="fu">sum</span>(ni)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(histo, <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">main=</span><span class="st">"Distribución acumulada del número de llamadas"</span>, <span class="at">xlab=</span><span class="st">"Llamadas"</span>, <span class="at">ylab=</span><span class="st">"Frecuencia relativa acumulada"</span>, )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma de frecuencias relativas acumuladas.</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>histo<span class="sc">$</span>counts <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(ni)<span class="sc">/</span><span class="fu">sum</span>(ni)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(histo, <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">main=</span><span class="st">"Distribución acumulada del número de llamadas"</span>, <span class="at">xlab=</span><span class="st">"Llamadas"</span>, <span class="at">ylab=</span><span class="st">"Frecuencia relativa acumulada"</span>, )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-frecuencias-graficos_files/figure-html/unnamed-chunk-18-4.png" class="img-fluid" width="672"></p>
 </div>
@@ -855,12 +843,12 @@ Solución 1
 </div>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución 2
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -868,33 +856,33 @@ Solución 2
 <div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Otra alternativa es usar la función la función <a href="https://aprendeconalf.es/manual-r/07-graficos.html#histogramas"><code>geom_histogram</code></a> del paquete <code>ggplot2</code>.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-19_0cf6681435905e1a080ee1c543a8a1f4">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma de frecuencias absolutas</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> llamadas)) <span class="sc">+</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">5</span>), <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">col =</span> <span class="st">"white"</span>) <span class="sc">+</span> </span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución del número de llamadas"</span>, <span class="at">x =</span> <span class="st">"Número de llamadas"</span>, <span class="at">y =</span> <span class="st">"Frecuencia absoluta"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-19_3a3642363c2692ddac18b93e82dbd313">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma de frecuencias absolutas</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> llamadas)) <span class="sc">+</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">5</span>), <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">col =</span> <span class="st">"white"</span>) <span class="sc">+</span> </span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución del número de llamadas"</span>, <span class="at">x =</span> <span class="st">"Número de llamadas"</span>, <span class="at">y =</span> <span class="st">"Frecuencia absoluta"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-frecuencias-graficos_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma de frecuencias relativas</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> llamadas)) <span class="sc">+</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> (..count..)<span class="sc">/</span><span class="fu">sum</span>(..count..)), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">5</span>), <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">col =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución del número de llamadas"</span>, <span class="at">x =</span> <span class="st">"Número de llamadas"</span>, <span class="at">y =</span> <span class="st">"Frecuencia relativa"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma de frecuencias relativas</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> llamadas)) <span class="sc">+</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(count<span class="sc">/</span><span class="fu">sum</span>(count))), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">5</span>), <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">col =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución del número de llamadas"</span>, <span class="at">x =</span> <span class="st">"Número de llamadas"</span>, <span class="at">y =</span> <span class="st">"Frecuencia relativa"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-frecuencias-graficos_files/figure-html/unnamed-chunk-19-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma de frecuencias acumuladas</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> llamadas)) <span class="sc">+</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">cumsum</span>(..count..)), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">5</span>), <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">col =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución acumulada del número de llamadas"</span>, <span class="at">x =</span> <span class="st">"Número de llamadas"</span>, <span class="at">y =</span> <span class="st">"Frecuencia absoluta acumulada"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma de frecuencias acumuladas</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> llamadas)) <span class="sc">+</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(<span class="fu">cumsum</span>(count))), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">5</span>), <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">col =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución acumulada del número de llamadas"</span>, <span class="at">x =</span> <span class="st">"Número de llamadas"</span>, <span class="at">y =</span> <span class="st">"Frecuencia absoluta acumulada"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-frecuencias-graficos_files/figure-html/unnamed-chunk-19-3.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma de frecuencias relativas acumuladas</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> llamadas)) <span class="sc">+</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">cumsum</span>(..count..)<span class="sc">/</span><span class="fu">sum</span>(..count..)),  <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">5</span>), <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">col =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución acumulada del número de llamadas"</span>, <span class="at">x =</span> <span class="st">"Número de llamadas"</span>, <span class="at">y =</span> <span class="st">"Frecuencia relativa acumulada"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma de frecuencias relativas acumuladas</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> llamadas)) <span class="sc">+</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(<span class="fu">cumsum</span>(count)<span class="sc">/</span><span class="fu">sum</span>(count))),  <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">5</span>), <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">col =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución acumulada del número de llamadas"</span>, <span class="at">x =</span> <span class="st">"Número de llamadas"</span>, <span class="at">y =</span> <span class="st">"Frecuencia relativa acumulada"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-frecuencias-graficos_files/figure-html/unnamed-chunk-19-4.png" class="img-fluid" width="672"></p>
 </div>
@@ -905,12 +893,12 @@ Solución 2
 <ol start="5" type="a">
 <li>Dibujar el polígono de frecuencias relativas acumuladas (ojiva).</li>
 </ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución 1
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -919,11 +907,11 @@ Solución 1
 <div class="callout-body-container callout-body">
 <p>Para dibujar la ojiva se puede usar la función <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot"><code>plot</code></a> del paquete <code>graphics</code>.</p>
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-20_d7884012bd49c3dd709407b2d5114dd8">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ojiva</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>cortes <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">5</span>)</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="fu">cut</span>(df<span class="sc">$</span>llamadas, <span class="at">breaks =</span> cortes))</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>Fi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">cumsum</span>(ni)<span class="sc">/</span><span class="fu">sum</span>(ni))</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cortes, Fi, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">main =</span> <span class="st">"Distribución acumulada del número de llamadas"</span>, <span class="at">xlab =</span> <span class="st">"Número de llamadas"</span>, <span class="at">ylab =</span> <span class="st">"Frecuencia relativa acumulada"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ojiva</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>cortes <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">5</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="fu">cut</span>(df<span class="sc">$</span>llamadas, <span class="at">breaks =</span> cortes))</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>Fi <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">cumsum</span>(ni)<span class="sc">/</span><span class="fu">sum</span>(ni))</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cortes, Fi, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">main =</span> <span class="st">"Distribución acumulada del número de llamadas"</span>, <span class="at">xlab =</span> <span class="st">"Número de llamadas"</span>, <span class="at">ylab =</span> <span class="st">"Frecuencia relativa acumulada"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-frecuencias-graficos_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -931,12 +919,12 @@ Solución 1
 </div>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución 2
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -945,17 +933,17 @@ Solución 2
 <div class="callout-body-container callout-body">
 <p>Otra alternativa es usar la función la función <a href="https://aprendeconalf.es/manual-r/07-graficos.html#histogramas"><code>geom_line</code></a> del paquete <code>ggplot2</code>.</p>
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-21_2c40c27c469c79bcc8c297190cc6e96a">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Ojiva</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>cortes <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">5</span>)</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>tabla_frec <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df, <span class="at">llamadas_int =</span> <span class="fu">cut</span>(df<span class="sc">$</span>llamadas, <span class="at">breaks =</span> cortes)) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(llamadas_int) <span class="sc">%&gt;%</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">cortes =</span> cortes[<span class="sc">-</span><span class="dv">1</span>], <span class="at">Fi =</span> <span class="fu">cumsum</span>(n)<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(cortes, Fi) </span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>tabla_frec <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">data.frame</span>(<span class="at">cortes =</span> cortes[<span class="dv">1</span>], <span class="at">Fi =</span> <span class="dv">0</span>), tabla_frec)</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tabla_frec, <span class="fu">aes</span>(<span class="at">x =</span> cortes , <span class="at">y =</span> Fi)) <span class="sc">+</span></span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">col =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución del número de llamadas"</span>, <span class="at">x =</span> <span class="st">"Número de llamadas"</span>, <span class="at">y =</span> <span class="st">"Frecuencia relativa acumulada"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Ojiva</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>cortes <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">5</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>tabla_frec <span class="ot">&lt;-</span> <span class="fu">mutate</span>(df, <span class="at">llamadas_int =</span> <span class="fu">cut</span>(df<span class="sc">$</span>llamadas, <span class="at">breaks =</span> cortes)) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(llamadas_int) <span class="sc">%&gt;%</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">cortes =</span> cortes[<span class="sc">-</span><span class="dv">1</span>], <span class="at">Fi =</span> <span class="fu">cumsum</span>(n)<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(cortes, Fi) </span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>tabla_frec <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">data.frame</span>(<span class="at">cortes =</span> cortes[<span class="dv">1</span>], <span class="at">Fi =</span> <span class="dv">0</span>), tabla_frec)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tabla_frec, <span class="fu">aes</span>(<span class="at">x =</span> cortes , <span class="at">y =</span> Fi)) <span class="sc">+</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="at">col =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución del número de llamadas"</span>, <span class="at">x =</span> <span class="st">"Número de llamadas"</span>, <span class="at">y =</span> <span class="st">"Frecuencia relativa acumulada"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-frecuencias-graficos_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -964,7 +952,7 @@ Solución 2
 </div>
 </div>
 </div>
-<div id="exr-3" class="theorem exercise">
+<div id="exr-frecuencias-graficos-3" class="theorem exercise">
 <p><span class="theorem-title"><strong>Ejercicio 3.3 </strong></span>Los grupos sanguíneos de una muestra de 30 personas son:</p>
 <table class="table">
 <colgroup>
@@ -979,12 +967,12 @@ Solución 2
 <ol type="a">
 <li>Crear un conjunto de datos con la variable <code>grupo_sanguíneo</code>.</li>
 </ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -992,7 +980,7 @@ Solución
 <div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-22_094866976f33378b6e2bd50b05a0025e">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">grupo_sanguineo =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>, <span class="st">"AB"</span>, <span class="st">"0"</span>, <span class="st">"0"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"AB"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"0"</span>, <span class="st">"B"</span>, <span class="st">"B"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"0"</span>, <span class="st">"A"</span>, <span class="st">"AB"</span>, <span class="st">"0"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">grupo_sanguineo =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>, <span class="st">"AB"</span>, <span class="st">"0"</span>, <span class="st">"0"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"AB"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"0"</span>, <span class="st">"B"</span>, <span class="st">"B"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"0"</span>, <span class="st">"A"</span>, <span class="st">"AB"</span>, <span class="st">"0"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1000,12 +988,12 @@ Solución
 <ol start="2" type="a">
 <li>Construir la tabla de frecuencias.</li>
 </ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución 1
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1014,12 +1002,12 @@ Solución 1
 <div class="callout-body-container callout-body">
 <p>Para obtener las frecuencias absolutas se puede usar la función <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/table"><code>table</code></a>, y para las frecuencias relativas la función <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/prop.table"><code>prop.table</code></a> ambas del paquete base de R.</p>
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-23_b3d3df6e4f8459de729c2c715e91dfa7">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias absolutas.</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>grupo_sanguineo)</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias relativas</span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>fi <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(ni)</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>tabla_frec <span class="ot">&lt;-</span> <span class="fu">cbind</span>(ni, fi)</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>tabla_frec</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias absolutas.</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>grupo_sanguineo)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias relativas</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>fi <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(ni)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>tabla_frec <span class="ot">&lt;-</span> <span class="fu">cbind</span>(ni, fi)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>tabla_frec</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   ni        fi
 0   5 0.1666667
@@ -1031,12 +1019,12 @@ B   8 0.2666667</code></pre>
 </div>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución 2
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1044,50 +1032,48 @@ Solución 2
 <div id="callout-20" class="callout-20-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Otra alternativa es usar la fución <a href="https://aprendeconalf.es/manual-r/06-preprocesamiento.html#conteo-del-n%C3%BAmero-de-observaciones"><code>count</code></a> del paquete <code>dplyr</code>.</p>
-<div>
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-24_5437e2c8e694af544ad346e5ecaf019a">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(df, grupo_sanguineo) <span class="sc">%&gt;%</span> </span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">fi =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">"hover"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(df, grupo_sanguineo) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">fi =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">"hover"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<table class="table table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> grupo_sanguineo </th>
-   <th style="text-align:right;"> n </th>
-   <th style="text-align:right;"> fi </th>
-  </tr>
- </thead>
+<table class="table table-hover table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">grupo_sanguineo</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">n</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">fi</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> 0 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 0.1666667 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 0.4666667 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> AB </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0.1000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> B </td>
-   <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 0.2666667 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">0</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.1666667</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0.4666667</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AB</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.1000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.2666667</td>
+</tr>
 </tbody>
 </table>
 
-</div>
+
 </div>
 </div>
 </div>
@@ -1096,12 +1082,12 @@ Solución 2
 <ol start="3" type="a">
 <li>Dibujar el diagrama de sectores.</li>
 </ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución 1
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1110,8 +1096,8 @@ Solución 1
 <div class="callout-body-container callout-body">
 <p>Para dibujar el diagrama de sectores se puede usar la función <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/pie"><code>pie</code></a> del paquete <code>graphics</code>.</p>
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-26_08b7c3e415f83c0ad194ab7435031bf2">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagrama de sectores</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pie</span>(ni, <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(ni), <span class="at">main =</span> <span class="st">"Distribución de los grupos sanguíneos"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagrama de sectores</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pie</span>(ni, <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(ni), <span class="at">main =</span> <span class="st">"Distribución de los grupos sanguíneos"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-frecuencias-graficos_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1119,12 +1105,12 @@ Solución 1
 </div>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución 2
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1133,12 +1119,12 @@ Solución 2
 <div class="callout-body-container callout-body">
 <p>Otra alternativa es usar las fuciones <a href="https://aprendeconalf.es/manual-r/07-graficos.html#diagrama-de-sectores"><code>geom_bar</code></a> y <code>coor_polar</code> del paquete <code>ggplot2</code>.</p>
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-27_d3e88aa02ccd00952ad2e541defc58ea">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">fill =</span> grupo_sanguineo)) <span class="sc">+</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Añadir la capa de las barras.</span></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Añadir el sistema de coordenadas polares</span></span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>) <span class="sc">+</span></span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución de los grupos sanguíneos"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">fill =</span> grupo_sanguineo)) <span class="sc">+</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Añadir la capa de las barras.</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Añadir el sistema de coordenadas polares</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>) <span class="sc">+</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribución de los grupos sanguíneos"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-frecuencias-graficos_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1147,7 +1133,7 @@ Solución 2
 </div>
 </div>
 </div>
-<div id="exr-4" class="theorem exercise">
+<div id="exr-frecuencias-graficos-4" class="theorem exercise">
 <p><span class="theorem-title"><strong>Ejercicio 3.4 </strong></span>En un estudio de población se tomó una muestra de 27 personas, y se les preguntó por su edad y estado civil, obteniendo los siguientes resultados:</p>
 <table class="table">
 <thead>
@@ -1178,12 +1164,12 @@ Solución 2
 <ol type="a">
 <li>Crear un conjunto de datos con la variables <code>estado_civil</code> y <code>edad</code>.</li>
 </ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1191,9 +1177,9 @@ Solución
 <div id="callout-23" class="callout-23-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-28_804033bc7ecc4083b82ed62641889ecf">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">edad =</span> <span class="fu">c</span>(<span class="dv">31</span>, <span class="dv">45</span>, <span class="dv">35</span>, <span class="dv">65</span>, <span class="dv">21</span>, <span class="dv">38</span>, <span class="dv">62</span>, <span class="dv">22</span>, <span class="dv">31</span>, <span class="dv">62</span>, <span class="dv">39</span>, <span class="dv">62</span>, <span class="dv">59</span>, <span class="dv">21</span>, <span class="dv">62</span>, <span class="dv">80</span>, <span class="dv">68</span>, <span class="dv">65</span>, <span class="dv">40</span>, <span class="dv">78</span>, <span class="dv">69</span>, <span class="dv">75</span>, <span class="dv">31</span>, <span class="dv">65</span>, <span class="dv">59</span>, <span class="dv">49</span>, <span class="dv">65</span>), </span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">estado_civil =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Soltero"</span>, <span class="st">"Casado"</span>, <span class="st">"Viudo"</span>, <span class="st">"Divorciado"</span>), <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">5</span>)))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">edad =</span> <span class="fu">c</span>(<span class="dv">31</span>, <span class="dv">45</span>, <span class="dv">35</span>, <span class="dv">65</span>, <span class="dv">21</span>, <span class="dv">38</span>, <span class="dv">62</span>, <span class="dv">22</span>, <span class="dv">31</span>, <span class="dv">62</span>, <span class="dv">39</span>, <span class="dv">62</span>, <span class="dv">59</span>, <span class="dv">21</span>, <span class="dv">62</span>, <span class="dv">80</span>, <span class="dv">68</span>, <span class="dv">65</span>, <span class="dv">40</span>, <span class="dv">78</span>, <span class="dv">69</span>, <span class="dv">75</span>, <span class="dv">31</span>, <span class="dv">65</span>, <span class="dv">59</span>, <span class="dv">49</span>, <span class="dv">65</span>), </span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">estado_civil =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Soltero"</span>, <span class="st">"Casado"</span>, <span class="st">"Viudo"</span>, <span class="st">"Divorciado"</span>), <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">5</span>)))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1201,12 +1187,12 @@ Solución
 <ol start="2" type="a">
 <li>Calcular los tamaños muestrales según <code>estado_civil</code>.</li>
 </ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución 1
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1215,7 +1201,7 @@ Solución 1
 <div class="callout-body-container callout-body">
 <p>Usando la función <code>table</code> del paquete base de R podemos obtener las frecuencias absolutas del estado civil que es el tamaño muestral de cada grupo.</p>
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-29_83793c99c696e8a2c1a8824cfa1f3694">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>estado_civil)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>estado_civil)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Casado Divorciado    Soltero      Viudo 
@@ -1225,12 +1211,12 @@ Solución 1
 </div>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución 1
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1239,9 +1225,9 @@ Solución 1
 <div class="callout-body-container callout-body">
 <p>Usando las funciones <code>groub_by</code>, <code>summarise</code> y <code>n</code> del paquete <code>dplyr</code>.</p>
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-30_12c3be5b95dd2269268bd5907ccae096">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(estado_civil) <span class="sc">%&gt;%</span></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(estado_civil) <span class="sc">%&gt;%</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
   estado_civil     n
@@ -1258,12 +1244,12 @@ Solución 1
 <ol start="3" type="a">
 <li>Construir la tabla de frecuencias de la variable <code>edad</code> para cada categoría de la variable <code>estado_civil</code>.</li>
 </ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1271,155 +1257,153 @@ Solución
 <div id="callout-26" class="callout-26-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Para dividir la muestra en grupos se puede usar la función <a href="https://aprendeconalf.es/manual-r/06-preprocesamiento.html#res%C3%BAmenes-por-grupos"><code>group-by</code></a> del paquete <code>dplyr</code>.</p>
-<div>
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-31_e5e59dc9f82fd838e8833a90ac307e01">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(df, <span class="at">edad_int =</span> <span class="fu">cut</span>(edad, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">10</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(estado_civil) <span class="sc">%&gt;%</span></span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(edad_int) <span class="sc">%&gt;%</span> </span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">fi =</span> n<span class="sc">/</span><span class="fu">sum</span>(n), <span class="at">Ni =</span> <span class="fu">cumsum</span>(n), <span class="at">Fi =</span> <span class="fu">cumsum</span>(n)<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">"hover"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(df, <span class="at">edad_int =</span> <span class="fu">cut</span>(edad, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">10</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(estado_civil) <span class="sc">%&gt;%</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">count</span>(edad_int) <span class="sc">%&gt;%</span> </span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">fi =</span> n<span class="sc">/</span><span class="fu">sum</span>(n), <span class="at">Ni =</span> <span class="fu">cumsum</span>(n), <span class="at">Fi =</span> <span class="fu">cumsum</span>(n)<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">"hover"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<table class="table table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> estado_civil </th>
-   <th style="text-align:left;"> edad_int </th>
-   <th style="text-align:right;"> n </th>
-   <th style="text-align:right;"> fi </th>
-   <th style="text-align:right;"> Ni </th>
-   <th style="text-align:right;"> Fi </th>
-  </tr>
- </thead>
+<table class="table table-hover table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">estado_civil</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">edad_int</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">n</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">fi</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Ni</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Fi</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> Casado </td>
-   <td style="text-align:left;"> (20,30] </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.1666667 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.1666667 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Casado </td>
-   <td style="text-align:left;"> (30,40] </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.1666667 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.3333333 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Casado </td>
-   <td style="text-align:left;"> (50,60] </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.1666667 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0.5000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Casado </td>
-   <td style="text-align:left;"> (60,70] </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0.5000000 </td>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 1.0000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Divorciado </td>
-   <td style="text-align:left;"> (30,40] </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.2000000 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.2000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Divorciado </td>
-   <td style="text-align:left;"> (40,50] </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.2000000 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.4000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Divorciado </td>
-   <td style="text-align:left;"> (50,60] </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.2000000 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0.6000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Divorciado </td>
-   <td style="text-align:left;"> (60,70] </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.4000000 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 1.0000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Soltero </td>
-   <td style="text-align:left;"> (20,30] </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.2222222 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.2222222 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Soltero </td>
-   <td style="text-align:left;"> (30,40] </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 0.4444444 </td>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 0.6666667 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Soltero </td>
-   <td style="text-align:left;"> (40,50] </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.1111111 </td>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 0.7777778 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Soltero </td>
-   <td style="text-align:left;"> (60,70] </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.2222222 </td>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 1.0000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Viudo </td>
-   <td style="text-align:left;"> (30,40] </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.1428571 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.1428571 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Viudo </td>
-   <td style="text-align:left;"> (60,70] </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0.4285714 </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 0.5714286 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Viudo </td>
-   <td style="text-align:left;"> (70,80] </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0.4285714 </td>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 1.0000000 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">Casado</td>
+<td style="text-align: left;">(20,30]</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.1666667</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.1666667</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Casado</td>
+<td style="text-align: left;">(30,40]</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.1666667</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.3333333</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Casado</td>
+<td style="text-align: left;">(50,60]</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.1666667</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.5000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Casado</td>
+<td style="text-align: left;">(60,70]</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.5000000</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">1.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Divorciado</td>
+<td style="text-align: left;">(30,40]</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.2000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Divorciado</td>
+<td style="text-align: left;">(40,50]</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.4000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Divorciado</td>
+<td style="text-align: left;">(50,60]</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.2000000</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.6000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Divorciado</td>
+<td style="text-align: left;">(60,70]</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.4000000</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Soltero</td>
+<td style="text-align: left;">(20,30]</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.2222222</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.2222222</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Soltero</td>
+<td style="text-align: left;">(30,40]</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.4444444</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.6666667</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Soltero</td>
+<td style="text-align: left;">(40,50]</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.1111111</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.7777778</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Soltero</td>
+<td style="text-align: left;">(60,70]</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.2222222</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">1.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Viudo</td>
+<td style="text-align: left;">(30,40]</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.1428571</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.1428571</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Viudo</td>
+<td style="text-align: left;">(60,70]</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.4285714</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.5714286</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Viudo</td>
+<td style="text-align: left;">(70,80]</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.4285714</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">1.0000000</td>
+</tr>
 </tbody>
 </table>
 
-</div>
+
 </div>
 </div>
 </div>
@@ -1428,12 +1412,12 @@ Solución
 <ol start="4" type="a">
 <li>Dibujar los diagramas de cajas de la edad según el estado civil. ¿Existen datos atípicos? ¿En qué grupo hay mayor dispersión?</li>
 </ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1441,9 +1425,9 @@ Solución
 <div id="callout-27" class="callout-27-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-33_7e774d24a962240652d40ee878bdaa15">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> edad, <span class="at">fill =</span> estado_civil)) <span class="sc">+</span></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> edad, <span class="at">fill =</span> estado_civil)) <span class="sc">+</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-frecuencias-graficos_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1454,12 +1438,12 @@ Solución
 <ol start="5" type="a">
 <li>Dibujar los histogramas de la edad según el estado civil.</li>
 </ol>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
@@ -1467,18 +1451,18 @@ Solución
 <div id="callout-28" class="callout-28-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-34_26548aadb78535bc954fd8cb851c303f">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> edad, <span class="at">fill =</span> estado_civil)) <span class="sc">+</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">10</span>), <span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">alpha=</span><span class="fl">0.4</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> edad, <span class="at">fill =</span> estado_civil)) <span class="sc">+</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">10</span>), <span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">alpha=</span><span class="fl">0.4</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-frecuencias-graficos_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Para dibujar cada histograma por separado se puede usar la función <a href="https://aprendeconalf.es/manual-r/07-graficos.html#facetas"><code>facet_wrap</code></a> o <code>facet_grid</code> del paquete <code>ggplot2</code>.</p>
 <div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-35_e64ff7e7dad49275903c4c550784255c">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> edad, <span class="at">fill =</span> estado_civil)) <span class="sc">+</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Añadir la faceta del estado civil</span></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(estado_civil))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> edad, <span class="at">fill =</span> estado_civil)) <span class="sc">+</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Añadir la faceta del estado civil</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(estado_civil))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="03-frecuencias-graficos_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1654,9 +1638,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1721,6 +1719,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

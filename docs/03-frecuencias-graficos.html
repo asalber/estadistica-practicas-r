@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.340">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -292,8 +292,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <ol type="a">
-<li>Crear un conjunto de datos con la variable <code>hijos</code>.</li>
-</ol>
+<li><p>Crear un conjunto de datos con la variable <code>hijos</code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -306,15 +305,13 @@ Solución
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-2_a7a92561b008f893e0f2697474e0dc71">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-2_4b43e2c4b20fd6a89c88834a1ad5273d">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">hijos =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
-</div>
-<ol start="2" type="a">
-<li>Construir la tabla de frecuencias.</li>
-</ol>
+</div></li>
+<li><p>Construir la tabla de frecuencias.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -328,7 +325,7 @@ Solución 1
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Para obtener las frecuencias absolutas se puede usar la función <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/table"><code>table</code></a>, y para las frecuencias relativas la función <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/prop.table"><code>prop.table</code></a> ambas del paquete base de R.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-3_a62e69f80dc061980f6249c392df2b8a">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-3_9ecf0fe5112fa5dab50c048925f74f56">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias absolutas.</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>hijos)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias relativas</span></span>
@@ -365,7 +362,7 @@ Solución 2
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Otra alternativa es usar la función <a href="https://aprendeconalf.es/manual-r/06-preprocesamiento.html#conteo-del-n%C3%BAmero-de-observaciones"><code>count</code></a> del paquete <code>dplyr</code>.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-4_9fa516b3cd81374a432ebada439b279b">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-4_167947afb4d1944a33be7e2d2a9a38c1">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
@@ -428,10 +425,8 @@ Solución 2
 </div>
 </div>
 </div>
-</div>
-<ol start="3" type="a">
-<li>Dibujar el diagrama de barras de las frecuencias absolutas, relativas, absolutas acumuladas y relativas acumuladas.</li>
-</ol>
+</div></li>
+<li><p>Dibujar el diagrama de barras de las frecuencias absolutas, relativas, absolutas acumuladas y relativas acumuladas.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -445,7 +440,7 @@ Solución 1
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Para dibujar un diagrama de barras se puede usar la función <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/barplot"><code>barplot</code></a> del paquete <code>graphics</code>.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-6_efe758b2a6495ee25dc45a291d790e25">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-6_e0ff5765cf2613662f8ac3136164d957">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagrama de barras de frecuencias absolutas.</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(ni, <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">main=</span><span class="st">"Distribución del número de hijos"</span>, <span class="at">xlab=</span><span class="st">"Hijos"</span>, <span class="at">ylab=</span><span class="st">"Frecuencia absoluta"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -483,7 +478,7 @@ Solución 2
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Otra alternativa es usar la función la función <a href="https://aprendeconalf.es/manual-r/07-graficos.html#diagramas-de-barras"><code>geom_bar</code></a> del paquete <code>ggplot2</code>.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-7_b4b19117de763a10b8d009b99da0afb5">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-7_20d916628d7febf1a7ce5cff55daa9bc">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagarma de barras de frecuencias absolutas</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> hijos)) <span class="sc">+</span></span>
@@ -516,10 +511,8 @@ Solución 2
 </div>
 </div>
 </div>
-</div>
-<ol start="4" type="a">
-<li>Dibujar el polígono de frecuencias relativas.</li>
-</ol>
+</div></li>
+<li><p>Dibujar el polígono de frecuencias relativas.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -533,7 +526,7 @@ Solución 1
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Para dibujar un diagrama de lineas se puede usar la función <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot"><code>plot</code></a> del paquete <code>graphics</code>.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-8_a2a27dac44f9d5a7ee1a333ee8ec181b">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-8_6bfe4a43de7a2dfaf94867cba4e693b2">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias relativas.</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">names</span>(fi), fi, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">main=</span><span class="st">"Distribución del número de hijos"</span>, <span class="at">xlab=</span><span class="st">"Hijos"</span>, <span class="at">ylab=</span><span class="st">"Frecuencia relativa"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -556,7 +549,7 @@ Solución 2
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Otra alternativa es usar la función la función <a href="https://aprendeconalf.es/manual-r/07-graficos.html#diagramas-de-lineas"><code>geom_line</code></a> del paquete <code>ggplot2</code>.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-9_ebfd68054fd4da6fcd81cd847c33b383">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-9_d4f912a19b1c71e09f1326bbafe8a55d">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(df, hijos) <span class="sc">%&gt;%</span> </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">fi =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
@@ -569,7 +562,8 @@ Solución 2
 </div>
 </div>
 </div>
-</div>
+</div></li>
+</ol>
 </div>
 <div id="exr-frecuencias-graficos-2" class="theorem exercise">
 <p><span class="theorem-title"><strong>Ejercicio 3.2 </strong></span>En un servicio de atención al cliente se han registrado el número de llamadas de clientes cada día del mes de noviembre, obteniendo los siguientes datos:</p>
@@ -584,8 +578,7 @@ Solución 2
 </tbody>
 </table>
 <ol type="a">
-<li>Crear un conjunto de datos con la variable <code>llamadas</code>.</li>
-</ol>
+<li><p>Crear un conjunto de datos con la variable <code>llamadas</code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -598,15 +591,13 @@ Solución
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-10_73453effe2410a0ea85785c1b837cd57">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-10_bcbd909a54a68077ecfdc958a62af821">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">llamadas =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">23</span>, <span class="dv">12</span>, <span class="dv">10</span>, <span class="dv">28</span>, <span class="dv">50</span>, <span class="dv">12</span>, <span class="dv">17</span>, <span class="dv">20</span>, <span class="dv">21</span>, <span class="dv">18</span>, <span class="dv">13</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">26</span>, <span class="dv">30</span>, <span class="dv">6</span>, <span class="dv">16</span>, <span class="dv">19</span>, <span class="dv">22</span>, <span class="dv">14</span>, <span class="dv">17</span>, <span class="dv">21</span>, <span class="dv">28</span>, <span class="dv">9</span>, <span class="dv">16</span>, <span class="dv">13</span>, <span class="dv">11</span>, <span class="dv">16</span>, <span class="dv">20</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
-</div>
-<ol start="2" type="a">
-<li>Dibujar el diagrama de cajas. ¿Existe algún dato atípico? En el caso de que exista, eliminarlo y proceder con los siguientes apartados.</li>
-</ol>
+</div></li>
+<li><p>Dibujar el diagrama de cajas. ¿Existe algún dato atípico? En el caso de que exista, eliminarlo y proceder con los siguientes apartados.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -620,7 +611,7 @@ Solución 1
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Para dibujar un diagrama de cajas se puede usar la función <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/boxplot"><code>boxplot</code></a> del paquete <code>graphics</code>.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-11_1b2fe103b150715c2177064745e2b386">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-11_61fd2113d246e9f0ec9f8380d0aeb67b">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias relativas.</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(df<span class="sc">$</span>llamadas, <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">main=</span><span class="st">"Distribución del número de llamadas"</span>, <span class="at">horizontal =</span> T, <span class="at">xlab=</span><span class="st">"Número de llamadas"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -643,7 +634,7 @@ Solución 2
 <div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Otra alternativa es usar la función la función <a href="https://aprendeconalf.es/manual-r/07-graficos.html#diagramas-de-cajas"><code>geom_boxplot</code></a> del paquete <code>ggplot2</code>.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-12_eb64dc95311c23caec8b58e10e08c26d">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-12_cba4613e5e04db2280c746b68c016d17">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> llamadas)) <span class="sc">+</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
@@ -666,7 +657,7 @@ Solución
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>La función <code>cut</code></p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-13_40c065fcf591504a6cdde396e807e63a">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-13_be97a06c12a26126187b7bd575a8c1a2">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Eliminación del dato atípico.</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[df<span class="sc">$</span>llamadas <span class="sc">!=</span> <span class="dv">50</span>, , drop <span class="ot">=</span> F]</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -675,10 +666,8 @@ Solución
 </div>
 </div>
 </div>
-</div>
-<ol start="3" type="a">
-<li>Construir la tabla de frecuencias agrupando en 5 clases.</li>
-</ol>
+</div></li>
+<li><p>Construir la tabla de frecuencias agrupando en 5 clases.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -692,10 +681,10 @@ Solución 1
 <div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Para agrupar los datos en intervalos se puede utilizar la función <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/cut"><code>cut</code></a> del paquete base de R, y para contar las frecuencias absolutas y relativas las funciones <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/table"><code>table</code></a>, y <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/prop.table"><code>prop.table</code></a> respectivamente.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-14_6476e0b3711af7ace90ef513c586dc78">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-14_b7555aaf5c26904e8622186537648a61">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias absolutas. Creación automática de 5 clases con intervalos cerrados a la izquierda.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-15_b32c16b39bf148806cd34ca2e2785ae1">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-15_f76fc49e85a699a83003b51072f88865">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="fu">cut</span>(df<span class="sc">$</span>llamadas, <span class="at">breaks =</span> <span class="dv">5</span>, <span class="at">right =</span> F))</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación manual de 5 clases.</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="fu">cut</span>(df<span class="sc">$</span>llamadas, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">5</span>)))</span>
@@ -733,7 +722,7 @@ Solución 2
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Otra alternativa es usar la fución <a href="https://aprendeconalf.es/manual-r/06-preprocesamiento.html#conteo-del-n%C3%BAmero-de-observaciones"><code>count</code></a> del paquete <code>dplyr</code>.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-16_64c787370b692491054d28ab685cc024">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-16_7435d3e6d6bb5612e406d8d7a44ba752">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
@@ -797,10 +786,8 @@ Solución 2
 </div>
 </div>
 </div>
-</div>
-<ol start="4" type="a">
-<li>Dibujar el histograma de frecuencias absolutas, relativas, absolutas acumuladas y relativas acumuladas correspondiente a la tabla anterior.</li>
-</ol>
+</div></li>
+<li><p>Dibujar el histograma de frecuencias absolutas, relativas, absolutas acumuladas y relativas acumuladas correspondiente a la tabla anterior.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -814,7 +801,7 @@ Solución 1
 <div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Para dibujar un histograma se puede usar la función <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/hist"><code>hist</code></a> del paquete <code>graphics</code>.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-18_7a327697de162863da7b773703ad4e1f">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-18_3e040a90eb9c771e7fbd961281e6e2d0">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma de frecuencias absolutas.</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>histo <span class="ot">&lt;-</span> <span class="fu">hist</span>(df<span class="sc">$</span>llamadas, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">5</span>), <span class="at">col =</span> <span class="st">"steelblue"</span>, <span class="at">main=</span><span class="st">"Distribución del número de llamadas"</span>, <span class="at">xlab=</span><span class="st">"Llamadas"</span>, <span class="at">ylab=</span><span class="st">"Frecuencia absoluta"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -856,7 +843,7 @@ Solución 2
 <div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Otra alternativa es usar la función la función <a href="https://aprendeconalf.es/manual-r/07-graficos.html#histogramas"><code>geom_histogram</code></a> del paquete <code>ggplot2</code>.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-19_3a3642363c2692ddac18b93e82dbd313">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-19_ab768d2fcedd838b58dc409fd7d59e70">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograma de frecuencias absolutas</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> llamadas)) <span class="sc">+</span></span>
@@ -889,10 +876,8 @@ Solución 2
 </div>
 </div>
 </div>
-</div>
-<ol start="5" type="a">
-<li>Dibujar el polígono de frecuencias relativas acumuladas (ojiva).</li>
-</ol>
+</div></li>
+<li><p>Dibujar el polígono de frecuencias relativas acumuladas (ojiva).</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -906,7 +891,7 @@ Solución 1
 <div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Para dibujar la ojiva se puede usar la función <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot"><code>plot</code></a> del paquete <code>graphics</code>.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-20_d7884012bd49c3dd709407b2d5114dd8">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-20_0de3f4a438c11f742792b581cf33802a">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ojiva</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>cortes <span class="ot">=</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">5</span>)</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="fu">cut</span>(df<span class="sc">$</span>llamadas, <span class="at">breaks =</span> cortes))</span>
@@ -932,7 +917,7 @@ Solución 2
 <div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Otra alternativa es usar la función la función <a href="https://aprendeconalf.es/manual-r/07-graficos.html#histogramas"><code>geom_line</code></a> del paquete <code>ggplot2</code>.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-21_2c40c27c469c79bcc8c297190cc6e96a">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-21_75c09c9b2940c29165faf97d95fee241">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Ojiva</span></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>cortes <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">5</span>)</span>
@@ -950,7 +935,8 @@ Solución 2
 </div>
 </div>
 </div>
-</div>
+</div></li>
+</ol>
 </div>
 <div id="exr-frecuencias-graficos-3" class="theorem exercise">
 <p><span class="theorem-title"><strong>Ejercicio 3.3 </strong></span>Los grupos sanguíneos de una muestra de 30 personas son:</p>
@@ -965,8 +951,7 @@ Solución 2
 </tbody>
 </table>
 <ol type="a">
-<li>Crear un conjunto de datos con la variable <code>grupo_sanguíneo</code>.</li>
-</ol>
+<li><p>Crear un conjunto de datos con la variable <code>grupo_sanguíneo</code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -979,15 +964,13 @@ Solución
 </div>
 <div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-22_094866976f33378b6e2bd50b05a0025e">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-22_0bd1e3c43fb87345672044d666898901">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">grupo_sanguineo =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>, <span class="st">"AB"</span>, <span class="st">"0"</span>, <span class="st">"0"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"AB"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"0"</span>, <span class="st">"B"</span>, <span class="st">"B"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"0"</span>, <span class="st">"A"</span>, <span class="st">"AB"</span>, <span class="st">"0"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
-</div>
-<ol start="2" type="a">
-<li>Construir la tabla de frecuencias.</li>
-</ol>
+</div></li>
+<li><p>Construir la tabla de frecuencias.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1001,7 +984,7 @@ Solución 1
 <div id="callout-19" class="callout-19-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Para obtener las frecuencias absolutas se puede usar la función <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/table"><code>table</code></a>, y para las frecuencias relativas la función <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/prop.table"><code>prop.table</code></a> ambas del paquete base de R.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-23_b3d3df6e4f8459de729c2c715e91dfa7">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-23_c7cf33c32fcb20e045cc2a1358e884bc">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias absolutas.</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="fu">table</span>(df<span class="sc">$</span>grupo_sanguineo)</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencias relativas</span></span>
@@ -1032,7 +1015,7 @@ Solución 2
 <div id="callout-20" class="callout-20-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Otra alternativa es usar la fución <a href="https://aprendeconalf.es/manual-r/06-preprocesamiento.html#conteo-del-n%C3%BAmero-de-observaciones"><code>count</code></a> del paquete <code>dplyr</code>.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-24_5437e2c8e694af544ad346e5ecaf019a">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-24_7ad61cc02ec5a7631bb61f0085461b7b">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
@@ -1078,10 +1061,8 @@ Solución 2
 </div>
 </div>
 </div>
-</div>
-<ol start="3" type="a">
-<li>Dibujar el diagrama de sectores.</li>
-</ol>
+</div></li>
+<li><p>Dibujar el diagrama de sectores.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1095,7 +1076,7 @@ Solución 1
 <div id="callout-21" class="callout-21-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Para dibujar el diagrama de sectores se puede usar la función <a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/pie"><code>pie</code></a> del paquete <code>graphics</code>.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-26_08b7c3e415f83c0ad194ab7435031bf2">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-26_6a7fcaaf779c30ee8dc1b467a4d9b750">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagrama de sectores</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pie</span>(ni, <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(ni), <span class="at">main =</span> <span class="st">"Distribución de los grupos sanguíneos"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1118,7 +1099,7 @@ Solución 2
 <div id="callout-22" class="callout-22-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Otra alternativa es usar las fuciones <a href="https://aprendeconalf.es/manual-r/07-graficos.html#diagrama-de-sectores"><code>geom_bar</code></a> y <code>coor_polar</code> del paquete <code>ggplot2</code>.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-27_d3e88aa02ccd00952ad2e541defc58ea">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-27_ec59352a29cb2120d97c54392ef3e6b2">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">fill =</span> grupo_sanguineo)) <span class="sc">+</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Añadir la capa de las barras.</span></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
@@ -1131,7 +1112,8 @@ Solución 2
 </div>
 </div>
 </div>
-</div>
+</div></li>
+</ol>
 </div>
 <div id="exr-frecuencias-graficos-4" class="theorem exercise">
 <p><span class="theorem-title"><strong>Ejercicio 3.4 </strong></span>En un estudio de población se tomó una muestra de 27 personas, y se les preguntó por su edad y estado civil, obteniendo los siguientes resultados:</p>
@@ -1162,8 +1144,7 @@ Solución 2
 </tbody>
 </table>
 <ol type="a">
-<li>Crear un conjunto de datos con la variables <code>estado_civil</code> y <code>edad</code>.</li>
-</ol>
+<li><p>Crear un conjunto de datos con la variables <code>estado_civil</code> y <code>edad</code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1176,17 +1157,15 @@ Solución
 </div>
 <div id="callout-23" class="callout-23-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-28_804033bc7ecc4083b82ed62641889ecf">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-28_daaea7e799d6c8db5ce6d777d64a003b">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">edad =</span> <span class="fu">c</span>(<span class="dv">31</span>, <span class="dv">45</span>, <span class="dv">35</span>, <span class="dv">65</span>, <span class="dv">21</span>, <span class="dv">38</span>, <span class="dv">62</span>, <span class="dv">22</span>, <span class="dv">31</span>, <span class="dv">62</span>, <span class="dv">39</span>, <span class="dv">62</span>, <span class="dv">59</span>, <span class="dv">21</span>, <span class="dv">62</span>, <span class="dv">80</span>, <span class="dv">68</span>, <span class="dv">65</span>, <span class="dv">40</span>, <span class="dv">78</span>, <span class="dv">69</span>, <span class="dv">75</span>, <span class="dv">31</span>, <span class="dv">65</span>, <span class="dv">59</span>, <span class="dv">49</span>, <span class="dv">65</span>), </span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">estado_civil =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Soltero"</span>, <span class="st">"Casado"</span>, <span class="st">"Viudo"</span>, <span class="st">"Divorciado"</span>), <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">5</span>)))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
-</div>
-<ol start="2" type="a">
-<li>Calcular los tamaños muestrales según <code>estado_civil</code>.</li>
-</ol>
+</div></li>
+<li><p>Calcular los tamaños muestrales según <code>estado_civil</code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1200,7 +1179,7 @@ Solución 1
 <div id="callout-24" class="callout-24-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Usando la función <code>table</code> del paquete base de R podemos obtener las frecuencias absolutas del estado civil que es el tamaño muestral de cada grupo.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-29_83793c99c696e8a2c1a8824cfa1f3694">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-29_dc7211b5b43def7603a6dc99c34b2e8a">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>estado_civil)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1217,14 +1196,14 @@ Solución 1
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Solución 1
+Solución 2
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-25" class="callout-25-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Usando las funciones <code>groub_by</code>, <code>summarise</code> y <code>n</code> del paquete <code>dplyr</code>.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-30_12c3be5b95dd2269268bd5907ccae096">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-30_5557439e7659a05c3606fb3e30116585">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(estado_civil) <span class="sc">%&gt;%</span></span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1240,10 +1219,8 @@ Solución 1
 </div>
 </div>
 </div>
-</div>
-<ol start="3" type="a">
-<li>Construir la tabla de frecuencias de la variable <code>edad</code> para cada categoría de la variable <code>estado_civil</code>.</li>
-</ol>
+</div></li>
+<li><p>Construir la tabla de frecuencias de la variable <code>edad</code> para cada categoría de la variable <code>estado_civil</code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1257,7 +1234,7 @@ Solución
 <div id="callout-26" class="callout-26-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Para dividir la muestra en grupos se puede usar la función <a href="https://aprendeconalf.es/manual-r/06-preprocesamiento.html#res%C3%BAmenes-por-grupos"><code>group-by</code></a> del paquete <code>dplyr</code>.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-31_e5e59dc9f82fd838e8833a90ac307e01">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-31_5ba8d7d5bc6be6398c53dcbf34c155d3">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
@@ -1408,10 +1385,8 @@ Solución
 </div>
 </div>
 </div>
-</div>
-<ol start="4" type="a">
-<li>Dibujar los diagramas de cajas de la edad según el estado civil. ¿Existen datos atípicos? ¿En qué grupo hay mayor dispersión?</li>
-</ol>
+</div></li>
+<li><p>Dibujar los diagramas de cajas de la edad según el estado civil. ¿Existen datos atípicos? ¿En qué grupo hay mayor dispersión?</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1424,7 +1399,7 @@ Solución
 </div>
 <div id="callout-27" class="callout-27-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-33_7e774d24a962240652d40ee878bdaa15">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-33_a5305bbb6c749f4b8f3c350c80d38da1">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> edad, <span class="at">fill =</span> estado_civil)) <span class="sc">+</span></span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1434,10 +1409,8 @@ Solución
 </div>
 </div>
 </div>
-</div>
-<ol start="5" type="a">
-<li>Dibujar los histogramas de la edad según el estado civil.</li>
-</ol>
+</div></li>
+<li><p>Dibujar los histogramas de la edad según el estado civil.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1450,7 +1423,7 @@ Solución
 </div>
 <div id="callout-28" class="callout-28-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-34_26548aadb78535bc954fd8cb851c303f">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-34_bae2eaae0c848ab5b0732c158e6a3ecd">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> edad, <span class="at">fill =</span> estado_civil)) <span class="sc">+</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">10</span>), <span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">alpha=</span><span class="fl">0.4</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1458,7 +1431,7 @@ Solución
 </div>
 </div>
 <p>Para dibujar cada histograma por separado se puede usar la función <a href="https://aprendeconalf.es/manual-r/07-graficos.html#facetas"><code>facet_wrap</code></a> o <code>facet_grid</code> del paquete <code>ggplot2</code>.</p>
-<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-35_e64ff7e7dad49275903c4c550784255c">
+<div class="cell" data-hash="03-frecuencias-graficos_cache/html/unnamed-chunk-35_6947fad1605824285032c6e6028621af">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> edad, <span class="at">fill =</span> estado_civil)) <span class="sc">+</span></span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Añadir la faceta del estado civil</span></span>
@@ -1469,18 +1442,19 @@ Solución
 </div>
 </div>
 </div>
-</div>
+</div></li>
+</ol>
 </div>
 </section>
 <section id="ejercicios-propuestos" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="ejercicios-propuestos"><span class="header-section-number">3.2</span> Ejercicios propuestos</h2>
-<p>El conjunto de datos <a href="datos/neonatos.csv">neonatos</a> contiene información sobre una muestra de 320 recién nacidos en un hospital durante un año que cumplieron el tiempo normal de gestación.</p>
+<div id="exr-frecuencias-graficos-5" class="theorem exercise">
+<p><span class="theorem-title"><strong>Ejercicio 3.5 </strong></span>El conjunto de datos <a href="datos/neonatos.csv">neonatos</a> contiene información sobre una muestra de 320 recién nacidos en un hospital durante un año que cumplieron el tiempo normal de gestación.</p>
 <ol type="a">
 <li><p>Construir la tabla de frecuencias de la puntuación Apgar al minuto de nacer. Si se considera que una puntuación Apgar de 3 o menos indica que el neonato está deprimido, ¿qué porcentaje de niños está deprimido en la muestra?</p></li>
 <li><p>Comparar las distribuciones de frecuencias de las puntuaciones Apgar al minuto de nacer según si la madre es mayor o menor de 20 años. ¿En qué grupo hay más neonatos deprimidos?</p></li>
 <li><p>Construir la tabla de frecuencias para el peso de los neonatos, agrupando en clases de amplitud <span class="math inline">\(0.5\)</span> desde el <span class="math inline">\(2\)</span> hasta el <span class="math inline">\(4.5\)</span>. ¿En qué intervalo de peso hay más neonatos?</p></li>
 <li><p>Comparar la distribución de frecuencias relativas del peso de los neonatos según si la madre fuma o no. Si se considera como peso bajo un peso menor de <span class="math inline">\(2.5\)</span> kg, ¿En qué grupo hay un mayor porcentaje de niños con peso bajo?</p></li>
-<li><p>Si en los recién nacidos se considera como peso bajo un peso menor de <span class="math inline">\(2.5\)</span> kg, calcular la prevalencia del bajo peso de recién nacidos en el grupo de madres fumadoras y en el de no fumadoras.</p></li>
 <li><p>Construir el diagrama de barras de la puntuación Apgar al minuto. ¿Qué puntuación Apgar es la más frecuente?</p></li>
 <li><p>Construir el diagrama de frecuencias relativas acumuladas de la puntuación Apgar al minuto. ¿Por debajo de que puntuación estarán la mitad de los niños?</p></li>
 <li><p>Comparar mediante diagramas de barras de frecuencias relativas las distribuciones de las puntuaciones Apgar al minuto según si la madre ha fumado o no durante el embarazo. ¿Qué se puede concluir?</p></li>
@@ -1491,6 +1465,7 @@ Solución
 <li><p>Comparar el diagrama de cajas y bigotes del peso, según si la madre fumó o no durante el embarazo y si era mayor o no de 20 años. ¿En qué grupo el peso tiene más dispersión central? ¿En qué grupo pesan menos los niños de la muestra?</p></li>
 <li><p>Comparar el diagrama de cajas de la puntuación Apgar al minuto y a los cinco minutos. ¿En qué variable hay más dispersión central?</p></li>
 </ol>
+</div>
 
 
 </section>

@@ -38,361 +38,361 @@ df1[-4, ] %>%
     kable_styling(full_width = T)
 ```
 
-a. Crear un data frame con los datos de la tabla.
+a.  Crear un data frame con los datos de la tabla.
 
-:::{.callout-tip collapse="true"}
-## Solución
-```{r}
-df <- data.frame(
-    Mes = c("Enero", "Febrero", "Marzo"),
-    Ingresos = c(45000, 41500, 51200),
-    Gastos = c(33400, 35400, 35600)
-    )
-df 
-```
-:::
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    ```{r}
+    df <- data.frame(
+        Mes = c("Enero", "Febrero", "Marzo"),
+        Ingresos = c(45000, 41500, 51200),
+        Gastos = c(33400, 35400, 35600)
+        )
+    df 
+    ```
+    :::
 
-b. Añadir una nueva columna con los siguientes impuestos pagados.
+a.  Añadir una nueva columna con los siguientes impuestos pagados.
 
-```{r, echo = F}
-df1[-4, ] %>%
-    select(Mes, Impuestos) %>%
-    kable() %>%
-    kable_styling(full_width = F)
-```
+    ```{r, echo = F}
+    df1[-4, ] %>%
+        select(Mes, Impuestos) %>%
+        kable() %>%
+        kable_styling(full_width = F)
+    ```
 
-:::{.callout-tip collapse="true"}
-## Solución 1
-Con las funciones básicas de R.
+    :::{.callout-tip collapse="true"}
+    ## Solución 1
+    Con las funciones básicas de R.
 
-```{r}
-df$Impuestos <- c(6450, 6300, 7100)
-df
-```
-:::
+    ```{r}
+    df$Impuestos <- c(6450, 6300, 7100)
+    df
+    ```
+    :::
 
-:::{.callout-tip collapse="true"}
-## Solución 2
-Con las funciones del paquete `dplyr`.
+    :::{.callout-tip collapse="true"}
+    ## Solución 2
+    Con las funciones del paquete `dplyr`.
 
-```{r}
-df <- df %>%
-    mutate(Impuestos = c(6450, 6300, 7100))
-df
-```
-:::
+    ```{r}
+    df <- df %>%
+        mutate(Impuestos = c(6450, 6300, 7100))
+    df
+    ```
+    :::
 
-c. Añadir una nueva fila con los siguientes datos de Abril. 
+a.  Añadir una nueva fila con los siguientes datos de Abril. 
 
-```{r, echo = F}
-df1[4, ] %>%
-    kable(row.names = F) %>%
-    kable_styling(full_width = T)
-```
+    ```{r, echo = F}
+    df1[4, ] %>%
+        kable(row.names = F) %>%
+        kable_styling(full_width = T)
+    ```
 
-:::{.callout-tip collapse="true"}
-## Solución 1 
-Con las funciones básicas de R.
+    :::{.callout-tip collapse="true"}
+    ## Solución 1 
+    Con las funciones básicas de R.
 
-```{r}
-df <- rbind(df, list(Mes = "Abril", Ingresos = 49700, Gastos = 36300, Impuestos = 6850))
-df
-```
-:::
+    ```{r}
+    df <- rbind(df, list(Mes = "Abril", Ingresos = 49700, Gastos = 36300, Impuestos = 6850))
+    df
+    ```
+    :::
 
-:::{.callout-tip collapse="true"}
-## Solución 2 
-Con las funciones del paquete `dplyr`.
+    :::{.callout-tip collapse="true"}
+    ## Solución 2 
+    Con las funciones del paquete `dplyr`.
 
-```{r, echo = F}
-df <- df[-4, ]
-```
+    ```{r, echo = F}
+    df <- df[-4, ]
+    ```
 
-```{r}
-df <- df %>%
-    add_row(Mes = "Abril", Ingresos = 49700, Gastos = 36300, Impuestos = 6850)
-df
-```
-:::
+    ```{r}
+    df <- df %>%
+        add_row(Mes = "Abril", Ingresos = 49700, Gastos = 36300, Impuestos = 6850)
+    df
+    ```
+    :::
 
-d. Cambiar los ingresos de Marzo por 50400. 
+a.  Cambiar los ingresos de Marzo por 50400. 
 
-:::{.callout-tip collapse="true"}
-## Solución
+    :::{.callout-tip collapse="true"}
+    ## Solución
 
-```{r}
-df[3, "Ingresos"] <- 50400
-df
-```
-:::
+    ```{r}
+    df[3, "Ingresos"] <- 50400
+    df
+    ```
+    :::
 
-e. Crear una nueva columna con los beneficios de cada mes (ingresos - gastos - impuestos).
+a.  Crear una nueva columna con los beneficios de cada mes (ingresos - gastos - impuestos).
 
-:::{.callout-tip collapse="true"}
-## Solución 1
-Con las funciones básicas de R.
+    :::{.callout-tip collapse="true"}
+    ## Solución 1
+    Con las funciones básicas de R.
 
-```{r}
-df$Beneficios <- df$Ingresos - df$Gastos - df$Impuestos
-df
-```
-:::
+    ```{r}
+    df$Beneficios <- df$Ingresos - df$Gastos - df$Impuestos
+    df
+    ```
+    :::
 
-:::{.callout-tip collapse="true"}
-## Solución 2
-Con las funciones del paquete `dplyr`.
+    :::{.callout-tip collapse="true"}
+    ## Solución 2
+    Con las funciones del paquete `dplyr`.
 
-```{r}
-df <- df %>%
-    mutate(Beneficios = Ingresos - Gastos - Impuestos)
-df
-```
-:::
+    ```{r}
+    df <- df %>%
+        mutate(Beneficios = Ingresos - Gastos - Impuestos)
+    df
+    ```
+    :::
 
-f. Crear una nueva columna con el factor `Balance` con dos posibles categorías: `positivo` si ha habido beneficios y `negativo` si ha habido pérdidas.
+a.  Crear una nueva columna con el factor `Balance` con dos posibles categorías: `positivo` si ha habido beneficios y `negativo` si ha habido pérdidas.
 
-:::{.callout-tip collapse="true"}
-## Solución 1
-Con las funciones básicas de R.
+    :::{.callout-tip collapse="true"}
+    ## Solución 1
+    Con las funciones básicas de R.
 
-```{r}
-df$Balance <- cut(df$Beneficios, breaks = c(-Inf, 0, Inf), labels = c("negativo", "positivo"))
-df
-```
-:::
+    ```{r}
+    df$Balance <- cut(df$Beneficios, breaks = c(-Inf, 0, Inf), labels = c("negativo", "positivo"))
+    df
+    ```
+    :::
 
-:::{.callout-tip collapse="true"}
-## Solución 2
-Con las funciones del paquete `dplyr`.
+    :::{.callout-tip collapse="true"}
+    ## Solución 2
+    Con las funciones del paquete `dplyr`.
 
-```{r}
-df <- df %>%
-    mutate(Balance = cut(Beneficios, breaks = c(-Inf, 0, Inf), labels = c("negativo", "positivo")))
-df
-```
-:::
+    ```{r}
+    df <- df %>%
+        mutate(Balance = cut(Beneficios, breaks = c(-Inf, 0, Inf), labels = c("negativo", "positivo")))
+    df
+    ```
+    :::
 
-g. Filtrar el conjunto de datos para quedarse con los nombres de los meses y los beneficios de los meses con balance positivo. 
+a.  Filtrar el conjunto de datos para quedarse con los nombres de los meses y los beneficios de los meses con balance positivo. 
 
-:::{.callout-tip collapse="true"}
-## Solución 1
-Con las funciones básicas de R.
+    :::{.callout-tip collapse="true"}
+    ## Solución 1
+    Con las funciones básicas de R.
 
-```{r}
-df[df$Balance == "positivo", c("Mes", "Beneficios")]
-```
-:::
+    ```{r}
+    df[df$Balance == "positivo", c("Mes", "Beneficios")]
+    ```
+    :::
 
-:::{.callout-tip collapse="true"}
-## Solución 2
-Con las funciones del paquete `dplyr`.
+    :::{.callout-tip collapse="true"}
+    ## Solución 2
+    Con las funciones del paquete `dplyr`.
 
-```{r}
-df %>%
-    filter(Balance == "positivo") %>% 
-    select(Mes, Beneficios)
-```
-:::
+    ```{r}
+    df %>%
+        filter(Balance == "positivo") %>% 
+        select(Mes, Beneficios)
+    ```
+    :::
 :::
 
 :::{#exr-preprocesamiento-2}
 El fichero [`colesterol.csv`](datos/colesterol.csv) contiene información de una muestra de pacientes donde se han medido la edad, el sexo, el peso, la altura y el nivel de colesterol, además de su nombre.
 
-a. Crear un data frame con los datos de todos los pacientes del estudio a partir del fichero [`colesterol.csv`](datos/colesterol.csv).
+a.  Crear un data frame con los datos de todos los pacientes del estudio a partir del fichero [`colesterol.csv`](datos/colesterol.csv).
 
-:::{.callout-tip collapse="true"}
-## Solución 1
-Con las funciones básicas de R.
+    :::{.callout-tip collapse="true"}
+    ## Solución 1
+    Con las funciones básicas de R.
 
-```{r}
-df <- read.csv("https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/colesterol.csv")
-df
-```
-:::
+    ```{r}
+    df <- read.csv("https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/colesterol.csv")
+    df
+    ```
+    :::
 
-:::{.callout-tip collapse="true"}
-## Solución 2
-Con las funciones del paquete `readr`.
+    :::{.callout-tip collapse="true"}
+    ## Solución 2
+    Con las funciones del paquete `readr`.
 
-```{r}
-df <- read_csv("https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/colesterol.csv")
-df
-```
-:::
+    ```{r}
+    df <- read_csv("https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/colesterol.csv")
+    df
+    ```
+    :::
 
-b. Crear una nueva columna con el índice de masa corporal, usando la siguiente fórmula 
+a.  Crear una nueva columna con el índice de masa corporal, usando la siguiente fórmula 
 
-$$
-\mbox{IMC} = \frac{\mbox{Peso (kg)}}{\mbox{Altura (cm)}^2}
-$$
+    $$
+    \mbox{IMC} = \frac{\mbox{Peso (kg)}}{\mbox{Altura (cm)}^2}
+    $$
 
-:::{.callout-tip collapse="true"}
-## Solución
+    :::{.callout-tip collapse="true"}
+    ## Solución
 
-```{r}
-df <- df %>%
-    mutate(imc = round(peso/altura^2))
-df
-```
-:::
+    ```{r}
+    df <- df %>%
+        mutate(imc = round(peso/altura^2))
+    df
+    ```
+    :::
 
-c. Crear una nueva columna con la variable `obesidad` recodificando la columna `imc` en las siguientes categorías.
+a.  Crear una nueva columna con la variable `obesidad` recodificando la columna `imc` en las siguientes categorías.
 
-| Rango IMC | Categoría |
-|:-|:-|
-|Menor de 18.5 | Bajo peso |
-|De 18.5 a 24.5 | Saludable |
-|De 24.5 a 30 | Sobrepeso |
-|Mayor de 30 | Obeso |
+    | Rango IMC | Categoría |
+    |:-|:-|
+    |Menor de 18.5 | Bajo peso |
+    |De 18.5 a 24.5 | Saludable |
+    |De 24.5 a 30 | Sobrepeso |
+    |Mayor de 30 | Obeso |
 
-:::{.callout-tip collapse="true"}
-## Solución 
+    :::{.callout-tip collapse="true"}
+    ## Solución 
 
-```{r}
-df <- df %>%
-    mutate(Obesidad = cut(imc, breaks = c(0, 18.5, 24.5, 30, Inf), labels = c("Bajo peso", "Saludable", "Sobrepeso", "Obeso")))
-df
-```
-:::
+    ```{r}
+    df <- df %>%
+        mutate(Obesidad = cut(imc, breaks = c(0, 18.5, 24.5, 30, Inf), labels = c("Bajo peso", "Saludable", "Sobrepeso", "Obeso")))
+    df
+    ```
+    :::
 
-d. Seleccionar las columnas `nombre`, `sexo` y `edad`.
+a.  Seleccionar las columnas `nombre`, `sexo` y `edad`.
 
-:::{.callout-tip collapse="true"}
-## Solución
+    :::{.callout-tip collapse="true"}
+    ## Solución
 
-```{r}
-df %>%
-    select(nombre, sexo, edad)
-```
-:::
+    ```{r}
+    df %>%
+        select(nombre, sexo, edad)
+    ```
+    :::
 
-e. Anonimizar los datos eliminando la columna `nombre`.
+a.  Anonimizar los datos eliminando la columna `nombre`.
 
-:::{.callout-tip collapse="true"}
-## Solución
+    :::{.callout-tip collapse="true"}
+    ## Solución
 
-```{r}
-df %>%
-    select(-nombre)
-```
-:::
+    ```{r}
+    df %>%
+        select(-nombre)
+    ```
+    :::
 
-f. Reordenar las columnas poniendo la columna `sexo` antes que la columna `edad`.
+a.  Reordenar las columnas poniendo la columna `sexo` antes que la columna `edad`.
 
-:::{.callout-tip collapse="true"}
-## Solución
+    :::{.callout-tip collapse="true"}
+    ## Solución
 
-```{r}
-df %>%
-    select(nombre, sexo, edad, everything())
-```
-:::
+    ```{r}
+    df %>%
+        select(nombre, sexo, edad, everything())
+    ```
+    :::
 
-g. Filtrar el data frame para quedarse con las mujeres.
+a.  Filtrar el data frame para quedarse con las mujeres.
 
-:::{.callout-tip collapse="true"}
-## Solución
+    :::{.callout-tip collapse="true"}
+    ## Solución
 
-```{r}
-df %>%
-    filter(sexo == "M")
-```
-:::
+    ```{r}
+    df %>%
+        filter(sexo == "M")
+    ```
+    :::
 
-h. Filtrar el data frame para quedarse con los hombres mayores de 30 años.
+a.  Filtrar el data frame para quedarse con los hombres mayores de 30 años.
 
-:::{.callout-tip collapse="true"}
-## Solución
+    :::{.callout-tip collapse="true"}
+    ## Solución
 
-```{r}
-df %>%
-    filter( sexo == "H" & edad > 30)
-```
-:::
+    ```{r}
+    df %>%
+        filter( sexo == "H" & edad > 30)
+    ```
+    :::
 
-i. Filtrar el data frame para eliminar las filas con datos perdidos en la columna `colesterol`.
+a.  Filtrar el data frame para eliminar las filas con datos perdidos en la columna `colesterol`.
 
-:::{.callout-tip collapse="true"}
-## Solución
+    :::{.callout-tip collapse="true"}
+    ## Solución
 
-```{r}
-df %>%
-    filter(!is.na(colesterol))
-```
-:::
+    ```{r}
+    df %>%
+        filter(!is.na(colesterol))
+    ```
+    :::
 
-j. Ordenar el data frame según la columna `nombre`.
+a.  Ordenar el data frame según la columna `nombre`.
 
-:::{.callout-tip collapse="true"}
-## Solución
+    :::{.callout-tip collapse="true"}
+    ## Solución
 
-```{r}
-df %>%
-    arrange(nombre)
-```
-:::
+    ```{r}
+    df %>%
+        arrange(nombre)
+    ```
+    :::
 
-k. Ordenar el data frame ascendentemente por la columna `sexo` y descendentemente por la columna `edad`.
+a.  Ordenar el data frame ascendentemente por la columna `sexo` y descendentemente por la columna `edad`.
 
-:::{.callout-tip collapse="true"}
-## Solución
+    :::{.callout-tip collapse="true"}
+    ## Solución
 
-```{r}
-df %>%
-    arrange(sexo, desc(edad))
-```
-:::
+    ```{r}
+    df %>%
+        arrange(sexo, desc(edad))
+    ```
+    :::
 :::
 
 :::{#exr-preprocesamiento-3}
 El fichero [`notas-curso2.csv`](datos/notas-curso2.csv) contiene las notas de las asignaturas de un curso en varios grupos de alumnos.
 
-a. Crear un data frame con los datos del curso a partir del fichero [`notas-curso2.csv`](datos/notas-curso2.csv).
+a.  Crear un data frame con los datos del curso a partir del fichero [`notas-curso2.csv`](datos/notas-curso2.csv).
 
-:::{.callout-tip collapse="true"}
-## Solución
+    :::{.callout-tip collapse="true"}
+    ## Solución
 
-```{r}
-df <- read_csv("https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/notas-curso2.csv")
-df
-```
-:::
+    ```{r}
+    df <- read_csv("https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/notas-curso2.csv")
+    df
+    ```
+    :::
 
-b. Convertir el data frame a formato largo. 
+a.  Convertir el data frame a formato largo. 
 
-:::{.callout-tip collapse="true"}
-## Solución
+    :::{.callout-tip collapse="true"}
+    ## Solución
 
-```{r}
-df_largo <- df %>% pivot_longer(notaA:notaE, names_to = "Asignatura", values_to = "Nota")
-df_largo
-```
-:::
+    ```{r}
+    df_largo <- df %>% pivot_longer(notaA:notaE, names_to = "Asignatura", values_to = "Nota")
+    df_largo
+    ```
+    :::
 
-c. Crear una nueva columna con la variable `calificación` que contenga las calificaciones de cada asignatura.
+a.  Crear una nueva columna con la variable `calificación` que contenga las calificaciones de cada asignatura.
 
-:::{.callout-tip collapse="true"}
-## Solución
+    :::{.callout-tip collapse="true"}
+    ## Solución
 
-```{r}
-df_largo <- df_largo %>%
-    mutate(Califiación = cut(Nota, breaks = c(0, 4.99, 6.99, 8.99, 10), labels = c("SS", "AP", "NT", "SB")))
-df_largo
-```
-:::
+    ```{r}
+    df_largo <- df_largo %>%
+        mutate(Califiación = cut(Nota, breaks = c(0, 4.99, 6.99, 8.99, 10), labels = c("SS", "AP", "NT", "SB")))
+    df_largo
+    ```
+    :::
 
-d. Filtrar el conjunto de datos para obtener las asignaturas y las notas de las mujeres del grupo A, ordenadas de mayor a menor.
+a.  Filtrar el conjunto de datos para obtener las asignaturas y las notas de las mujeres del grupo A, ordenadas de mayor a menor.
 
-:::{.callout-tip collapse="true"}
-## Solución
+    :::{.callout-tip collapse="true"}
+    ## Solución
 
-```{r}
-df_largo %>%
-    filter(sexo == "Mujer", grupo == "A") %>%
-    select(Asignatura, Nota) %>%
-    arrange(desc(Nota))
-```
-:::
+    ```{r}
+    df_largo %>%
+        filter(sexo == "Mujer", grupo == "A") %>%
+        select(Asignatura, Nota) %>%
+        arrange(desc(Nota))
+    ```
+    :::
 :::
 
 ## Ejercicios Propuestos
@@ -409,66 +409,66 @@ La siguiente tabla recoge las notas de los alumnos de un curso con dos asignatur
 | Luis | H | 3.5 | 5 |
 | Sara | M | 6.2 | 4 |
 
-a. Definir cuatro vectores con el nombre, el sexo y las notas de Física y Química.
+a.  Definir cuatro vectores con el nombre, el sexo y las notas de Física y Química.
 
-:::{.callout-tip collapse="true"}
-## Solución 
-```{r}
-nombre <- c("Carlos", "María", "Carmen", "Pedro", "Luis", "Sara")
-sexo <- c("H", "M", "M", "H", "H", "M")
-fisica <- c(6.7, 7.2, 5.5, NA, 3.5, 6.2)
-quimica <- c(8.1, 9.5, 5, 4.5, 5, 4)
-```
-:::
+    :::{.callout-tip collapse="true"}
+    ## Solución 
+    ```{r}
+    nombre <- c("Carlos", "María", "Carmen", "Pedro", "Luis", "Sara")
+    sexo <- c("H", "M", "M", "H", "H", "M")
+    fisica <- c(6.7, 7.2, 5.5, NA, 3.5, 6.2)
+    quimica <- c(8.1, 9.5, 5, 4.5, 5, 4)
+    ```
+    :::
 
-b. Convertir el sexo en un factor y mostrar sus niveles.
+a.  Convertir el sexo en un factor y mostrar sus niveles.
 
-:::{.callout-tip collapse="true"}
-## Solución 
-```{r}
-sexo <- factor(sexo)
-levels(sexo)
-```
-:::
+    :::{.callout-tip collapse="true"}
+    ## Solución 
+    ```{r}
+    sexo <- factor(sexo)
+    levels(sexo)
+    ```
+    :::
 
-c. Crear un data frame con el nombre, sexo y las notas de Física y Química.
+a.  Crear un data frame con el nombre, sexo y las notas de Física y Química.
 
-:::{.callout-tip collapse="true"}
-## Solución 
-```{r}
-df <- data.frame(nombre, sexo, fisica, quimica)
-df
-```
-:::
+    :::{.callout-tip collapse="true"}
+    ## Solución 
+    ```{r}
+    df <- data.frame(nombre, sexo, fisica, quimica)
+    df
+    ```
+    :::
 
-d. Crear una nueva columna con la nota media de Física y Química.
+a.  Crear una nueva columna con la nota media de Física y Química.
 
-:::{.callout-tip collapse="true"}
-## Solución 
-```{r}
-df$media <- (df$fisica + df$quimica) / 2
-df
-```
-:::
+    :::{.callout-tip collapse="true"}
+    ## Solución 
+    ```{r}
+    df$media <- (df$fisica + df$quimica) / 2
+    df
+    ```
+    :::
 
-e. Crear una nueva columna booleana `aprobado` que tenga el valor `TRUE` si la media es mayor o igual que 5 y `FALSE` en caso contrario.
+a.  Crear una nueva columna booleana `aprobado` que tenga el valor `TRUE` si la media es mayor o igual que 5 y `FALSE` en caso contrario.
 
-:::{.callout-tip collapse="true"}
-## Solución 
-```{r}
-df$aprobado <- df$media >= 5
-df
-```
-:::
+    :::{.callout-tip collapse="true"}
+    ## Solución 
+    ```{r}
+    df$aprobado <- df$media >= 5
+    df
+    ```
+    :::
 
-f. Filtrar el data frame para quedarse con el nombre y la media de las mujeres que han aprobado.
+a.  Filtrar el data frame para quedarse con el nombre y la media de las mujeres que han aprobado.
 
-:::{.callout-tip collapse="true"}
-## Solución 
-```{r}
-df[df$sexo == "M" & df$media >= 5, c("nombre", "media")]
-```
-:::
+    :::{.callout-tip collapse="true"}
+    ## Solución 
+    ```{r}
+    df[df$sexo == "M" & df$media >= 5, c("nombre", "media")]
+    ```
+    :::
 :::
 
 
@@ -500,27 +500,27 @@ El archivo de claves de aleatorización contiene sólo dos variables.
 - CLAVE: Clave de aleatorización
 - FARMACO: Fármaco administrado (0: Placebo, 1: IECA,  2:Ca Antagonista + diurético)
 
-a. Crear un data frame con los datos de los pacientes del hospital A (fichero de csv [datos-hospital-a.csv](datos/hipertension/datos-hospital-a.csv)).
+a.  Crear un data frame con los datos de los pacientes del hospital A (fichero de csv [datos-hospital-a.csv](datos/hipertension/datos-hospital-a.csv)).
 
-b. Crear un data frame con los datos de los pacientes del hospital B (fichero csv [datos-hospital-b.csv](datos/hipertension/datos-hospital-b.csv)).
+a.  Crear un data frame con los datos de los pacientes del hospital B (fichero csv [datos-hospital-b.csv](datos/hipertension/datos-hospital-b.csv)).
 
-c. Fusionar los datos de los dos hospitales en un nuevo data frame.
+a.  Fusionar los datos de los dos hospitales en un nuevo data frame.
 
-:::{.callout-note collapse="true"}
-## Ayuda
-Para fusionar las filas de dos data frames con las mismas columnas usar la función [`rbind`](https://aprendeconalf.es/manual-r/03-tipos-datos-estructurados.html#a%C3%B1adir-elementos-a-un-data-frame).
-:::
+    :::{.callout-note collapse="true"}
+    ## Ayuda
+    Para fusionar las filas de dos data frames con las mismas columnas usar la función [`rbind`](https://aprendeconalf.es/manual-r/03-tipos-datos-estructurados.html#a%C3%B1adir-elementos-a-un-data-frame).
+    :::
 
-d. Crear un data frame con los datos de las claves de aleatorización (fichero csv [claves-aleatorizacion.csv](datos/hipertension/claves-aleatorizacion.csv))
+a.  Crear un data frame con los datos de las claves de aleatorización (fichero csv [claves-aleatorizacion.csv](datos/hipertension/claves-aleatorizacion.csv))
 
-e. Fusionar el data frame con los datos clínicos y el data frame con claves de aleatorización en un nuevo data frame.
+a.  Fusionar el data frame con los datos clínicos y el data frame con claves de aleatorización en un nuevo data frame.
 
-:::{.callout-note collapse="true"}
-## Ayuda
-Para fusionar las columnas de dos data frames usando una misma columna como clave en ambos data frames usar la función [`left_join`](https://dtplyr.tidyverse.org/reference/left_join.dtplyr_step.html) del paquete `dplyr`.
-:::
+    :::{.callout-note collapse="true"}
+    ## Ayuda
+    Para fusionar las columnas de dos data frames usando una misma columna como clave en ambos data frames usar la función [`left_join`](https://dtplyr.tidyverse.org/reference/left_join.dtplyr_step.html) del paquete `dplyr`.
+    :::
 
-f. Convertir en un factor el sexo.
+a.  Convertir en un factor el sexo.
 
-g. Crear una nueva columna para la evolución de la presión arterial diastólica restando las columnas `PAS_FIN` y `PAS_FIN`.
+a.  Crear una nueva columna para la evolución de la presión arterial diastólica restando las columnas `PAS_FIN` y `PAS_FIN`.
 :::

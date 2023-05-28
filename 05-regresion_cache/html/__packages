@@ -1,7 +1,7 @@
 ggplot2
 readr
 dplyr
-broom
-kableExtra
 tidyr
 purrr
+broom
+kableExtra

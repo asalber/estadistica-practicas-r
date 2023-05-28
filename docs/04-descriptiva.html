@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -94,7 +94,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "resultados adicionales en este documento",
     "search-clear-button-title": "Borrar",
     "search-detached-cancel-button-title": "Cancelar",
-    "search-submit-button-title": "Enviar"
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
   }
 }</script>
 
@@ -106,11 +107,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <meta property="og:title" content="Prácticas de Estadística con R - 4&nbsp; Estadística Descriptiva">
 <meta property="og:description" content="">
-<meta property="og:image" content="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAADcAAAEKCAQAAAAcQQUKAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cDHwU1O52+VfoAAAETSURBVHja7dZdDsFQFIVRFaMzAkbICEyP11s/oelub5yu/SbIipwmvuG+W3P7VbXi3KF9cXl7yNMwj2i/fhi/dXz58C3662rfDofD4XC4LtzTv3n2v/t1Q5snyzRn2yq1b9fzUbku0pkfOZ2Jw+FwONwfcjozOOEXXO3b4XA4HA63BU5nBqczg6t9OxwOh8PhtsDpzOB0ZnC1b4fD4XA4XBdO+AVXm9OZOBwOh8PhJk1nBleb05k4HA6Hw+EmTWcGJ/yCq307HA6Hw+G2wOnM4HRmcLVvh8PhcDjcFjidGZzODK727XA4HA6H68IJv+Bqcz905tydm+N97cy5Gz/rtW+Hw+FwOFwXrmdnLr/at1uZewBxe0ESBJWlqgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wMy0zMVQwNTo1Mzo1OSswMDowMDF3aOsAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDMtMzFUMDU6NTM6NTkrMDA6MDBAKtBXAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTAzLTMxVDA1OjUzOjU5KzAwOjAwFz/xiAAAAABJRU5ErkJggg==">
+<meta property="og:image" content="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAADcAAAEKCAQAAAAcQQUKAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cFHBYhGnzs1ZYAAAETSURBVHja7dZdDsFQFIVRFaMzAkbICEyP11s/oelub5yu/SbIipwmvuG+W3P7VbXi3KF9cXl7yNMwj2i/fhi/dXz58C3662rfDofD4XC4LtzTv3n2v/t1Q5snyzRn2yq1b9fzUbku0pkfOZ2Jw+FwONwfcjozOOEXXO3b4XA4HA63BU5nBqczg6t9OxwOh8PhtsDpzOB0ZnC1b4fD4XA4XBdO+AVXm9OZOBwOh8PhJk1nBleb05k4HA6Hw+EmTWcGJ/yCq307HA6Hw+G2wOnM4HRmcLVvh8PhcDjcFjidGZzODK727XA4HA6H68IJv+Bqcz905tydm+N97cy5Gz/rtW+Hw+FwOFwXrmdnLr/at1uZewBxe0ESBJWlqgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wNS0yOFQyMjozMzoyNiswMDowMH5T1yMAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDUtMjhUMjI6MzM6MjYrMDA6MDAPDm+fAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTA1LTI4VDIyOjMzOjI2KzAwOjAwWBtOQAAAAABJRU5ErkJggg==">
 <meta property="og:site-name" content="Prácticas de Estadística con R">
 <meta name="twitter:title" content="Prácticas de Estadística con R - 4&nbsp; Estadística Descriptiva">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAADcAAAEKCAQAAAAcQQUKAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cDHwU1O52+VfoAAAETSURBVHja7dZdDsFQFIVRFaMzAkbICEyP11s/oelub5yu/SbIipwmvuG+W3P7VbXi3KF9cXl7yNMwj2i/fhi/dXz58C3662rfDofD4XC4LtzTv3n2v/t1Q5snyzRn2yq1b9fzUbku0pkfOZ2Jw+FwONwfcjozOOEXXO3b4XA4HA63BU5nBqczg6t9OxwOh8PhtsDpzOB0ZnC1b4fD4XA4XBdO+AVXm9OZOBwOh8PhJk1nBleb05k4HA6Hw+EmTWcGJ/yCq307HA6Hw+G2wOnM4HRmcLVvh8PhcDjcFjidGZzODK727XA4HA6H68IJv+Bqcz905tydm+N97cy5Gz/rtW+Hw+FwOFwXrmdnLr/at1uZewBxe0ESBJWlqgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wMy0zMVQwNTo1Mzo1OSswMDowMDF3aOsAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDMtMzFUMDU6NTM6NTkrMDA6MDBAKtBXAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTAzLTMxVDA1OjUzOjU5KzAwOjAwFz/xiAAAAABJRU5ErkJggg==">
+<meta name="twitter:image" content="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAADcAAAEKCAQAAAAcQQUKAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cFHBYhGnzs1ZYAAAETSURBVHja7dZdDsFQFIVRFaMzAkbICEyP11s/oelub5yu/SbIipwmvuG+W3P7VbXi3KF9cXl7yNMwj2i/fhi/dXz58C3662rfDofD4XC4LtzTv3n2v/t1Q5snyzRn2yq1b9fzUbku0pkfOZ2Jw+FwONwfcjozOOEXXO3b4XA4HA63BU5nBqczg6t9OxwOh8PhtsDpzOB0ZnC1b4fD4XA4XBdO+AVXm9OZOBwOh8PhJk1nBleb05k4HA6Hw+EmTWcGJ/yCq307HA6Hw+G2wOnM4HRmcLVvh8PhcDjcFjidGZzODK727XA4HA6H68IJv+Bqcz905tydm+N97cy5Gz/rtW+Hw+FwOFwXrmdnLr/at1uZewBxe0ESBJWlqgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wNS0yOFQyMjozMzoyNiswMDowMH5T1yMAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDUtMjhUMjI6MzM6MjYrMDA6MDAPDm+fAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTA1LTI4VDIyOjMzOjI2KzAwOjAwWBtOQAAAAABJRU5ErkJggg==">
 <meta name="twitter:site" content="@aprendeconalf">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -127,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-descriptiva.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Estadística Descriptiva</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -305,7 +306,7 @@ Solución
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-1_32dfa7835d2e00e5cc8e23a23e95d055">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-1_b2c777293b72a2919f8c30f23ff6dcb2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">hijos =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
@@ -324,7 +325,7 @@ Solución
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-2_be37f940b2233e93d9d7cecc54a0b70e">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-2_20161495727dbedb4d62efd5cf4925d2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(df)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 25</code></pre>
@@ -346,7 +347,7 @@ Solución
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-3_e60fb7fb9effcaa283758c18d861c821">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-3_e05cfc271b18cabf260c1f6fd93450f6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>hijos)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.76</code></pre>
@@ -368,7 +369,7 @@ Solución
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-4_d4395c4912a4d70291a15d5266f8e64b">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-4_bc80d752f961429ddaf8dce113d76aea">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df<span class="sc">$</span>hijos)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2</code></pre>
@@ -391,7 +392,7 @@ Solución
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>El paquete base de R no tiene implementada ninguna función para calcular la moda, así que definiremos nuestra propia función.</p>
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-5_1a7de9f08e4198fc826da1e7ad0c8d9f">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-5_4387a5bfb93228d52cc3dcf72784a0f6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>moda <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">unique</span>(x) <span class="co"># Vector con los valores de la muestra sin repetir (sin ordenar).</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">tabulate</span>(<span class="fu">match</span>(x, u)) <span class="co"># Frecuencias absolutas de los valores en u.</span></span>
@@ -419,7 +420,7 @@ Solución
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-6_863204ade4bcd66686136e67667560ac">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-6_e496883727f8163bf4e9284564868733">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(df<span class="sc">$</span>hijos)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
@@ -441,7 +442,7 @@ Solución
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-7_bc5cb33ddea489e00a2a861a25dd22ca">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-7_3dc3763e3934f055f8dbe4ec95f7bf85">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(df<span class="sc">$</span>hijos)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4</code></pre>
@@ -463,7 +464,7 @@ Solución
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-8_b34fc40c88866ee47e04453a87885d77">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-8_91012ca238af3c5e8c1244af5f806b2f">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(df<span class="sc">$</span>hijos, <span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>25% 50% 75% 
@@ -486,7 +487,7 @@ Solución
 </div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-9_dfe58516071c728162d1b1bba66c43f9">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-9_a79ff65e833a598bdebda2d2374f4f94">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(df<span class="sc">$</span>hijos, <span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.95</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> 5% 95% 
@@ -509,7 +510,7 @@ Solución
 </div>
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-10_1d0325d11d4b79d8b66de2d22babbdff">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-10_810a28408a29dca88b03681851339962">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(df<span class="sc">$</span>hijos) <span class="sc">-</span> <span class="fu">min</span>(df<span class="sc">$</span>hijos)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4</code></pre>
@@ -531,7 +532,7 @@ Solución
 </div>
 <div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-11_42715aeacd1f3ae0d7074fe323a045fa">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-11_066e45383c358dd3e6e3f00227bc88f6">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">IQR</span>(df<span class="sc">$</span>hijos)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1</code></pre>
@@ -554,7 +555,7 @@ Solución
 <div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>R dispone de la función <code>var</code> para calcular la <em>cuasivarianza</em> o <em>varianza corregida</em> <span class="math inline">\(\sum \frac{(x_i-\bar x)^2}{n-1}\)</span>, pero no dispone de una función para calcular la varianza, de manera que para calcularla hay que corregir la cuasivarianza.</p>
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-12_0837fb21b3924d5d6f0e19725b1c4adc">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-12_37e4e25c83422cfb266631f4f1dc7933">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Cuasivarianza</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Cuasivarianza:"</span>, <span class="fu">var</span>(df<span class="sc">$</span>hijos)))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -584,7 +585,7 @@ Solución
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>R dispone de la función <code>sd</code> para calcular la <em>cuasidesviación típica</em> o <em>desviación típica corregida</em> <span class="math inline">\(\sqrt{\sum \frac{(x_i-\bar x)^2}{n-1}}\)</span>, pero no dispone de una función para calcular la desviación típica, de manera que para calcularla hay que corregir la cuasidesviación típica.</p>
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-13_3030cf7753f1dbca88cefcc5004c6a0d">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-13_00df2fada96c7e7408e81a8db1b4d70c">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Cuasidesviación típica</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Cuasidesviación típica:"</span>, <span class="fu">sd</span>(df<span class="sc">$</span>hijos)))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -613,7 +614,7 @@ Solución
 </div>
 <div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-14_6b736bdd01dfd367c6dd48d4274300b4">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-14_749dfea0648bef5891c0c7fa18fb305d">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(df<span class="sc">$</span>hijos) <span class="sc">/</span> <span class="fu">abs</span>(<span class="fu">mean</span>(df<span class="sc">$</span>hijos))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.4996555</code></pre>
@@ -636,7 +637,7 @@ Solución
 <div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Para calcular el coeficiente de asimetría se utiliza el paquete <em>moments</em>.</p>
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-15_c3c57a9d41d289c024749c7468d24dea">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-15_0318af126c881cde0de423eb55b1da15">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(moments)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(df<span class="sc">$</span>hijos)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -661,7 +662,7 @@ Solución
 <div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Para calcular el coeficiente de apuntamiento se utiliza el paquete <em>moments</em>.</p>
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-16_7b980b80dc61aab60dfcc2e07ebd4881">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-16_fb60b3f481163e14bd341217f4549337">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(moments)</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(df<span class="sc">$</span>hijos)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -690,7 +691,7 @@ Solución
 </div>
 <div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-17_7218f2836b468145a6c5748f25c7fc89">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-17_12fb56bf35ae5cfd1ccf70d8e22f10e6">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/colesterol.csv"</span>)</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -744,7 +745,7 @@ Solución
 </div>
 <div id="callout-19" class="callout-19-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-19_502f0d2d3e5cc2afc4e6382946af2ab4">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-19_69cb79c900809ec200cdf960062d6a93">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Media:"</span>, <span class="fu">mean</span>(df<span class="sc">$</span>colesterol, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Media: 220.230769230769"</code></pre>
@@ -771,7 +772,7 @@ Solución 1
 <div id="callout-20" class="callout-20-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Usando el paquete base de R.</p>
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-20_80e02298242ef1b36f71bebd9c428c0b">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-20_6d551867914c5f9b80a94d028fab9b0b">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    nombre               edad           sexo                peso       
@@ -808,7 +809,7 @@ Solución 2
 <div id="callout-21" class="callout-21-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Usando la función <code>st</code> del paquete <a href="https://cran.r-project.org/web/packages/vtable/vignettes/sumtable.html"><code>vtable</code></a>.</p>
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-21_7e7df2bd0de8dab8eee302c844a19b01">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-21_2bb137af39e75d723ece0d6ad820c778">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vtable)</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">st</span>(df)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -919,7 +920,7 @@ Solución 3
 <div id="callout-22" class="callout-22-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Usando la función <code>skim</code> del paquete <a href="https://cran.r-project.org/web/packages/skimr/vignettes/skimr.html"><code>skimr</code></a>.</p>
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-22_bc72b83df901bfc31d6ee00954058e2d">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-22_3dc9954a3a4b78fef4c28b68b4920a4b">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(df)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1290,7 +1291,7 @@ Solución 4
 <div id="callout-23" class="callout-23-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Usando las funciones <code>descr</code> y <code>dfSummary</code> del paquete <a href="https://cran.r-project.org/web/packages/summarytools/vignettes/introduction.html"><code>summarytools</code></a>.</p>
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-23_ed773a3496bb4283accc90a645f35c4f">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-23_083952ca4f92655e344375d8ff12bb3b">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(summarytools)</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">descr</span>(df) <span class="sc">%&gt;%</span></span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
@@ -1558,7 +1559,7 @@ Solución 4
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADcAAAEKCAQAAAAcQQUKAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cDHwU1O52+VfoAAAETSURBVHja7dZdDsFQFIVRFaMzAkbICEyP11s/oelub5yu/SbIipwmvuG+W3P7VbXi3KF9cXl7yNMwj2i/fhi/dXz58C3662rfDofD4XC4LtzTv3n2v/t1Q5snyzRn2yq1b9fzUbku0pkfOZ2Jw+FwONwfcjozOOEXXO3b4XA4HA63BU5nBqczg6t9OxwOh8PhtsDpzOB0ZnC1b4fD4XA4XBdO+AVXm9OZOBwOh8PhJk1nBleb05k4HA6Hw+EmTWcGJ/yCq307HA6Hw+G2wOnM4HRmcLVvh8PhcDjcFjidGZzODK727XA4HA6H68IJv+Bqcz905tydm+N97cy5Gz/rtW+Hw+FwOFwXrmdnLr/at1uZewBxe0ESBJWlqgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wMy0zMVQwNTo1Mzo1OSswMDowMDF3aOsAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDMtMzFUMDU6NTM6NTkrMDA6MDBAKtBXAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTAzLTMxVDA1OjUzOjU5KzAwOjAwFz/xiAAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADcAAAEKCAQAAAAcQQUKAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cFHBYhGnzs1ZYAAAETSURBVHja7dZdDsFQFIVRFaMzAkbICEyP11s/oelub5yu/SbIipwmvuG+W3P7VbXi3KF9cXl7yNMwj2i/fhi/dXz58C3662rfDofD4XC4LtzTv3n2v/t1Q5snyzRn2yq1b9fzUbku0pkfOZ2Jw+FwONwfcjozOOEXXO3b4XA4HA63BU5nBqczg6t9OxwOh8PhtsDpzOB0ZnC1b4fD4XA4XBdO+AVXm9OZOBwOh8PhJk1nBleb05k4HA6Hw+EmTWcGJ/yCq307HA6Hw+G2wOnM4HRmcLVvh8PhcDjcFjidGZzODK727XA4HA6H68IJv+Bqcz905tydm+N97cy5Gz/rtW+Hw+FwOFwXrmdnLr/at1uZewBxe0ESBJWlqgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wNS0yOFQyMjozMzoyNiswMDowMH5T1yMAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDUtMjhUMjI6MzM6MjYrMDA6MDAPDm+fAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTA1LTI4VDIyOjMzOjI2KzAwOjAwWBtOQAAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">14 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1582,7 +1583,7 @@ Solución 4
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">12 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cDHwU1O52+VfoAAAFSSURBVHja7dzLCcJAFEBRI1ZnBVqhVmB7uh3dyImMH7xnJyTyuDBZPWa5biK2nx7g1xQMFQztxh/2PTtP/fwdlpmz2L+PD+/kxUd7ePaCT8+dZb2OJCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYuluom7tTaL5pltHDBuK79viek0lmzzLqSKKCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGXbqj7Xbaudxzu9PvTYOsXBzuSqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGBoGVfxTl96jd6njRuIS41MRxIVDBUM3QB5IxYydzivEAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wMy0zMVQwNTo1Mzo1OSswMDowMDF3aOsAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDMtMzFUMDU6NTM6NTkrMDA6MDBAKtBXAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTAzLTMxVDA1OjUzOjU5KzAwOjAwFz/xiAAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cFHBYhGnzs1ZYAAAFSSURBVHja7dzLCcJAFEBRI1ZnBVqhVmB7uh3dyImMH7xnJyTyuDBZPWa5biK2nx7g1xQMFQztxh/2PTtP/fwdlpmz2L+PD+/kxUd7ePaCT8+dZb2OJCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYuluom7tTaL5pltHDBuK79viek0lmzzLqSKKCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGXbqj7Xbaudxzu9PvTYOsXBzuSqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGBoGVfxTl96jd6njRuIS41MRxIVDBUM3QB5IxYydzivEAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wNS0yOFQyMjozMzoyNiswMDowMH5T1yMAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDUtMjhUMjI6MzM6MjYrMDA6MDAPDm+fAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTA1LTI4VDIyOjMzOjI2KzAwOjAwWBtOQAAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">14 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1615,7 +1616,7 @@ Solución 4
 </tr>
 </tbody>
 </table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAGIAAAA3CAQAAABd71fBAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cDHwU1O52+VfoAAACgSURBVGje7djBCYAwEADBRKzOCrRCrSDt6TcRBMknm2Pn50Nx4SJ4+U7zW0a/gBGRItb64pzogBz5IyKlbfS7/VSaqxDjZASFERRGUBhBYQSFERRGUBhBYQTF6x+79D1lsFwvOCZadqRq2RFjnEJENGfiGj5Pe+65C7U86/2shBgnIyiMoDCCwggKIyiMoDCCwggKIyjiLc9mFWKcjKB4AMlDC+F+elCbAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTAzLTMxVDA1OjUzOjU5KzAwOjAwMXdo6wAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wMy0zMVQwNTo1Mzo1OSswMDowMEAq0FcAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjMtMDMtMzFUMDU6NTM6NTkrMDA6MDAXP/GIAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAGIAAAA3CAQAAABd71fBAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cFHBYhGnzs1ZYAAACgSURBVGje7djBCYAwEADBRKzOCrRCrSDt6TcRBMknm2Pn50Nx4SJ4+U7zW0a/gBGRItb64pzogBz5IyKlbfS7/VSaqxDjZASFERRGUBhBYQSFERRGUBhBYQTF6x+79D1lsFwvOCZadqRq2RFjnEJENGfiGj5Pe+65C7U86/2shBgnIyiMoDCCwggKIyiMoDCCwggKIyjiLc9mFWKcjKB4AMlDC+F+elCbAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTA1LTI4VDIyOjMzOjI2KzAwOjAwflPXIwAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wNS0yOFQyMjozMzoyNiswMDowMA8Ob58AAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjMtMDUtMjhUMjI6MzM6MjYrMDA6MDBYG05AAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">14 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1639,7 +1640,7 @@ Solución 4
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">12 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cDHwU1O52+VfoAAAFbSURBVHja7dzBbYMwAEBRiJguEzQTthNkvfTqVr08aCAR/90iIQRfMgfb8fyYIi5HP8C7KRgqGFrGH/Y9+8LP38d89MuuNT74svou0zRd4dr70W/9TxqSqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGDox7Zz3Xl/Rr/26Z9x571pSKKCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqFNZ++Y5y6x7HUU0o7BbIFFrt5zQaYhiQqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoZ2nKJ+Hbq6cBvWC04ZbMsfOBqSqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYGgep7c/O6zoT+Oc/lwj05BEBUMFQ99UMBOPZ+QYAQAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wMy0zMVQwNTo1Mzo1OSswMDowMDF3aOsAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDMtMzFUMDU6NTM6NTkrMDA6MDBAKtBXAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTAzLTMxVDA1OjUzOjU5KzAwOjAwFz/xiAAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cFHBYhGnzs1ZYAAAFbSURBVHja7dzBbYMwAEBRiJguEzQTthNkvfTqVr08aCAR/90iIQRfMgfb8fyYIi5HP8C7KRgqGFrGH/Y9+8LP38d89MuuNT74svou0zRd4dr70W/9TxqSqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGDox7Zz3Xl/Rr/26Z9x571pSKKCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqFNZ++Y5y6x7HUU0o7BbIFFrt5zQaYhiQqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoZ2nKJ+Hbq6cBvWC04ZbMsfOBqSqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYGgep7c/O6zoT+Oc/lwj05BEBUMFQ99UMBOPZ+QYAQAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wNS0yOFQyMjozMzoyNiswMDowMH5T1yMAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDUtMjhUMjI6MzM6MjYrMDA6MDAPDm+fAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTA1LTI4VDIyOjMzOjI2KzAwOjAwWBtOQAAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">13 (92.9%)</td>
 <td style="text-align: center;">1 (7.1%)</td>
 </tr>
@@ -1663,7 +1664,7 @@ Solución 4
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">14 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cDHwU1O52+VfoAAAFfSURBVHja7dyxbcMwFEDBKPB0mSCZMJnA6yUtHbh5BEFB8F3nwqbwAKqgvnz8vlG8n30BVyNYJFh0Gz/svp/9TC74eey9znG52/SvLPEx8Z37qVdsS0aCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRUvGzmfn7Xevt2K+f9Gc/sy8/fzE/d7VHtmSkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFg0cn/vbPX7MOTr+HhyUsFW/HwxJaMBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEix6OqHe/oHBF/870z3xl4BpsyUiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLDoGI/xv53pPzXO6R8aNbZkJFgkWPQHoAkVNpKup5gAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDMtMzFUMDU6NTM6NTkrMDA6MDAxd2jrAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTAzLTMxVDA1OjUzOjU5KzAwOjAwQCrQVwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wMy0zMVQwNTo1Mzo1OSswMDowMBc/8YgAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cFHBYhGnzs1ZYAAAFfSURBVHja7dyxbcMwFEDBKPB0mSCZMJnA6yUtHbh5BEFB8F3nwqbwAKqgvnz8vlG8n30BVyNYJFh0Gz/svp/9TC74eey9znG52/SvLPEx8Z37qVdsS0aCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRUvGzmfn7Xevt2K+f9Gc/sy8/fzE/d7VHtmSkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFg0cn/vbPX7MOTr+HhyUsFW/HwxJaMBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEix6OqHe/oHBF/870z3xl4BpsyUiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLDoGI/xv53pPzXO6R8aNbZkJFgkWPQHoAkVNpKup5gAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDUtMjhUMjI6MzM6MjYrMDA6MDB+U9cjAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA1LTI4VDIyOjMzOjI2KzAwOjAwDw5vnwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wNS0yOFQyMjozMzoyNiswMDowMFgbTkAAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">14 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1687,14 +1688,14 @@ Solución 4
 </tbody>
 </table></td>
 <td style="text-align: left; vertical-align: middle;">13 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cDHwU1O52+VfoAAAFiSURBVHja7d1BTsJAGIBRazgdJ9AT6gm4Hm5HF2ZeQx3A7+1ISGm+ZLr4aTvb9SXidfUJPJqCoYKh0/jh1tezz+kDvm2rQ/xmPLnT7qNMOU9967KuBWtJooKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhg287v2fzTxG8Dzfq/+Ng+54iaEmigqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhJ5zpz/+5sccTBjv2FUktSVQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDD0bUS9bsOAY+fwt/Rjpr9qw4CZ373cxXYGLUlUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwtI3D9I+Hmaz/rfFlRVuNTEsSFQwVDH0BYZcWNs7B9l8AAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDMtMzFUMDU6NTM6NTkrMDA6MDAxd2jrAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTAzLTMxVDA1OjUzOjU5KzAwOjAwQCrQVwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wMy0zMVQwNTo1Mzo1OSswMDowMBc/8YgAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cFHBYhGnzs1ZYAAAFiSURBVHja7d1BTsJAGIBRazgdJ9AT6gm4Hm5HF2ZeQx3A7+1ISGm+ZLr4aTvb9SXidfUJPJqCoYKh0/jh1tezz+kDvm2rQ/xmPLnT7qNMOU9967KuBWtJooKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhg287v2fzTxG8Dzfq/+Ng+54iaEmigqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhJ5zpz/+5sccTBjv2FUktSVQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDD0bUS9bsOAY+fwt/Rjpr9qw4CZ373cxXYGLUlUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwtI3D9I+Hmaz/rfFlRVuNTEsSFQwVDH0BYZcWNs7B9l8AAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDUtMjhUMjI6MzM6MjYrMDA6MDB+U9cjAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA1LTI4VDIyOjMzOjI2KzAwOjAwDw5vnwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wNS0yOFQyMjozMzoyNiswMDowMFgbTkAAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">13 (92.9%)</td>
 <td style="text-align: center;">1 (7.1%)</td>
 </tr>
 </tbody>
 </table>
 
-<p>Generated by <a href="https://github.com/dcomtois/summarytools">summarytools</a> 1.0.1 (<a href="https://www.r-project.org/">R</a> version 4.2.3)<br>2023-03-31</p>
+<p>Generated by <a href="https://github.com/dcomtois/summarytools">summarytools</a> 1.0.1 (<a href="https://www.r-project.org/">R</a> version 4.3.0)<br>2023-05-29</p>
 </div>
 </div>
 </div>
@@ -1715,14 +1716,10 @@ Solución 1
 <div id="callout-24" class="callout-24-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Usando la función <code>sumtable</code> del paquete <a href="https://cran.r-project.org/web/packages/vtable/vignettes/sumtable.html"><code>vtable</code></a>.</p>
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-24_e8dc3a1eb4e4ff067313f48806be8a5c">
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-24_c56231d99ecc51ce00282f72d7ee8cb5">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vtable)</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sumtable</span>(df, <span class="at">summ =</span> <span class="fu">c</span>(<span class="st">'mean(x)'</span>, <span class="st">'sd(x)'</span>, <span class="st">'sd(x)/mean(x)'</span>),</span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="at">summ.names =</span> <span class="fu">c</span>(<span class="st">"Media"</span>, <span class="st">"Desviación Típica"</span>, <span class="st">"Coef. Variación"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in sumtable(df, summ = c("mean(x)", "sd(x)", "sd(x)/mean(x)"), summ.names = c("Media", : Factor variables ignore custom summ options. Cols 1 and 2 are count and percentage.
-Beware combining factors with a custom summ unless factor.numeric = TRUE.</code></pre>
-</div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Summary Statistics</caption>
@@ -1800,11 +1797,11 @@ Solución 2
 <div id="callout-25" class="callout-25-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Usando las funciones <code>summarise</code> y <code>across</code> del paquete <code>dplyr</code>.</p>
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-25_0ea37c16e674f1f01a4036712e2198cd">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(df, <span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">where</span>(is.numeric), <span class="at">.fns =</span> <span class="fu">list</span>(<span class="at">Media =</span> <span class="sc">~</span> <span class="fu">mean</span>(.x, <span class="at">na.rm =</span> T), <span class="st">`</span><span class="at">Desviación Típica</span><span class="st">`</span> <span class="ot">=</span> <span class="er">~</span> <span class="fu">sd</span>(.x, <span class="at">na.rm =</span> T), <span class="st">`</span><span class="at">Coef. Variación</span><span class="st">`</span> <span class="ot">=</span> <span class="er">~</span> <span class="fu">sd</span>(.x, <span class="at">na.rm=</span>T) <span class="sc">/</span> <span class="fu">mean</span>(.x, <span class="at">na.rm=</span>T)))) <span class="sc">%&gt;%</span></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_styling</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-25_edcc7c701550a16fa1c21886cab76a45">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(df, <span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">where</span>(is.numeric), <span class="at">.fns =</span> <span class="fu">list</span>(<span class="at">Media =</span> <span class="sc">~</span> <span class="fu">mean</span>(.x, <span class="at">na.rm =</span> T), <span class="st">`</span><span class="at">Desviación Típica</span><span class="st">`</span> <span class="ot">=</span> <span class="er">~</span> <span class="fu">sd</span>(.x, <span class="at">na.rm =</span> T), <span class="st">`</span><span class="at">Coef. Variación</span><span class="st">`</span> <span class="ot">=</span> <span class="er">~</span> <span class="fu">sd</span>(.x, <span class="at">na.rm=</span>T) <span class="sc">/</span> <span class="fu">mean</span>(.x, <span class="at">na.rm=</span>T)))) <span class="sc">%&gt;%</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_styling</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
@@ -1860,16 +1857,16 @@ Solución 3
 <div id="callout-26" class="callout-26-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Usando las funciones <code>group_by</code> y <code>summarise</code> del paquete <code>dplyr</code> y pivotando el data frame a formato largo.</p>
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-26_cf7ff250fad7285eb1f04935d73c0ff0">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span> </span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"Variable"</span>, <span class="at">values_to =</span> <span class="st">"Valor"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Variable) <span class="sc">%&gt;%</span></span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="st">"Media"</span> <span class="ot">=</span> <span class="fu">mean</span>(Valor, <span class="at">na.rm =</span> T), </span>
-<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Desviación Típica"</span> <span class="ot">=</span> <span class="fu">sd</span>(Valor, <span class="at">na.rm =</span> T),</span>
-<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Coef. Variación"</span> <span class="ot">=</span> <span class="fu">sd</span>(Valor, <span class="at">na.rm =</span> T) <span class="sc">/</span> <span class="fu">mean</span>(Valor, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span></span>
-<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-26_2a86f50831f96d18cbcb76ec8546983f">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"Variable"</span>, <span class="at">values_to =</span> <span class="st">"Valor"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Variable) <span class="sc">%&gt;%</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="st">"Media"</span> <span class="ot">=</span> <span class="fu">mean</span>(Valor, <span class="at">na.rm =</span> T), </span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Desviación Típica"</span> <span class="ot">=</span> <span class="fu">sd</span>(Valor, <span class="at">na.rm =</span> T),</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Coef. Variación"</span> <span class="ot">=</span> <span class="fu">sd</span>(Valor, <span class="at">na.rm =</span> T) <span class="sc">/</span> <span class="fu">mean</span>(Valor, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable_styling</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
@@ -1929,14 +1926,10 @@ Solución 1
 <div id="callout-27" class="callout-27-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Usando la función <code>sumtable</code> del paquete <a href="https://cran.r-project.org/web/packages/vtable/vignettes/sumtable.html"><code>vtable</code></a>.</p>
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-27_67b59dc32793abad661be4047f600660">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vtable)</span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sumtable</span>(df, <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"peso"</span>, <span class="st">"altura"</span>), <span class="at">group =</span> <span class="st">"sexo"</span>, <span class="at">summ =</span> <span class="fu">c</span>(<span class="st">'skewness(x)'</span>, <span class="st">'kurtosis(x)'</span>),</span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="at">summ.names =</span> <span class="fu">c</span>(<span class="st">"Coef. Asimetría"</span>, <span class="st">"Coef. Apuntamiento"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in sumtable(df, vars = c("peso", "altura"), group = "sexo", summ = c("skewness(x)", : Factor variables ignore custom summ options. Cols 1 and 2 are count and percentage.
-Beware combining factors with a custom summ unless factor.numeric = TRUE.</code></pre>
-</div>
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-27_65a16b7f39f2a69360a3db5fd90b7731">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vtable)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sumtable</span>(df, <span class="at">vars =</span> <span class="fu">c</span>(<span class="st">"peso"</span>, <span class="st">"altura"</span>), <span class="at">group =</span> <span class="st">"sexo"</span>, <span class="at">summ =</span> <span class="fu">c</span>(<span class="st">'skewness(x)'</span>, <span class="st">'kurtosis(x)'</span>),</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="at">summ.names =</span> <span class="fu">c</span>(<span class="st">"Coef. Asimetría"</span>, <span class="st">"Coef. Apuntamiento"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Summary Statistics</caption>
@@ -2004,13 +1997,13 @@ Solución 2
 <div id="callout-28" class="callout-28-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Usando las funciones <code>group_by</code> y <code>summarise</code> del paquete <a href=""><code>dplyr</code></a>.</p>
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-28_fad3c8ca7a051c69afaf4fb7db6ecbd4">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">select</span>(sexo, peso, altura) <span class="sc">%&gt;%</span></span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(sexo) <span class="sc">%&gt;%</span></span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">everything</span>(), <span class="at">.fns =</span> <span class="fu">list</span>(<span class="st">"Coef. Asimetría"</span> <span class="ot">=</span> <span class="er">~</span> <span class="fu">skewness</span>(.x, <span class="at">na.rm =</span> T), <span class="st">"Coef. Apuntamiento"</span> <span class="ot">=</span> <span class="er">~</span> <span class="fu">kurtosis</span>(.x, <span class="at">na.rm =</span> T)))) <span class="sc">%&gt;%</span></span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_styling</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-28_0217e292e53219dcc1964f56a62084f5">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">select</span>(sexo, peso, altura) <span class="sc">%&gt;%</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(sexo) <span class="sc">%&gt;%</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">everything</span>(), <span class="at">.fns =</span> <span class="fu">list</span>(<span class="st">"Coef. Asimetría"</span> <span class="ot">=</span> <span class="er">~</span> <span class="fu">skewness</span>(.x, <span class="at">na.rm =</span> T), <span class="st">"Coef. Apuntamiento"</span> <span class="ot">=</span> <span class="er">~</span> <span class="fu">kurtosis</span>(.x, <span class="at">na.rm =</span> T)))) <span class="sc">%&gt;%</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kable_styling</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
@@ -2068,22 +2061,9 @@ Solución
 </div>
 <div id="callout-29" class="callout-29-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-29_b6778748bdb2455346f712e04e5ae955">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"https://aprendeconalf.es/estadistica-practicas-r/datos/renta-media-comunidades-autonomas.csv"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>ℹ Using "','" as decimal and "'.'" as grouping mark. Use `read_delim()` for more control.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 19 Columns: 15
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ";"
-chr  (1): Comunidad
-dbl (14): 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, ...
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="04-descriptiva_cache/html/unnamed-chunk-30_dce0e93eadf0ad9cca3278be76971e03">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"https://aprendeconalf.es/estadistica-practicas-r/datos/renta-media-comunidades-autonomas.csv"</span>)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 19 × 15
    Comunidad      `2021` `2020` `2019` `2018` `2017` `2016` `2015` `2014` `2013`

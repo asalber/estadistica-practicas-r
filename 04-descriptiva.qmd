@@ -363,6 +363,13 @@ a.  Crear un data frame con los datos de las rentas medias por persona de las co
 
     :::{.callout-tip collapse="true"}
     ## Solución 
+
+    ```{r, echo = F}
+    df <- read_csv2("datos/renta-media-comunidades-autonomas-2.csv")
+    df <- read_csv2("datos/renta-media-comunidades-autonomas-3.csv")
+    df <- read_csv2("datos/renta-media-comunidades-autonomas-4.csv")
+    ```
+
     ```{r}
     df <- read_csv2("https://aprendeconalf.es/estadistica-practicas-r/datos/renta-media-comunidades-autonomas.csv")
     df

@@ -37,7 +37,7 @@ a.  Crear un conjunto de datos con la variable `hijos`.
     :::{.callout-tip collapse="true"}
     ## Solución
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-1_32dfa7835d2e00e5cc8e23a23e95d055'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-1_b2c777293b72a2919f8c30f23ff6dcb2'}
     
     ```{.r .cell-code}
     df <- data.frame(hijos = c(1, 2, 4, 2, 2, 2, 3, 2, 1, 1, 0, 2, 2, 0, 2, 2, 1, 2, 2, 3, 1, 2, 2, 1, 2))
@@ -51,7 +51,7 @@ a.  Calcular el tamaño muestral.
     :::{.callout-tip collapse="true"}
     ## Solución
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-2_be37f940b2233e93d9d7cecc54a0b70e'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-2_20161495727dbedb4d62efd5cf4925d2'}
     
     ```{.r .cell-code}
     nrow(df)
@@ -71,7 +71,7 @@ a.  Calcular la media.
     :::{.callout-tip collapse="true"}
     ## Solución
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-3_e60fb7fb9effcaa283758c18d861c821'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-3_e05cfc271b18cabf260c1f6fd93450f6'}
     
     ```{.r .cell-code}
     mean(df$hijos)
@@ -91,7 +91,7 @@ a.  Calcular la mediana.
     :::{.callout-tip collapse="true"}
     ## Solución
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-4_d4395c4912a4d70291a15d5266f8e64b'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-4_bc80d752f961429ddaf8dce113d76aea'}
     
     ```{.r .cell-code}
     median(df$hijos)
@@ -112,7 +112,7 @@ a.  Calcular la moda.
     ## Solución
     El paquete base de R no tiene implementada ninguna función para calcular la moda, así que definiremos nuestra propia función.
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-5_1a7de9f08e4198fc826da1e7ad0c8d9f'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-5_4387a5bfb93228d52cc3dcf72784a0f6'}
     
     ```{.r .cell-code}
     moda <- function(x) {
@@ -138,7 +138,7 @@ a.  Calcular el mínimo.
     :::{.callout-tip collapse="true"}
     ## Solución
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-6_863204ade4bcd66686136e67667560ac'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-6_e496883727f8163bf4e9284564868733'}
     
     ```{.r .cell-code}
     min(df$hijos)
@@ -158,7 +158,7 @@ a.  Calcular el máximo.
     :::{.callout-tip collapse="true"}
     ## Solución
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-7_bc5cb33ddea489e00a2a861a25dd22ca'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-7_3dc3763e3934f055f8dbe4ec95f7bf85'}
     
     ```{.r .cell-code}
     max(df$hijos)
@@ -178,7 +178,7 @@ a.  Calcular los cuartiles.
     :::{.callout-tip collapse="true"}
     ## Solución
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-8_b34fc40c88866ee47e04453a87885d77'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-8_91012ca238af3c5e8c1244af5f806b2f'}
     
     ```{.r .cell-code}
     quantile(df$hijos, prob=c(0.25, 0.5, 0.75))
@@ -199,7 +199,7 @@ a.  Calcular los percentiles 5 y 95.
     :::{.callout-tip collapse="true"}
     ## Solución
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-9_dfe58516071c728162d1b1bba66c43f9'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-9_a79ff65e833a598bdebda2d2374f4f94'}
     
     ```{.r .cell-code}
     quantile(df$hijos, prob=c(0.05, 0.95))
@@ -220,7 +220,7 @@ a.  Calcular el rango.
     :::{.callout-tip collapse="true"}
     ## Solución
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-10_1d0325d11d4b79d8b66de2d22babbdff'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-10_810a28408a29dca88b03681851339962'}
     
     ```{.r .cell-code}
     max(df$hijos) - min(df$hijos)
@@ -240,7 +240,7 @@ a.  Calcular el rango intecuartílico.
     :::{.callout-tip collapse="true"}
     ## Solución
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-11_42715aeacd1f3ae0d7074fe323a045fa'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-11_066e45383c358dd3e6e3f00227bc88f6'}
     
     ```{.r .cell-code}
     IQR(df$hijos)
@@ -261,7 +261,7 @@ a.  Calcular la varianza
     ## Solución
     R dispone de la función `var` para calcular la _cuasivarianza_ o _varianza corregida_ $\sum \frac{(x_i-\bar x)^2}{n-1}$, pero no dispone de una función para calcular la varianza, de manera que para calcularla hay que corregir la cuasivarianza.
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-12_0837fb21b3924d5d6f0e19725b1c4adc'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-12_37e4e25c83422cfb266631f4f1dc7933'}
     
     ```{.r .cell-code}
     n <- nrow(df)
@@ -295,7 +295,7 @@ a.  Calcular la desviación típica.
     ## Solución
     R dispone de la función `sd` para calcular la _cuasidesviación típica_ o _desviación típica corregida_ $\sqrt{\sum \frac{(x_i-\bar x)^2}{n-1}}$, pero no dispone de una función para calcular la desviación típica, de manera que para calcularla hay que corregir la cuasidesviación típica.
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-13_3030cf7753f1dbca88cefcc5004c6a0d'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-13_00df2fada96c7e7408e81a8db1b4d70c'}
     
     ```{.r .cell-code}
     n <- nrow(df)
@@ -328,7 +328,7 @@ a.  Calcular el coeficiente de variación.
     :::{.callout-tip collapse="true"}
     ## Solución
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-14_6b736bdd01dfd367c6dd48d4274300b4'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-14_749dfea0648bef5891c0c7fa18fb305d'}
     
     ```{.r .cell-code}
     sd(df$hijos) / abs(mean(df$hijos))
@@ -350,7 +350,7 @@ a.  Calcular el coeficiente de asimetría.
     Para calcular el coeficiente de asimetría se utiliza el paquete _moments_.
 
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-15_c3c57a9d41d289c024749c7468d24dea'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-15_0318af126c881cde0de423eb55b1da15'}
     
     ```{.r .cell-code}
     library(moments)
@@ -375,7 +375,7 @@ a.  Calcular el coeficiente de apuntamiento.
     Para calcular el coeficiente de apuntamiento se utiliza el paquete _moments_.
 
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-16_7b980b80dc61aab60dfcc2e07ebd4881'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-16_fb60b3f481163e14bd341217f4549337'}
     
     ```{.r .cell-code}
     library(moments)
@@ -402,7 +402,7 @@ a.  Crear un data frame con los datos de todos los pacientes del estudio a parti
     :::{.callout-tip collapse="true"}
     ## Solución 
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-17_7218f2836b468145a6c5748f25c7fc89'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-17_12fb56bf35ae5cfd1ccf70d8e22f10e6'}
     
     ```{.r .cell-code}
     df <- read.csv("https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/colesterol.csv")
@@ -437,7 +437,7 @@ a.  Calcular el tamaño muestral según el sexo.
     :::{.callout-tip collapse="true"}
     ## Solución 
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-18_b7fe8c1d885c0a060cd82a99549f0620'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-18_b808b2792384c002c12f92c887d39f75'}
     
     :::
 
@@ -448,7 +448,7 @@ a.  Calcular la media y la desviación típica del nivel de colesterol sin tener
     :::{.callout-tip collapse="true"}
     ## Solución 
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-19_502f0d2d3e5cc2afc4e6382946af2ab4'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-19_69cb79c900809ec200cdf960062d6a93'}
     
     ```{.r .cell-code}
     print(paste("Media:", mean(df$colesterol, na.rm = TRUE)))
@@ -480,7 +480,7 @@ a.  Realizar un resumen estadístico con la media, el mínimo, los cuartiles y e
     Usando el paquete base de R.
 
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-20_80e02298242ef1b36f71bebd9c428c0b'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-20_6d551867914c5f9b80a94d028fab9b0b'}
     
     ```{.r .cell-code}
     summary(df)
@@ -515,7 +515,7 @@ a.  Realizar un resumen estadístico con la media, el mínimo, los cuartiles y e
     Usando la función `st` del paquete [`vtable`](https://cran.r-project.org/web/packages/vtable/vignettes/sumtable.html).
     
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-21_7e7df2bd0de8dab8eee302c844a19b01'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-21_2bb137af39e75d723ece0d6ad820c778'}
     
     ```{.r .cell-code}
     library(vtable)
@@ -625,7 +625,7 @@ a.  Realizar un resumen estadístico con la media, el mínimo, los cuartiles y e
     Usando la función `skim` del paquete [`skimr`](https://cran.r-project.org/web/packages/skimr/vignettes/skimr.html).
     
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-22_bc72b83df901bfc31d6ee00954058e2d'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-22_3dc9954a3a4b78fef4c28b68b4920a4b'}
     
     ```{.r .cell-code}
     library(skimr)
@@ -800,7 +800,7 @@ a.  Realizar un resumen estadístico con la media, el mínimo, los cuartiles y e
     Usando las funciones `descr` y `dfSummary` del paquete [`summarytools`](https://cran.r-project.org/web/packages/summarytools/vignettes/introduction.html).
     
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-23_ed773a3496bb4283accc90a645f35c4f'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-23_083952ca4f92655e344375d8ff12bb3b'}
     
     ```{.r .cell-code}
     library(summarytools)
@@ -967,7 +967,7 @@ a.  Realizar un resumen estadístico con la media, el mínimo, los cuartiles y e
     [character]</td>
           <td align="left" style="padding:8;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">1. Antonio Fern&#0225;ndez Oca&#0241;a</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">2. Antonio Ruiz Cruz</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">3. Carmen L&#0243;pez Pinz&#0243;n</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">4. Carolina Rubio Moreno</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">5. Javier Garc&#0237;a S&#0225;nchez</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">6. Jos&#0233; Luis Mart&#0237;nez Izquie</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">7. Jos&#0233; Mar&#0237;a de la Gu&#0237;a San</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">8. Macarena &#0193;lvarez Luna</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">9. Marisa L&#0243;pez Collado</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">10. Miguel Angel Cuadrado Gut</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">[ 4 others ]</td></tr></table></td>
           <td align="left" style="padding:0;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">1</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">7.1%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">1</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">7.1%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">1</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">7.1%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">1</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">7.1%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">1</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">7.1%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">1</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">7.1%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">1</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">7.1%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">1</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">7.1%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">1</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">7.1%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">1</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">7.1%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">4</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">28.6%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr></table></td>
-          <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAADcAAAEKCAQAAAAcQQUKAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cDHwU1O52+VfoAAAETSURBVHja7dZdDsFQFIVRFaMzAkbICEyP11s/oelub5yu/SbIipwmvuG+W3P7VbXi3KF9cXl7yNMwj2i/fhi/dXz58C3662rfDofD4XC4LtzTv3n2v/t1Q5snyzRn2yq1b9fzUbku0pkfOZ2Jw+FwONwfcjozOOEXXO3b4XA4HA63BU5nBqczg6t9OxwOh8PhtsDpzOB0ZnC1b4fD4XA4XBdO+AVXm9OZOBwOh8PhJk1nBleb05k4HA6Hw+EmTWcGJ/yCq307HA6Hw+G2wOnM4HRmcLVvh8PhcDjcFjidGZzODK727XA4HA6H68IJv+Bqcz905tydm+N97cy5Gz/rtW+Hw+FwOFwXrmdnLr/at1uZewBxe0ESBJWlqgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wMy0zMVQwNTo1Mzo1OSswMDowMDF3aOsAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDMtMzFUMDU6NTM6NTkrMDA6MDBAKtBXAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTAzLTMxVDA1OjUzOjU5KzAwOjAwFz/xiAAAAABJRU5ErkJggg=="></td>
+          <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAADcAAAEKCAQAAAAcQQUKAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cFHBYhGnzs1ZYAAAETSURBVHja7dZdDsFQFIVRFaMzAkbICEyP11s/oelub5yu/SbIipwmvuG+W3P7VbXi3KF9cXl7yNMwj2i/fhi/dXz58C3662rfDofD4XC4LtzTv3n2v/t1Q5snyzRn2yq1b9fzUbku0pkfOZ2Jw+FwONwfcjozOOEXXO3b4XA4HA63BU5nBqczg6t9OxwOh8PhtsDpzOB0ZnC1b4fD4XA4XBdO+AVXm9OZOBwOh8PhJk1nBleb05k4HA6Hw+EmTWcGJ/yCq307HA6Hw+G2wOnM4HRmcLVvh8PhcDjcFjidGZzODK727XA4HA6H68IJv+Bqcz905tydm+N97cy5Gz/rtW+Hw+FwOFwXrmdnLr/at1uZewBxe0ESBJWlqgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wNS0yOFQyMjozMzoyNiswMDowMH5T1yMAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDUtMjhUMjI6MzM6MjYrMDA6MDAPDm+fAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTA1LTI4VDIyOjMzOjI2KzAwOjAwWBtOQAAAAABJRU5ErkJggg=="></td>
           <td align="center">14
     (100.0%)</td>
           <td align="center">0
@@ -979,7 +979,7 @@ a.  Realizar un resumen estadístico con la media, el mínimo, los cuartiles y e
     [integer]</td>
           <td align="left" style="padding:8;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">Mean (sd) : 38.2 (15.6)</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">min &le; med &le; max:</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">18 &le; 35 &le; 68</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">IQR (CV) : 25 (0.4)</td></tr></table></td>
           <td align="left" style="vertical-align:middle">12 distinct values</td>
-          <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cDHwU1O52+VfoAAAFSSURBVHja7dzLCcJAFEBRI1ZnBVqhVmB7uh3dyImMH7xnJyTyuDBZPWa5biK2nx7g1xQMFQztxh/2PTtP/fwdlpmz2L+PD+/kxUd7ePaCT8+dZb2OJCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYuluom7tTaL5pltHDBuK79viek0lmzzLqSKKCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGXbqj7Xbaudxzu9PvTYOsXBzuSqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGBoGVfxTl96jd6njRuIS41MRxIVDBUM3QB5IxYydzivEAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wMy0zMVQwNTo1Mzo1OSswMDowMDF3aOsAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDMtMzFUMDU6NTM6NTkrMDA6MDBAKtBXAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTAzLTMxVDA1OjUzOjU5KzAwOjAwFz/xiAAAAABJRU5ErkJggg=="></td>
+          <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cFHBYhGnzs1ZYAAAFSSURBVHja7dzLCcJAFEBRI1ZnBVqhVmB7uh3dyImMH7xnJyTyuDBZPWa5biK2nx7g1xQMFQztxh/2PTtP/fwdlpmz2L+PD+/kxUd7ePaCT8+dZb2OJCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYuluom7tTaL5pltHDBuK79viek0lmzzLqSKKCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGXbqj7Xbaudxzu9PvTYOsXBzuSqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGBoGVfxTl96jd6njRuIS41MRxIVDBUM3QB5IxYydzivEAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wNS0yOFQyMjozMzoyNiswMDowMH5T1yMAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDUtMjhUMjI6MzM6MjYrMDA6MDAPDm+fAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTA1LTI4VDIyOjMzOjI2KzAwOjAwWBtOQAAAAABJRU5ErkJggg=="></td>
           <td align="center">14
     (100.0%)</td>
           <td align="center">0
@@ -991,7 +991,7 @@ a.  Realizar un resumen estadístico con la media, el mínimo, los cuartiles y e
     [character]</td>
           <td align="left" style="padding:8;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">1. H</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">2. M</td></tr></table></td>
           <td align="left" style="padding:0;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">8</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">57.1%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr><tr style="background-color:transparent"><td style="padding:0 5px 0 7px;margin:0;border:0" align="right">6</td><td style="padding:0 2px 0 0;border:0;" align="left">(</td><td style="padding:0;border:0" align="right">42.9%</td><td style="padding:0 4px 0 2px;border:0" align="left">)</td></tr></table></td>
-          <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAGIAAAA3CAQAAABd71fBAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cDHwU1O52+VfoAAACgSURBVGje7djBCYAwEADBRKzOCrRCrSDt6TcRBMknm2Pn50Nx4SJ4+U7zW0a/gBGRItb64pzogBz5IyKlbfS7/VSaqxDjZASFERRGUBhBYQSFERRGUBhBYQTF6x+79D1lsFwvOCZadqRq2RFjnEJENGfiGj5Pe+65C7U86/2shBgnIyiMoDCCwggKIyiMoDCCwggKIyjiLc9mFWKcjKB4AMlDC+F+elCbAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTAzLTMxVDA1OjUzOjU5KzAwOjAwMXdo6wAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wMy0zMVQwNTo1Mzo1OSswMDowMEAq0FcAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjMtMDMtMzFUMDU6NTM6NTkrMDA6MDAXP/GIAAAAAElFTkSuQmCC"></td>
+          <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAGIAAAA3CAQAAABd71fBAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cFHBYhGnzs1ZYAAACgSURBVGje7djBCYAwEADBRKzOCrRCrSDt6TcRBMknm2Pn50Nx4SJ4+U7zW0a/gBGRItb64pzogBz5IyKlbfS7/VSaqxDjZASFERRGUBhBYQSFERRGUBhBYQTF6x+79D1lsFwvOCZadqRq2RFjnEJENGfiGj5Pe+65C7U86/2shBgnIyiMoDCCwggKIyiMoDCCwggKIyjiLc9mFWKcjKB4AMlDC+F+elCbAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIzLTA1LTI4VDIyOjMzOjI2KzAwOjAwflPXIwAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMy0wNS0yOFQyMjozMzoyNiswMDowMA8Ob58AAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjMtMDUtMjhUMjI6MzM6MjYrMDA6MDBYG05AAAAAAElFTkSuQmCC"></td>
           <td align="center">14
     (100.0%)</td>
           <td align="center">0
@@ -1003,7 +1003,7 @@ a.  Realizar un resumen estadístico con la media, el mínimo, los cuartiles y e
     [numeric]</td>
           <td align="left" style="padding:8;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">Mean (sd) : 70.9 (16.1)</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">min &le; med &le; max:</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">51 &le; 65 &le; 109</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">IQR (CV) : 17 (0.2)</td></tr></table></td>
           <td align="left" style="vertical-align:middle">12 distinct values</td>
-          <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cDHwU1O52+VfoAAAFbSURBVHja7dzBbYMwAEBRiJguEzQTthNkvfTqVr08aCAR/90iIQRfMgfb8fyYIi5HP8C7KRgqGFrGH/Y9+8LP38d89MuuNT74svou0zRd4dr70W/9TxqSqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGDox7Zz3Xl/Rr/26Z9x571pSKKCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqFNZ++Y5y6x7HUU0o7BbIFFrt5zQaYhiQqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoZ2nKJ+Hbq6cBvWC04ZbMsfOBqSqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYGgep7c/O6zoT+Oc/lwj05BEBUMFQ99UMBOPZ+QYAQAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wMy0zMVQwNTo1Mzo1OSswMDowMDF3aOsAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDMtMzFUMDU6NTM6NTkrMDA6MDBAKtBXAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTAzLTMxVDA1OjUzOjU5KzAwOjAwFz/xiAAAAABJRU5ErkJggg=="></td>
+          <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cFHBYhGnzs1ZYAAAFbSURBVHja7dzBbYMwAEBRiJguEzQTthNkvfTqVr08aCAR/90iIQRfMgfb8fyYIi5HP8C7KRgqGFrGH/Y9+8LP38d89MuuNT74svou0zRd4dr70W/9TxqSqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGDox7Zz3Xl/Rr/26Z9x571pSKKCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqFNZ++Y5y6x7HUU0o7BbIFFrt5zQaYhiQqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoZ2nKJ+Hbq6cBvWC04ZbMsfOBqSqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYGgep7c/O6zoT+Oc/lwj05BEBUMFQ99UMBOPZ+QYAQAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMy0wNS0yOFQyMjozMzoyNiswMDowMH5T1yMAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjMtMDUtMjhUMjI6MzM6MjYrMDA6MDAPDm+fAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIzLTA1LTI4VDIyOjMzOjI2KzAwOjAwWBtOQAAAAABJRU5ErkJggg=="></td>
           <td align="center">13
     (92.9%)</td>
           <td align="center">1
@@ -1015,7 +1015,7 @@ a.  Realizar un resumen estadístico con la media, el mínimo, los cuartiles y e
     [numeric]</td>
           <td align="left" style="padding:8;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">Mean (sd) : 1.8 (0.1)</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">min &le; med &le; max:</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">1.6 &le; 1.8 &le; 2</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">IQR (CV) : 0.1 (0.1)</td></tr></table></td>
           <td align="left" style="vertical-align:middle">14 distinct values</td>
-          <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cDHwU1O52+VfoAAAFfSURBVHja7dyxbcMwFEDBKPB0mSCZMJnA6yUtHbh5BEFB8F3nwqbwAKqgvnz8vlG8n30BVyNYJFh0Gz/svp/9TC74eey9znG52/SvLPEx8Z37qVdsS0aCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRUvGzmfn7Xevt2K+f9Gc/sy8/fzE/d7VHtmSkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFg0cn/vbPX7MOTr+HhyUsFW/HwxJaMBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEix6OqHe/oHBF/870z3xl4BpsyUiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLDoGI/xv53pPzXO6R8aNbZkJFgkWPQHoAkVNpKup5gAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDMtMzFUMDU6NTM6NTkrMDA6MDAxd2jrAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTAzLTMxVDA1OjUzOjU5KzAwOjAwQCrQVwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wMy0zMVQwNTo1Mzo1OSswMDowMBc/8YgAAAAASUVORK5CYII="></td>
+          <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cFHBYhGnzs1ZYAAAFfSURBVHja7dyxbcMwFEDBKPB0mSCZMJnA6yUtHbh5BEFB8F3nwqbwAKqgvnz8vlG8n30BVyNYJFh0Gz/svp/9TC74eey9znG52/SvLPEx8Z37qVdsS0aCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRUvGzmfn7Xevt2K+f9Gc/sy8/fzE/d7VHtmSkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFg0cn/vbPX7MOTr+HhyUsFW/HwxJaMBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEix6OqHe/oHBF/870z3xl4BpsyUiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLDoGI/xv53pPzXO6R8aNbZkJFgkWPQHoAkVNpKup5gAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDUtMjhUMjI6MzM6MjYrMDA6MDB+U9cjAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA1LTI4VDIyOjMzOjI2KzAwOjAwDw5vnwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wNS0yOFQyMjozMzoyNiswMDowMFgbTkAAAAAASUVORK5CYII="></td>
           <td align="center">14
     (100.0%)</td>
           <td align="center">0
@@ -1027,7 +1027,7 @@ a.  Realizar un resumen estadístico con la media, el mínimo, los cuartiles y e
     [numeric]</td>
           <td align="left" style="padding:8;vertical-align:middle"><table style="border-collapse:collapse;border:none;margin:0"><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">Mean (sd) : 220.2 (39.8)</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">min &le; med &le; max:</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">148 &le; 210 &le; 280</td></tr><tr style="background-color:transparent"><td style="padding:0;margin:0;border:0" align="left">IQR (CV) : 55 (0.2)</td></tr></table></td>
           <td align="left" style="vertical-align:middle">13 distinct values</td>
-          <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cDHwU1O52+VfoAAAFiSURBVHja7d1BTsJAGIBRazgdJ9AT6gm4Hm5HF2ZeQx3A7+1ISGm+ZLr4aTvb9SXidfUJPJqCoYKh0/jh1tezz+kDvm2rQ/xmPLnT7qNMOU9967KuBWtJooKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhg287v2fzTxG8Dzfq/+Ng+54iaEmigqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhJ5zpz/+5sccTBjv2FUktSVQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDD0bUS9bsOAY+fwt/Rjpr9qw4CZ373cxXYGLUlUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwtI3D9I+Hmaz/rfFlRVuNTEsSFQwVDH0BYZcWNs7B9l8AAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDMtMzFUMDU6NTM6NTkrMDA6MDAxd2jrAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTAzLTMxVDA1OjUzOjU5KzAwOjAwQCrQVwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wMy0zMVQwNTo1Mzo1OSswMDowMBc/8YgAAAAASUVORK5CYII="></td>
+          <td align="left" style="vertical-align:middle;padding:0;background-color:transparent;"><img style="border:none;background-color:transparent;padding:0;max-width:max-content;" src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+cFHBYhGnzs1ZYAAAFiSURBVHja7d1BTsJAGIBRazgdJ9AT6gm4Hm5HF2ZeQx3A7+1ISGm+ZLr4aTvb9SXidfUJPJqCoYKh0/jh1tezz+kDvm2rQ/xmPLnT7qNMOU9967KuBWtJooKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhg287v2fzTxG8Dzfq/+Ng+54iaEmigqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhJ5zpz/+5sccTBjv2FUktSVQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDD0bUS9bsOAY+fwt/Rjpr9qw4CZ373cxXYGLUlUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwtI3D9I+Hmaz/rfFlRVuNTEsSFQwVDH0BYZcWNs7B9l8AAAAldEVYdGRhdGU6Y3JlYXRlADIwMjMtMDUtMjhUMjI6MzM6MjYrMDA6MDB+U9cjAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIzLTA1LTI4VDIyOjMzOjI2KzAwOjAwDw5vnwAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyMy0wNS0yOFQyMjozMzoyNiswMDowMFgbTkAAAAAASUVORK5CYII="></td>
           <td align="center">13
     (92.9%)</td>
           <td align="center">1
@@ -1035,7 +1035,7 @@ a.  Realizar un resumen estadístico con la media, el mínimo, los cuartiles y e
         </tr>
       </tbody>
     </table>
-    <p>Generated by <a href='https://github.com/dcomtois/summarytools'>summarytools</a> 1.0.1 (<a href='https://www.r-project.org/'>R</a> version 4.2.3)<br/>2023-03-31</p>
+    <p>Generated by <a href='https://github.com/dcomtois/summarytools'>summarytools</a> 1.0.1 (<a href='https://www.r-project.org/'>R</a> version 4.3.0)<br/>2023-05-29</p>
     </div>
     ```
 
@@ -1050,20 +1050,13 @@ a.  ¿En qué variable es más representativa la media?
     ## Solución 1
     Usando la función `sumtable` del paquete [`vtable`](https://cran.r-project.org/web/packages/vtable/vignettes/sumtable.html).
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-24_e8dc3a1eb4e4ff067313f48806be8a5c'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-24_c56231d99ecc51ce00282f72d7ee8cb5'}
     
     ```{.r .cell-code}
     library(vtable)
     sumtable(df, summ = c('mean(x)', 'sd(x)', 'sd(x)/mean(x)'),
     summ.names = c("Media", "Desviación Típica", "Coef. Variación"))
     ```
-    
-    ::: {.cell-output .cell-output-stderr}
-    ```
-    Warning in sumtable(df, summ = c("mean(x)", "sd(x)", "sd(x)/mean(x)"), summ.names = c("Media", : Factor variables ignore custom summ options. Cols 1 and 2 are count and percentage.
-    Beware combining factors with a custom summ unless factor.numeric = TRUE.
-    ```
-    :::
     
     ::: {.cell-output-display}
 
@@ -1137,7 +1130,7 @@ a.  ¿En qué variable es más representativa la media?
     ## Solución 2
     Usando las funciones `summarise` y `across` del paquete `dplyr`.
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-25_0ea37c16e674f1f01a4036712e2198cd'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-25_edcc7c701550a16fa1c21886cab76a45'}
     
     ```{.r .cell-code}
     library(dplyr)
@@ -1195,7 +1188,7 @@ a.  ¿En qué variable es más representativa la media?
     ## Solución 3
     Usando las funciones `group_by` y `summarise` del paquete `dplyr` y pivotando el data frame a formato largo.
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-26_cf7ff250fad7285eb1f04935d73c0ff0'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-26_2a86f50831f96d18cbcb76ec8546983f'}
     
     ```{.r .cell-code}
     library(tidyverse)
@@ -1265,20 +1258,13 @@ a.  Realizar un resumen estadístico con el coeficiente de asimetría y el coefi
     ## Solución 1
     Usando la función `sumtable` del paquete [`vtable`](https://cran.r-project.org/web/packages/vtable/vignettes/sumtable.html).
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-27_67b59dc32793abad661be4047f600660'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-27_65a16b7f39f2a69360a3db5fd90b7731'}
     
     ```{.r .cell-code}
     library(vtable)
     sumtable(df, vars = c("peso", "altura"), group = "sexo", summ = c('skewness(x)', 'kurtosis(x)'),
     summ.names = c("Coef. Asimetría", "Coef. Apuntamiento"))
     ```
-    
-    ::: {.cell-output .cell-output-stderr}
-    ```
-    Warning in sumtable(df, vars = c("peso", "altura"), group = "sexo", summ = c("skewness(x)", : Factor variables ignore custom summ options. Cols 1 and 2 are count and percentage.
-    Beware combining factors with a custom summ unless factor.numeric = TRUE.
-    ```
-    :::
     
     ::: {.cell-output-display}
 
@@ -1329,7 +1315,7 @@ a.  Realizar un resumen estadístico con el coeficiente de asimetría y el coefi
     Usando las funciones `group_by` y `summarise` del paquete [`dplyr`]().
     
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-28_fad3c8ca7a051c69afaf4fb7db6ecbd4'}
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-28_0217e292e53219dcc1964f56a62084f5'}
     
     ```{.r .cell-code}
     library(dplyr)
@@ -1391,32 +1377,15 @@ a.  Crear un data frame con los datos de las rentas medias por persona de las co
     :::{.callout-tip collapse="true"}
     ## Solución 
 
-    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-29_b6778748bdb2455346f712e04e5ae955'}
+
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-29_df982183a19b66eebea49aed4164f1ca'}
+    
+    :::
+
+    ::: {.cell hash='04-descriptiva_cache/html/unnamed-chunk-30_dce0e93eadf0ad9cca3278be76971e03'}
     
     ```{.r .cell-code}
     df <- read_csv2("https://aprendeconalf.es/estadistica-practicas-r/datos/renta-media-comunidades-autonomas.csv")
-    ```
-    
-    ::: {.cell-output .cell-output-stderr}
-    ```
-    ℹ Using "','" as decimal and "'.'" as grouping mark. Use `read_delim()` for more control.
-    ```
-    :::
-    
-    ::: {.cell-output .cell-output-stderr}
-    ```
-    Rows: 19 Columns: 15
-    ── Column specification ────────────────────────────────────────────────────────
-    Delimiter: ";"
-    chr  (1): Comunidad
-    dbl (14): 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, ...
-    
-    ℹ Use `spec()` to retrieve the full column specification for this data.
-    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-    ```
-    :::
-    
-    ```{.r .cell-code}
     df
     ```
     

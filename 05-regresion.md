@@ -57,7 +57,7 @@ a.  Crear un conjunto de datos con las variables `x` e `y`.
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-1_6ef216e957b9c9ba76a97c60aef905a6'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-1_3beffcd1f5b09f64b1db02a1277a0041'}
     
     ```{.r .cell-code}
     df <- data.frame(
@@ -77,7 +77,7 @@ a.  Dibujar el diagrama de dispersión correspondiente. ¿Qué tipo de modelo de
     Para dibujar un diagrama de dispersión se puede usar la función [`plot`](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot) del paquete `graphics`.
     
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-2_60bb8c2e90e7806b73a338b19eca5e89'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-2_e0a6c7a1d0b03f612d593eb58707c612'}
     
     ```{.r .cell-code}
     plot(df$x, df$y, xlab = "X", ylab = "Y", main = "Diagrama de dispersión")
@@ -96,7 +96,7 @@ a.  Dibujar el diagrama de dispersión correspondiente. ¿Qué tipo de modelo de
     Otra alternativa es usar la función la función [`geom_point`](https://aprendeconalf.es/manual-r/07-graficos.html#diagramas-de-puntos) del paquete `ggplot2`.
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-3_a267c464d4afee84a46f7bf7f0a81c20'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-3_a576c60053026be195de0b8b74b70787'}
     
     ```{.r .cell-code}
     library(ggplot2)
@@ -122,19 +122,12 @@ a.  Calcular la recta de regresión de $Y$ sobre $X$.
     Para ajustar un modelo de regresión se utiliza la función [`lm`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/lm) del paquete `stats`. Esta función requiere que se le pase como parámetro la fórmula del modelo de regresión que debe tener la sintaxis `y ~ f(x)`, donde `y` es la variable dependiente en el modelo, `x` es la variable independiente, y `f(x)` es una expresión matemática que describe el modelo.
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-4_3a0f4e4a58cdeeed627f9b3fa730df7e'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-4_e2a42dbf90af00e34805ec51b4dfee21'}
     
     ```{.r .cell-code}
     recta_y_x <- lm(y ~ x, df) 
     summary(recta_y_x)
     ```
-    
-    ::: {.cell-output .cell-output-stderr}
-    ```
-    Warning in summary.lm(recta_y_x): essentially perfect fit: summary may be
-    unreliable
-    ```
-    :::
     
     ::: {.cell-output .cell-output-stdout}
     ```
@@ -172,7 +165,7 @@ a.  Obtener el coeficiente de regresión de la recta anterior e interpretarlo.
     El coeficiente de regresión es la pendiente de la recta de regresión
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-5_6b5ed59f5600c3f6562b11598431364e'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-5_7730f1262a03564d2d3937429a647ddb'}
     
     ```{.r .cell-code}
     cat(paste("Coeficiente de regresión de Y sobre X:", recta_y_x$coefficients[["x"]]))
@@ -198,7 +191,7 @@ a.  Dibujar la recta de regresión de $Y$ sobre $X$ sobre el diagrama de dispers
     Para dibujar la recta de regresión se puede usar la función [`abline`](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/abline) del paquete `graphics`.
     
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-6_4510a8bb7dc261b82f8c7e8621262ad0'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-6_049f33039e0101dbb7e24f5768b791c5'}
     
     ```{.r .cell-code}
     plot(df$x, df$y, xlab = "X", ylab = "Y", main = "Diagrama de dispersión")
@@ -218,7 +211,7 @@ a.  Dibujar la recta de regresión de $Y$ sobre $X$ sobre el diagrama de dispers
     Otra alternativa es usar la geometría de ajuste de regresión por mínimos cuadrados [`geom_smooth`](https://aprendeconalf.es/manual-r/07-graficos.html#interpolaci%C3%B3n-y-ajustes-de-regresi%C3%B3n) del paquete `ggplot2`.
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-7_38af4206843d55169c3acd607b14e396'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-7_cf933321517349909228157224082c1c'}
     
     ```{.r .cell-code}
     library(ggplot2)
@@ -227,12 +220,6 @@ a.  Dibujar la recta de regresión de $Y$ sobre $X$ sobre el diagrama de dispers
         geom_smooth(method = "lm") +
         labs(title = "Diagrama de dispersión", x = "X", y = "Y")
     ```
-    
-    ::: {.cell-output .cell-output-stderr}
-    ```
-    `geom_smooth()` using formula = 'y ~ x'
-    ```
-    :::
     
     ::: {.cell-output-display}
     ![](05-regresion_files/figure-html/unnamed-chunk-7-1.png){width=672}
@@ -249,18 +236,11 @@ a.  Calcular el coeficiente de determinación del modelo lineal e interpretarlo.
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-8_620f695321a60a62791604d467e61b1a'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-8_a7042ddf073e26003f13313f4142b846'}
     
     ```{.r .cell-code}
     cat(paste("Coeficiente de determinación lineal R²:", summary(recta_y_x)$r.squared))
     ```
-    
-    ::: {.cell-output .cell-output-stderr}
-    ```
-    Warning in summary.lm(recta_y_x): essentially perfect fit: summary may be
-    unreliable
-    ```
-    :::
     
     ::: {.cell-output .cell-output-stdout}
     ```
@@ -279,19 +259,12 @@ a.  Calcular la recta de regresión de $X$ sobre $Y$. ¿Coincide con la recta de
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-9_c87776714b4ce3f68255a9e655237cf0'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-9_371e4ab98c4d80570b5bc20bc3e3248c'}
     
     ```{.r .cell-code}
     recta_x_y <- lm(x ~ y, df) 
     summary(recta_x_y)
     ```
-    
-    ::: {.cell-output .cell-output-stderr}
-    ```
-    Warning in summary.lm(recta_x_y): essentially perfect fit: summary may be
-    unreliable
-    ```
-    :::
     
     ::: {.cell-output .cell-output-stdout}
     ```
@@ -331,26 +304,11 @@ a.  Crear un data frame con los datos de las horas de estudio y los suspensos a 
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-10_1ec301d74ea777d5970a259766b0cb6b'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-10_874505fb8658af53deca3ad5829b4c83'}
     
     ```{.r .cell-code}
     library(readr)
     df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/horas-estudio.csv")
-    ```
-    
-    ::: {.cell-output .cell-output-stderr}
-    ```
-    Rows: 30 Columns: 2
-    ── Column specification ────────────────────────────────────────────────────────
-    Delimiter: ","
-    dbl (2): Horas, Suspensos
-    
-    ℹ Use `spec()` to retrieve the full column specification for this data.
-    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-    ```
-    :::
-    
-    ```{.r .cell-code}
     df
     ```
     
@@ -382,7 +340,7 @@ a.  Dibujar el diagrama de dispersión correspondiente. ¿Qué tipo de modelo de
     ## Solución 
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-11_9640840bc1693d8ab6f4a24a2e9ac8c4'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-11_97358a059b3f5c965541bd50f4d697d3'}
     
     ```{.r .cell-code}
     library(ggplot2)
@@ -406,7 +364,7 @@ a.  Calcular la recta de regresión de los suspensos sobre las horas de estudio.
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-12_455cdb7a0b86c85ce7ab1523a9b97f7e'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-12_dd1433abbb4ff02e8836d03b00de78d3'}
     
     ```{.r .cell-code}
     recta_suspensos_horas <- lm(Suspensos ~ Horas, df) 
@@ -447,7 +405,7 @@ a.  Obtener el coeficiente de regresión de la recta anterior e interpretarlo.
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-13_b90d677a9829e84faa1056d9d53fdf2e'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-13_466e185db3cdf51e84da956606c8553e'}
     
     ```{.r .cell-code}
     cat(paste("Coeficiente de regresión de Suspensos sobre Horas:", recta_suspensos_horas$coefficients[["Horas"]]))
@@ -471,7 +429,7 @@ a.  Dibujar la recta de regresión  sobre el diagrama de dispersión. ¿El ajust
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-14_8d3b1f01a96ea4e12d0cdff3bb27c0c9'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-14_fcd9c64e220c555961bfb986573849cc'}
     
     ```{.r .cell-code}
     library(ggplot2)
@@ -480,12 +438,6 @@ a.  Dibujar la recta de regresión  sobre el diagrama de dispersión. ¿El ajust
         geom_smooth(method = "lm") +
         labs(title = "Diagrama de dispersión", x = "Horas de estudio", y = "Asignaturas suspensas")
     ```
-    
-    ::: {.cell-output .cell-output-stderr}
-    ```
-    `geom_smooth()` using formula = 'y ~ x'
-    ```
-    :::
     
     ::: {.cell-output-display}
     ![](05-regresion_files/figure-html/unnamed-chunk-14-1.png){width=672}
@@ -502,7 +454,7 @@ a.  Calcular el coeficiente de determinación del modelo lineal e interpretarlo.
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-15_d1b9c8d37ccfe6e24f8c9f4776b6a412'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-15_a356e53931298b469b4df34f0471b710'}
     
     ```{.r .cell-code}
     cat(paste("Coeficiente de determinación lineal R²:", summary(recta_suspensos_horas)$r.squared))
@@ -525,7 +477,7 @@ a.  Utilizar la recta de regresión para predecir el número de suspensos corres
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-16_83db87809617aedd45136bfd8fc3e5f5'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-16_6b31174a2fdf69896e8165280e1b7c68'}
     
     ```{.r .cell-code}
     predict.lm(recta_suspensos_horas, newdata = list(Horas = 3))
@@ -551,7 +503,7 @@ a.  Según el modelo lineal, ¿cuántas horas diarias tendrá que estudiar como 
     Como ahora queremos predecir el número de horas de estudio, necesitamos calcular la recta de regresión de la horas sobre los suspensos.
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-17_6479f5944eca4d30ec6f797a8fdfed42'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-17_6a5757f94d818a9bbb21221f35d8d382'}
     
     ```{.r .cell-code}
     recta_horas_suspensos <- lm(Horas ~ Suspensos, df) 
@@ -587,7 +539,7 @@ a.  Crear un data frame con los datos del tiempo y la concentración de alcohol.
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-18_842fdd19f358269bf9aac1c822f592d3'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-18_10562d771a91938fecce1d06b27b3012'}
     
     ```{.r .cell-code}
     df <- data.frame(
@@ -621,7 +573,7 @@ a.  Calcular el coeficiente de correlación lineal. ¿Existe relación lineal en
     Para calcular el coeficiente de correlación lineal de Pearson se puede utilar la función [`cor`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor) del paquete `stats`.
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-19_7e1b84ad292c89627a16d128e3211a41'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-19_949279878f2a2c4ec6c70f2b370255ad'}
     
     ```{.r .cell-code}
     cor(df$Tiempo, df$Alcohol)
@@ -644,7 +596,7 @@ a.  Dibujar el diagrama de dispersión correspondiente y la recta de regresión 
     ## Solución 
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-20_4230874691faa756eb9e83563903e208'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-20_6d48dd626b4c8645e5b411b4e756b8f0'}
     
     ```{.r .cell-code}
     library(ggplot2)
@@ -653,12 +605,6 @@ a.  Dibujar el diagrama de dispersión correspondiente y la recta de regresión 
         geom_smooth(method = "lm") +
         labs(title = "Diagrama de dispersión", x = "Tiempo en minutos", y = "Concentración de alcohol en sangre (g/l)")
     ```
-    
-    ::: {.cell-output .cell-output-stderr}
-    ```
-    `geom_smooth()` using formula = 'y ~ x'
-    ```
-    :::
     
     ::: {.cell-output-display}
     ![](05-regresion_files/figure-html/unnamed-chunk-20-1.png){width=672}
@@ -675,7 +621,7 @@ a.  Eliminar el dato atípico y calcular la recta de la concentración de alcoho
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-21_65fdce270b0aa9a81090f15eb0a64bb9'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-21_19f691d4158c5c85fb01fff3c74fd38a'}
     
     ```{.r .cell-code}
     # Eliminamos el dato atípico que está en la fila 
@@ -720,7 +666,7 @@ a.  Según el modelo de regresión lineal, ¿a qué velocidad metaboliza esta pe
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-22_567d48101caf488757655f14cf0b15df'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-22_aff2367195a5dcb7ad8e6e1b0561d1c4'}
     
     ```{.r .cell-code}
     cat(paste("Coeficiente de regresión de la concentración de alchol sobre el tiempo:", recta_alcohol_tiempo$coefficients[["Tiempo"]]))
@@ -745,7 +691,7 @@ a.  Si la concentración máxima de alcohol en la sangre que permite la ley para
     Como ahora queremos predecir el tiempo, necesitamos calcular la recta de regresión del tiempo sobre la concentración de alcohol.
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-23_46bca3be9afceda0d2cebc73267d2e08'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-23_8556e338c523e6d01a99b4328a203421'}
     
     ```{.r .cell-code}
     recta_tiempo_alcohol <- lm(Tiempo ~ Alcohol, df) 
@@ -774,26 +720,11 @@ a.  Crear un data frame con los datos del PIB y los años a partir del fichero [
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-24_10251a8f535e24099a6f5567a40fe809'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-24_ef2ada5cdd59ccef334f1cabb6098254'}
     
     ```{.r .cell-code}
     library(readr)
     df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/pib-usa.csv")
-    ```
-    
-    ::: {.cell-output .cell-output-stderr}
-    ```
-    Rows: 76 Columns: 2
-    ── Column specification ────────────────────────────────────────────────────────
-    Delimiter: ","
-    dbl (2): Año, PIB
-    
-    ℹ Use `spec()` to retrieve the full column specification for this data.
-    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-    ```
-    :::
-    
-    ```{.r .cell-code}
     df
     ```
     
@@ -825,7 +756,7 @@ a.  Dibujar el diagrama de dispersión que represente la evolución anual del PI
     ## Solución 
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-25_d69a8725b7bce7d68c08a0dd97542f32'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-25_051729b9184d49a578886acde956fd44'}
     
     ```{.r .cell-code}
     library(ggplot2)
@@ -849,36 +780,10 @@ a.  Dibujar el diagrama de dispersión del logaritmo del PIB y los años.
     ## Solución 
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-26_4160380ed8b967f23f19f6c09255328c'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-26_48977a2d4db35a3213c80e7826c2510d'}
     
     ```{.r .cell-code}
     library(dplyr)
-    ```
-    
-    ::: {.cell-output .cell-output-stderr}
-    ```
-    
-    Attaching package: 'dplyr'
-    ```
-    :::
-    
-    ::: {.cell-output .cell-output-stderr}
-    ```
-    The following objects are masked from 'package:stats':
-    
-        filter, lag
-    ```
-    :::
-    
-    ::: {.cell-output .cell-output-stderr}
-    ```
-    The following objects are masked from 'package:base':
-    
-        intersect, setdiff, setequal, union
-    ```
-    :::
-    
-    ```{.r .cell-code}
     df <- mutate(df, logPIB = log(PIB)) 
     ggplot(df, aes(x = Año, y = logPIB)) +
             geom_point(col = "red") +
@@ -900,7 +805,7 @@ a.  Calcular el modelo de regresión exponencial del PIB sobre los años.
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-27_807ee49b656be8a7363ded9ff86dd027'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-27_d052584598854e46a8a95a07bc2ac8d5'}
     
     ```{.r .cell-code}
     recta_logPIB_años <- lm(log(PIB) ~ Año, df) 
@@ -941,7 +846,7 @@ a.  ¿Cuál es la tasa de crecimiento porcentual anual del PIB?
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-28_37b5ef0d629d494181bf6318026f3e30'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-28_c2dbb1500d1e43b201acf083a91a1084'}
     
     ```{.r .cell-code}
     cat(paste("Coeficiente de regresión del logaritmo del PIB sobre los años:", recta_logPIB_años$coefficients[["Año"]]))
@@ -965,7 +870,7 @@ a.  Dibujar el modelo de regresión exponencial sobre el diagrama de dispersión
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-29_42730dda66fdf2586a53d20259254683'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-29_8a25f321f357b0bb04788edbf510deb3'}
     
     ```{.r .cell-code}
     library(ggplot2)
@@ -973,12 +878,6 @@ a.  Dibujar el modelo de regresión exponencial sobre el diagrama de dispersión
             geom_point(col = "red") +
             geom_smooth(method = "glm", method.args = list(family=gaussian(link="log")))
     ```
-    
-    ::: {.cell-output .cell-output-stderr}
-    ```
-    `geom_smooth()` using formula = 'y ~ x'
-    ```
-    :::
     
     ::: {.cell-output-display}
     ![](05-regresion_files/figure-html/unnamed-chunk-29-1.png){width=672}
@@ -1016,7 +915,7 @@ a.  ¿Es el modelo de regresión exponencial un buen modelo para explicar la evo
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-30_488687e571755710ff67a81a7d97c807'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-30_3a724bb86579b1bfee68319e8bb0c83f'}
     
     ```{.r .cell-code}
     cat(paste("Coeficiente de determinación exponencial R²:", summary(recta_logPIB_años)$r.squared))
@@ -1039,7 +938,7 @@ a.  Utilizar el modelo de regresión exponencial para predecir el PIB del año 2
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-31_fceec52aa1986c2babf346cad76b8025'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-31_f0fa664e0965b532e31867c657ba413b'}
     
     ```{.r .cell-code}
     # El modelo exponencial devuelve el logaritmo del PIB, por lo que hay que aplicar la función exponencial para obtener el PIB.
@@ -1066,7 +965,7 @@ a.  ¿Cuándo se alcanzará un PIB de 50000 billones de dólares?
     Como ahora queremos predecir el año en el que se alcanzará el PIB dado, necesitamos construir el modelo de regresión de los años sobre el PIB. Como la relación entre el PIB y los años es exponencial, la relación entre los años y el PIB será la inversa, es decir, el modelo logarítmico.
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-32_b0589dc440b0a9efce0552fdcfea0cc9'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-32_304682257b496e1dbd80dcc4035c59cf'}
     
     ```{.r .cell-code}
     log_años_PIB <- lm(Año ~ log(PIB), df) 
@@ -1101,7 +1000,7 @@ a.  ¿Cuándo se alcanzará un PIB de 50000 billones de dólares?
     El modelo de regresión logarítmico de los años sobre el PIB es $\textsf{Año}= 1863.4980331 + 15.0677514 \log(\textsf{PIB})$.
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-33_35c2b5a9ea36ebc95b86444735939906'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-33_c16b2fdcd719dd021ddc94a629349961'}
     
     ```{.r .cell-code}
     predict.lm(log_años_PIB, newdata = list(PIB = 50000))
@@ -1127,27 +1026,11 @@ a.  Crear un data frame con los datos de la dieta a partir del fichero [`dieta.c
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-34_c9481bc4dada041efbfec44b8a8e5b79'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-34_95c10250dab22b54e5c6b3d39b8266ee'}
     
     ```{.r .cell-code}
     library(readr)
     df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/dieta.csv")
-    ```
-    
-    ::: {.cell-output .cell-output-stderr}
-    ```
-    Rows: 40 Columns: 3
-    ── Column specification ────────────────────────────────────────────────────────
-    Delimiter: ","
-    chr (1): ejercicio
-    dbl (2): dias, peso.perdido
-    
-    ℹ Use `spec()` to retrieve the full column specification for this data.
-    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-    ```
-    :::
-    
-    ```{.r .cell-code}
     df
     ```
     
@@ -1179,7 +1062,7 @@ a.  Dibujar el diagrama de dispersión de los kilos perdidos en función del nú
     ## Solución 
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-35_96ff5d0898aa080b95b0e582facae629'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-35_6a9ff078879d1255e33ee8b228ebc152'}
     
     ```{.r .cell-code}
     library(ggplot2)
@@ -1203,7 +1086,7 @@ a.  Calcular los coeficientes de determinación lineal, cuadrático, exponencial
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-36_68b0d855cf61165474d3dcc237cb70f5'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-36_57a6817c3064bc7b2981b26b7eed39a9'}
     
     ```{.r .cell-code}
     library(dplyr)
@@ -1293,7 +1176,7 @@ a.  Dibujar el diagrama de dispersión de los kilos perdidos en función del nú
     ## Solución 
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-37_51fcd669e5a64ca7f5aa7eef944669c6'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-37_763d2001ec142c2b2e93c1f2c4c3c824'}
     
     ```{.r .cell-code}
     library(ggplot2)
@@ -1317,7 +1200,7 @@ a.  ¿Qué tipo de modelo explica mejor la relación entre el peso perdido y los
     ## Solución
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-38_97ced36e24115dc3138ab7b148f76da7'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-38_849b35bf0fcd1fe05545b39187656678'}
     
     ```{.r .cell-code}
     modelos <- df  %>% 
@@ -1452,7 +1335,7 @@ a.  Construir el mejor modelo de regresión del peso perdido sobre los días de 
     Construimos el modelo inverso para el grupo de las personas que hacen ejercicio.
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-39_9b1238b1e79b0ba9430c8a2424b4d050'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-39_61f83956f7c8e73ccea900b73b35e619'}
     
     ```{.r .cell-code}
     inverso_ejercicio <- lm(peso.perdido ~ I(1/dias), df[df$ejercicio == "si", ])
@@ -1498,7 +1381,7 @@ a.  Construir el mejor modelo de regresión del peso perdido sobre los días de 
     Y ahora el modelo sigmoidal para el grupo de las personas que no hacen ejercicio.
     
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-40_e4a4c148423e7a94b26d36dfcde098a3'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-40_76c6caa2760e32accb0a874195299115'}
     
     ```{.r .cell-code}
     sigmoidal_no_ejercicio <- lm(log(peso.perdido) ~ I(1/dias), df[df$ejercicio == "no", ])
@@ -1540,7 +1423,7 @@ a.  Según los mejores modelos de regresión en cada caso, ¿cuántos kilos perd
     Hacemos primero la predicción del peso perdido para la persona que hace ejercicio usando el modelo inverso.
 
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-41_6eb60a1c167aed570503c861b1ee077c'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-41_6345de5fcaeff9ea60be10928685d85f'}
     
     ```{.r .cell-code}
     predict.lm(inverso_ejercicio, newdata = list(dias = 100))
@@ -1558,7 +1441,7 @@ a.  Según los mejores modelos de regresión en cada caso, ¿cuántos kilos perd
     Y ahora hacemos la predicción del peso perdido para la persona que no hace ejercicio usando el modelo sigmoidal.
     
 
-    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-42_7251ccd86ce02caccf342863b5d42df2'}
+    ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-42_6189d13142f133ea705f201e51fe28fb'}
     
     ```{.r .cell-code}
     # El modelo sigmoidal devuelve el logaritmo del peso perdido por lo que hay que aplicar la función exponencial para obtener el peso perdido.

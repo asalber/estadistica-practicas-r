@@ -1,5 +1,7 @@
-tidyverse
+extraDistr
+kableExtra
 ggplot2
+tidyverse
 tibble
 tidyr
 readr
@@ -8,6 +10,3 @@ dplyr
 stringr
 forcats
 lubridate
-knitr
-kableExtra
-extraDistr

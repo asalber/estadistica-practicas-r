@@ -242,7 +242,7 @@ a.  Aproximar un modelo binomial $B(10, 0.2)$ mediante el correspondiente modelo
 
     ```{r}
     library(kableExtra)
-    library(dplyr)
+    library(tidyverse)
     library(ggplot2)
     x <- 0:10
     fbinom <- dbinom(x, 10, 0.3)

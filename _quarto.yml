@@ -4,6 +4,7 @@ project:
   preview:
     port: 1313
     browser: false
+  resources: "datos"
 
 execute: 
   freeze: auto

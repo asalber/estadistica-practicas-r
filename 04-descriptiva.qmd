@@ -220,9 +220,17 @@ a.  Crear un data frame con los datos de todos los pacientes del estudio a parti
 a.  Calcular el tamaño muestral según el sexo.
 
     :::{.callout-tip collapse="true"}
-    ## Solución 
+    ## Solución 1
     ```{r}
-    
+    table(df$sexo)
+    ```
+    :::
+
+    :::{.callout-tip collapse="true"}
+    ## Solución 2
+    ```{r}
+    library(dplyr)
+    count(df, sexo)
     ```
     :::
 

@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.361">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>Prácticas de Estadística con R - 2&nbsp; Preprocesamiento de datos</title>
 <style>
 code{white-space: pre-wrap;}
@@ -56,7 +53,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -77,8 +73,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -97,14 +92,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Enviar",
     "search-label": "Buscar"
   }
-}</script>
-
-<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
+}</script><script src="site_libs/kePrint-0.0.1/kePrint.js"></script><link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 <meta property="og:title" content="Prácticas de Estadística con R - 2&nbsp; Preprocesamiento de datos">
 <meta property="og:description" content="">
 <meta property="og:site-name" content="Prácticas de Estadística con R">
@@ -113,13 +102,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="twitter:site" content="@aprendeconalf">
 <meta name="twitter:card" content="summary">
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -130,16 +116,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="./index.html" class="sidebar-logo-link">
-      <img src="./img/logos/aprendeconalf.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
-      </a>
+      <img src="./img/logos/aprendeconalf.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none"></a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Prácticas de Estadística con R</a> 
         <div class="sidebar-tools-main tools-wide">
@@ -147,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="dropdown">
       <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
+<li>
             <a class="dropdown-item sidebar-tools-main-item" href="./estadistica-practicas-r.pdf">
               <i class="bi bi-bi-file-pdf pe-1"></i>
             Download PDF
@@ -160,24 +141,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             </a>
           </li>
       </ul>
-    </div>
+</div>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-1" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-1">
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
               <i class="bi bi-bi-twitter pe-1"></i>
             Twitter
             </a>
           </li>
           <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
               <i class="bi bi-bi-linkedin pe-1"></i>
             LinkedIn
             </a>
           </li>
       </ul>
-    </div>
+</div>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
 </div>
     </div>
@@ -189,7 +170,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Prefacio</span></a>
@@ -232,26 +213,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Tabla de contenidos</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#ejercicios-resueltos" id="toc-ejercicios-resueltos" class="nav-link active" data-scroll-target="#ejercicios-resueltos"><span class="header-section-number">2.1</span> Ejercicios Resueltos</a></li>
+<li><a href="#ejercicios-resueltos" id="toc-ejercicios-resueltos" class="nav-link active" data-scroll-target="#ejercicios-resueltos"><span class="header-section-number">2.1</span> Ejercicios Resueltos</a></li>
   <li><a href="#ejercicios-propuestos" id="toc-ejercicios-propuestos" class="nav-link" data-scroll-target="#ejercicios-propuestos"><span class="header-section-number">2.2</span> Ejercicios Propuestos</a></li>
-  </ul>
-</nav>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preprocesamiento de datos</span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Preprocesamiento de datos</span>
+</h1>
 </div>
 
 
@@ -264,30 +241,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-</header>
-
-<section id="ejercicios-resueltos" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="ejercicios-resueltos"><span class="header-section-number">2.1</span> Ejercicios Resueltos</h2>
+</header><section id="ejercicios-resueltos" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="ejercicios-resueltos">
+<span class="header-section-number">2.1</span> Ejercicios Resueltos</h2>
 <p>Para la realización de esta práctica se requieren los paquetes <code>readr</code> y <a href="https://aprendeconalf.es/manual-r/06-preprocesamiento.html#el-paquete-dplyr"><code>dplyr</code></a> de la colección de paquetes <a href="https://aprendeconalf.es/manual-r/06-preprocesamiento.html#la-colecci%C3%B3n-de-paquetes-tidyverse"><code>tidyverse</code></a>.</p>
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-1_db4c1fca4e79f845dea621824a6d7c8b">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Incluye los siguientes paquetes:</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - readr: para la lectura de ficheros csv. </span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - dplyr: para el preprocesamiento y manipulación de datos.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-1_21097132dbe9adbb169f059a08f56920">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> </span>
+<span><span class="co"># Incluye los siguientes paquetes:</span></span>
+<span><span class="co"># - readr: para la lectura de ficheros csv. </span></span>
+<span><span class="co"># - dplyr: para el preprocesamiento y manipulación de datos.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="exr-preprocesamiento-1" class="theorem exercise">
 <p><span class="theorem-title"><strong>Ejercicio 2.1 </strong></span>La siguiente tabla contiene los ingresos y gastos de una empresa durante el primer trimestre del año.</p>
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-2_60eceb1a6d8d6e5218daecf58bd7179f">
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-2_93f718c48e7a1565cdb27b6fc52b2461">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">Mes</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">Ingresos</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">Gastos</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">Impuestos</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Enero</td>
@@ -309,12 +282,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-
-
 </div>
 </div>
 <ol type="a">
-<li><p>Crear un data frame con los datos de la tabla.</p>
+<li>
+<p>Crear un data frame con los datos de la tabla.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -327,13 +299,13 @@ Solución
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-3_b92be18a6294ec49b19362dc2f0b4cba">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mes =</span> <span class="fu">c</span>(<span class="st">"Enero"</span>, <span class="st">"Febrero"</span>, <span class="st">"Marzo"</span>),</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Ingresos =</span> <span class="fu">c</span>(<span class="dv">45000</span>, <span class="dv">41500</span>, <span class="dv">51200</span>),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Gastos =</span> <span class="fu">c</span>(<span class="dv">33400</span>, <span class="dv">35400</span>, <span class="dv">35600</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>df </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-3_4f96c0eda5b5214b0d63468778fe60bf">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>    Mes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Enero"</span>, <span class="st">"Febrero"</span>, <span class="st">"Marzo"</span><span class="op">)</span>,</span>
+<span>    Ingresos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">45000</span>, <span class="fl">41500</span>, <span class="fl">51200</span><span class="op">)</span>,</span>
+<span>    Gastos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">33400</span>, <span class="fl">35400</span>, <span class="fl">35600</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span><span class="va">df</span> </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      Mes Ingresos Gastos
 1   Enero    45000  33400
@@ -343,17 +315,17 @@ Solución
 </div>
 </div>
 </div>
-</div></li>
-<li><p>Añadir una nueva columna con los siguientes impuestos pagados.</p>
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-4_b5047215f5269c101e2e7fc477f3c268">
+</div>
+</li>
+<li>
+<p>Añadir una nueva columna con los siguientes impuestos pagados.</p>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-4_85dda9550739525573ce16daeb27facf">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">Mes</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">Impuestos</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Enero</td>
@@ -369,8 +341,6 @@ Solución
 </tr>
 </tbody>
 </table>
-
-
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -386,9 +356,9 @@ Solución 1
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Con las funciones básicas de R.</p>
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-5_6b0be56a5a810a57eaf1a74a8e82cc5b">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Impuestos <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">6450</span>, <span class="dv">6300</span>, <span class="dv">7100</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-5_2ef372f76116517ef67300f014684bcc">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">Impuestos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6450</span>, <span class="fl">6300</span>, <span class="fl">7100</span><span class="op">)</span></span>
+<span><span class="va">df</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      Mes Ingresos Gastos Impuestos
 1   Enero    45000  33400      6450
@@ -412,10 +382,10 @@ Solución 2
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Con las funciones del paquete <code>dplyr</code>.</p>
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-6_749e4a73b4a569d531dfbcd1f035dde9">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Impuestos =</span> <span class="fu">c</span>(<span class="dv">6450</span>, <span class="dv">6300</span>, <span class="dv">7100</span>))</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-6_5c47816999be42d384164ce9734f5c01">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Impuestos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6450</span>, <span class="fl">6300</span>, <span class="fl">7100</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      Mes Ingresos Gastos Impuestos
 1   Enero    45000  33400      6450
@@ -425,30 +395,26 @@ Solución 2
 </div>
 </div>
 </div>
-</div></li>
-<li><p>Añadir una nueva fila con los siguientes datos de Abril.</p>
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-7_9582b24e53980152f268b6373921208d">
+</div>
+</li>
+<li>
+<p>Añadir una nueva fila con los siguientes datos de Abril.</p>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-7_4c241941f5fab3f788e6d593876c107a">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">Mes</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">Ingresos</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">Gastos</th>
 <th style="text-align: right;" data-quarto-table-cell-role="th">Impuestos</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
+</tr></thead>
+<tbody><tr class="odd">
 <td style="text-align: left;">Abril</td>
 <td style="text-align: right;">49700</td>
 <td style="text-align: right;">36300</td>
 <td style="text-align: right;">6850</td>
-</tr>
-</tbody>
+</tr></tbody>
 </table>
-
-
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -464,9 +430,9 @@ Solución 1
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Con las funciones básicas de R.</p>
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-8_27ab1aa66acafde2cb0511d7489a0e33">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(df, <span class="fu">list</span>(<span class="at">Mes =</span> <span class="st">"Abril"</span>, <span class="at">Ingresos =</span> <span class="dv">49700</span>, <span class="at">Gastos =</span> <span class="dv">36300</span>, <span class="at">Impuestos =</span> <span class="dv">6850</span>))</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-8_b1c4bfa1225247cca4cce72835f2b113">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>Mes <span class="op">=</span> <span class="st">"Abril"</span>, Ingresos <span class="op">=</span> <span class="fl">49700</span>, Gastos <span class="op">=</span> <span class="fl">36300</span>, Impuestos <span class="op">=</span> <span class="fl">6850</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      Mes Ingresos Gastos Impuestos
 1   Enero    45000  33400      6450
@@ -491,10 +457,10 @@ Solución 2
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Con las funciones del paquete <code>dplyr</code>.</p>
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-10_8e265427d6f666722947f71a60a19846">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_row</span>(<span class="at">Mes =</span> <span class="st">"Abril"</span>, <span class="at">Ingresos =</span> <span class="dv">49700</span>, <span class="at">Gastos =</span> <span class="dv">36300</span>, <span class="at">Impuestos =</span> <span class="dv">6850</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-10_8ecc9a8b28cfa20f20b1e7ee623fd63c">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/add_row.html">add_row</a></span><span class="op">(</span>Mes <span class="op">=</span> <span class="st">"Abril"</span>, Ingresos <span class="op">=</span> <span class="fl">49700</span>, Gastos <span class="op">=</span> <span class="fl">36300</span>, Impuestos <span class="op">=</span> <span class="fl">6850</span><span class="op">)</span></span>
+<span><span class="va">df</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      Mes Ingresos Gastos Impuestos
 1   Enero    45000  33400      6450
@@ -505,8 +471,10 @@ Solución 2
 </div>
 </div>
 </div>
-</div></li>
-<li><p>Cambiar los ingresos de Marzo por 50400.</p>
+</div>
+</li>
+<li>
+<p>Cambiar los ingresos de Marzo por 50400.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -519,9 +487,9 @@ Solución
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-11_5b4950392045d576547c134a7c4734ad">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">3</span>, <span class="st">"Ingresos"</span>] <span class="ot">&lt;-</span> <span class="dv">50400</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-11_345d84fd22436756131ec3209149ef2a">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="fl">3</span>, <span class="st">"Ingresos"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">50400</span></span>
+<span><span class="va">df</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      Mes Ingresos Gastos Impuestos
 1   Enero    45000  33400      6450
@@ -532,8 +500,10 @@ Solución
 </div>
 </div>
 </div>
-</div></li>
-<li><p>Crear una nueva columna con los beneficios de cada mes (ingresos - gastos - impuestos).</p>
+</div>
+</li>
+<li>
+<p>Crear una nueva columna con los beneficios de cada mes (ingresos - gastos - impuestos).</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -547,9 +517,9 @@ Solución 1
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Con las funciones básicas de R.</p>
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-12_907d062d8d18a85f17b97d95c897690f">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Beneficios <span class="ot">&lt;-</span> df<span class="sc">$</span>Ingresos <span class="sc">-</span> df<span class="sc">$</span>Gastos <span class="sc">-</span> df<span class="sc">$</span>Impuestos</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-12_55141d3d4e0c12cd3bd18a11ec9bf5df">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">Beneficios</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">Ingresos</span> <span class="op">-</span> <span class="va">df</span><span class="op">$</span><span class="va">Gastos</span> <span class="op">-</span> <span class="va">df</span><span class="op">$</span><span class="va">Impuestos</span></span>
+<span><span class="va">df</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      Mes Ingresos Gastos Impuestos Beneficios
 1   Enero    45000  33400      6450       5150
@@ -574,10 +544,10 @@ Solución 2
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Con las funciones del paquete <code>dplyr</code>.</p>
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-13_097b46759d6b9c7cdf8ac5b4fe3aa39d">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Beneficios =</span> Ingresos <span class="sc">-</span> Gastos <span class="sc">-</span> Impuestos)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-13_f73d6ac9b43323b5364d62738ca845f5">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Beneficios <span class="op">=</span> <span class="va">Ingresos</span> <span class="op">-</span> <span class="va">Gastos</span> <span class="op">-</span> <span class="va">Impuestos</span><span class="op">)</span></span>
+<span><span class="va">df</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      Mes Ingresos Gastos Impuestos Beneficios
 1   Enero    45000  33400      6450       5150
@@ -588,8 +558,10 @@ Solución 2
 </div>
 </div>
 </div>
-</div></li>
-<li><p>Crear una nueva columna con el factor <code>Balance</code> con dos posibles categorías: <code>positivo</code> si ha habido beneficios y <code>negativo</code> si ha habido pérdidas.</p>
+</div>
+</li>
+<li>
+<p>Crear una nueva columna con el factor <code>Balance</code> con dos posibles categorías: <code>positivo</code> si ha habido beneficios y <code>negativo</code> si ha habido pérdidas.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -603,9 +575,9 @@ Solución 1
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Con las funciones básicas de R.</p>
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-14_a52f94855c7e4340298e4acd05f0efc6">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>Balance <span class="ot">&lt;-</span> <span class="fu">cut</span>(df<span class="sc">$</span>Beneficios, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">0</span>, <span class="cn">Inf</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"negativo"</span>, <span class="st">"positivo"</span>))</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-14_d321ca1ea7660ce4a4083d0c62d857a5">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">Balance</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Beneficios</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>, <span class="fl">0</span>, <span class="cn">Inf</span><span class="op">)</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"negativo"</span>, <span class="st">"positivo"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      Mes Ingresos Gastos Impuestos Beneficios  Balance
 1   Enero    45000  33400      6450       5150 positivo
@@ -630,10 +602,10 @@ Solución 2
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Con las funciones del paquete <code>dplyr</code>.</p>
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-15_71b8cfc0e562ef0da4709daaa04fd149">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Balance =</span> <span class="fu">cut</span>(Beneficios, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">0</span>, <span class="cn">Inf</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"negativo"</span>, <span class="st">"positivo"</span>)))</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-15_eea84c3b793f73da0a5fbc18d96649a8">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Balance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span><span class="op">(</span><span class="va">Beneficios</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span>, <span class="fl">0</span>, <span class="cn">Inf</span><span class="op">)</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"negativo"</span>, <span class="st">"positivo"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      Mes Ingresos Gastos Impuestos Beneficios  Balance
 1   Enero    45000  33400      6450       5150 positivo
@@ -644,8 +616,10 @@ Solución 2
 </div>
 </div>
 </div>
-</div></li>
-<li><p>Filtrar el conjunto de datos para quedarse con los nombres de los meses y los beneficios de los meses con balance positivo.</p>
+</div>
+</li>
+<li>
+<p>Filtrar el conjunto de datos para quedarse con los nombres de los meses y los beneficios de los meses con balance positivo.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -659,8 +633,8 @@ Solución 1
 <div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Con las funciones básicas de R.</p>
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-16_8c0b1e432c1f2ada0cf3f517278714ad">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>Balance <span class="sc">==</span> <span class="st">"positivo"</span>, <span class="fu">c</span>(<span class="st">"Mes"</span>, <span class="st">"Beneficios"</span>)]</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-16_667d29d66660b03cfe8cac2ee23f73f2">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">Balance</span> <span class="op">==</span> <span class="st">"positivo"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Mes"</span>, <span class="st">"Beneficios"</span><span class="op">)</span><span class="op">]</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Mes Beneficios
 1 Enero       5150
@@ -684,10 +658,10 @@ Solución 2
 <div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Con las funciones del paquete <code>dplyr</code>.</p>
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-17_04cb6f63a27924dcbe0719e9fc7713be">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Balance <span class="sc">==</span> <span class="st">"positivo"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Mes, Beneficios)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-17_1ef47903e6eb345bf2f6d58d3d189e24">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Balance</span> <span class="op">==</span> <span class="st">"positivo"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Mes</span>, <span class="va">Beneficios</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Mes Beneficios
 1 Enero       5150
@@ -697,13 +671,15 @@ Solución 2
 </div>
 </div>
 </div>
-</div></li>
+</div>
+</li>
 </ol>
 </div>
 <div id="exr-preprocesamiento-2" class="theorem exercise">
 <p><span class="theorem-title"><strong>Ejercicio 2.2 </strong></span>El fichero <a href="datos/colesterol.csv"><code>colesterol.csv</code></a> contiene información de una muestra de pacientes donde se han medido la edad, el sexo, el peso, la altura y el nivel de colesterol, además de su nombre.</p>
 <ol type="a">
-<li><p>Crear un data frame con los datos de todos los pacientes del estudio a partir del fichero <a href="datos/colesterol.csv"><code>colesterol.csv</code></a>.</p>
+<li>
+<p>Crear un data frame con los datos de todos los pacientes del estudio a partir del fichero <a href="datos/colesterol.csv"><code>colesterol.csv</code></a>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -717,26 +693,8 @@ Solución 1
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Con las funciones básicas de R.</p>
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-18_c0b5356311725a3f24f67310cbbf0430">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/colesterol.csv"</span>)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                            nombre edad sexo peso altura colesterol
-1     José Luis Martínez Izquierdo   18    H   85   1.79        182
-2                   Rosa Díaz Díaz   32    M   65   1.73        232
-3            Javier García Sánchez   24    H   NA   1.81        191
-4              Carmen López Pinzón   35    M   65   1.70        200
-5             Marisa López Collado   46    M   51   1.58        148
-6                Antonio Ruiz Cruz   68    H   66   1.74        249
-7          Antonio Fernández Ocaña   51    H   62   1.72        276
-8            Pilar Martín González   22    M   60   1.66         NA
-9             Pedro Gálvez Tenorio   35    H   90   1.94        241
-10         Santiago Reillo Manzano   46    H   75   1.85        280
-11           Macarena Álvarez Luna   53    M   55   1.62        262
-12      José María de la Guía Sanz   58    H   78   1.87        198
-13 Miguel Angel Cuadrado Gutiérrez   27    H  109   1.98        210
-14           Carolina Rubio Moreno   20    M   61   1.77        194</code></pre>
-</div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-18_1afd2b58453091046b9c36689bd6da52">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/colesterol.csv"</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -753,10 +711,41 @@ Solución 2
 </div>
 <div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Con las funciones del paquete <code>readr</code>.</p>
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-19_4e0d109f079242ce6c344c608a66bed7">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/colesterol.csv"</span>)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Con la función <a href="https://readr.tidyverse.org/reference/read_delim.html"><code>read_csv</code></a> del paquete del paquete <a href="https://readr.tidyverse.org/index.html"><code>readr</code></a>.</p>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-19_ee27ea0f4a774889bc5bee88b2d64b42">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/colesterol.csv"</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 14 Columns: 6
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): nombre, sexo
+dbl (4): edad, peso, altura, colesterol
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Mostrar el contenido del data frame.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solución 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Con las funciones básicas de R.</p>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-20_23d0a16537b603cc644c76b129e79bd7">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 14 × 6
    nombre                           edad sexo   peso altura colesterol
@@ -779,13 +768,44 @@ Solución 2
 </div>
 </div>
 </div>
-</div></li>
-<li><p>Crear una nueva columna con el índice de masa corporal, usando la siguiente fórmula</p>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solución 2
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Con la función <a href="https://dplyr.tidyverse.org/reference/glimpse.html?q=read_csv#undefined"><code>glimpse</code></a> del paquete <a href="https://dplyr.tidyverse.org/index.html"><code>dplyr</code></a>. Esta función muestra las columnas del data frame en filas, de manera que permite ver todas las columnas de un data frame cuando este tiene muchas columnas.</p>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-21_794b9f587c2933b640df55ed94c7e5a1">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 14
+Columns: 6
+$ nombre     &lt;chr&gt; "José Luis Martínez Izquierdo", "Rosa Díaz Díaz", "Javier G…
+$ edad       &lt;dbl&gt; 18, 32, 24, 35, 46, 68, 51, 22, 35, 46, 53, 58, 27, 20
+$ sexo       &lt;chr&gt; "H", "M", "H", "M", "M", "H", "H", "M", "H", "H", "M", "H",…
+$ peso       &lt;dbl&gt; 85, 65, NA, 65, 51, 66, 62, 60, 90, 75, 55, 78, 109, 61
+$ altura     &lt;dbl&gt; 1.79, 1.73, 1.81, 1.70, 1.58, 1.74, 1.72, 1.66, 1.94, 1.85,…
+$ colesterol &lt;dbl&gt; 182, 232, 191, 200, 148, 249, 276, NA, 241, 280, 262, 198, …</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Crear una nueva columna con el índice de masa corporal, usando la siguiente fórmula</p>
 <p><span class="math display">\[
 \mbox{IMC} = \frac{\mbox{Peso (kg)}}{\mbox{Altura (cm)}^2}
 \]</span></p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -794,12 +814,12 @@ Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-20_5a8ed337dc8e4184686652aada02f1c2">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">imc =</span> <span class="fu">round</span>(peso<span class="sc">/</span>altura<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-22_d1909d6148064c796fc9db65e693a31e">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>imc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">peso</span><span class="op">/</span><span class="va">altura</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 14 × 7
    nombre                           edad sexo   peso altura colesterol   imc
@@ -822,15 +842,15 @@ Solución
 </div>
 </div>
 </div>
-</div></li>
-<li><p>Crear una nueva columna con la variable <code>obesidad</code> recodificando la columna <code>imc</code> en las siguientes categorías.</p>
+</div>
+</li>
+<li>
+<p>Crear una nueva columna con la variable <code>obesidad</code> recodificando la columna <code>imc</code> en las siguientes categorías.</p>
 <table class="table">
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: left;">Rango IMC</th>
 <th style="text-align: left;">Categoría</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Menor de 18.5</td>
@@ -851,7 +871,7 @@ Solución
 </tbody>
 </table>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -860,12 +880,12 @@ Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-21_32146c2717c1d66c3c443a1cdc604260">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Obesidad =</span> <span class="fu">cut</span>(imc, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">18.5</span>, <span class="fl">24.5</span>, <span class="dv">30</span>, <span class="cn">Inf</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Bajo peso"</span>, <span class="st">"Saludable"</span>, <span class="st">"Sobrepeso"</span>, <span class="st">"Obeso"</span>)))</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-23_c5d5228337c0f663fedbf8ac0bfbebfe">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Obesidad <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span><span class="op">(</span><span class="va">imc</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">18.5</span>, <span class="fl">24.5</span>, <span class="fl">30</span>, <span class="cn">Inf</span><span class="op">)</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Bajo peso"</span>, <span class="st">"Saludable"</span>, <span class="st">"Sobrepeso"</span>, <span class="st">"Obeso"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 14 × 8
    nombre                      edad sexo   peso altura colesterol   imc Obesidad
@@ -888,10 +908,12 @@ Solución
 </div>
 </div>
 </div>
-</div></li>
-<li><p>Seleccionar las columnas <code>nombre</code>, <code>sexo</code> y <code>edad</code>.</p>
+</div>
+</li>
+<li>
+<p>Seleccionar las columnas <code>nombre</code>, <code>sexo</code> y <code>edad</code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -900,11 +922,11 @@ Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-22_5673d8390df9a0e5d7ca2db1ffb7f7c7">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(nombre, sexo, edad)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-24_24a02b499f9faad430603dccef3f1491">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">nombre</span>, <span class="va">sexo</span>, <span class="va">edad</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 14 × 3
    nombre                          sexo   edad
@@ -927,10 +949,12 @@ Solución
 </div>
 </div>
 </div>
-</div></li>
-<li><p>Anonimizar los datos eliminando la columna <code>nombre</code>.</p>
+</div>
+</li>
+<li>
+<p>Anonimizar los datos eliminando la columna <code>nombre</code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -939,11 +963,11 @@ Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-23_265e8dbceb7371340b4bcd8ccb76ac18">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="sc">-</span>nombre)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-25_f292b9f2a7b4acf9e582d5249562ae83">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">nombre</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 14 × 7
     edad sexo   peso altura colesterol   imc Obesidad 
@@ -966,10 +990,12 @@ Solución
 </div>
 </div>
 </div>
-</div></li>
-<li><p>Reordenar las columnas poniendo la columna <code>sexo</code> antes que la columna <code>edad</code>.</p>
+</div>
+</li>
+<li>
+<p>Reordenar las columnas poniendo la columna <code>sexo</code> antes que la columna <code>edad</code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -978,11 +1004,11 @@ Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-24_11a8e9665ff191e3249e51c23601c818">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(nombre, sexo, edad, <span class="fu">everything</span>())</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-26_5a8ab7de46f27b488b13a0ffecea2903">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">nombre</span>, <span class="va">sexo</span>, <span class="va">edad</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 14 × 8
    nombre                     sexo   edad  peso altura colesterol   imc Obesidad
@@ -1005,10 +1031,12 @@ Solución
 </div>
 </div>
 </div>
-</div></li>
-<li><p>Filtrar el data frame para quedarse con las mujeres.</p>
+</div>
+</li>
+<li>
+<p>Filtrar el data frame para quedarse con las mujeres.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1017,11 +1045,11 @@ Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-25_3beb19498fa9e5ae5cde010dd27bf7df">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(sexo <span class="sc">==</span> <span class="st">"M"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-27_3c6772e6ccf332eed238f34bde488a18">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">sexo</span> <span class="op">==</span> <span class="st">"M"</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 8
   nombre                 edad sexo   peso altura colesterol   imc Obesidad 
@@ -1036,10 +1064,12 @@ Solución
 </div>
 </div>
 </div>
-</div></li>
-<li><p>Filtrar el data frame para quedarse con los hombres mayores de 30 años.</p>
+</div>
+</li>
+<li>
+<p>Filtrar el data frame para quedarse con los hombres mayores de 30 años.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1048,11 +1078,11 @@ Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-26_427f4a422598c0f8b01a7dd7f6acf8c5">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>( sexo <span class="sc">==</span> <span class="st">"H"</span> <span class="sc">&amp;</span> edad <span class="sc">&gt;</span> <span class="dv">30</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-28_99b80af600257d62f3dee124ceff47ff">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span> <span class="va">sexo</span> <span class="op">==</span> <span class="st">"H"</span> <span class="op">&amp;</span> <span class="va">edad</span> <span class="op">&gt;</span> <span class="fl">30</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 8
   nombre                      edad sexo   peso altura colesterol   imc Obesidad 
@@ -1066,10 +1096,12 @@ Solución
 </div>
 </div>
 </div>
-</div></li>
-<li><p>Filtrar el data frame para eliminar las filas con datos perdidos en la columna <code>colesterol</code>.</p>
+</div>
+</li>
+<li>
+<p>Filtrar el data frame para eliminar las filas con datos perdidos en la columna <code>colesterol</code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1078,11 +1110,11 @@ Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-27_aeec3a9f2350489ce434c8dec622c812">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(colesterol))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-29_192eaff4c49cc2612047ab4bce01fb9e">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">colesterol</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 13 × 8
    nombre                      edad sexo   peso altura colesterol   imc Obesidad
@@ -1104,10 +1136,12 @@ Solución
 </div>
 </div>
 </div>
-</div></li>
-<li><p>Ordenar el data frame según la columna <code>nombre</code>.</p>
+</div>
+</li>
+<li>
+<p>Ordenar el data frame según la columna <code>nombre</code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1116,11 +1150,11 @@ Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-28_d01a70f8c6cc85674cf279c3a3bcf6fc">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(nombre)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-30_673265f713cd68b539e8d02472085ae6">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">nombre</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 14 × 8
    nombre                      edad sexo   peso altura colesterol   imc Obesidad
@@ -1143,10 +1177,12 @@ Solución
 </div>
 </div>
 </div>
-</div></li>
-<li><p>Ordenar el data frame ascendentemente por la columna <code>sexo</code> y descendentemente por la columna <code>edad</code>.</p>
+</div>
+</li>
+<li>
+<p>Ordenar el data frame ascendentemente por la columna <code>sexo</code> y descendentemente por la columna <code>edad</code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1155,11 +1191,11 @@ Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-24" class="callout-24-contents callout-collapse collapse">
+<div id="callout-26" class="callout-26-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-29_126cd8e4d481f67ad1396b8274a2e71d">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(sexo, <span class="fu">desc</span>(edad))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-31_3d0bd6d7bd4df4c33d2c9ea6462ed9d9">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">sexo</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">edad</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 14 × 8
    nombre                      edad sexo   peso altura colesterol   imc Obesidad
@@ -1182,15 +1218,17 @@ Solución
 </div>
 </div>
 </div>
-</div></li>
+</div>
+</li>
 </ol>
 </div>
 <div id="exr-preprocesamiento-3" class="theorem exercise">
 <p><span class="theorem-title"><strong>Ejercicio 2.3 </strong></span>El fichero <a href="datos/notas-curso2.csv"><code>notas-curso2.csv</code></a> contiene las notas de las asignaturas de un curso en varios grupos de alumnos.</p>
 <ol type="a">
-<li><p>Crear un data frame con los datos del curso a partir del fichero <a href="datos/notas-curso2.csv"><code>notas-curso2.csv</code></a>.</p>
+<li>
+<p>Crear un data frame con los datos del curso a partir del fichero <a href="datos/notas-curso2.csv"><code>notas-curso2.csv</code></a>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1199,11 +1237,21 @@ Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div id="callout-27" class="callout-27-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-30_487392b8cdb4fa07560c8da8e3839bc7">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/notas-curso2.csv"</span>)</span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-32_f846fc7f3b9605206b3a7560dfca47fb">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/notas-curso2.csv"</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 120 Columns: 9
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (4): sexo, turno, grupo, trabaja
+dbl (5): notaA, notaB, notaC, notaD, notaE
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 120 × 9
    sexo   turno  grupo trabaja notaA notaB notaC notaD notaE
@@ -1223,10 +1271,12 @@ Solución
 </div>
 </div>
 </div>
-</div></li>
-<li><p>Convertir el data frame a formato largo.</p>
+</div>
+</li>
+<li>
+<p>Convertir el data frame a formato largo.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1235,11 +1285,11 @@ Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div id="callout-28" class="callout-28-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-31_556f476bbec9b5fb784abff7316bc407">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>df_largo <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(notaA<span class="sc">:</span>notaE, <span class="at">names_to =</span> <span class="st">"Asignatura"</span>, <span class="at">values_to =</span> <span class="st">"Nota"</span>)</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>df_largo</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-33_6a008e28b30406a02ecb56bac04d2369">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_largo</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="va">notaA</span><span class="op">:</span><span class="va">notaE</span>, names_to <span class="op">=</span> <span class="st">"Asignatura"</span>, values_to <span class="op">=</span> <span class="st">"Nota"</span><span class="op">)</span></span>
+<span><span class="va">df_largo</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 600 × 6
    sexo   turno  grupo trabaja Asignatura  Nota
@@ -1259,10 +1309,12 @@ Solución
 </div>
 </div>
 </div>
-</div></li>
-<li><p>Crear una nueva columna con la variable <code>calificación</code> que contenga las calificaciones de cada asignatura.</p>
+</div>
+</li>
+<li>
+<p>Crear una nueva columna con la variable <code>calificación</code> que contenga las calificaciones de cada asignatura.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1271,12 +1323,12 @@ Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-27" class="callout-27-contents callout-collapse collapse">
+<div id="callout-29" class="callout-29-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-32_40aeb5d989075e2bf0a2c85e87b0f21e">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>df_largo <span class="ot">&lt;-</span> df_largo <span class="sc">%&gt;%</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(Califiación <span class="ot">=</span> <span class="fu">cut</span>(Nota, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">4.99</span>, <span class="fl">6.99</span>, <span class="fl">8.99</span>, <span class="dv">10</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"SS"</span>, <span class="st">"AP"</span>, <span class="st">"NT"</span>, <span class="st">"SB"</span>)))</span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>df_largo</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-34_477d2b7e62b310fcff00f3cde7d6a917">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_largo</span> <span class="op">&lt;-</span> <span class="va">df_largo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Califiación <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span><span class="op">(</span><span class="va">Nota</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4.99</span>, <span class="fl">6.99</span>, <span class="fl">8.99</span>, <span class="fl">10</span><span class="op">)</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"SS"</span>, <span class="st">"AP"</span>, <span class="st">"NT"</span>, <span class="st">"SB"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df_largo</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 600 × 7
    sexo   turno  grupo trabaja Asignatura  Nota Califiación
@@ -1296,10 +1348,12 @@ Solución
 </div>
 </div>
 </div>
-</div></li>
-<li><p>Filtrar el conjunto de datos para obtener las asignaturas y las notas de las mujeres del grupo A, ordenadas de mayor a menor.</p>
+</div>
+</li>
+<li>
+<p>Filtrar el conjunto de datos para obtener las asignaturas y las notas de las mujeres del grupo A, ordenadas de mayor a menor.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1308,13 +1362,13 @@ Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-28" class="callout-28-contents callout-collapse collapse">
+<div id="callout-30" class="callout-30-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-33_1936c918867297bf6c3d20db56fc52e5">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>df_largo <span class="sc">%&gt;%</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(sexo <span class="sc">==</span> <span class="st">"Mujer"</span>, grupo <span class="sc">==</span> <span class="st">"A"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Asignatura, Nota) <span class="sc">%&gt;%</span></span>
-<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(Nota))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-35_d35c62265bc64fddec9036a9b1f8eea1">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_largo</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">sexo</span> <span class="op">==</span> <span class="st">"Mujer"</span>, <span class="va">grupo</span> <span class="op">==</span> <span class="st">"A"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Asignatura</span>, <span class="va">Nota</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">Nota</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 75 × 2
    Asignatura  Nota
@@ -1334,23 +1388,21 @@ Solución
 </div>
 </div>
 </div>
-</div></li>
+</div>
+</li>
 </ol>
 </div>
-</section>
-<section id="ejercicios-propuestos" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="ejercicios-propuestos"><span class="header-section-number">2.2</span> Ejercicios Propuestos</h2>
+</section><section id="ejercicios-propuestos" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="ejercicios-propuestos">
+<span class="header-section-number">2.2</span> Ejercicios Propuestos</h2>
 <div id="exr-preprocesaimento-5" class="theorem exercise">
 <p><span class="theorem-title"><strong>Ejercicio 2.4 </strong></span>La siguiente tabla recoge las notas de los alumnos de un curso con dos asignaturas.</p>
 <table class="table">
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: left;">Alumno</th>
 <th style="text-align: center;">Sexo</th>
 <th style="text-align: center;">Física</th>
 <th style="text-align: center;">Química</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Carlos</td>
@@ -1391,52 +1443,8 @@ Solución
 </tbody>
 </table>
 <ol type="a">
-<li><p>Definir cuatro vectores con el nombre, el sexo y las notas de Física y Química.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solución
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-29" class="callout-29-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-34_18d47d29a2e3a2db5818d60637f55026">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>nombre <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Carlos"</span>, <span class="st">"María"</span>, <span class="st">"Carmen"</span>, <span class="st">"Pedro"</span>, <span class="st">"Luis"</span>, <span class="st">"Sara"</span>)</span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>sexo <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"H"</span>, <span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"H"</span>, <span class="st">"H"</span>, <span class="st">"M"</span>)</span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>fisica <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">6.7</span>, <span class="fl">7.2</span>, <span class="fl">5.5</span>, <span class="cn">NA</span>, <span class="fl">3.5</span>, <span class="fl">6.2</span>)</span>
-<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>quimica <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">8.1</span>, <span class="fl">9.5</span>, <span class="dv">5</span>, <span class="fl">4.5</span>, <span class="dv">5</span>, <span class="dv">4</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div></li>
-<li><p>Convertir el sexo en un factor y mostrar sus niveles.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solución
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-30" class="callout-30-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-35_b1060d51721c99298f729694a248e2c4">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>sexo <span class="ot">&lt;-</span> <span class="fu">factor</span>(sexo)</span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(sexo)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "H" "M"</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div></li>
-<li><p>Crear un data frame con el nombre, sexo y las notas de Física y Química.</p>
+<li>
+<p>Definir cuatro vectores con el nombre, el sexo y las notas de Física y Química.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1449,23 +1457,18 @@ Solución
 </div>
 <div id="callout-31" class="callout-31-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-36_ca371a6bbb2ccfdc6d1a5e45bf07ca68">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(nombre, sexo, fisica, quimica)</span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  nombre sexo fisica quimica
-1 Carlos    H    6.7     8.1
-2  María    M    7.2     9.5
-3 Carmen    M    5.5     5.0
-4  Pedro    H     NA     4.5
-5   Luis    H    3.5     5.0
-6   Sara    M    6.2     4.0</code></pre>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-36_fbf91f5f034eafbc2a88886829cef8fd">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nombre</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Carlos"</span>, <span class="st">"María"</span>, <span class="st">"Carmen"</span>, <span class="st">"Pedro"</span>, <span class="st">"Luis"</span>, <span class="st">"Sara"</span><span class="op">)</span></span>
+<span><span class="va">sexo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"H"</span>, <span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"H"</span>, <span class="st">"H"</span>, <span class="st">"M"</span><span class="op">)</span></span>
+<span><span class="va">fisica</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6.7</span>, <span class="fl">7.2</span>, <span class="fl">5.5</span>, <span class="cn">NA</span>, <span class="fl">3.5</span>, <span class="fl">6.2</span><span class="op">)</span></span>
+<span><span class="va">quimica</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">8.1</span>, <span class="fl">9.5</span>, <span class="fl">5</span>, <span class="fl">4.5</span>, <span class="fl">5</span>, <span class="fl">4</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
-</div></li>
-<li><p>Crear una nueva columna con la nota media de Física y Química.</p>
+</li>
+<li>
+<p>Convertir el sexo en un factor y mostrar sus niveles.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-32-contents" aria-controls="callout-32" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1478,23 +1481,19 @@ Solución
 </div>
 <div id="callout-32" class="callout-32-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-37_cca198d7e397422384bb15f4f6cdbc90">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>media <span class="ot">&lt;-</span> (df<span class="sc">$</span>fisica <span class="sc">+</span> df<span class="sc">$</span>quimica) <span class="sc">/</span> <span class="dv">2</span></span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-37_2ddf01a8025e3934f0324f5df7665822">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sexo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">sexo</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">sexo</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  nombre sexo fisica quimica media
-1 Carlos    H    6.7     8.1  7.40
-2  María    M    7.2     9.5  8.35
-3 Carmen    M    5.5     5.0  5.25
-4  Pedro    H     NA     4.5    NA
-5   Luis    H    3.5     5.0  4.25
-6   Sara    M    6.2     4.0  5.10</code></pre>
+<pre><code>[1] "H" "M"</code></pre>
 </div>
 </div>
 </div>
 </div>
-</div></li>
-<li><p>Crear una nueva columna booleana <code>aprobado</code> que tenga el valor <code>TRUE</code> si la media es mayor o igual que 5 y <code>FALSE</code> en caso contrario.</p>
+</div>
+</li>
+<li>
+<p>Crear un data frame con el nombre, sexo y las notas de Física y Química.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-33-contents" aria-controls="callout-33" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1507,23 +1506,25 @@ Solución
 </div>
 <div id="callout-33" class="callout-33-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-38_9cee65fb5bdd1befdedcac45db74d6ee">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>aprobado <span class="ot">&lt;-</span> df<span class="sc">$</span>media <span class="sc">&gt;=</span> <span class="dv">5</span></span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-38_473e49502d7b269021fababe45844c3a">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">nombre</span>, <span class="va">sexo</span>, <span class="va">fisica</span>, <span class="va">quimica</span><span class="op">)</span></span>
+<span><span class="va">df</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  nombre sexo fisica quimica media aprobado
-1 Carlos    H    6.7     8.1  7.40     TRUE
-2  María    M    7.2     9.5  8.35     TRUE
-3 Carmen    M    5.5     5.0  5.25     TRUE
-4  Pedro    H     NA     4.5    NA       NA
-5   Luis    H    3.5     5.0  4.25    FALSE
-6   Sara    M    6.2     4.0  5.10     TRUE</code></pre>
+<pre><code>  nombre sexo fisica quimica
+1 Carlos    H    6.7     8.1
+2  María    M    7.2     9.5
+3 Carmen    M    5.5     5.0
+4  Pedro    H     NA     4.5
+5   Luis    H    3.5     5.0
+6   Sara    M    6.2     4.0</code></pre>
 </div>
 </div>
 </div>
 </div>
-</div></li>
-<li><p>Filtrar el data frame para quedarse con el nombre y la media de las mujeres que han aprobado.</p>
+</div>
+</li>
+<li>
+<p>Crear una nueva columna con la nota media de Física y Química.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-34-contents" aria-controls="callout-34" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1536,8 +1537,70 @@ Solución
 </div>
 <div id="callout-34" class="callout-34-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-39_246dd8fdf5887dcf05f9260462352591">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>sexo <span class="sc">==</span> <span class="st">"M"</span> <span class="sc">&amp;</span> df<span class="sc">$</span>media <span class="sc">&gt;=</span> <span class="dv">5</span>, <span class="fu">c</span>(<span class="st">"nombre"</span>, <span class="st">"media"</span>)]</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-39_b4a983e1b08cdf48ee1b7eb22e1bfe74">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">media</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">fisica</span> <span class="op">+</span> <span class="va">df</span><span class="op">$</span><span class="va">quimica</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span></span>
+<span><span class="va">df</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  nombre sexo fisica quimica media
+1 Carlos    H    6.7     8.1  7.40
+2  María    M    7.2     9.5  8.35
+3 Carmen    M    5.5     5.0  5.25
+4  Pedro    H     NA     4.5    NA
+5   Luis    H    3.5     5.0  4.25
+6   Sara    M    6.2     4.0  5.10</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Crear una nueva columna booleana <code>aprobado</code> que tenga el valor <code>TRUE</code> si la media es mayor o igual que 5 y <code>FALSE</code> en caso contrario.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-35-contents" aria-controls="callout-35" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-35" class="callout-35-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-40_5809cb0bad39205c5f4ec1e7fb6bd585">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">aprobado</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">media</span> <span class="op">&gt;=</span> <span class="fl">5</span></span>
+<span><span class="va">df</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  nombre sexo fisica quimica media aprobado
+1 Carlos    H    6.7     8.1  7.40     TRUE
+2  María    M    7.2     9.5  8.35     TRUE
+3 Carmen    M    5.5     5.0  5.25     TRUE
+4  Pedro    H     NA     4.5    NA       NA
+5   Luis    H    3.5     5.0  4.25    FALSE
+6   Sara    M    6.2     4.0  5.10     TRUE</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Filtrar el data frame para quedarse con el nombre y la media de las mujeres que han aprobado.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-36-contents" aria-controls="callout-36" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-36" class="callout-36-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell" data-hash="02-preprocesamiento-datos_cache/html/unnamed-chunk-41_a1bf91cef985ab55ff2997ef6211f503">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">sexo</span> <span class="op">==</span> <span class="st">"M"</span> <span class="op">&amp;</span> <span class="va">df</span><span class="op">$</span><span class="va">media</span> <span class="op">&gt;=</span> <span class="fl">5</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"nombre"</span>, <span class="st">"media"</span><span class="op">)</span><span class="op">]</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  nombre media
 2  María  8.35
@@ -1547,7 +1610,8 @@ Solución
 </div>
 </div>
 </div>
-</div></li>
+</div>
+</li>
 </ol>
 </div>
 <div id="exr-preprocesamiento-5" class="theorem exercise">
@@ -1575,9 +1639,10 @@ Solución
 <ol type="a">
 <li><p>Crear un data frame con los datos de los pacientes del hospital A (fichero de csv <a href="datos/hipertension/datos-hospital-a.csv">datos-hospital-a.csv</a>).</p></li>
 <li><p>Crear un data frame con los datos de los pacientes del hospital B (fichero csv <a href="datos/hipertension/datos-hospital-b.csv">datos-hospital-b.csv</a>).</p></li>
-<li><p>Fusionar los datos de los dos hospitales en un nuevo data frame.</p>
+<li>
+<p>Fusionar los datos de los dos hospitales en un nuevo data frame.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-35-contents" aria-controls="callout-35" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-37-contents" aria-controls="callout-37" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1586,16 +1651,18 @@ Ayuda
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-35" class="callout-35-contents callout-collapse collapse">
+<div id="callout-37" class="callout-37-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Para fusionar las filas de dos data frames con las mismas columnas usar la función <a href="https://aprendeconalf.es/manual-r/03-tipos-datos-estructurados.html#a%C3%B1adir-elementos-a-un-data-frame"><code>rbind</code></a>.</p>
 </div>
 </div>
-</div></li>
+</div>
+</li>
 <li><p>Crear un data frame con los datos de las claves de aleatorización (fichero csv <a href="datos/hipertension/claves-aleatorizacion.csv">claves-aleatorizacion.csv</a>)</p></li>
-<li><p>Fusionar el data frame con los datos clínicos y el data frame con claves de aleatorización en un nuevo data frame.</p>
+<li>
+<p>Fusionar el data frame con los datos clínicos y el data frame con claves de aleatorización en un nuevo data frame.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-36-contents" aria-controls="callout-36" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-38-contents" aria-controls="callout-38" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1604,22 +1671,20 @@ Ayuda
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-36" class="callout-36-contents callout-collapse collapse">
+<div id="callout-38" class="callout-38-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Para fusionar las columnas de dos data frames usando una misma columna como clave en ambos data frames usar la función <a href="https://dtplyr.tidyverse.org/reference/left_join.dtplyr_step.html"><code>left_join</code></a> del paquete <code>dplyr</code>.</p>
 </div>
 </div>
-</div></li>
+</div>
+</li>
 <li><p>Convertir en un factor el sexo.</p></li>
 <li><p>Crear una nueva columna para la evolución de la presión arterial diastólica restando las columnas <code>PAS_FIN</code> y <code>PAS_FIN</code>.</p></li>
 </ol>
 </div>
 
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1966,9 +2031,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./01-intro.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción a R</span></span>
       </a>          

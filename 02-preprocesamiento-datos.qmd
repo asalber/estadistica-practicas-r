@@ -206,17 +206,35 @@ a.  Crear un data frame con los datos de todos los pacientes del estudio a parti
 
     ```{r}
     df <- read.csv("https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/colesterol.csv")
-    df
     ```
     :::
 
     :::{.callout-tip collapse="true"}
     ## Solución 2
-    Con las funciones del paquete `readr`.
+    Con la función [`read_csv`](https://readr.tidyverse.org/reference/read_delim.html) del paquete del paquete [`readr`](https://readr.tidyverse.org/index.html).
 
     ```{r}
     df <- read_csv("https://raw.githubusercontent.com/asalber/estadistica-practicas-r/main/datos/colesterol.csv")
-    df
+    ```
+    :::
+
+a.  Mostrar el contenido del data frame.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución 1
+    Con las funciones básicas de R.
+
+    ```{r}
+    df 
+    ```
+    :::
+
+    :::{.callout-tip collapse="true"}
+    ## Solución 2
+    Con la función [`glimpse`](https://dplyr.tidyverse.org/reference/glimpse.html?q=read_csv#undefined) del paquete [`dplyr`](https://dplyr.tidyverse.org/index.html). Esta función muestra las columnas del data frame en filas, de manera que permite ver todas las columnas de un data frame cuando este tiene muchas columnas.
+
+    ```{r}
+    glimpse(df)
     ```
     :::
 

@@ -1103,19 +1103,19 @@ a.  Calcular los coeficientes de determinación lineal, cuadrático, exponencial
             Potencial = list(lm(log(peso.perdido) ~ log(dias), df)),
             Inverso = list(lm(peso.perdido ~ I(1/dias), df)),
             Sigmoidal = list(lm(log(peso.perdido) ~ I(1/dias), df)),
-        )  %>% 
+        )  |> 
         # 
         # Reestructuramos el data frame para tener todos los modelos en la misma columna.
-        pivot_longer(everything(), names_to = "Tipo_Modelo", values_to = "Modelo")  %>% 
+        pivot_longer(everything(), names_to = "Tipo_Modelo", values_to = "Modelo")  |> 
         # Obtenemos un resumen del ajuste de cada modelo en formato organizado (se obtiene una lista con los parámetros que describen el ajuste de cada modelo).
-        mutate(Resumen = map(Modelo, glance)) %>% 
+        mutate(Resumen = map(Modelo, glance)) |> 
         # Desanidamos el resumen (se obtiene una columna para cada parámetro del resumen del ajuste de los modelos).
-        unnest(Resumen)  %>% 
+        unnest(Resumen)  |> 
         # Ordenamos el data frame por el coeficiente de determinación.
         arrange(-r.squared)
-    modelos  %>%
-        select(Tipo_Modelo, r.squared)  %>% 
-        kable(col.names = c("Tipo de Modelo", "R²")) %>%
+    modelos  |>
+        select(Tipo_Modelo, r.squared)  |> 
+        kable(col.names = c("Tipo de Modelo", "R²")) |>
         kable_styling(full_width = F)
     ```
     
@@ -1203,9 +1203,9 @@ a.  ¿Qué tipo de modelo explica mejor la relación entre el peso perdido y los
     ::: {.cell hash='05-regresion_cache/html/unnamed-chunk-38_849b35bf0fcd1fe05545b39187656678'}
     
     ```{.r .cell-code}
-    modelos <- df  %>% 
+    modelos <- df  |> 
         # Anidamos por la columna ejercicio.
-        nest_by(ejercicio)  %>% 
+        nest_by(ejercicio)  |> 
         # Ajustamos los modelos de regresión.
         mutate(
             Lineal = list(lm(peso.perdido ~ dias, data)),
@@ -1215,19 +1215,19 @@ a.  ¿Qué tipo de modelo explica mejor la relación entre el peso perdido y los
             Potencial = list(lm(log(peso.perdido) ~ log(dias), data)),
             Inverso = list(lm(peso.perdido ~ I(1/dias), data)),
             Sigmoidal = list(lm(log(peso.perdido) ~ I(1/dias), data)),
-        )  %>% 
+        )  |> 
         # Reestructuramos el data frame para tener todos los modelos en la misma columna.
-        pivot_longer(-c(ejercicio, data), names_to = "Tipo_Modelo", values_to = "Modelo")  %>% 
+        pivot_longer(-c(ejercicio, data), names_to = "Tipo_Modelo", values_to = "Modelo")  |> 
         # Obtenemos un resumen del ajuste de cada modelo en formato organizado (se obtiene una lista con los parámetros que describen el ajuste de cada modelo).
-        mutate(Resumen = map(Modelo, glance)) %>% 
+        mutate(Resumen = map(Modelo, glance)) |> 
         # Desanidamos el resumen (se obtiene una columna para cada parámetro del resumen del ajuste de los modelos).
-        unnest(Resumen)  %>% 
+        unnest(Resumen)  |> 
         # Ordenamos el data frame por la columna ejercicio y por el coeficiente de determinación.
         arrange(ejercicio, -r.squared)  
-    modelos %>% 
-        select(ejercicio, Tipo_Modelo, r.squared)  %>% 
-        kable(col.names = c("Ejercicio", "Tipo de Modelo", "R²")) %>%
-        pack_rows(index = table(modelos$ejercicio))  %>% 
+    modelos |> 
+        select(ejercicio, Tipo_Modelo, r.squared)  |> 
+        kable(col.names = c("Ejercicio", "Tipo de Modelo", "R²")) |>
+        pack_rows(index = table(modelos$ejercicio))  |> 
         kable_styling(full_width = F)
     ```
     
@@ -1369,12 +1369,12 @@ a.  Construir el mejor modelo de regresión del peso perdido sobre los días de 
 
 
     <!-- ```{r}
-    df %>%
-        nest_by(ejercicio) %>% 
-        filter(ejercicio == "si") %>%
-        mutate(modelo = list(lm(peso.perdido ~ I(1/dias), df))) %>%
-        summarize(tidy(modelo)) %>%
-        kable() %>%
+    df |>
+        nest_by(ejercicio) |> 
+        filter(ejercicio == "si") |>
+        mutate(modelo = list(lm(peso.perdido ~ I(1/dias), df))) |>
+        summarize(tidy(modelo)) |>
+        kable() |>
         kable_styling()
     ``` -->
 

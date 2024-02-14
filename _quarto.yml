@@ -44,6 +44,7 @@ book:
     - 04-descriptiva.qmd
     - 05-regresion.qmd
     - 06-distribuciones-probabilidad.qmd
+    - 07-intervalos-confianza.qmd
     
 #bibliography: references.bib
 

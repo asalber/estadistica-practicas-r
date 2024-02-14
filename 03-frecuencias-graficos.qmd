@@ -70,9 +70,9 @@ a.  Construir la tabla de frecuencias.
     library(dplyr)
     library(knitr)
     library(kableExtra)
-    count(df, hijos) %>% 
-        mutate(fi = n/sum(n), Ni = cumsum(n), Fi = cumsum(n)/sum(n)) %>%
-        kable() %>%
+    count(df, hijos) |> 
+        mutate(fi = n/sum(n), Ni = cumsum(n), Fi = cumsum(n)/sum(n)) |>
+        kable() |>
         kable_styling(bootstrap_options = "hover", full_width = F)
     ```
     :::
@@ -82,8 +82,8 @@ a.  Construir la tabla de frecuencias.
     library(dplyr)
     library(knitr)
     library(kableExtra)
-    count(df, hijos) %>% 
-        mutate(fi = n/sum(n), Ni = cumsum(n), Fi = cumsum(n)/sum(n)) %>%
+    count(df, hijos) |> 
+        mutate(fi = n/sum(n), Ni = cumsum(n), Fi = cumsum(n)/sum(n)) |>
         kable()
     ```
     :::
@@ -153,8 +153,8 @@ a.  Dibujar el polígono de frecuencias relativas.
 
     ```{r}
     library(ggplot2)
-    count(df, hijos) %>% 
-        mutate(fi = n/sum(n)) %>%
+    count(df, hijos) |> 
+        mutate(fi = n/sum(n)) |>
         ggplot(aes(x=hijos, y=fi)) +
         geom_line(col = "steelblue") +
         labs(title = "Distribución del número de hijos", y = "Frecuencia relativa")
@@ -250,10 +250,10 @@ a.  Construir la tabla de frecuencias agrupando en 5 clases.
     library(dplyr)
     library(knitr)
     library(kableExtra)
-    mutate(df, llamadas_int = cut(llamadas, breaks = seq(5, 30, 5))) %>% 
-        count(llamadas_int) %>%
-        mutate(fi = n/sum(n), Ni = cumsum(n), Fi = cumsum(n)/sum(n)) %>%
-        kable() %>%
+    mutate(df, llamadas_int = cut(llamadas, breaks = seq(5, 30, 5))) |> 
+        count(llamadas_int) |>
+        mutate(fi = n/sum(n), Ni = cumsum(n), Fi = cumsum(n)/sum(n)) |>
+        kable() |>
         kable_styling(bootstrap_options = "hover", full_width = F)
     ```
     :::
@@ -263,9 +263,9 @@ a.  Construir la tabla de frecuencias agrupando en 5 clases.
     library(dplyr)
     library(knitr)
     library(kableExtra)
-    mutate(df, llamadas_int = cut(llamadas, breaks = seq(5, 30, 5))) %>% 
-        count(llamadas_int) %>%
-        mutate(fi = n/sum(n), Ni = cumsum(n), Fi = cumsum(n)/sum(n)) %>%
+    mutate(df, llamadas_int = cut(llamadas, breaks = seq(5, 30, 5))) |> 
+        count(llamadas_int) |>
+        mutate(fi = n/sum(n), Ni = cumsum(n), Fi = cumsum(n)/sum(n)) |>
         kable()
     ```
     :::
@@ -346,9 +346,9 @@ a.  Dibujar el polígono de frecuencias relativas acumuladas (ojiva).
     library(ggplot2)
     # Ojiva
     cortes <- seq(5, 30, 5)
-    tabla_frec <- mutate(df, llamadas_int = cut(df$llamadas, breaks = cortes)) %>% 
-        count(llamadas_int) %>%
-        mutate(cortes = cortes[-1], Fi = cumsum(n)/sum(n)) %>%
+    tabla_frec <- mutate(df, llamadas_int = cut(df$llamadas, breaks = cortes)) |> 
+        count(llamadas_int) |>
+        mutate(cortes = cortes[-1], Fi = cumsum(n)/sum(n)) |>
         select(cortes, Fi) 
     tabla_frec <- rbind(data.frame(cortes = cortes[1], Fi = 0), tabla_frec)
     ggplot(tabla_frec, aes(x = cortes , y = Fi)) +
@@ -401,9 +401,9 @@ a.  Construir la tabla de frecuencias.
     library(dplyr)
     library(knitr)
     library(kableExtra)
-    count(df, grupo_sanguineo) %>% 
-        mutate(fi = n/sum(n)) %>%
-        kable() %>%
+    count(df, grupo_sanguineo) |> 
+        mutate(fi = n/sum(n)) |>
+        kable() |>
         kable_styling(bootstrap_options = "hover", full_width = F)
     ```
     :::
@@ -413,8 +413,8 @@ a.  Construir la tabla de frecuencias.
     library(dplyr)
     library(knitr)
     library(kableExtra)
-    count(df, grupo_sanguineo) %>% 
-        mutate(fi = n/sum(n)) %>%
+    count(df, grupo_sanguineo) |> 
+        mutate(fi = n/sum(n)) |>
         kable()
     ```
     :::
@@ -489,7 +489,7 @@ a.  Calcular los tamaños muestrales según `estado_civil`.
     Usando las funciones `groub_by`, `summarise` y `n` del paquete `dplyr`.
     ```{r}
     library(dplyr)
-    df %>% group_by(estado_civil) %>%
+    df |> group_by(estado_civil) |>
         summarise(n = n())
     ```
     :::
@@ -506,11 +506,11 @@ a.  Construir la tabla de frecuencias de la variable `edad` para cada categoría
     library(dplyr)
     library(knitr)
     library(kableExtra)
-    mutate(df, edad_int = cut(edad, breaks = seq(20, 80, 10))) %>%
-        group_by(estado_civil) %>%
-        count(edad_int) %>% 
-        mutate(fi = n/sum(n), Ni = cumsum(n), Fi = cumsum(n)/sum(n)) %>%
-        kable() %>%
+    mutate(df, edad_int = cut(edad, breaks = seq(20, 80, 10))) |>
+        group_by(estado_civil) |>
+        count(edad_int) |> 
+        mutate(fi = n/sum(n), Ni = cumsum(n), Fi = cumsum(n)/sum(n)) |>
+        kable() |>
         kable_styling(bootstrap_options = "hover", full_width = F)
     ```
     :::
@@ -520,10 +520,10 @@ a.  Construir la tabla de frecuencias de la variable `edad` para cada categoría
     library(dplyr)
     library(knitr)
     library(kableExtra)
-    mutate(df, edad_int = cut(edad, breaks = seq(20, 80, 10))) %>%
-        group_by(estado_civil) %>%
-        count(edad_int) %>% 
-        mutate(fi = n/sum(n), Ni = cumsum(n), Fi = cumsum(n)/sum(n)) %>%
+    mutate(df, edad_int = cut(edad, breaks = seq(20, 80, 10))) |>
+        group_by(estado_civil) |>
+        count(edad_int) |> 
+        mutate(fi = n/sum(n), Ni = cumsum(n), Fi = cumsum(n)/sum(n)) |>
         kable()
     ```
     :::

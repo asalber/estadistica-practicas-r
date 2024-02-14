@@ -836,8 +836,8 @@ a.  Realizar un resumen estadístico con la media, el mínimo, los cuartiles y e
     
     ```{.r .cell-code}
     library(summarytools)
-    descr(df) %>%
-    kable() %>%
+    descr(df) |>
+    kable() |>
     kable_styling()
     ```
     
@@ -1173,8 +1173,8 @@ a.  ¿En qué variable es más representativa la media?
     
     ```{.r .cell-code}
     library(dplyr)
-    summarise(df, across(.cols = where(is.numeric), .fns = list(Media = ~ mean(.x, na.rm = T), `Desviación Típica` = ~ sd(.x, na.rm = T), `Coef. Variación` = ~ sd(.x, na.rm=T) / mean(.x, na.rm=T)))) %>%
-    kable() %>%
+    summarise(df, across(.cols = where(is.numeric), .fns = list(Media = ~ mean(.x, na.rm = T), `Desviación Típica` = ~ sd(.x, na.rm = T), `Coef. Variación` = ~ sd(.x, na.rm=T) / mean(.x, na.rm=T)))) |>
+    kable() |>
     kable_styling()
     ```
     
@@ -1231,13 +1231,13 @@ a.  ¿En qué variable es más representativa la media?
     
     ```{.r .cell-code}
     library(tidyverse)
-    df %>% select(where(is.numeric)) %>% 
-        pivot_longer(everything(), names_to = "Variable", values_to = "Valor") %>%
-        group_by(Variable) %>%
+    df |> select(where(is.numeric)) |> 
+        pivot_longer(everything(), names_to = "Variable", values_to = "Valor") |>
+        group_by(Variable) |>
         summarise("Media" = mean(Valor, na.rm = T), 
         "Desviación Típica" = sd(Valor, na.rm = T),
-        "Coef. Variación" = sd(Valor, na.rm = T) / mean(Valor, na.rm = T)) %>%
-        kable() %>%
+        "Coef. Variación" = sd(Valor, na.rm = T) / mean(Valor, na.rm = T)) |>
+        kable() |>
         kable_styling()
     ```
     
@@ -1365,10 +1365,10 @@ a.  Realizar un resumen estadístico con el coeficiente de asimetría y el coefi
     
     ```{.r .cell-code}
     library(dplyr)
-    df %>% select(sexo, peso, altura) %>%
-    group_by(sexo) %>%
-    summarise(across(.cols = everything(), .fns = list("Coef. Asimetría" = ~ skewness(.x, na.rm = T), "Coef. Apuntamiento" = ~ kurtosis(.x, na.rm = T)))) %>%
-    kable() %>%
+    df |> select(sexo, peso, altura) |>
+    group_by(sexo) |>
+    summarise(across(.cols = everything(), .fns = list("Coef. Asimetría" = ~ skewness(.x, na.rm = T), "Coef. Apuntamiento" = ~ kurtosis(.x, na.rm = T)))) |>
+    kable() |>
     kable_styling()
     ```
     
@@ -1547,7 +1547,7 @@ a.  Hacer un resumen estadístico con la media, cuartiles, desviación típica, 
 <!-- 
 
 
-df <- df %>% 
+df <- df |> 
     mutate(total = rowMeans(across(where(is.numeric)), na.rm = T))
-df %>% mutate(riqueza = cut(total, breaks = quantile(total, probs = c(0, 0.25, 0.75, 1)), include.lowest = T)) %>% select(riqueza)
+df |> mutate(riqueza = cut(total, breaks = quantile(total, probs = c(0, 0.25, 0.75, 1)), include.lowest = T)) |> select(riqueza)
 ``` -->

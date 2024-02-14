@@ -2155,9 +2155,9 @@ dbl (14): 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, ...
 <!-- 
 
 
-df <- df %>% 
+df <- df |> 
     mutate(total = rowMeans(across(where(is.numeric)), na.rm = T))
-df %>% mutate(riqueza = cut(total, breaks = quantile(total, probs = c(0, 0.25, 0.75, 1)), include.lowest = T)) %>% select(riqueza)
+df |> mutate(riqueza = cut(total, breaks = quantile(total, probs = c(0, 0.25, 0.75, 1)), include.lowest = T)) |> select(riqueza)
 ``` -->
 
 

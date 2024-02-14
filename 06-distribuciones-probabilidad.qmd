@@ -38,8 +38,8 @@ a.  ¿Qué tipo de modelo de distribución de probabilidad sigue $X$? Construir 
     x <- 1:6
     f <- ddunif(x, 1, 6)
     df <- data.frame(x, f)
-    df %>% 
-        kable() %>% 
+    df |> 
+        kable() |> 
         kable_styling(full_width = F)
     ```
     :::
@@ -65,7 +65,7 @@ a.  Simular el experimento aleatorio del lanzamiento de un dado. Repetir el lanz
     ```{r}
     # Fijamos una semilla de aleatorización para obtener resultados reproducibles.
     set.seed(123)
-    data.frame(x = rdunif(10^6, 1, 6))  %>% 
+    data.frame(x = rdunif(10^6, 1, 6))  |> 
         ggplot(aes(x = x)) +
         geom_bar(aes(y = after_stat(count/sum(count))), fill = "steelblue") +
         labs(title = "Distribución de frecuencias del lanzamiento de un dado", x = "Número obtenido", y = "Frecuencia relativa")
@@ -90,8 +90,8 @@ a.  ¿Qué tipo de modelo de distribución de probabilidad sigue la variable que
     x <- 0:10
     f <- dbinom(x, 10, 0.25)
     df <- data.frame(x, f)
-    df %>% 
-        kable() %>% 
+    df |> 
+        kable() |> 
         kable_styling(full_width = F)
     ```
     :::
@@ -184,8 +184,8 @@ a.  ¿Qué tipo de modelo de distribución de probabilidad sigue la variable que
     x <- 0:15
     f <- dpois(x, 4)
     df <- data.frame(x, f)
-    df %>% 
-        kable() %>% 
+    df |> 
+        kable() |> 
         kable_styling(full_width = F)
     ```
     :::
@@ -248,8 +248,8 @@ a.  Aproximar un modelo binomial $B(10, 0.2)$ mediante el correspondiente modelo
     fbinom <- dbinom(x, 10, 0.3)
     fpois <- dpois(x, 3)
     df <- data.frame(x, fbinom, fpois)
-    df  %>% 
-        pivot_longer(-x, names_to = "Distribución", values_to = "Probabilidad")  %>% 
+    df  |> 
+        pivot_longer(-x, names_to = "Distribución", values_to = "Probabilidad")  |> 
         ggplot(aes(x = x, y = Probabilidad, color = Distribución)) + 
         geom_point() +
         labs(title = "Función de probabilidad de los modelos B(10, 0.3) y P(3)")
@@ -258,8 +258,8 @@ a.  Aproximar un modelo binomial $B(10, 0.2)$ mediante el correspondiente modelo
     Vamos a calcular el error en la aproximación.
 
     ```{r}
-    df  %>% 
-        mutate(error = abs(fbinom - fpois))  %>% 
+    df  |> 
+        mutate(error = abs(fbinom - fpois))  |> 
         summarize(error = sum(error))
     ``` 
 
@@ -278,8 +278,8 @@ a.  Aproximar $B(30, 0.1)$ mediante el correspondiente modelo Poisson aplicando 
     fbinom <- dbinom(x, 30, 0.1)
     fpois <- dpois(x, 3)
     df <- data.frame(x, fbinom, fpois)
-    df  %>% 
-        pivot_longer(-x, names_to = "Distribución", values_to = "Probabilidad")  %>% 
+    df  |> 
+        pivot_longer(-x, names_to = "Distribución", values_to = "Probabilidad")  |> 
         ggplot(aes(x = x, y = Probabilidad, color = Distribución)) + 
         geom_point() +
         labs(title = "Función de probabilidad de los modelos B(30, 0.1) y P(3)")
@@ -288,8 +288,8 @@ a.  Aproximar $B(30, 0.1)$ mediante el correspondiente modelo Poisson aplicando 
     Vamos a calcular el error en la aproximación.
 
     ```{r}
-    df  %>% 
-        mutate(error = abs(fbinom - fpois))  %>% 
+    df  |> 
+        mutate(error = abs(fbinom - fpois))  |> 
         summarize(error = sum(error))
     ``` 
 
@@ -313,14 +313,14 @@ a.  Definir una función para repetir los procedimientos de los apartados anteri
         # Creamos un data frame con las dos funciones de probabilidad.
         df <- data.frame(x, fbinom, fpois)
         # Dibujamos las gráficas de las funciones de probabilidad.
-        grafico <- df  %>% 
-            pivot_longer(-x, names_to = "Distribución", values_to = "Probabilidad")  %>% 
+        grafico <- df  |> 
+            pivot_longer(-x, names_to = "Distribución", values_to = "Probabilidad")  |> 
             ggplot(aes(x = x, y = Probabilidad, color = Distribución)) + 
             geom_point() +
             labs(title = paste0("Función de probabilidad de los modelos B(", n, ",", p, ") y P(", n*p, ")"))
         # Calculamos el error de la aproximación.
-        error <- df  %>% 
-            mutate(error = abs(fbinom - fpois))  %>% 
+        error <- df  |> 
+            mutate(error = abs(fbinom - fpois))  |> 
             summarize(error = sum(error))
         return(list(grafico, error))
     }
@@ -349,8 +349,8 @@ a.  Dibujar una gráfica con los errores en las aproximaciones de un modelo bino
         return(sum(error))
     }
 
-    data.frame(n = 4:100)  %>% 
-        mutate(error = map_dbl(n, error_casos_raros))  %>% 
+    data.frame(n = 4:100)  |> 
+        mutate(error = map_dbl(n, error_casos_raros))  |> 
         ggplot(aes(x = n, y = error)) +
         geom_point(color = "steelblue") +
         geom_hline(yintercept = 0.05, color = "red") +
@@ -562,8 +562,8 @@ a.  Generar otra muestra aleatoria de tamaño 1000000 de una variable aleatoria 
     ## Solución
 
     ```{r}
-    df  %>% 
-        mutate(x2 = rdunif(10^6, 1, 10), suma = x1 + x2)  %>% 
+    df  |> 
+        mutate(x2 = rdunif(10^6, 1, 10), suma = x1 + x2)  |> 
         ggplot(aes(x = suma)) +
         geom_bar(aes(y = after_stat(count/sum(count))), fill = "steelblue") +
         labs(title = "Distribución de frecuencias de la suma de dos variables U(1,10) independientes", x = "Suma", y = "Frecuencia relativa")

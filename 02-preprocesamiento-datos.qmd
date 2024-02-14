@@ -33,8 +33,8 @@ df1 <- data.frame(
     Gastos = c(33400, 35400, 35600, 36300), 
     Impuestos = c(6450, 6300, 7100, 6850)
     )
-df1[-4, ] %>%
-    kable() %>%
+df1[-4, ] |>
+    kable() |>
     kable_styling(full_width = T)
 ```
 
@@ -55,9 +55,9 @@ a.  Crear un data frame con los datos de la tabla.
 a.  Añadir una nueva columna con los siguientes impuestos pagados.
 
     ```{r, echo = F}
-    df1[-4, ] %>%
-        select(Mes, Impuestos) %>%
-        kable() %>%
+    df1[-4, ] |>
+        select(Mes, Impuestos) |>
+        kable() |>
         kable_styling(full_width = F)
     ```
 
@@ -76,7 +76,7 @@ a.  Añadir una nueva columna con los siguientes impuestos pagados.
     Con las funciones del paquete `dplyr`.
 
     ```{r}
-    df <- df %>%
+    df <- df |>
         mutate(Impuestos = c(6450, 6300, 7100))
     df
     ```
@@ -85,8 +85,8 @@ a.  Añadir una nueva columna con los siguientes impuestos pagados.
 a.  Añadir una nueva fila con los siguientes datos de Abril. 
 
     ```{r, echo = F}
-    df1[4, ] %>%
-        kable(row.names = F) %>%
+    df1[4, ] |>
+        kable(row.names = F) |>
         kable_styling(full_width = T)
     ```
 
@@ -109,7 +109,7 @@ a.  Añadir una nueva fila con los siguientes datos de Abril.
     ```
 
     ```{r}
-    df <- df %>%
+    df <- df |>
         add_row(Mes = "Abril", Ingresos = 49700, Gastos = 36300, Impuestos = 6850)
     df
     ```
@@ -143,7 +143,7 @@ a.  Crear una nueva columna con los beneficios de cada mes (ingresos - gastos - 
     Con las funciones del paquete `dplyr`.
 
     ```{r}
-    df <- df %>%
+    df <- df |>
         mutate(Beneficios = Ingresos - Gastos - Impuestos)
     df
     ```
@@ -166,7 +166,7 @@ a.  Crear una nueva columna con el factor `Balance` con dos posibles categorías
     Con las funciones del paquete `dplyr`.
 
     ```{r}
-    df <- df %>%
+    df <- df |>
         mutate(Balance = cut(Beneficios, breaks = c(-Inf, 0, Inf), labels = c("negativo", "positivo")))
     df
     ```
@@ -188,8 +188,8 @@ a.  Filtrar el conjunto de datos para quedarse con los nombres de los meses y lo
     Con las funciones del paquete `dplyr`.
 
     ```{r}
-    df %>%
-        filter(Balance == "positivo") %>% 
+    df |>
+        filter(Balance == "positivo") |> 
         select(Mes, Beneficios)
     ```
     :::
@@ -248,7 +248,7 @@ a.  Crear una nueva columna con el índice de masa corporal, usando la siguiente
     ## Solución
 
     ```{r}
-    df <- df %>%
+    df <- df |>
         mutate(imc = round(peso/altura^2))
     df
     ```
@@ -267,7 +267,7 @@ a.  Crear una nueva columna con la variable `obesidad` recodificando la columna 
     ## Solución 
 
     ```{r}
-    df <- df %>%
+    df <- df |>
         mutate(Obesidad = cut(imc, breaks = c(0, 18.5, 24.5, 30, Inf), labels = c("Bajo peso", "Saludable", "Sobrepeso", "Obeso")))
     df
     ```
@@ -279,7 +279,7 @@ a.  Seleccionar las columnas `nombre`, `sexo` y `edad`.
     ## Solución
 
     ```{r}
-    df %>%
+    df |>
         select(nombre, sexo, edad)
     ```
     :::
@@ -290,7 +290,7 @@ a.  Anonimizar los datos eliminando la columna `nombre`.
     ## Solución
 
     ```{r}
-    df %>%
+    df |>
         select(-nombre)
     ```
     :::
@@ -301,7 +301,7 @@ a.  Reordenar las columnas poniendo la columna `sexo` antes que la columna `edad
     ## Solución
 
     ```{r}
-    df %>%
+    df |>
         select(nombre, sexo, edad, everything())
     ```
     :::
@@ -312,7 +312,7 @@ a.  Filtrar el data frame para quedarse con las mujeres.
     ## Solución
 
     ```{r}
-    df %>%
+    df |>
         filter(sexo == "M")
     ```
     :::
@@ -323,7 +323,7 @@ a.  Filtrar el data frame para quedarse con los hombres mayores de 30 años.
     ## Solución
 
     ```{r}
-    df %>%
+    df |>
         filter( sexo == "H" & edad > 30)
     ```
     :::
@@ -334,7 +334,7 @@ a.  Filtrar el data frame para eliminar las filas con datos perdidos en la colum
     ## Solución
 
     ```{r}
-    df %>%
+    df |>
         filter(!is.na(colesterol))
     ```
     :::
@@ -345,7 +345,7 @@ a.  Ordenar el data frame según la columna `nombre`.
     ## Solución
 
     ```{r}
-    df %>%
+    df |>
         arrange(nombre)
     ```
     :::
@@ -356,7 +356,7 @@ a.  Ordenar el data frame ascendentemente por la columna `sexo` y descendentemen
     ## Solución
 
     ```{r}
-    df %>%
+    df |>
         arrange(sexo, desc(edad))
     ```
     :::
@@ -382,7 +382,7 @@ a.  Convertir el data frame a formato largo.
     ## Solución
 
     ```{r}
-    df_largo <- df %>% pivot_longer(notaA:notaE, names_to = "Asignatura", values_to = "Nota")
+    df_largo <- df |> pivot_longer(notaA:notaE, names_to = "Asignatura", values_to = "Nota")
     df_largo
     ```
     :::
@@ -393,7 +393,7 @@ a.  Crear una nueva columna con la variable `calificación` que contenga las cal
     ## Solución
 
     ```{r}
-    df_largo <- df_largo %>%
+    df_largo <- df_largo |>
         mutate(Califiación = cut(Nota, breaks = c(0, 4.99, 6.99, 8.99, 10), labels = c("SS", "AP", "NT", "SB")))
     df_largo
     ```
@@ -405,9 +405,9 @@ a.  Filtrar el conjunto de datos para obtener las asignaturas y las notas de las
     ## Solución
 
     ```{r}
-    df_largo %>%
-        filter(sexo == "Mujer", grupo == "A") %>%
-        select(Asignatura, Nota) %>%
+    df_largo |>
+        filter(sexo == "Mujer", grupo == "A") |>
+        select(Asignatura, Nota) |>
         arrange(desc(Nota))
     ```
     :::

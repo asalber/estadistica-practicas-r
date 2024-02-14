@@ -12,10 +12,10 @@ color4 <- "#C77CFF"
 # Carga de la imagen
 img <- image_read("img/logos/gauss-bell-r.png")
 # Modificación de la imagen
-# img <- img %>%
-# image_convert("png") %>%
-# image_resize("1080 x 200")%>%
-# image_fill(color="#062047", point="+45") %>%
+# img <- img |>
+# image_convert("png") |>
+# image_resize("1080 x 200")|>
+# image_fill(color="#062047", point="+45") |>
 # image_annotate("d?ta", size=38, location = "+47+58", color="black")
 
 # Creación del hex sticker

@@ -129,6 +129,16 @@ a.  Calcular la recta de regresión de $Y$ sobre $X$.
     summary(recta_y_x)
     ```
     
+    ::: {.cell-output .cell-output-stderr}
+    
+    ```
+    Warning in summary.lm(recta_y_x): essentially perfect fit: summary may be
+    unreliable
+    ```
+    
+    
+    :::
+    
     ::: {.cell-output .cell-output-stdout}
     
     ```
@@ -227,6 +237,15 @@ a.  Dibujar la recta de regresión de $Y$ sobre $X$ sobre el diagrama de dispers
         labs(title = "Diagrama de dispersión", x = "X", y = "Y")
     ```
     
+    ::: {.cell-output .cell-output-stderr}
+    
+    ```
+    `geom_smooth()` using formula = 'y ~ x'
+    ```
+    
+    
+    :::
+    
     ::: {.cell-output-display}
     ![](05-regresion_files/figure-html/unnamed-chunk-7-1.png){width=672}
     :::
@@ -247,6 +266,16 @@ a.  Calcular el coeficiente de determinación del modelo lineal e interpretarlo.
     ```{.r .cell-code}
     cat(paste("Coeficiente de determinación lineal R²:", summary(recta_y_x)$r.squared))
     ```
+    
+    ::: {.cell-output .cell-output-stderr}
+    
+    ```
+    Warning in summary.lm(recta_y_x): essentially perfect fit: summary may be
+    unreliable
+    ```
+    
+    
+    :::
     
     ::: {.cell-output .cell-output-stdout}
     
@@ -274,6 +303,16 @@ a.  Calcular la recta de regresión de $X$ sobre $Y$. ¿Coincide con la recta de
     recta_x_y <- lm(x ~ y, df) 
     summary(recta_x_y)
     ```
+    
+    ::: {.cell-output .cell-output-stderr}
+    
+    ```
+    Warning in summary.lm(recta_x_y): essentially perfect fit: summary may be
+    unreliable
+    ```
+    
+    
+    :::
     
     ::: {.cell-output .cell-output-stdout}
     
@@ -321,6 +360,24 @@ a.  Crear un data frame con los datos de las horas de estudio y los suspensos a 
     ```{.r .cell-code}
     library(readr)
     df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/horas-estudio.csv")
+    ```
+    
+    ::: {.cell-output .cell-output-stderr}
+    
+    ```
+    Rows: 30 Columns: 2
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ","
+    dbl (2): Horas, Suspensos
+    
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+    ```
+    
+    
+    :::
+    
+    ```{.r .cell-code}
     df
     ```
     
@@ -459,6 +516,15 @@ a.  Dibujar la recta de regresión  sobre el diagrama de dispersión. ¿El ajust
         geom_smooth(method = "lm") +
         labs(title = "Diagrama de dispersión", x = "Horas de estudio", y = "Asignaturas suspensas")
     ```
+    
+    ::: {.cell-output .cell-output-stderr}
+    
+    ```
+    `geom_smooth()` using formula = 'y ~ x'
+    ```
+    
+    
+    :::
     
     ::: {.cell-output-display}
     ![](05-regresion_files/figure-html/unnamed-chunk-14-1.png){width=672}
@@ -642,6 +708,15 @@ a.  Dibujar el diagrama de dispersión correspondiente y la recta de regresión 
         labs(title = "Diagrama de dispersión", x = "Tiempo en minutos", y = "Concentración de alcohol en sangre (g/l)")
     ```
     
+    ::: {.cell-output .cell-output-stderr}
+    
+    ```
+    `geom_smooth()` using formula = 'y ~ x'
+    ```
+    
+    
+    :::
+    
     ::: {.cell-output-display}
     ![](05-regresion_files/figure-html/unnamed-chunk-20-1.png){width=672}
     :::
@@ -770,6 +845,24 @@ a.  Crear un data frame con los datos del PIB y los años a partir del fichero [
     ```{.r .cell-code}
     library(readr)
     df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/pib-usa.csv")
+    ```
+    
+    ::: {.cell-output .cell-output-stderr}
+    
+    ```
+    Rows: 76 Columns: 2
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ","
+    dbl (2): Año, PIB
+    
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+    ```
+    
+    
+    :::
+    
+    ```{.r .cell-code}
     df
     ```
     
@@ -932,6 +1025,15 @@ a.  Dibujar el modelo de regresión exponencial sobre el diagrama de dispersión
             geom_point(col = "red") +
             geom_smooth(method = "glm", method.args = list(family=gaussian(link="log")))
     ```
+    
+    ::: {.cell-output .cell-output-stderr}
+    
+    ```
+    `geom_smooth()` using formula = 'y ~ x'
+    ```
+    
+    
+    :::
     
     ::: {.cell-output-display}
     ![](05-regresion_files/figure-html/unnamed-chunk-29-1.png){width=672}
@@ -1100,6 +1202,25 @@ a.  Crear un data frame con los datos de la dieta a partir del fichero [`dieta.c
     ```{.r .cell-code}
     library(readr)
     df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/dieta.csv")
+    ```
+    
+    ::: {.cell-output .cell-output-stderr}
+    
+    ```
+    Rows: 40 Columns: 3
+    ── Column specification ────────────────────────────────────────────────────────
+    Delimiter: ","
+    chr (1): ejercicio
+    dbl (2): dias, peso.perdido
+    
+    ℹ Use `spec()` to retrieve the full column specification for this data.
+    ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+    ```
+    
+    
+    :::
+    
+    ```{.r .cell-code}
     df
     ```
     
@@ -1185,6 +1306,7 @@ a.  Calcular los coeficientes de determinación lineal, cuadrático, exponencial
         unnest(Resumen)  |> 
         # Ordenamos el data frame por el coeficiente de determinación.
         arrange(-r.squared)
+        
     modelos  |>
         select(Tipo_Modelo, r.squared)  |> 
         kable(col.names = c("Tipo de Modelo", "R²")) |>

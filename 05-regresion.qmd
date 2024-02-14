@@ -581,6 +581,7 @@ a.  Calcular los coeficientes de determinación lineal, cuadrático, exponencial
         unnest(Resumen)  |> 
         # Ordenamos el data frame por el coeficiente de determinación.
         arrange(-r.squared)
+        
     modelos  |>
         select(Tipo_Modelo, r.squared)  |> 
         kable(col.names = c("Tipo de Modelo", "R²")) |>

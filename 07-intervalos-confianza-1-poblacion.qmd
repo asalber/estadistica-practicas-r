@@ -21,7 +21,6 @@ library(broom) # para convertir las listas con los resúmenes de los modelos de 
 library(qwraps2) # para el cálculo de intervalos de confianza para la media.
 library(samplingbook) # para el cálculo de tamaños muestrales.
 library(knitr) # para el formateo de tablas.
-library(kableExtra) # para personalizar el formato de las tablas.
 ```
 
 :::{#exr-intervalo-media-principio-activo}
@@ -161,8 +160,6 @@ a.  Calcular el contenido medio de materia grasa de la muestra de leche cada gra
     ## `stats`
 
     ```{r}
-    library(kableExtra)
-    #| message: false
     tabla_ic <- df |> 
         group_by(granja) |>
         summarise("Media" = mean(grasa, na.rm = T), 
@@ -170,8 +167,7 @@ a.  Calcular el contenido medio de materia grasa de la muestra de leche cada gra
         "IC 95% Sup" = t.test(grasa)$conf.int[2]) 
         
     tabla_ic |> 
-        kable() |>
-        kable_styling()
+        kable()
     ```
 
     ## `qwraps2`
@@ -179,12 +175,10 @@ a.  Calcular el contenido medio de materia grasa de la muestra de leche cada gra
     ```{r}
     #| message: false
     library(qwraps2)
-    library(kableExtra)
     df |> 
         group_by(granja)  |> 
         summarise(N = n(), "Media (IC 95%)" = frmtci(mean_ci(grasa, alpha = 0.05, qdist = qt, qdist.args = list(df = N-1)), digits = 4))  |> 
-        kable()  |> 
-        kable_styling()
+        kable()
     ```
     :::
 
@@ -219,8 +213,7 @@ a.  Repetir los cálculos anteriores tomando una confianza del $99\%$. ¿Existen
         "IC 99% Sup" = t.test(grasa, conf.level = 0.99)$conf.int[2]) 
         
     tabla_ic_99 |> 
-        kable() |>
-        kable_styling()
+        kable()
 
     tabla_ic_99  |> 
         ggplot(aes(x = granja, y = Media, color = granja)) +
@@ -266,7 +259,6 @@ a.  Calcular el intervalo de confianza con $\alpha=0.01$ para la proporción del
     ```{r}
     #| message: false
     library(broom)
-    library(kableExtra)
     frec <- table(df$respuesta)
     tidy(prop.test(frec["si"], nrow(df), conf.level = 0.99)) |> 
     select(estimate, conf.low, conf.high) |> 
@@ -277,7 +269,7 @@ a.  Calcular el intervalo de confianza con $\alpha=0.01$ para la proporción del
     Se trata de un intervalo poco preciso, ya que su amplitud es bastante grande.
     :::
 
-a.  ¿Qué tamaño muestral sería necesario para obtener una estimación del porcentaje de alumnos que utilizan regularmente la biblioteca con un margen de error de un $1\%$ y una confianza del $95\%$? 
+a.  ¿Qué tamaño muestral sería necesario para obtener una estimación de la proporción de alumnos que utilizan regularmente la biblioteca con un margen de error de un $1\%$ y una confianza del $95\%$? 
 
     :::{.callout-tip collapse="true"}
     ## Solución
@@ -319,7 +311,6 @@ a.  Calcular el intervalo de confianza para el porcentaje de voto al partido $A$
     ```{r}
     #| message: false
     library(broom)
-    library(kableExtra)
     tidy(prop.test(220, 500)) |> 
     select(estimate, conf.low, conf.high) |> 
     mutate(across(everything(), ~ .x * 100)) |> 

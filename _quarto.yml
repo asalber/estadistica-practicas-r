@@ -45,6 +45,7 @@ book:
     - 05-regresion.qmd
     - 06-distribuciones-probabilidad.qmd
     - 07-intervalos-confianza-1-poblacion.qmd
+    - 08-intervalos-confianza-comparacion-2-poblaciones.qmd
     
 #bibliography: references.bib
 

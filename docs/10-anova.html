@@ -661,15 +661,15 @@ Solución
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="co">#df &lt;- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/trigo.csv")</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"datos/trigo.csv"</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://aprendeconalf.es/estadistica-practicas-r/datos/trigo.csv"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>semilla <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">semilla</span><span class="op">)</span>, abono <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">abono</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
 </li>
 <li>
-<p>Realizar un contraste ANOVA para ver si la cosecha de trigo depende del abono.</p>
+<p>Realizar un contraste ANOVA para ver si la cosecha de trigo depende del abono. ¿Cuál es la varianza residual del modelo?</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -734,7 +734,7 @@ H_1 &amp;: \mbox{Existen diferencias entre al menos dos medias}
 </div>
 <div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">semilla</span> <span class="op">~</span> <span class="va">abono</span>, data <span class="op">=</span> <span class="va">df</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">cosecha</span> <span class="op">~</span> <span class="va">abono</span>, data <span class="op">=</span> <span class="va">df</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -752,16 +752,16 @@ H_1 &amp;: \mbox{Existen diferencias entre al menos dos medias}
 <tr class="odd">
 <td style="text-align: left;">abono</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0.0000000</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.105369</td>
+<td style="text-align: right;">0.5526844</td>
+<td style="text-align: right;">5.795432</td>
+<td style="text-align: right;">0.0042462</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Residuals</td>
 <td style="text-align: right;">93</td>
-<td style="text-align: right;">24</td>
-<td style="text-align: right;">0.2580645</td>
+<td style="text-align: right;">8.868994</td>
+<td style="text-align: right;">0.0953655</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
 </tr>
@@ -772,13 +772,14 @@ H_1 &amp;: \mbox{Existen diferencias entre al menos dos medias}
 </div>
 </div>
 </div>
-<p>Como el p-valor del contraste es <span class="math inline">\(0.0044\)</span> que es mucho menor que el nivel de significación <span class="math inline">\(\alpha=0.05\)</span>, rechazamos la hipótesis nula y se concluye que existen diferencias estadísticamente significativas entre las medias de las cosechas de trigo de los distintos abonos, y por tanto, la cosecha depende del tipo de abono.</p>
+<p>Como el p-valor del contraste es <span class="math inline">\(0.0108\)</span> que es menor que el nivel de significación <span class="math inline">\(\alpha=0.05\)</span>, rechazamos la hipótesis nula y se concluye que existen diferencias estadísticamente significativas entre las medias de las cosechas de trigo de los distintos abonos, y por tanto, la cosecha depende del tipo de abono.</p>
+<p>La varianza residual del modelo es <span class="math inline">\(8.891\)</span>.</p>
 </div>
 </div>
 </div>
 </li>
 <li>
-<p>Realizar un contraste ANOVA para ver si la cosecha de trigo depende del abono y del tipo de semilla.</p>
+<p>Realizar un contraste ANOVA para ver si la cosecha de trigo depende del abono y del tipo de semilla. ¿Cuánto se reduce la varianza residual al incluir el tipo de semilla en el modelo?</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -807,7 +808,7 @@ Solución
 </div>
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Tenemos que realizar el contraste ANOVA de dos factores</p>
+<p>Tenemos que realizar el contraste ANOVA de dos factores sin interacción.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
 <li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true"><code>aov</code></a></li>
@@ -909,7 +910,501 @@ Solución
 </div>
 </div>
 </div>
-<p>Como tanto el p-valor correspondiente a la semilla, que es prácticamente <span class="math inline">\(0\)</span>, como el correspondiente al abono, que es <span class="math inline">\(0.0004\)</span>, son menores que el nivel de significación <span class="math inline">\(\alpha=0.05\)</span>, rechazamos la hipótesis nula y se concluye que la cosecha depende tanto del tipo de semilla como del tipo de abono.</p>
+<p>Como tanto el p-valor correspondiente a la semilla, que es prácticamente <span class="math inline">\(0\)</span>, como el correspondiente al abono, que es <span class="math inline">\(0.002\)</span>, son menores que el nivel de significación <span class="math inline">\(\alpha=0.05\)</span>, rechazamos la hipótesis nula y se concluye que la cosecha depende tanto del tipo de semilla como del tipo de abono.</p>
+<p>Al incluir el tipo de semilla en el modelo, la varianza residual se reduce de <span class="math inline">\(8.8689\)</span> a <span class="math inline">\(6.3528\)</span>, por lo que este modelo explica mejor la variabilidad de la cosecha.</p>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Incluir en el modelo anterior también la interacción entre el tipo de semilla y el tipo de abono. ¿Es significativa la interacción entre los dos factores? ¿Cuánto se reduce la varianza residual al incluir la interacción en el modelo?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Ayuda
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Para realizar un contraste ANOVA de dos factores con interacción se puede utilizar tanto la función <code>aov</code> como la función <code>lm</code> pero incluyendo la fórmula del modelo <code>vd ~ f1 * f2</code>, donde <code>vd</code> es la variable dependiente, <code>f1</code> es el primer factor y <code>f2</code> el segundo.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Tenemos que realizar el contraste ANOVA de dos factores con interacción.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true"><code>aov</code></a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false"><code>lm</code></a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">cosecha</span> <span class="op">~</span> <span class="va">semilla</span> <span class="op">*</span> <span class="va">abono</span>, data <span class="op">=</span> <span class="va">df</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">sumsq</th>
+<th style="text-align: right;">meansq</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">semilla</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.7812042</td>
+<td style="text-align: right;">2.7812042</td>
+<td style="text-align: right;">43.326467</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">abono</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1.1053687</td>
+<td style="text-align: right;">0.5526844</td>
+<td style="text-align: right;">8.609890</td>
+<td style="text-align: right;">0.0003789</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">semilla:abono</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.3105271</td>
+<td style="text-align: right;">0.1552635</td>
+<td style="text-align: right;">2.418744</td>
+<td style="text-align: right;">0.0948006</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residuals</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">5.7772625</td>
+<td style="text-align: right;">0.0641918</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">cosecha</span> <span class="op">~</span> <span class="va">semilla</span> <span class="op">*</span> <span class="va">abono</span>, data <span class="op">=</span> <span class="va">df</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">sumsq</th>
+<th style="text-align: right;">meansq</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">semilla</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.7812042</td>
+<td style="text-align: right;">2.7812042</td>
+<td style="text-align: right;">43.326467</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">abono</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1.1053687</td>
+<td style="text-align: right;">0.5526844</td>
+<td style="text-align: right;">8.609890</td>
+<td style="text-align: right;">0.0003789</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">semilla:abono</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.3105271</td>
+<td style="text-align: right;">0.1552635</td>
+<td style="text-align: right;">2.418744</td>
+<td style="text-align: right;">0.0948006</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Residuals</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">5.7772625</td>
+<td style="text-align: right;">0.0641918</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Al igual que antes, tanto el tipo de semilla como el tipo de abono son significativos en el modelo, pero además lo es su interacción ya que el p-valor correspondiente es <span class="math inline">\(0.0483\)</span> que es menor que el nivel de significación <span class="math inline">\(\alpha = 0.05\)</span>.</p>
+<p>Al incluir la interacción entre el tipo de semilla y el tipo de abono en el modelo, la varianza residual se reduce de <span class="math inline">\(6.3528\)</span> a <span class="math inline">\(5.9391\)</span>, por lo que este modelo explica todavía mejor la variabilidad de la cosecha.</p>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Realizar un diagrama de interacción entre los factores con las medias de los distintos grupos experimentales.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">semilla</span>, <span class="va">abono</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>media <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">cosecha</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">semilla</span>, y <span class="op">=</span> <span class="va">media</span>, color <span class="op">=</span> <span class="va">abono</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>group <span class="op">=</span> <span class="va">abono</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'semilla'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="10-anova_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Como se aprecia en el diagrama, las líneas que unen las medias no son paralelas, lo que significa que hay interacción entre el tipo de semilla y el tipo de abono.</p>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Realizar un contraste <em>post-hoc</em> para comparar las medias de los distintos grupos experimentales por pares. ¿Qué combinación de semilla y abono ofrece el mayor rendimiento de la cosecha?</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Primero comparamos las medias de los grupos según el tipo de abono.</p>
+<div class="cell">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">cosecha</span> <span class="op">~</span> <span class="va">abono</span>, data <span class="op">=</span> <span class="va">df</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 13%">
+<col style="width: 15%">
+<col style="width: 14%">
+<col style="width: 15%">
+<col style="width: 14%">
+<col style="width: 17%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: left;">contrast</th>
+<th style="text-align: right;">null.value</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">conf.low</th>
+<th style="text-align: right;">conf.high</th>
+<th style="text-align: right;">adj.p.value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">abono</td>
+<td style="text-align: left;">B-A</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.0946875</td>
+<td style="text-align: right;">-0.0891963</td>
+<td style="text-align: right;">0.2785713</td>
+<td style="text-align: right;">0.4406667</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">abono</td>
+<td style="text-align: left;">C-A</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.2596875</td>
+<td style="text-align: right;">0.0758037</td>
+<td style="text-align: right;">0.4435713</td>
+<td style="text-align: right;">0.0031808</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">abono</td>
+<td style="text-align: left;">C-B</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.1650000</td>
+<td style="text-align: right;">-0.0188838</td>
+<td style="text-align: right;">0.3488838</td>
+<td style="text-align: right;">0.0879138</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Se observa que solo hay una diferencia estadísticamente significativa entre las medias de las cosechas con los tipos de abono <span class="math inline">\(A\)</span> y <span class="math inline">\(C\)</span>.</p>
+<p>Ahora comparamos las medias de los grupos según el tipo de semilla.</p>
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">cosecha</span> <span class="op">~</span> <span class="va">abono</span>, data <span class="op">=</span> <span class="va">df</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 13%">
+<col style="width: 15%">
+<col style="width: 14%">
+<col style="width: 15%">
+<col style="width: 14%">
+<col style="width: 17%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: left;">contrast</th>
+<th style="text-align: right;">null.value</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">conf.low</th>
+<th style="text-align: right;">conf.high</th>
+<th style="text-align: right;">adj.p.value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">abono</td>
+<td style="text-align: left;">B-A</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.0946875</td>
+<td style="text-align: right;">-0.0891963</td>
+<td style="text-align: right;">0.2785713</td>
+<td style="text-align: right;">0.4406667</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">abono</td>
+<td style="text-align: left;">C-A</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.2596875</td>
+<td style="text-align: right;">0.0758037</td>
+<td style="text-align: right;">0.4435713</td>
+<td style="text-align: right;">0.0031808</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">abono</td>
+<td style="text-align: left;">C-B</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.1650000</td>
+<td style="text-align: right;">-0.0188838</td>
+<td style="text-align: right;">0.3488838</td>
+<td style="text-align: right;">0.0879138</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Como solo hay dos grupos, solo hay una comparación posible, y se concluye hay diferencias significativas entre las medias de las cosechas con los tipos de semillas 1 y 2.</p>
+<p>Finalmente, comparamos las medias de los grupos que surgen de la interacción del tipo de semilla con el tipo de abono.</p>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">cosecha</span> <span class="op">~</span> <span class="va">semilla</span> <span class="op">:</span> <span class="va">abono</span>, data <span class="op">=</span> <span class="va">df</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">adj.p.value</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 11%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 15%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: left;">contrast</th>
+<th style="text-align: right;">null.value</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">conf.low</th>
+<th style="text-align: right;">conf.high</th>
+<th style="text-align: right;">adj.p.value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">semilla:abono</td>
+<td style="text-align: left;">2:C-1:A</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.611875</td>
+<td style="text-align: right;">0.351025</td>
+<td style="text-align: right;">0.872725</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">semilla:abono</td>
+<td style="text-align: left;">2:B-1:A</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.498125</td>
+<td style="text-align: right;">0.237275</td>
+<td style="text-align: right;">0.758975</td>
+<td style="text-align: right;">0.0000040</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">semilla:abono</td>
+<td style="text-align: left;">2:A-1:A</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.490000</td>
+<td style="text-align: right;">0.229150</td>
+<td style="text-align: right;">0.750850</td>
+<td style="text-align: right;">0.0000059</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">semilla:abono</td>
+<td style="text-align: left;">2:C-1:B</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.430625</td>
+<td style="text-align: right;">0.169775</td>
+<td style="text-align: right;">0.691475</td>
+<td style="text-align: right;">0.0000875</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">semilla:abono</td>
+<td style="text-align: left;">1:C-1:A</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.397500</td>
+<td style="text-align: right;">0.136650</td>
+<td style="text-align: right;">0.658350</td>
+<td style="text-align: right;">0.0003618</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">semilla:abono</td>
+<td style="text-align: left;">2:B-1:B</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.316875</td>
+<td style="text-align: right;">0.056025</td>
+<td style="text-align: right;">0.577725</td>
+<td style="text-align: right;">0.0081714</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">semilla:abono</td>
+<td style="text-align: left;">1:B-2:A</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-0.308750</td>
+<td style="text-align: right;">-0.569600</td>
+<td style="text-align: right;">-0.047900</td>
+<td style="text-align: right;">0.0108433</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">semilla:abono</td>
+<td style="text-align: left;">1:C-1:B</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.216250</td>
+<td style="text-align: right;">-0.044600</td>
+<td style="text-align: right;">0.477100</td>
+<td style="text-align: right;">0.1624412</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">semilla:abono</td>
+<td style="text-align: left;">2:C-1:C</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.214375</td>
+<td style="text-align: right;">-0.046475</td>
+<td style="text-align: right;">0.475225</td>
+<td style="text-align: right;">0.1697000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">semilla:abono</td>
+<td style="text-align: left;">1:B-1:A</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.181250</td>
+<td style="text-align: right;">-0.079600</td>
+<td style="text-align: right;">0.442100</td>
+<td style="text-align: right;">0.3374838</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">semilla:abono</td>
+<td style="text-align: left;">2:C-2:A</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.121875</td>
+<td style="text-align: right;">-0.138975</td>
+<td style="text-align: right;">0.382725</td>
+<td style="text-align: right;">0.7501653</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">semilla:abono</td>
+<td style="text-align: left;">2:C-2:B</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.113750</td>
+<td style="text-align: right;">-0.147100</td>
+<td style="text-align: right;">0.374600</td>
+<td style="text-align: right;">0.8004937</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">semilla:abono</td>
+<td style="text-align: left;">1:C-2:B</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-0.100625</td>
+<td style="text-align: right;">-0.361475</td>
+<td style="text-align: right;">0.160225</td>
+<td style="text-align: right;">0.8704653</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">semilla:abono</td>
+<td style="text-align: left;">1:C-2:A</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-0.092500</td>
+<td style="text-align: right;">-0.353350</td>
+<td style="text-align: right;">0.168350</td>
+<td style="text-align: right;">0.9056996</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">semilla:abono</td>
+<td style="text-align: left;">2:B-2:A</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.008125</td>
+<td style="text-align: right;">-0.252725</td>
+<td style="text-align: right;">0.268975</td>
+<td style="text-align: right;">0.9999991</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>De más a menos significativas, se observa que hay diferencias estadísticamente significativas entre las medias de las cosechas de los grupos 2:C (semilla 2 y abono C) y 1:A (semilla 1 y abono A), entre los grupos 2:B y 1:A, entre los grupos 2:A y 1:A, entre los grupos 2:C y 1:B, entre los grupos 1:C y 1:A, entre los grupos 2:B y 1:B y ente los grupos 1:B y 2:A. Entre el resto de grupos no hay diferencias estadísticamente significativas.</p>
+<p>A la vista del diagrama del apartado anterior, se observa que el mayor rendimiento se obtiene con el tipo de semilla 2 y el abono <span class="math inline">\(C\)</span>, seguido del tipo de semilla 2 y el abono <span class="math inline">\(B\)</span>, aunque la diferencia entre las medias de estos dos grupos no es significativa.</p>
 </div>
 </div>
 </div>

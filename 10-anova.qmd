@@ -156,7 +156,8 @@ a.  Crear conjunto de datos con los datos de la muestra a partir del fichero [`t
     ```{r}
     #| message: false
     library(tidyverse)
-    df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/trigo.csv")
+    #df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/trigo.csv")
+    df <- read_csv("datos/trigo.csv")
     ```
     :::
 
@@ -185,7 +186,7 @@ a.  Realizar un contraste ANOVA para ver si la cosecha de trigo depende del abon
     ## `lm`
 
     ```{r}
-    lm(nitrogeno ~ lugar, data = df) |> 
+    lm(semilla ~ abono, data = df) |> 
         anova() |> 
         tidy() |> 
         kable()
@@ -194,5 +195,41 @@ a.  Realizar un contraste ANOVA para ver si la cosecha de trigo depende del abon
     
     Como el p-valor del contraste es $0.0044$ que es mucho menor que el nivel de significación $\alpha=0.05$, rechazamos la hipótesis nula y se concluye que existen diferencias estadísticamente significativas entre las medias de las cosechas de trigo de los distintos abonos, y por tanto, la cosecha depende del tipo de abono.
     :::
+
+a.  Realizar un contraste ANOVA para ver si la cosecha de trigo depende del abono y del tipo de semilla.
+
+    :::{.callout-note collapse="true"}
+    ## Ayuda
+    Para realizar un contraste ANOVA de dos factores sin interacción se puede utilizar tanto la función `aov` como la función `lm` pero incluyendo la fórmula del modelo `vd ~ f1 + f2`, donde `vd` es la variable dependiente, `f1` es el primer factor y `f2` el segundo.
+    :::
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    Tenemos que realizar el contraste ANOVA de dos factores 
+
+    :::{.panel-tabset}
+    ## `aov`
+
+    ```{r}
+    library(knitr)
+    library(broom)
+    aov(cosecha ~ semilla + abono, data = df) |> 
+        tidy() |> 
+        kable()
+    ```
+
+    ## `lm`
+
+    ```{r}
+    lm(cosecha ~ semilla + abono, data = df) |> 
+        anova() |> 
+        tidy() |> 
+        kable()
+    ```
+    :::
+    
+    Como tanto el p-valor correspondiente a la semilla, que es prácticamente $0$, como el correspondiente al abono, que es $0.0004$, son menores que el nivel de significación $\alpha=0.05$,  rechazamos la hipótesis nula y se concluye que la cosecha depende tanto del tipo de semilla como del tipo de abono.
+    :::
+
 
 :::

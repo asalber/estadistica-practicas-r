@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/10-anova.html",
       "/03-frecuencias-graficos.html",
       "/06-distribuciones-probabilidad.html",
       "/04-descriptiva.html",

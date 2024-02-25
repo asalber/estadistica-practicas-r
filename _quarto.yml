@@ -47,6 +47,7 @@ book:
     - 07-intervalos-confianza-una-poblacion.qmd
     - 08-intervalos-confianza-comparacion-dos-poblaciones.qmd
     - 09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones.qmd
+    - 10-anova.qmd
     
 #bibliography: references.bib
 

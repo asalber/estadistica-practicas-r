@@ -56,9 +56,9 @@ a.  Calcular el intervalo de confianza para la media de la concentración del lo
 
     :::{.callout-note collapse="true"}
     ## Ayuda
-    Para calcular el intervalo de confianza para la media de una población podemos utilizar la función [`t.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test) del paquete base `stats`.
+    Para calcular el intervalo de confianza para la media de una población podemos utilizar la función [`t.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test) del paquete `stats`.
 
-    Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función `tidy` del paquete `broom`.
+    Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función `tidy` del paquete [`broom`](https://broom.tidymodels.org/index.html).
 
     También podemos usar la función [`t_test`](https://infer.tidymodels.org/reference/t_test.html?q=t_test#null) de la colección de paquetes `tidymodels`, que ofrece ya la salida en formato `tidy`.
     :::
@@ -188,7 +188,7 @@ a.  Calcular el contenido medio de materia grasa de la muestra de leche cada gra
 
     :::{.callout-note collapse="true"}
     ## Ayuda
-    Para calcular el intervalo de confianza para la media de una población podemos utilizar la función [`t.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test) del paquete base `stats`. 
+    Para calcular el intervalo de confianza para la media de una población podemos utilizar la función [`t.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test) del paquete `stats`. 
 
     También podemos usar la función `t_test` de la colección de paquetes `tidymodels`, que ofrece ya la salida en formato `tidy`.
 
@@ -322,9 +322,9 @@ a.  Calcular el intervalo de confianza con $\alpha=0.01$ para la proporción del
 
     :::{.callout-note collapse="true"}
     ## Ayuda
-    Para calcular el intervalo de confianza para la proporción de una población podemos utilizar la función [`prop.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/prop.test) del paquete base `stats`.
+    Para calcular el intervalo de confianza para la proporción de una población podemos utilizar la función [`prop.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/prop.test) del paquete `stats`.
 
-    Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función `tidy` del paquete `broom`.
+    Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función `tidy` del paquete [`broom`](https://broom.tidymodels.org/index.html).
 
     También podemos usar la función [`prop_test`](https://infer.tidymodels.org/reference/prop_test.html) de la colección de paquetes `tidymodels`, que ofrece ya la salida en formato `tidy`.
     :::

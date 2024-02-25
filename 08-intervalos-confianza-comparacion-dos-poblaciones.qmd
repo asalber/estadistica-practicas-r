@@ -15,6 +15,7 @@ Para la realización de esta práctica se requieren los siguientes paquetes:
 library(tidyverse)
 # Incluye los siguientes paquetes:
 # - dplyr: para el preprocesamiento y manipulación de datos.
+# - purrr: para aplicar funciones a vectores.
 library(broom) # para convertir las listas con los resúmenes de los modelos de regresión a formato organizado.
 library(knitr) # para el formateo de tablas.
 ```
@@ -247,8 +248,7 @@ a.  Calcular el intervalo de confianza para la diferencia entre las proporciones
 :::
 
 :::{#exr-intervalo-comparacion-proporciones-aprobados}
-Un profesor universitario ha tenido dos grupos de clase a lo largo del año: uno con horario de mañana y otro de tarde. En el de mañana, sobre un total de 80 alumnos, han aprobado 55; y en el de tarde, sobre un total de 90 alumnos,
-han aprobado 32. 
+Un profesor universitario ha tenido dos grupos de clase a lo largo del año: uno con horario de mañana y otro de tarde. En el de mañana, sobre un total de 80 alumnos, han aprobado 55; y en el de tarde, sobre un total de 90 alumnos, han aprobado 32. 
 
 a.  ¿Existen diferencias significativas en el porcentaje de aprobados de los dos grupos? En tal caso, ¿en qué turno hay un porcentaje mayor de aprobados y cuánto mayor es?
 

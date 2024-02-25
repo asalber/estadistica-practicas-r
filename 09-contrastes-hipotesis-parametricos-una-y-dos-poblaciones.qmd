@@ -15,6 +15,7 @@ Para la realización de esta práctica se requieren los siguientes paquetes:
 library(tidyverse)
 # Incluye los siguientes paquetes:
 # - dplyr: para el preprocesamiento y manipulación de datos.
+# - purrr: para aplicar funciones a vectores.
 library(broom) # para convertir las listas con los resúmenes de los modelos de regresión a formato organizado.
 library(tidymodels) # para realizar contrastes de hipótesis en formato tidy.
 library(pwr) # para el cálculo de tamaños muestrales.
@@ -142,9 +143,9 @@ a.  Realizar un contraste de hipótesis para ver si la concentración media de p
 
     :::{.callout-note collapse="true"}
     ## Ayuda
-    Para realizar un contraste de hipótesis para la media de una población podemos utilizar la función [`t.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test) del paquete base `stats`.
+    Para realizar un contraste de hipótesis para la media de una población podemos utilizar la función [`t.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test) del paquete `stats`.
 
-    Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función `tidy` del paquete `broom`.
+    Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función `tidy` del paquete [`broom`](https://broom.tidymodels.org/index.html).
 
     Otra opción es utilizar la función [`t_test`](https://infer.tidymodels.org/reference/t_test.html) de la colección de paquetes `tidymodels`, que ofrece ya la salida en formato `tidy`.
     :::
@@ -290,9 +291,9 @@ a.  Contrastar si el porcentaje de alumnos que utiliza habitualmente la bibliote
 
     :::{.callout-note collapse="true"}
     ## Ayuda
-    Para realizar un contraste de hipótesis para la proporción de una población podemos utilizar la función [`prop.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/prop.test) del paquete base `stats`.
+    Para realizar un contraste de hipótesis para la proporción de una población podemos utilizar la función [`prop.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/prop.test) del paquete `stats`.
 
-    Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función `tidy` del paquete `broom`.
+    Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función `tidy` del paquete [`broom`](https://broom.tidymodels.org/index.html).
 
     Otra opción es utilizar la función [`prop_test`](https://infer.tidymodels.org/reference/prop_test.html) de la colección de paquetes `tidymodels`, que ofrece ya la salida en formato `tidy`.
     :::
@@ -361,9 +362,9 @@ a.  Realizar un contraste de hipótesis con un nivel de significación de $0.05$
 
     :::{.callout-note collapse="true"}
     ## Ayuda
-    Para realizar un contraste de hipótesis para la diferencia de medias de dos población independientes utilizar la función [`t.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test) del paquete base `stats`. Este test da resultados diferentes dependiendo de si las dos poblaciones que se comparan tienen varianzas diferentes o no, por lo que previamente debemos realizar un contraste de comparación de varianzas mediante la función [`var.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/var.test) del paquete `stats`. Si se acepta la hipótesis de igualdad de varianzas mediante este test, en la función `t.test` hay que añadir el parámetro `var.equal = TRUE`.
+    Para realizar un contraste de hipótesis para la diferencia de medias de dos población independientes utilizar la función [`t.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test) del paquete `stats`. Este test da resultados diferentes dependiendo de si las dos poblaciones que se comparan tienen varianzas diferentes o no, por lo que previamente debemos realizar un contraste de comparación de varianzas mediante la función [`var.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/var.test) del paquete `stats`. Si se acepta la hipótesis de igualdad de varianzas mediante este test, en la función `t.test` hay que añadir el parámetro `var.equal = TRUE`.
 
-    Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función `tidy` del paquete `broom`.
+    Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función `tidy` del paquete [`broom`](https://broom.tidymodels.org/index.html).
 
     Otra opción es utilizar la función [`t_test`](https://infer.tidymodels.org/reference/t_test.html) de la colección de paquetes `tidymodels`, que ofrece ya la salida en formato `tidy`.
     :::
@@ -441,9 +442,9 @@ a.  Realizar un contraste de hipótesis para ver si hay la media de la presión 
 
     :::{.callout-note collapse="true"}
     ## Ayuda
-    Para realizar un contraste de hipótesis para la diferencia de medias de dos población pareadas utilizar la función [`t.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test) del paquete base `stats` añadiendo el parámetro `paired = TRUE`.
+    Para realizar un contraste de hipótesis para la diferencia de medias de dos población pareadas utilizar la función [`t.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test) del paquete `stats` añadiendo el parámetro `paired = TRUE`.
 
-    Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función `tidy` del paquete `broom`.
+    Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función `tidy` del paquete [`broom`](https://broom.tidymodels.org/index.html).
 
     Otra opción es utilizar la función [`t_test`](https://infer.tidymodels.org/reference/t_test.html) de la colección de paquetes `tidymodels`, que ofrece ya la salida en formato `tidy`.
     :::

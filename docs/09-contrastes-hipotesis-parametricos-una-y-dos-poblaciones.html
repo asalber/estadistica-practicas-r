@@ -60,6 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./10-anova.html" rel="next">
 <link href="./08-intervalos-confianza-comparacion-dos-poblaciones.html" rel="prev">
 <link href="./img/logos/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -262,6 +263,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Intervalos de confianza para la comparación de medias y proporciones de dos poblaciones</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Análisis de la Varianza (ANOVA)</span></span></a>
+  </div>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
@@ -298,6 +305,7 @@ window.Quarto = {
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="co"># Incluye los siguientes paquetes:</span></span>
 <span><span class="co"># - dplyr: para el preprocesamiento y manipulación de datos.</span></span>
+<span><span class="co"># - purrr: para aplicar funciones a vectores.</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span> <span class="co"># para convertir las listas con los resúmenes de los modelos de regresión a formato organizado.</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidymodels.tidymodels.org">tidymodels</a></span><span class="op">)</span> <span class="co"># para realizar contrastes de hipótesis en formato tidy.</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/heliosdrm/pwr">pwr</a></span><span class="op">)</span> <span class="co"># para el cálculo de tamaños muestrales.</span></span>
@@ -519,8 +527,8 @@ Ayuda
 </div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Para realizar un contraste de hipótesis para la media de una población podemos utilizar la función <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test"><code>t.test</code></a> del paquete base <code>stats</code>.</p>
-<p>Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función <code>tidy</code> del paquete <code>broom</code>.</p>
+<p>Para realizar un contraste de hipótesis para la media de una población podemos utilizar la función <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test"><code>t.test</code></a> del paquete <code>stats</code>.</p>
+<p>Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función <code>tidy</code> del paquete <a href="https://broom.tidymodels.org/index.html"><code>broom</code></a>.</p>
 <p>Otra opción es utilizar la función <a href="https://infer.tidymodels.org/reference/t_test.html"><code>t_test</code></a> de la colección de paquetes <code>tidymodels</code>, que ofrece ya la salida en formato <code>tidy</code>.</p>
 </div>
 </div>
@@ -935,8 +943,8 @@ Ayuda
 </div>
 <div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Para realizar un contraste de hipótesis para la proporción de una población podemos utilizar la función <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/prop.test"><code>prop.test</code></a> del paquete base <code>stats</code>.</p>
-<p>Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función <code>tidy</code> del paquete <code>broom</code>.</p>
+<p>Para realizar un contraste de hipótesis para la proporción de una población podemos utilizar la función <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/prop.test"><code>prop.test</code></a> del paquete <code>stats</code>.</p>
+<p>Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función <code>tidy</code> del paquete <a href="https://broom.tidymodels.org/index.html"><code>broom</code></a>.</p>
 <p>Otra opción es utilizar la función <a href="https://infer.tidymodels.org/reference/prop_test.html"><code>prop_test</code></a> de la colección de paquetes <code>tidymodels</code>, que ofrece ya la salida en formato <code>tidy</code>.</p>
 </div>
 </div>
@@ -1087,8 +1095,8 @@ Ayuda
 </div>
 <div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Para realizar un contraste de hipótesis para la diferencia de medias de dos población independientes utilizar la función <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test"><code>t.test</code></a> del paquete base <code>stats</code>. Este test da resultados diferentes dependiendo de si las dos poblaciones que se comparan tienen varianzas diferentes o no, por lo que previamente debemos realizar un contraste de comparación de varianzas mediante la función <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/var.test"><code>var.test</code></a> del paquete <code>stats</code>. Si se acepta la hipótesis de igualdad de varianzas mediante este test, en la función <code>t.test</code> hay que añadir el parámetro <code>var.equal = TRUE</code>.</p>
-<p>Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función <code>tidy</code> del paquete <code>broom</code>.</p>
+<p>Para realizar un contraste de hipótesis para la diferencia de medias de dos población independientes utilizar la función <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test"><code>t.test</code></a> del paquete <code>stats</code>. Este test da resultados diferentes dependiendo de si las dos poblaciones que se comparan tienen varianzas diferentes o no, por lo que previamente debemos realizar un contraste de comparación de varianzas mediante la función <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/var.test"><code>var.test</code></a> del paquete <code>stats</code>. Si se acepta la hipótesis de igualdad de varianzas mediante este test, en la función <code>t.test</code> hay que añadir el parámetro <code>var.equal = TRUE</code>.</p>
+<p>Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función <code>tidy</code> del paquete <a href="https://broom.tidymodels.org/index.html"><code>broom</code></a>.</p>
 <p>Otra opción es utilizar la función <a href="https://infer.tidymodels.org/reference/t_test.html"><code>t_test</code></a> de la colección de paquetes <code>tidymodels</code>, que ofrece ya la salida en formato <code>tidy</code>.</p>
 </div>
 </div>
@@ -1315,8 +1323,8 @@ Ayuda
 </div>
 <div id="callout-21" class="callout-21-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Para realizar un contraste de hipótesis para la diferencia de medias de dos población pareadas utilizar la función <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test"><code>t.test</code></a> del paquete base <code>stats</code> añadiendo el parámetro <code>paired = TRUE</code>.</p>
-<p>Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función <code>tidy</code> del paquete <code>broom</code>.</p>
+<p>Para realizar un contraste de hipótesis para la diferencia de medias de dos población pareadas utilizar la función <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test"><code>t.test</code></a> del paquete <code>stats</code> añadiendo el parámetro <code>paired = TRUE</code>.</p>
+<p>Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función <code>tidy</code> del paquete <a href="https://broom.tidymodels.org/index.html"><code>broom</code></a>.</p>
 <p>Otra opción es utilizar la función <a href="https://infer.tidymodels.org/reference/t_test.html"><code>t_test</code></a> de la colección de paquetes <code>tidymodels</code>, que ofrece ya la salida en formato <code>tidy</code>.</p>
 </div>
 </div>
@@ -2231,6 +2239,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./10-anova.html" class="pagination-link" aria-label="<span class='chapter-number'>10</span>&nbsp; <span class='chapter-title'>Análisis de la Varianza (ANOVA)</span>">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Análisis de la Varianza (ANOVA)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

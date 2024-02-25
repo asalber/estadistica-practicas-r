@@ -1,0 +1,198 @@
+---
+title: Análisis de la Varianza (ANOVA)
+knitr: 
+    opts_chunk: 
+      R.options:
+        warning: false
+lang: es
+---
+
+## Ejercicios Resueltos
+
+Para la realización de esta práctica se requieren los siguientes paquetes:
+
+```r
+library(tidyverse)
+# Incluye los siguientes paquetes:
+# - dplyr: para el preprocesamiento y manipulación de datos.
+library(broom) # para convertir las listas con los resúmenes de los modelos de regresión a formato organizado.
+library(tidymodels) # para realizar contrastes de hipótesis en formato tidy.
+library(pwr) # para el cálculo de tamaños muestrales.
+library(knitr) # para el formateo de tablas.
+```
+
+:::{#exr-anova-un-factor-contaminacion}
+Se quiere comparar la contaminación por dióxido de nitrógeno (NO2) en tres lugares distintos de una ciudad $A$, $B$ y $C$ y para ello se han medido las concentraciones de NO2 en cada lugar en una muestra aleatoria de días, obteniendo los resultados de la siguiente tabla.
+
+$$
+\begin{array}{lrrrrrrrrrrrr}
+\hline
+A & 19.8 & 21.1 & 28.2 & 22.3 & 22.5 & 28.9 & 23.8 & 16.9 \\
+B & 31.6 & 32.8 & 41.1 & 36.8 & 37.0 & 35.6 & 32.2 & 43.9 & 37.5 & 25.2 \\
+C & 37.2 & 30.2 & 26.6 & 31.7 & 26.8 & 28.6 & 29.2 & 22.9 & 38.0 & 33.9 & 26.2 & 40.5 \\
+\hline
+\end{array}
+$$
+
+a.  Crear un conjunto de datos con los datos de la muestra.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    df <- data.frame(nitrogeno = c(19.8, 21.1, 28.2, 22.3, 22.5, 28.9, 23.8, 16.9, 31.6, 32.8, 41.1, 36.8, 37.0, 35.6, 32.2, 43.9, 37.5, 25.2, 37.2, 30.2, 26.6, 31.7, 26.8, 28.6, 29.2, 22.9, 38.0, 33.9, 26.2, 40.5),
+    lugar = rep(c("A", "B", "C"), c(8, 10, 12)))
+    ```
+    :::
+
+a.  Dibujar el diagrama de cajas con los puntos correspondientes a las mediciones de cada lugar y sus medias. A la vista del diagrama, ¿crees que existen diferencias significativas entre los niveles de NO2 de los tres lugares?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    
+    ```{r}
+    #| message: false
+    library(tidyverse)
+    media <- mean(df$nitrogeno)
+    df |> 
+        ggplot(aes(x = lugar, y = nitrogeno, fill = lugar)) +
+        geom_boxplot(alpha = 0.5) +
+        geom_point() + 
+        stat_summary(fun = mean, geom = "point", size = 3, color = "red") +
+        geom_hline(yintercept = media, color = "red") +
+        geom_text(aes(x = 0.7, y = media + 0.5, label = "Media global") )
+    ```
+
+    Como se puede apreciar en el diagrama existen diferencias muy claras entre los niveles de NO2 de los tres lugares, especialmente entre $B$ y $A$.
+    :::
+
+a.  Realizar un contraste ANOVA para ver si hay diferencias estadísticamente significativas entre las concentraciones medias de NO2 de los tres lugares.
+
+    :::{.callout-note collapse="true"}
+    ## Ayuda
+    Para realizar un contraste ANOVA podemos usar la función [`aov`](https://rdrr.io/r/stats/aov.html) del paquete `stats`.
+
+    Otra opción es utilizar la función para ajustar modelos de regresión lineales [`lm`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/lm) y pasarle el modelo a la función [`anova`](https://rdrr.io/r/stats/anova.html) del paquete `stats`.
+
+    Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función `tidy` del paquete [`broom`](https://broom.tidymodels.org/index.html).
+    :::
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    Tenemos que realizar el contraste
+
+    \begin{align*}
+    H_0 &: \mu_A = \mu_B = \mu_C \\
+    H_1 &: \mbox{Existen diferencias entre al menos dos medias}
+    \end{align*}
+
+    :::{.panel-tabset}
+    ## `aov`
+
+    ```{r}
+    library(knitr)
+    library(broom)
+    aov1 <- aov(nitrogeno ~ lugar, data = df) 
+    aov1 |> 
+        tidy() |> 
+        kable()
+    ```
+
+    ## `lm`
+
+    ```{r}
+    lm(nitrogeno ~ lugar, data = df) |> 
+        anova() |> 
+        tidy() |> 
+        kable()
+    ```
+    :::
+    
+    Como el p-valor del contraste es $0.00007$ que es mucho menor que el nivel de significación $\alpha=0.05$, rechazamos la hipótesis nula y se concluye que existen diferencias estadísticamente significativas entre las concentraciones medias de NO2 de al menos dos lugares.
+    :::
+
+a.  Realizar un contraste _post-hoc_ de comparación de las medias de N02 por pares. ¿Entre qué lugares existe una diferencia estadísticamente significativa en la concentración media de NO2?
+
+    :::{.callout-note collapse="true"}
+    ## Ayuda
+    Para realizar un contraste post-hoc de comparación de medias por pares podemos usar la función [`TukeyHSD`](https://rdrr.io/r/stats/TukeyHSD.html) del paquete `stats`.
+
+    Otra opción es utilizar la función [`pairwise.t.test`](https://rdrr.io/r/stats/pairwise.t.test.html) del paquete `stats` que aplica la corrección de Bonferroni a los p-valores.
+    :::
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    :::{.panel-tabset}
+    ## Tukey HSD
+
+    ```{r}
+    TukeyHSD(aov(nitrogeno ~ lugar, data = df)) |> 
+        tidy() |> 
+        kable()
+    ```
+
+    ## Bonferroni
+
+    ```{r}
+    pairwise.t.test(df$nitrogeno, df$lugar, p.adjust.method = "bonferroni") |> 
+        tidy() |> 
+        kable()
+    ```
+    :::
+
+    Existe una diferencia muy significativa entre la concentración media de NO2 de los lugares $A$ y $B$ (p-valor $0.00005$), y también entre los lugares $A$ y $C$ (p-valor $0.0049$), pero no entre los lugares $B$ y $C$ (p-valor $0.1558$).
+    :::
+:::
+
+:::{#exr-anova-dos-factores-trigo}
+El fichero [`trigo.csv`](https://aprendeconalf.es/estadistica-practicas-r/datos/trigo.csv) contiene información sobre la cosecha de trigo (en toneladas) obtenida para dos tipos de semillas y tres tipos de abonos ($A$, $B$ y $C$).
+
+a.  Crear conjunto de datos con los datos de la muestra a partir del fichero [`trigo.csv`](https://aprendeconalf.es/estadistica-practicas-r/datos/trigo.csv).
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    #| message: false
+    library(tidyverse)
+    df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/trigo.csv")
+    ```
+    :::
+
+a.  Realizar un contraste ANOVA para ver si la cosecha de trigo depende del abono.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    Tenemos que realizar el contraste
+
+    \begin{align*}
+    H_0 &: \mu_A = \mu_B = \mu_C \\
+    H_1 &: \mbox{Existen diferencias entre al menos dos medias}
+    \end{align*}
+
+    :::{.panel-tabset}
+    ## `aov`
+
+    ```{r}
+    library(knitr)
+    library(broom)
+    aov(cosecha ~ abono, data = df) |> 
+        tidy() |> 
+        kable()
+    ```
+
+    ## `lm`
+
+    ```{r}
+    lm(nitrogeno ~ lugar, data = df) |> 
+        anova() |> 
+        tidy() |> 
+        kable()
+    ```
+    :::
+    
+    Como el p-valor del contraste es $0.0044$ que es mucho menor que el nivel de significación $\alpha=0.05$, rechazamos la hipótesis nula y se concluye que existen diferencias estadísticamente significativas entre las medias de las cosechas de trigo de los distintos abonos, y por tanto, la cosecha depende del tipo de abono.
+    :::
+
+:::

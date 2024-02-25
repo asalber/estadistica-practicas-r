@@ -1,0 +1,574 @@
+---
+title: Intervalos de confianza para la comparación de medias y proporciones de dos poblaciones
+knitr: 
+    opts_chunk: 
+      R.options:
+        warning: false
+lang: es
+---
+
+## Ejercicios Resueltos
+
+Para la realización de esta práctica se requieren los siguientes paquetes:
+
+```r
+library(tidyverse)
+# Incluye los siguientes paquetes:
+# - dplyr: para el preprocesamiento y manipulación de datos.
+library(broom) # para convertir las listas con los resúmenes de los modelos de regresión a formato organizado.
+library(tidymodels) # para realizar contrastes de hipótesis en formato tidy.
+library(pwr) # para el cálculo de tamaños muestrales.
+library(knitr) # para el formateo de tablas.
+```
+
+:::{#exr-contraste-hipotesis-proporcion-hombres}
+Para averiguar si en una determinada población existen menos hombres que mujeres se plantea el siguiente contraste de hipótesis sobre la proporción de hombres que hay en la población: 
+
+\begin{align*}
+H_0 &: p=0.5\\
+H_1 &: p<0.5 
+\end{align*}
+
+Para ello se ha tomado una muestra aleatoria con reemplazamiento de $10$ personas. 
+
+a.  Suponiendo cierta la hipótesis nula, ¿qué distribución sigue la variable que mide el número de hombres en la muestra de tamaño 10?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    Suponiendo cierta la hipótesis nula, es decir, que la proporción de hombres en la población es $0.5$, el número de hombres en una muestra aleatoria con reemplazamiento de 10 personas sigue una distribución Binomial $B(10, 0.5)$.
+    :::
+
+a.  Suponiendo cierta la hipótesis nula, ¿cuál es la probabilidad de que en la muestra se obtengan 0 hombres?
+¿Se aceptaría la hipótesis nula en tal caso? 
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    Tenemos que calcular la probabilidad de $0$ hombres con la distribución $B(10, 0.5)$.
+
+    ```{r}
+    pbinom(0, 10, 0.5)
+    ```
+
+    Como se ve, la probabilidad de obtener 0 hombres en una muestra aleatoria con reemplazamiento de 10 personas tomadas de una población con el mismo número de hombres y mujeres es muy baja, por lo que, en este caso rechazaríamos la hipótesis nula sin dudarlo.
+    :::
+
+
+a.  Suponiendo cierta la hipótesis nula, si se decide rechazarla cuando en la muestra haya 2 o menos hombres, ¿cuál es el riesgo de equivocarse?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    Tenemos que calcular la probabilidad de haya $2$ o menos hombres con la distribución $B(10, 0.5)$.
+
+    ```{r}
+    pbinom(2, 10, 0.5)
+    ```
+
+    La probabilidad de cometer un error de tipo I (rechazar la hipótesis nula cuando es cierta) es $0.0547$.
+    :::
+
+a.  Si el máximo riesgo de error de tipo I $\alpha$ que se tolera es $0.05$, ¿qué número de hombres en la muestra formarían la región de rechazo de la hipótesis nula?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    Si el máximo riesgo de error de tipo I se establece en $\alpha=0.05$, solo podría rechazarse la hipótesis nula si en la muestra aleatoria con reemplazamiento de $10$ personas se obtuviese $0$ o $1$ hombres. Si se obtuviesen $2$ hombres ya no se podría rechazar la hipótesis nula porque la probabilidad de equivocarnos es mayor de $0.05$ como se ha visto en el apartado anterior.
+    :::
+
+a.  Suponiendo que la proporción real de hombres en la población fuese de $0.4$, ¿cuál es la potencia del contraste para la región de rechazo del apartado anterior?
+
+    :::{.callout-note collapse="true"}
+    ## Ayuda
+    La potencia de un contraste es $1-\beta$, donde $\beta$ es la probabilidad de cometer un error de tipo II (aceptar la hipótesis nula cuando es falsa).
+    :::
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    Tenemos que calcular la probabilidad de haya $1$ o menos hombres con la distribución $B(10, 0.4)$.
+
+    ```{r}
+    pbinom(1, 10, 0.4)
+    ```
+
+    La potencia del contraste suponiendo que la proporción real de hombres en la población es $0.4$, es $0.0464$ que es muy baja.
+    :::
+
+a.  Si en lugar de una muestra de tamaño 10 se tomase una muestra de tamaño 100, y haciendo uso de la aproximación de una distribución binomial mediante una normal, ¿qué número de hombres en la muestra formarían la región de rechazo para un riesgo $\alpha=0.05$? 
+¿Qué potencia tendría ahora el contraste si la proporción real de hombres fuese de $0.4$? ¿Es mejor o peor contraste que el anterior?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    Si tomamos una muestra de $100$ personas, entonces el número de hombres en la muestra si en la población hay el mismo número de hombres que de mujeres sigue una distribución binomial $B(100,0.5)$, que puede aproximarse mediante una distribución normal $N(50,5)$, así que tenemos que calcular el percentil $5$ de esta distribución.
+
+    ```{r}
+    qnorm(0.05, 50, 5)
+    ```
+
+    Por tanto, para un riesgo $\alpha=0.05$, rechazaremos la hipótesis nula si en la muestra se obtienen $41$ o menos hombres.
+
+    Si la proporción real de hombres fuese de $0.4$, la potencia del contraste es la probabilidad de obtener $41$ o menos hombres con una distribución binomial $B(100, 0.4)$.
+
+    ```{r}
+    pbinom(41, 100, 0.4)
+    ```
+
+    Ahora la potencia del contraste ha aumentado hasta $0.6225$ que es mucho mayor que la del contraste anterior.
+    :::
+:::
+
+
+:::{#exr-contraste-hipotesis-media-principio-activo}
+Se sabe que para que un fármaco sea efectivo, la concentración de su principio activo debe ser de al menos $16$ mg/mm$^3$. Una farmacia va a comprar un lote de este medicamento, pero antes quiere asegurarse de que los medicamentos del lote son efectivos y para ello analiza la concentración de principio activo en una muestra aleatoria de $10$ envases tomados del lote, obteniendo los siguientes resultados en mg/mm$^{3}$:
+
+$$
+17.6 \quad 19.2 \quad 21.3 \quad 15.1 \quad 17.6 \quad 18.9 \quad 16.2 \quad 18.3 \quad 19.0 \quad 16.4
+$$
+
+a.  Crear un conjunto de datos con los datos de la muestra.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    df <- data.frame(concentracion = c(17.6, 19.2, 21.3, 15.1, 17.6, 18.9, 16.2, 18.3, 19.0, 16.4 ))
+    ```
+    :::
+
+a.  Realizar un contraste de hipótesis para ver si la concentración media de principio activo es diferente de $18$ mg/mm$^3$.
+
+    :::{.callout-note collapse="true"}
+    ## Ayuda
+    Para realizar un contraste de hipótesis para la media de una población podemos utilizar la función [`t.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test) del paquete base `stats`.
+
+    Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función `tidy` del paquete `broom`.
+
+    Otra opción es utilizar la función [`t_test`](https://infer.tidymodels.org/reference/t_test.html) de la colección de paquetes `tidymodels`, que ofrece ya la salida en formato `tidy`.
+    :::
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    Tenemos que realizar el contraste bilateral
+
+    \begin{align*}
+    H_0 &: \mu=18\\
+    H_1 &: \mu\neq 18 
+    \end{align*}
+
+    :::{.panel-tabset}
+    ## `stats`
+
+    ```{r}
+    t.test(df$concentracion, mu = 18)
+    ```
+
+    Para mostrar la salida en formato tabla.
+
+    ```{r}
+    library(broom)
+    library(knitr)
+    tidy(t.test(df$concentracion, mu = 18)) |> 
+        kable()
+    ```
+
+    ## `tidymodels`
+
+    ```{r}
+    library(tidymodels)
+    df |> 
+        t_test(response = concentracion, mu = 18) |> 
+        kable() 
+    ```
+    :::
+    
+    Como el p-valor del contraste es $0.9451$ que es mucho mayor que el riesgo $\alpha=0.05$, no rechazamos la hipótesis nula.
+
+    Obsérvese que el valor de la media muestral es $17.96$ que está muy cerca del valor que establece la hipótesis nula, por lo que sería una locura rechazar la hipótesis nula con esta muestra.
+    :::
+
+
+a.  Realizar un contraste de hipótesis para ver si la concentración media de principio activo es diferente de $19.5$ mg/mm$^3$.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    Tenemos que realizar el contraste bilateral
+
+    \begin{align*}
+    H_0 &: \mu=19.5\\
+    H_1 &: \mu\neq 19.5
+    \end{align*}
+
+    :::{.panel-tabset}
+    ## `stats`
+
+    ```{r}
+    tidy(t.test(df$concentracion, mu = 19.5)) |> 
+        kable()
+    ```
+
+    ## `tidymodels`
+
+    ```{r}
+    library(tidymodels)
+    df |> 
+        t_test(response = concentracion, mu = 19.5) |> 
+        kable() 
+    ```
+    :::
+    
+    Como el p-valor del contraste es $0.0234$ que es menor que el riesgo $\alpha=0.05$, rechazamos la hipótesis nula y concluimos que la concentración media es significativamente diferente de $19$.
+
+    Obsérvese que ahora el valor de la media muestral es $17.96$ está mucho más lejos del valor que establece la hipótesis nula, por lo que tiene más lógica rechazar la hipótesis nula.
+    :::
+
+a.  Si el fabricante del lote asegura haber aumentado la concentración de principio activo con respecto a anteriores lotes, en los que la media era de $17$ mg/mm$^3$, ¿podemos aceptar la afirmación del fabricante?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    Ahora tenemos que realizar el contraste unilateral
+
+    \begin{align*}
+    H_0 &: \mu=17\\
+    H_1 &: \mu> 17
+    \end{align*}
+
+    :::{.panel-tabset}
+    ## `stats`.
+
+    ```{r}
+    tidy(t.test(df$concentracion, mu = 17, alternative = "greater")) |> 
+        kable()
+    ```
+
+    ## `tidymodels`
+
+    ```{r}
+    library(tidymodels)
+    df |> 
+        t_test(response = concentracion, mu = 19.5, alternative = "greater") |> 
+        kable() 
+    ```
+    :::
+    
+    Como el p-valor del contraste es $0.0618$ que es mayor que el riesgo $\alpha=0.05$, no podemos rechazar la hipótesis nula y concluimos que con esta muestra no hay pruebas significativas de que la afirmación del fabricante sea cierta.
+    :::
+
+a.  ¿Cuál sería el tamaño muestral requerido para poder detectar una diferencia de $0.5$ mg/mm$^{3}$ más con un nivel de significación $\alpha=0.05$ y una potencia $1-\beta=0.8$?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    Ahora tenemos que realizar el contraste unilateral
+
+    ```{r}
+    library(pwr)
+    efecto <- 0.5 / sd(df$concentracion)
+    power.t.test(d = efecto, sig.level = 0.05, power = 0.8, type = "one.sample", alternative = "two.sided")
+    ```
+    :::
+
+:::
+
+:::{#exr-contraste-hipotesis-proporcion-uso-biblioteca}
+El conjunto de datos [`biblioteca.csv`](https://aprendeconalf.es/estadistica-practicas-r/datos/biblioteca.csv) contiene los resultados de una encuesta realizada en una universidad, sobre si el alumnado utiliza habitualmente (al menos una vez a la semana) la biblioteca.
+
+a.  Crear conjunto de datos con los datos de la muestra a partir del fichero [`biblioteca.csv`](https://aprendeconalf.es/estadistica-practicas-r/datos/biblioteca.csv).
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    #| message: false
+    library(tidyverse)
+    df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/biblioteca.csv")
+    ```
+    :::
+
+a.  Contrastar si el porcentaje de alumnos que utiliza habitualmente la biblioteca es superior al $40\%$. 
+
+    :::{.callout-note collapse="true"}
+    ## Ayuda
+    Para realizar un contraste de hipótesis para la proporción de una población podemos utilizar la función [`prop.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/prop.test) del paquete base `stats`.
+
+    Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función `tidy` del paquete `broom`.
+
+    Otra opción es utilizar la función [`prop_test`](https://infer.tidymodels.org/reference/prop_test.html) de la colección de paquetes `tidymodels`, que ofrece ya la salida en formato `tidy`.
+    :::
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    Tenemos que realizar el contraste unilateral
+
+    \begin{align*}
+    H_0 &: p = 0.4\\
+    H_1 &: p > 0.4 
+    \end{align*}
+
+    :::{.panel-tabset}
+    ## `stats`
+
+    ```{r}
+    #| message: false
+    library(broom)
+    library(knitr)
+    frec <- table(df$respuesta)
+    tidy(prop.test(frec["si"], nrow(df), p = 0.4, alternative = "greater")) |> 
+    kable()
+    ```
+
+    ## `tidymodels`
+
+    ```{r}
+    #| message: false
+    library(tidymodels)
+    library(knitr)
+    df  |> 
+        prop_test(response = respuesta, p = 0.4, alternative = "greater", success = "si") |>
+        kable()
+    ```
+    :::
+    
+    Como el p-valor del contraste es $0.253$, que es  mayor que el riesgo $\alpha=0.05$, no rechazamos la hipótesis nula.
+    :::
+:::
+
+:::{#exr-contraste-hipotesis-media-edad-andar}
+Un estudio trata de averiguar si existen diferencias significativas en la edad media a la que los niños de África y Europa comienzan a andar por sí solos. Los investigadores obtuvieron los siguientes datos para la edad al comenzar a andar (expresada en meses):
+
+\begin{align*}
+\textrm{África}:& \ 9.5-10.5-9.0-9.8-10.0-13.0-10.0-13.5-10.0-9.8\\
+\textrm{Europa}:& \ 12.5-9.5-13.5-13.8-12.0-13.8-12.5-9.5-12.0-13.5-12.0-12.0
+\end{align*}
+
+a.  Crear un conjunto de datos con los datos de la muestra.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    #| message: false
+    library(tidyverse)
+    df <- tibble(
+        edad = c(9.5, 10.5, 9.0, 9.8, 10.0, 13.0, 10.0, 13.5, 10.0, 9.8, 12.5, 9.5, 13.5, 13.8, 12.0, 13.8, 12.5, 9.5, 12.0, 13.5, 12.0, 12.0),
+        continente = factor(c(rep("África", 10), rep("Europa", 12)))
+    )
+    ```
+    :::
+
+a.  Realizar un contraste de hipótesis con un nivel de significación de $0.05$ para ver si existen diferencias estadísticamente significativas entre las edades medias a las que comienzan a andar los niños de África y los de Europa.
+
+    :::{.callout-note collapse="true"}
+    ## Ayuda
+    Para realizar un contraste de hipótesis para la diferencia de medias de dos población independientes utilizar la función [`t.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test) del paquete base `stats`. Este test da resultados diferentes dependiendo de si las dos poblaciones que se comparan tienen varianzas diferentes o no, por lo que previamente debemos realizar un contraste de comparación de varianzas mediante la función [`var.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/var.test) del paquete `stats`. Si se acepta la hipótesis de igualdad de varianzas mediante este test, en la función `t.test` hay que añadir el parámetro `var.equal = TRUE`.
+
+    Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función `tidy` del paquete `broom`.
+
+    Otra opción es utilizar la función [`t_test`](https://infer.tidymodels.org/reference/t_test.html) de la colección de paquetes `tidymodels`, que ofrece ya la salida en formato `tidy`.
+    :::
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    Tenemos que realizar el contraste bilateral
+
+    \begin{align*}
+    H_0 &: \mu_A = \mu_E \\
+    H_1 &: \mu_A \neq \mu_E 
+    \end{align*}
+
+    Realizamos primero el test F para la comparación de las varianzas de las dos poblaciones.
+
+    ```{r}
+    var.test(edad ~ continente, data = df)
+    ```
+
+    Como el p-valor del contraste es $0.9164$, que es mayor que el riesgo $\alpha=0.05$, no se rechaza la hipótesis nula y concluimos que no hay una diferencia estadísticamente significativas entre las varianzas de las dos poblaciones. 
+
+    A continuación realizamos el contraste de comparación de medias.
+
+    :::{.panel-tabset}
+    ## `stats`
+
+    ```{r}
+    t.test(edad ~ continente, data = df, var.equal = TRUE)
+    ```
+
+    Para mostrar la salida en formato tabla.
+
+    ```{r}
+    #| message: false
+    library(broom)
+    library(knitr)
+    tidy(t.test(edad ~ continente, data = df, var.equal = TRUE)) |> 
+        kable()
+    ```
+
+    ## `tidymodels`
+
+    ```{r}
+    #| message: false
+    library(tidymodels)
+    df |> 
+        t_test(edad ~ continente, var.equal = TRUE) |> 
+        kable() 
+    ```
+    :::
+    
+    Como el p-valor del contraste es $0.0138$ que es menor que el riesgo $\alpha=0.05$, podemos rechazar la hipótesis nula y se concluye que existe una diferencia estadísticamente significativa entre las edades medias a las que comienzan a andar los niños de África y Europa.
+
+    Aunque se ha planteado un contraste bilateral, observando el intervalo de confianza para la diferencia entre la edad media de los niños de África y los de Europa, que es completamente negativo, se puede concluir con un $95\%$ de confianza que los niños de África comienzan a andar entre $0.3872$ meses y $3.261$ meses antes que los niños de Europa en promedio.
+    :::
+:::
+
+:::{#exr-contraste-hipotesis-media-hipertension}
+El conjunto de datos `hipertension.csv` contiene datos de la presión arterial de una muestra de individuos hipertensos, antes y después de aplicarles tres tratamientos (Placebo, IECA y Antagonista del Calcio + Diurético).
+
+a.  Crear un conjunto de datos con los datos de la muestra.
+    
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    #| message: false
+    library(tidyverse)
+    df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/hipertension.csv")
+    glimpse(df)
+    ```
+    :::
+
+a.  Realizar un contraste de hipótesis para ver si hay la media de la presión sistólica ha disminuido significativamente.
+
+    :::{.callout-note collapse="true"}
+    ## Ayuda
+    Para realizar un contraste de hipótesis para la diferencia de medias de dos población pareadas utilizar la función [`t.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test) del paquete base `stats` añadiendo el parámetro `paired = TRUE`.
+
+    Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función `tidy` del paquete `broom`.
+
+    Otra opción es utilizar la función [`t_test`](https://infer.tidymodels.org/reference/t_test.html) de la colección de paquetes `tidymodels`, que ofrece ya la salida en formato `tidy`.
+    :::
+
+    :::{.callout-tip collapse="true"}   
+    ## Solución
+
+    Tenemos que realizar el contraste de hipótesis unilateral
+
+    \begin{align*}
+    H_0 &: \mu_I = \mu_F \\
+    H_1 &: \mu_I \neq \mu_F 
+    \end{align*}
+
+    :::{.panel-tabset}
+    ## `stats`
+
+    ```{r}
+    t.test(df$PAS_INI, df$PAS_FIN, paired = TRUE, alternative = "greater")
+    ```
+
+    Para mostrar la salida en formato tabla.
+
+    ```{r}
+    #| message: false
+    library(broom)
+    library(knitr)
+    tidy(t.test(df$PAS_INI, df$PAS_FIN, paired = TRUE, alternative = "greater")) |> 
+        kable()
+    ```
+
+    ## `tidymodels`
+
+    ```{r}
+    #| message: false
+    library(tidymodels)
+    df |> 
+    mutate(PAS_DIF = PAS_INI - PAS_FIN) |> 
+        t_test(response = PAS_DIF, alternative = "greater") |> 
+        kable() 
+    ```
+    :::
+    
+    Como el p-valor del contraste es prácticamente $0$, que es mucho menor que el riesgo $\alpha=0.05$, podemos rechazar con contundencia la hipótesis nula y se concluye que existe una diferencia estadísticamente muy significativa entre las medias de la presión arterial sistólica antes y después del tratamiento.
+    :::
+
+a.  Realizar el mismo contraste de antes, pero para cada tratamiento por separado.
+
+    :::{.callout-tip collapse="true"}   
+    ## Solución
+
+    :::{.panel-tabset}
+    ## `stats`
+
+    ```{r}
+    df |> 
+        nest(data = -FARMACO) |> 
+        mutate(test = map(data, ~ tidy(t.test(.x$PAS_INI, .x$PAS_FIN, paired = TRUE, alternative = "greater")))) |> 
+        unnest(test) |>
+        select(-data) |> 
+        kable()
+    ```
+
+    ## `tidymodels`
+
+    ```{r}
+    df |> 
+    mutate(PAS_DIF = PAS_INI - PAS_FIN) |> 
+    nest(data = -FARMACO) |> 
+        mutate(test = map(data, ~ t_test(x = .x, response = PAS_DIF, paired = TRUE, alternative = "greater"))) |> 
+        unnest(test) |>
+        select(-data) |> 
+        kable()
+    ```
+    :::
+
+    Como se puede observar, todos los p-valores son menores que el nivel de significación $\alpha=0.05$, por lo que se puede concluir que existe una diferencia estadísticamente muy significativa entre las medias de la presión arterial sistólica antes y después de cada tratamiento. Si observamos los intervalos de confianza, se observa que la mayor diferencia entre se da para el tratamiento IECA, después el Antagonista del Calcio y finalmente el Placebo.
+    :::
+:::
+
+:::{#exr-contraste-hipotesis-proporciones-aprobados}
+Un profesor universitario ha tenido dos grupos de clase a lo largo del año: uno con horario de mañana y otro de tarde. En el de mañana, sobre un total de $80$ alumnos, han aprobado $55$; y en el de tarde, sobre un total de $90$ alumnos, han aprobado $32$. ¿Se puede afirmar que hay diferencias significativas entre los porcentajes de aprobados en ambos grupos?
+
+:::{.callout-tip collapse="true"}
+## Solución
+
+Tenemos que realizar el contraste bilateral
+
+\begin{align*}
+H_0 &: p_M = p_T \\
+H_1 &: p_M \neq p_T 
+\end{align*}
+
+```{r}
+library(broom)
+library(knitr) 
+# Aplicamos el test de comparación de proporciones.
+tidy(prop.test(c(55, 32), c(80, 90))) |> 
+    # Multiplicamos por 100 todas las columnas para obtener porcentajes.
+    mutate(across(c(estimate1, estimate2, conf.low, conf.high), ~ .x * 100)) |> 
+    # Mostramos por pantalla en formato tabla.
+    kable()
+```
+
+Como el p-valor del contraste es prácticamente $0$, que es mucho menor que el riesgo $\alpha=0.05$, podemos rechazar con contundencia la hipótesis nula y se concluye que existe una diferencia estadísticamente muy significativa entre los porcentajes de aprobados en la mañana y la tarde. Si observamos el intervalo de confianza para diferencia entre la proporción de aprobados en la mañana y la tarde, que es completamente positivo, se concluye con un $95\%$ de confianza que el porcentaje de aprobados en la mañana es significativamente mayor que en la tarde.
+:::
+:::
+
+## Ejercicios propuestos
+
+:::{#exr-contraste-hipotesis-pulso}
+El fichero [`pulso.csv`](https://aprendeconalf.es/estadistica-practicas-r/datos/pulso.csv) contiene información sobre el pulso de un grupo de pacientes que han realizado
+distintos ejercicios: pulso en reposo (pulse1), pulso después de hacer ejercicio (pulse2), tipo de ejercicio (ran, 1=correr, 2=andar), sexo (sex, 1=hombre, 2=mujer) y peso (weight).
+
+a.  Contrastar si el pulso en reposo está por debajo de $75$ pulsaciones.
+
+a.  ¿Qué tamaño muestral sería necesario para detectar una diferencia de 2 pulsaciones más en la media de las pulsaciones en reposo, con un nivel de significación $0.05$ y una potencia de $0.9$?
+
+a.  Contrastar si el pulso después de correr está por encima de $85$ pulsaciones.
+
+a.  Contrastar si el porcentaje de personas con taquicardia leve (número de pulsaciones en reposo por encima de $90$) supera el $5\%$.
+
+a.  ¿Se puede afirmar que el ejercicio aumenta las pulsaciones con una significación de $0.05$? ¿y con una significación $0.01$?
+
+a.  ¿Existe una diferencia significativa entre las medias de las pulsaciones después de andar y después de correr?
+
+a.  ¿Existe una diferencia significativa entre la media de las pulsaciones en reposo de hombres y mujeres? ¿Y entre las medias de las pulsaciones después de correr?
+:::

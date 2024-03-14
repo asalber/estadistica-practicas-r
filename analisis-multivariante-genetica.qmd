@@ -1,0 +1,229 @@
+---
+title: Análisis multivariante en Genética
+knitr: 
+    opts_chunk: 
+      R.options:
+        warning: false
+lang: es
+---
+
+## Ejercicios Resueltos
+
+Para la realización de esta práctica se requieren los siguientes paquetes:
+
+```r
+library(tidyverse)
+# Incluye los siguientes paquetes:
+# - dplyr: para el preprocesamiento y manipulación de datos.
+library(broom) # para convertir las listas con los resúmenes de los modelos de regresión a formato organizado.
+library(tidymodels) # para realizar contrastes de hipótesis en formato tidy.
+library(pwr) # para el cálculo de tamaños muestrales.
+library(knitr) # para el formateo de tablas.
+```
+
+:::{#exr-anova-dos-factores-copula}
+El fichero [`copula.csv`](https://aprendeconalf.es/estadistica-practicas-r/datos/genetica/copula.csv) contiene información sobre el tiempo de cópula de varias especies de chimpancés.
+
+a.  Creación del conjunto de datos con los datos de la muestra a partir del fichero [`copula.csv`](datos/).
+
+```{r}
+#| message: false
+library(tidyverse)
+df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/trigo.csv") |> 
+    mutate(semilla = factor(semilla), abono = factor(abono))
+```
+:::
+
+a.  Realizar un contraste ANOVA para ver si la cosecha de trigo depende del abono. ¿Cuál es la varianza residual del modelo?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    Tenemos que realizar el contraste
+
+    \begin{align*}
+    H_0 &: \mu_A = \mu_B = \mu_C \\
+    H_1 &: \mbox{Existen diferencias entre al menos dos medias}
+    \end{align*}
+
+    :::{.panel-tabset}
+    ## `aov`
+
+    ```{r}
+    library(knitr)
+    library(broom)
+    aov(cosecha ~ abono, data = df) |> 
+        tidy() |> 
+        kable()
+    ```
+
+    ## `lm`
+
+    ```{r}
+    lm(cosecha ~ abono, data = df) |> 
+        anova() |> 
+        tidy() |> 
+        kable()
+    ```
+    :::
+    
+    Como el p-valor del contraste es $0.0108$ que es menor que el nivel de significación $\alpha=0.05$, rechazamos la hipótesis nula y se concluye que existen diferencias estadísticamente significativas entre las medias de las cosechas de trigo de los distintos abonos, y por tanto, la cosecha depende del tipo de abono.
+
+    La varianza residual del modelo es $8.891$.
+    :::
+
+a.  Realizar un contraste ANOVA para ver si la cosecha de trigo depende del abono y del tipo de semilla. ¿Cuánto se reduce la varianza residual al incluir el tipo de semilla en el modelo?
+
+    :::{.callout-note collapse="true"}
+    ## Ayuda
+    Para realizar un contraste ANOVA de dos factores sin interacción se puede utilizar tanto la función `aov` como la función `lm` pero incluyendo la fórmula del modelo `vd ~ f1 + f2`, donde `vd` es la variable dependiente, `f1` es el primer factor y `f2` el segundo.
+    :::
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    Tenemos que realizar el contraste ANOVA de dos factores sin interacción.
+
+    :::{.panel-tabset}
+    ## `aov`
+
+    ```{r}
+    library(knitr)
+    library(broom)
+    aov(cosecha ~ semilla + abono, data = df) |> 
+        tidy() |> 
+        kable()
+    ```
+
+    ## `lm`
+
+    ```{r}
+    lm(cosecha ~ semilla + abono, data = df) |> 
+        anova() |> 
+        tidy() |> 
+        kable()
+    ```
+    :::
+    
+    Como tanto el p-valor correspondiente a la semilla, que es prácticamente $0$, como el correspondiente al abono, que es $0.002$, son menores que el nivel de significación $\alpha=0.05$,  rechazamos la hipótesis nula y se concluye que la cosecha depende tanto del tipo de semilla como del tipo de abono.
+
+    Al incluir el tipo de semilla en el modelo, la varianza residual se reduce de $8.8689$ a $6.3528$, por lo que este modelo explica mejor la variabilidad de la cosecha.
+    :::
+
+a.  Incluir en el modelo anterior también la interacción entre el tipo de semilla y el tipo de abono. ¿Es significativa la interacción entre los dos factores? ¿Cuánto se reduce la varianza residual al incluir la interacción en el modelo?
+
+    :::{.callout-note collapse="true"}
+    ## Ayuda
+    Para realizar un contraste ANOVA de dos factores con interacción se puede utilizar tanto la función `aov` como la función `lm` pero incluyendo la fórmula del modelo `vd ~ f1 * f2`, donde `vd` es la variable dependiente, `f1` es el primer factor y `f2` el segundo.
+    :::
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    Tenemos que realizar el contraste ANOVA de dos factores con interacción.
+
+    :::{.panel-tabset}
+    ## `aov`
+
+    ```{r}
+    library(knitr)
+    library(broom)
+    aov(cosecha ~ semilla * abono, data = df) |> 
+        tidy() |> 
+        kable()
+    ```
+
+    ## `lm`
+
+    ```{r}
+    lm(cosecha ~ semilla * abono, data = df) |> 
+        anova() |> 
+        tidy() |> 
+        kable()
+    ```
+    :::
+    
+    Al igual que antes, tanto el tipo de semilla como el tipo de abono son significativos en el modelo, pero además lo es su interacción ya que el p-valor correspondiente es $0.0483$ que es menor que el nivel de significación $\alpha = 0.05$.
+
+    Al incluir la interacción entre el tipo de semilla y el tipo de abono en el modelo, la varianza residual se reduce de $6.3528$ a $5.9391$, por lo que este modelo explica todavía mejor la variabilidad de la cosecha.
+    :::
+
+a.  Realizar un diagrama de interacción entre los factores con las medias de los distintos grupos experimentales.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    
+    ```{r}
+    df |> 
+        group_by(semilla, abono) |> 
+        summarise(media = mean(cosecha)) |> 
+        ggplot(aes(x = semilla, y = media, color = abono)) +
+        geom_line(aes(group = abono)) +
+        geom_point()
+    ```
+
+    Como se aprecia en el diagrama, las líneas que unen las medias no son paralelas, lo que significa que hay interacción entre el tipo de semilla y el tipo de abono.
+    :::
+
+a.  Realizar un contraste _post-hoc_ para comparar las medias de los distintos grupos experimentales por pares. ¿Qué combinación de semilla y abono ofrece el mayor rendimiento de la cosecha?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    Primero comparamos las medias de los grupos según el tipo de abono.
+    
+    ```{r}
+    TukeyHSD(aov(cosecha ~ abono, data = df)) |> 
+        tidy() |> 
+        kable()
+    ```
+
+    Se observa que solo hay una diferencia estadísticamente significativa entre las medias de las cosechas con los tipos de abono $A$ y $C$.
+
+    Ahora comparamos las medias de los grupos según el tipo de semilla.
+
+    ```{r}
+    TukeyHSD(aov(cosecha ~ abono, data = df)) |> 
+        tidy() |> 
+        kable()
+    ```
+
+    Como solo hay dos grupos, solo hay una comparación posible, y se concluye hay diferencias significativas entre las medias de las cosechas con los tipos de semillas 1 y 2.
+
+    Finalmente, comparamos las medias de los grupos que surgen de la interacción del tipo de semilla con el tipo de abono.
+
+    ```{r}
+    TukeyHSD(aov(cosecha ~ semilla : abono, data = df)) |> 
+        tidy() |> 
+        arrange(adj.p.value) |> 
+        kable()
+    ```
+
+    De más a menos significativas, se observa que hay diferencias estadísticamente significativas entre las medias de las cosechas de los grupos 2:C (semilla 2 y abono C) y 1:A (semilla 1 y abono A), entre los grupos 2:B y 1:A, entre los grupos 2:A y 1:A, entre los grupos 2:C y 1:B, entre los grupos 1:C y 1:A, entre los grupos 2:B y 1:B y ente los grupos 1:B y 2:A. Entre el resto de grupos no hay diferencias estadísticamente significativas.
+
+    A la vista del diagrama del apartado anterior, se observa que el mayor rendimiento se obtiene con el tipo de semilla 2 y el abono $C$, seguido del tipo de semilla 2 y el abono $B$, aunque la diferencia entre las medias de estos dos grupos no es significativa.
+    :::
+:::
+
+
+## Ejercicios propuestos
+
+:::{#exr-anova-un-factor-evau}
+La tabla siguiente contiene las notas medias en la prueba de acceso a la universidad (EVAU) de una muestra de alumnos de los cinco institutos de una ciudad.
+
+$$
+\begin{array}{ccccc}
+\hline
+\mbox{Instituto 1} & \mbox{Instituto 2} & \mbox{Instituto 3} & \mbox{Instituto 4} & \mbox{Instituto 5} \\
+5.5 & 6.1 & 4.9 & 3.2 & 6.7 \\
+5.2 & 7.2 & 5.5 & 3.3 & 5.8 \\
+5.9 & 5.5 & 6.1 & 5.5 & 5.4 \\
+7.1 & 6.7 & 6.1 & 5.7 & 5.5 \\
+6.2 & 7.6 & 6.2 & 6.0 & 4.9 \\
+5.9 & 5.9 & 6.4 & 6.1 & 6.2 \\
+5.3 & 8.1 & 6.9 & 4.7 & 6.1 \\
+6.2 & 8.3 & 4.5 & 5.1 & 7.0 \\
+\hline
+\end{array}
+$$
+
+a.  Dibujar el diagrama de cajas y puntos de las notas de cada centro con sus respectivas medias. ¿Se observan diferencias entre los centros en el diagrama?
+
+:::

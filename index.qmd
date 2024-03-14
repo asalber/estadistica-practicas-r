@@ -1,11 +1,11 @@
 ---
 lang: es
-listing: 
-    id: toc
-    type: grid
-    fields: [title]
-    sort-ui: false
-    filter-ui: false
+# listing: 
+#     id: toc
+#     type: grid
+#     fields: [title, image]
+#     sort: title
+#     filter-ui: false
 ---
 
 # Prefacio {.unnumbered}
@@ -18,8 +18,16 @@ No es un libro para aprender a programar con R, ya que solo enseña el uso del l
 
 ## Capítulos
 
-::: {#toc}
-:::
+1. [Introducción a R](/01-intro.qmd)
+1. [Preprocesamiento de datos](02-preprocesamiento-datos.qmd)
+1. [Distribuciones de frecuencias y representaciones gráficas](03-frecuencias-graficos.qmd)
+1. [Estadística descriptiva](04-descriptiva.qmd)
+1. [Regresión](05-regresion.qmd)
+1. [Distribuciones de probabilidad.qmd](06-distribuciones-probabilidad.qmd)
+1. [Intervalos de confianza para una población](07-intervalos-confianza-una-poblacion.qmd)
+1. [Intervalos de confianza para la comparación de dos poblaciones](08-intervalos-confianza-comparacion-dos-poblaciones.qmd)
+1. [Contrastes de hipótesis](09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones.qmd)
+1. [Análisis de la varianza](10-anova.qmd)
 
 ## Licencia
 

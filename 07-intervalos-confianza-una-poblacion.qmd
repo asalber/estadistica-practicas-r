@@ -77,6 +77,7 @@ a.  Calcular el intervalo de confianza para la media de la concentración del lo
     Para mostrar la salida en formato de tabla.
 
     ```{r}
+    library(tidyverse)
     library(broom)
     library(knitr)
     tidy(t1) |> 

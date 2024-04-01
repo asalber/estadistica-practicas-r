@@ -1,5 +1,5 @@
 ---
-title: Intervalos de confianza para la comparación de medias y proporciones de dos poblaciones
+title: Contrastes de hipótesis paramétricos de una y dos poblaciones
 knitr: 
     opts_chunk: 
       R.options:

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.450">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Prácticas de Estadística con R - 9&nbsp; Intervalos de confianza para la comparación de medias y proporciones de dos poblaciones</title>
+<title>Prácticas de Estadística con R - 9&nbsp; Contrastes de hipótesis paramétricos de una y dos poblaciones</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,10 +93,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Buscar"
   }
 }</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-<meta property="og:title" content="Prácticas de Estadística con R - 9&nbsp; Intervalos de confianza para la comparación de medias y proporciones de dos poblaciones">
+<meta property="og:title" content="Prácticas de Estadística con R - 9&nbsp; Contrastes de hipótesis paramétricos de una y dos poblaciones">
 <meta property="og:description" content="">
 <meta property="og:site-name" content="Prácticas de Estadística con R">
-<meta name="twitter:title" content="Prácticas de Estadística con R - 9&nbsp; Intervalos de confianza para la comparación de medias y proporciones de dos poblaciones">
+<meta name="twitter:title" content="Prácticas de Estadística con R - 9&nbsp; Contrastes de hipótesis paramétricos de una y dos poblaciones">
 <meta name="twitter:description" content="">
 <meta name="twitter:site" content="@aprendeconalf">
 <meta name="twitter:card" content="summary">
@@ -108,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Intervalos de confianza para la comparación de medias y proporciones de dos poblaciones</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Contrastes de hipótesis paramétricos de una y dos poblaciones</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -226,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Intervalos de confianza para la comparación de medias y proporciones de dos poblaciones</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Contrastes de hipótesis paramétricos de una y dos poblaciones</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -250,7 +250,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Intervalos de confianza para la comparación de medias y proporciones de dos poblaciones</span>
+<span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Contrastes de hipótesis paramétricos de una y dos poblaciones</span>
 </h1>
 </div>
 
@@ -317,7 +317,7 @@ Solución
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Tenemos que calcular la probabilidad de <span class="math inline">\(0\)</span> hombres con la distribución <span class="math inline">\(B(10, 0.5)\)</span>.</p>
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-1_598f7f6c0383e00aec13b27c98b2cf71">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, <span class="fl">0.5</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.0009765625</code></pre>
@@ -343,7 +343,7 @@ Solución
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Tenemos que calcular la probabilidad de haya <span class="math inline">\(2\)</span> o menos hombres con la distribución <span class="math inline">\(B(10, 0.5)\)</span>.</p>
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-2_ba8dec0fc85efbeb8196c00058cf828a">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">10</span>, <span class="fl">0.5</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.0546875</code></pre>
@@ -404,7 +404,7 @@ Solución
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Tenemos que calcular la probabilidad de haya <span class="math inline">\(1\)</span> o menos hombres con la distribución <span class="math inline">\(B(10, 0.4)\)</span>.</p>
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-3_76d38bc788bf8583990284e0d7039341">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">0.4</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.0463574</code></pre>
@@ -430,7 +430,7 @@ Solución
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Si tomamos una muestra de <span class="math inline">\(100\)</span> personas, entonces el número de hombres en la muestra si en la población hay el mismo número de hombres que de mujeres sigue una distribución binomial <span class="math inline">\(B(100,0.5)\)</span>, que puede aproximarse mediante una distribución normal <span class="math inline">\(N(50,5)\)</span>, así que tenemos que calcular el percentil <span class="math inline">\(5\)</span> de esta distribución.</p>
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-4_eb8c8e5d064a0fe0d9db763292e4e75f">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fl">50</span>, <span class="fl">5</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 41.77573</code></pre>
@@ -438,7 +438,7 @@ Solución
 </div>
 <p>Por tanto, para un riesgo <span class="math inline">\(\alpha=0.05\)</span>, rechazaremos la hipótesis nula si en la muestra se obtienen <span class="math inline">\(41\)</span> o menos hombres.</p>
 <p>Si la proporción real de hombres fuese de <span class="math inline">\(0.4\)</span>, la potencia del contraste es la probabilidad de obtener <span class="math inline">\(41\)</span> o menos hombres con una distribución binomial <span class="math inline">\(B(100, 0.4)\)</span>.</p>
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-5_bb65d5a6215a6940304edf23c3be2376">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">pbinom</a></span><span class="op">(</span><span class="fl">41</span>, <span class="fl">100</span>, <span class="fl">0.4</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.6225327</code></pre>
@@ -471,7 +471,7 @@ Solución
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-6_72018ace71f53e3a3cea1ac5f2d6ac0d">
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>concentracion <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">17.6</span>, <span class="fl">19.2</span>, <span class="fl">21.3</span>, <span class="fl">15.1</span>, <span class="fl">17.6</span>, <span class="fl">18.9</span>, <span class="fl">16.2</span>, <span class="fl">18.3</span>, <span class="fl">19.0</span>, <span class="fl">16.4</span> <span class="op">)</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
@@ -522,7 +522,7 @@ H_1 &amp;: \mu\neq 18
 </ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-7_d4f34b8e8fb2e94cdcf12dd66955ebc8">
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">concentracion</span>, mu <span class="op">=</span> <span class="fl">18</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -539,7 +539,7 @@ mean of x
 </div>
 </div>
 <p>Para mostrar la salida en formato tabla.</p>
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-8_6019c38d053b6b38737f60f8977663b0">
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">concentracion</span>, mu <span class="op">=</span> <span class="fl">18</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -581,7 +581,7 @@ mean of x
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-9_62fbc42d1c06a56831d8d52f093bfe8e">
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidymodels.tidymodels.org">tidymodels</a></span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu">t_test</span><span class="op">(</span>response <span class="op">=</span> <span class="va">concentracion</span>, mu <span class="op">=</span> <span class="fl">18</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -653,7 +653,7 @@ H_1 &amp;: \mu\neq 19.5
 </ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-10_2b884c46970f30952679f7045fd20ef7">
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">concentracion</span>, mu <span class="op">=</span> <span class="fl">19.5</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -693,7 +693,7 @@ H_1 &amp;: \mu\neq 19.5
 </div>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-11_d1d95fbe2854bbbeb218150fbf2569a4">
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidymodels.tidymodels.org">tidymodels</a></span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu">t_test</span><span class="op">(</span>response <span class="op">=</span> <span class="va">concentracion</span>, mu <span class="op">=</span> <span class="fl">19.5</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -756,7 +756,7 @@ H_1 &amp;: \mu&gt; 17
 </ul>
 <div class="tab-content">
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-12_5716b2ac4c73fb6dc86288d7af2c3b55">
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">concentracion</span>, mu <span class="op">=</span> <span class="fl">17</span>, alternative <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -796,7 +796,7 @@ H_1 &amp;: \mu&gt; 17
 </div>
 </div>
 <div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-13_f7e6252decd0c74b11e34c45da45201c">
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidymodels.tidymodels.org">tidymodels</a></span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu">t_test</span><span class="op">(</span>response <span class="op">=</span> <span class="va">concentracion</span>, mu <span class="op">=</span> <span class="fl">19.5</span>, alternative <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -847,7 +847,7 @@ Solución
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Ahora tenemos que realizar el contraste unilateral</p>
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-14_524db6ce57cc71c8b78745882bd5d1ba">
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/heliosdrm/pwr">pwr</a></span><span class="op">)</span></span>
 <span><span class="va">efecto</span> <span class="op">&lt;-</span> <span class="fl">0.5</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">concentracion</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/power.t.test.html">power.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="va">efecto</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>, type <span class="op">=</span> <span class="st">"one.sample"</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -886,7 +886,7 @@ Solución
 </div>
 <div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-15_f3d24869ef716543862d1a109b1a8aa0">
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://aprendeconalf.es/estadistica-practicas-r/datos/biblioteca.csv"</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -938,7 +938,7 @@ H_1 &amp;: p &gt; 0.4
 </ul>
 <div class="tab-content">
 <div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-16_b5601cc008e3178001639f9b210a62f2">
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span></span>
 <span><span class="va">frec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">respuesta</span><span class="op">)</span></span>
@@ -981,7 +981,7 @@ H_1 &amp;: p &gt; 0.4
 </div>
 </div>
 <div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-17_5883b1ff5edc45eeef5464af0ea53161">
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidymodels.tidymodels.org">tidymodels</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span></span>
 <span><span class="va">df</span>  <span class="op">|&gt;</span> </span>
@@ -1035,7 +1035,7 @@ Solución
 </div>
 <div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-18_86eb732b0e616992aacb0248d84b2138">
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>    edad <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">9.5</span>, <span class="fl">10.5</span>, <span class="fl">9.0</span>, <span class="fl">9.8</span>, <span class="fl">10.0</span>, <span class="fl">13.0</span>, <span class="fl">10.0</span>, <span class="fl">13.5</span>, <span class="fl">10.0</span>, <span class="fl">9.8</span>, <span class="fl">12.5</span>, <span class="fl">9.5</span>, <span class="fl">13.5</span>, <span class="fl">13.8</span>, <span class="fl">12.0</span>, <span class="fl">13.8</span>, <span class="fl">12.5</span>, <span class="fl">9.5</span>, <span class="fl">12.0</span>, <span class="fl">13.5</span>, <span class="fl">12.0</span>, <span class="fl">12.0</span><span class="op">)</span>,</span>
@@ -1084,7 +1084,7 @@ H_0 &amp;: \mu_A = \mu_E \\
 H_1 &amp;: \mu_A \neq \mu_E
 \end{align*}\]</span></p>
 <p>Realizamos primero el test F para la comparación de las varianzas de las dos poblaciones.</p>
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-19_0738afe10ca7e1ae3b4556fcfe7db206">
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/var.test.html">var.test</a></span><span class="op">(</span><span class="va">edad</span> <span class="op">~</span> <span class="va">continente</span>, data <span class="op">=</span> <span class="va">df</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1109,7 +1109,7 @@ ratio of variances
 </ul>
 <div class="tab-content">
 <div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-20_b409ef9a91d2d01f09afedaabfc5accc">
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">edad</span> <span class="op">~</span> <span class="va">continente</span>, data <span class="op">=</span> <span class="va">df</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1126,7 +1126,7 @@ mean in group África mean in group Europa
 </div>
 </div>
 <p>Para mostrar la salida en formato tabla.</p>
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-21_4377f5203786fba8c32db1ff54210444">
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">edad</span> <span class="op">~</span> <span class="va">continente</span>, data <span class="op">=</span> <span class="va">df</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1174,7 +1174,7 @@ mean in group África mean in group Europa
 </div>
 </div>
 <div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-22_fa8405d5a0fbc2daea2015eb1c6ac47c">
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidymodels.tidymodels.org">tidymodels</a></span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu">t_test</span><span class="op">(</span><span class="va">edad</span> <span class="op">~</span> <span class="va">continente</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1246,7 +1246,7 @@ Solución
 </div>
 <div id="callout-20" class="callout-20-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-23_932876a4b7e64c8068707fc5d889ffb7">
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://aprendeconalf.es/estadistica-practicas-r/datos/hipertension.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1318,7 +1318,7 @@ H_1 &amp;: \mu_I \neq \mu_F
 </ul>
 <div class="tab-content">
 <div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-24_a78588e319b7445523777ec23e6c71fd">
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">PAS_INI</span>, <span class="va">df</span><span class="op">$</span><span class="va">PAS_FIN</span>, paired <span class="op">=</span> <span class="cn">TRUE</span>, alternative <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1335,7 +1335,7 @@ mean difference
 </div>
 </div>
 <p>Para mostrar la salida en formato tabla.</p>
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-25_41b37b3a64703222e1cc5f29d7e37e8b">
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">PAS_INI</span>, <span class="va">df</span><span class="op">$</span><span class="va">PAS_FIN</span>, paired <span class="op">=</span> <span class="cn">TRUE</span>, alternative <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1377,7 +1377,7 @@ mean difference
 </div>
 </div>
 <div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-26_4d3105a4502c190d43bbc114a83c3509">
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidymodels.tidymodels.org">tidymodels</a></span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">|&gt;</span> </span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>PAS_DIF <span class="op">=</span> <span class="va">PAS_INI</span> <span class="op">-</span> <span class="va">PAS_FIN</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1435,7 +1435,7 @@ Solución
 </ul>
 <div class="tab-content">
 <div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-27_7979d2b7a0bb920efc816a588e111afd">
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">nest</a></span><span class="op">(</span>data <span class="op">=</span> <span class="op">-</span><span class="va">FARMACO</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>test <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">data</span>, <span class="op">~</span> <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">.x</span><span class="op">$</span><span class="va">PAS_INI</span>, <span class="va">.x</span><span class="op">$</span><span class="va">PAS_FIN</span>, paired <span class="op">=</span> <span class="cn">TRUE</span>, alternative <span class="op">=</span> <span class="st">"greater"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1506,7 +1506,7 @@ Solución
 </div>
 </div>
 <div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-28_620f778120403f1aa330033b0252e466">
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>PAS_DIF <span class="op">=</span> <span class="va">PAS_INI</span> <span class="op">-</span> <span class="va">PAS_FIN</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">nest</a></span><span class="op">(</span>data <span class="op">=</span> <span class="op">-</span><span class="va">FARMACO</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1600,7 +1600,7 @@ Solución
 H_0 &amp;: p_M = p_T \\
 H_1 &amp;: p_M \neq p_T
 \end{align*}\]</span></p>
-<div class="cell">
+<div class="cell" data-hash="09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones_cache/html/unnamed-chunk-29_f7f85a883ea544a180e844a96fc36998">
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span> </span>
 <span><span class="co"># Aplicamos el test de comparación de proporciones.</span></span>

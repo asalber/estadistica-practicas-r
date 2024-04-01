@@ -10,3 +10,9 @@ dplyr
 stringr
 forcats
 lubridate
+rstatix
+ggpubr
+Matrix
+lme4
+carData
+car

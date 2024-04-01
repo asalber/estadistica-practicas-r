@@ -5,23 +5,25 @@ knitr:
       R.options:
         warning: false
 lang: es
+bibliography: references.bib
 ---
 
 ## Ejercicios Resueltos
 
 Para la realización de esta práctica se requieren los siguientes paquetes:
 
-```r
+``` r
 library(tidyverse)
 # Incluye los siguientes paquetes:
 # - dplyr: para el preprocesamiento y manipulación de datos.
+# - ggplot2: para la creación de gráficos.
 library(broom) # para convertir las listas con los resúmenes de los modelos de regresión a formato organizado.
-library(tidymodels) # para realizar contrastes de hipótesis en formato tidy.
-library(pwr) # para el cálculo de tamaños muestrales.
+library(rstatix) # para realizar ANOVAs de medidas repetidas y mixtos.
+library(lme4) # para construir modelos lineales mixtos.
 library(knitr) # para el formateo de tablas.
 ```
 
-:::{#exr-anova-un-factor-contaminacion}
+::: {#exr-anova-un-factor-contaminacion}
 Se quiere comparar la contaminación por dióxido de nitrógeno (NO2) en tres lugares distintos de una ciudad $A$, $B$ y $C$ y para ello se han medido las concentraciones de NO2 en cada lugar en una muestra aleatoria de días, obteniendo los resultados de la siguiente tabla.
 
 $$
@@ -36,7 +38,7 @@ $$
 
 a.  Crear un conjunto de datos con los datos de la muestra.
 
-    :::{.callout-tip collapse="true"}
+    ::: {.callout-tip collapse="true"}
     ## Solución
 
     ```{r}
@@ -47,9 +49,9 @@ a.  Crear un conjunto de datos con los datos de la muestra.
 
 a.  Dibujar el diagrama de cajas con los puntos correspondientes a las mediciones de cada lugar y sus medias. A la vista del diagrama, ¿crees que existen diferencias significativas entre los niveles de NO2 de los tres lugares?
 
-    :::{.callout-tip collapse="true"}
+    ::: {.callout-tip collapse="true"}
     ## Solución
-    
+
     ```{r}
     #| message: false
     library(tidyverse)
@@ -68,8 +70,14 @@ a.  Dibujar el diagrama de cajas con los puntos correspondientes a las medicione
 
 a.  Realizar un contraste ANOVA para ver si hay diferencias estadísticamente significativas entre las concentraciones medias de NO2 de los tres lugares.
 
-    :::{.callout-note collapse="true"}
+    ::: {.callout-note collapse="true"}
     ## Ayuda
+    Antes de realizar el contraste de ANOVA hay que comprobar que se cumplen los supuestos del modelo ANOVA.
+    
+    - Normalidad: Para comprobar la normalidad de la variable dependiente se puede utilizar el test de normalidad de Shapiro-Wilk mediante la función [`shapiro.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/shapiro.test).
+    - Homocedasticidad: Para comprobar la homocedasticidad de las varianzas de los grupos de comparación se puede utilizar el test de Barlett de homogeneidad de varianzas mediante la función [`bartlett.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/bartlett.test).
+    - Independencia: Para comprobar la independencia de las observaciones se puede utilizar el test de independencia de Durbin-Watson mediante la función [`durbinWatsonTest`](https://www.rdocumentation.org/packages/car/versions/3.1-2/topics/durbinWatsonTest) del paquete `car`.
+
     Para realizar un contraste ANOVA podemos usar la función [`aov`](https://rdrr.io/r/stats/aov.html) del paquete `stats`.
 
     Otra opción es utilizar la función para ajustar modelos de regresión lineales [`lm`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/lm) y pasarle el modelo a la función [`anova`](https://rdrr.io/r/stats/anova.html) del paquete `stats`.
@@ -77,16 +85,50 @@ a.  Realizar un contraste ANOVA para ver si hay diferencias estadísticamente si
     Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función `tidy` del paquete [`broom`](https://broom.tidymodels.org/index.html).
     :::
 
-    :::{.callout-tip collapse="true"}
+    ::: {.callout-tip collapse="true"}
     ## Solución
-    Tenemos que realizar el contraste
+    Comprobemos en primer lugar si se cumplen los supuestos del modelo ANOVA.
 
+    #### Normalidad
+
+    ```{r}
+    shapiro.test(df$nitrogeno) |> 
+        tidy() |> 
+        kable()
+    ```
+
+    Como el p-valor es mayor que el nivel de significación $\alpha=0.05$, no podemos rechazar la hipótesis nula de normalidad de los datos.
+
+    #### Homocedasticidad
+
+    ```{r}
+    bartlett.test(nitrogeno ~ lugar, data = df) |> 
+        tidy() |> 
+        kable()
+    ```
+
+    Como el p-valor es mayor que el nivel de significación $\alpha=0.05$, no podemos rechazar la hipótesis nula de homocedasticidad de las varianzas.
+
+    #### Independencia
+
+    ```{r}
+    library(car)
+    durbinWatsonTest(aov(nitrogeno ~ lugar, data = df)) |> 
+        tidy() |> 
+        kable()
+    ```
+
+    Como el p-valor es mayor que el nivel de significación $\alpha=0.05$, no podemos rechazar la hipótesis nula de independencia de las observaciones.
+
+    Así pues, todas las condiciones del modelo ANOVA se cumplen, por lo que podemos realizar el contraste de comparación de medias que es
+
+    ```{=tex}
     \begin{align*}
     H_0 &: \mu_A = \mu_B = \mu_C \\
     H_1 &: \mbox{Existen diferencias entre al menos dos medias}
     \end{align*}
-
-    :::{.panel-tabset}
+    ```
+    ::: panel-tabset
     ## `aov`
 
     ```{r}
@@ -107,23 +149,49 @@ a.  Realizar un contraste ANOVA para ver si hay diferencias estadísticamente si
         kable()
     ```
     :::
-    
+
     Como el p-valor del contraste es $0.00007$ que es mucho menor que el nivel de significación $\alpha=0.05$, rechazamos la hipótesis nula y se concluye que existen diferencias estadísticamente significativas entre las concentraciones medias de NO2 de al menos dos lugares.
     :::
 
-a.  Realizar un contraste _post-hoc_ de comparación de las medias de N02 por pares. ¿Entre qué lugares existe una diferencia estadísticamente significativa en la concentración media de NO2?
+a.  Analizar los residuos del modelo ANOVA.
 
-    :::{.callout-note collapse="true"}
+    ::: {.callout-note collapse="true"}
     ## Ayuda
+
+    El análisis de los residuos se suele realizar mediante la función `plot`, pasándole como argumento el modelo ANOVA. Esta función dibuja cuatro diagramas, el de los residuos frente a las predicciones del modelo, el de los cuantiles de los residuos frente a los cuantiles normales (qqplot).
+    :::
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    par(mfrow=c(2,2))
+    plot(aov1)
+    ```
+
+    El primer diagrama "Residuals vs Fitted" muestra si los residuos tienen tendencia lineal o no. En este caso, la línea roja que representa las medias es prácticamente horizontal por lo que se puede asumir que la tendencia es lineal.
+    
+    El segundo diagrama "Normal Q-Q" muestra si los residuos siguen una distribución normal. En este caso los puntos se ajustan bastante bien a la línea recta, por lo que se puede asumir que los residuos siguen una distribución normal.
+
+    El tercer diagrama "Scale-Location" muestra si los residuos tienen una varianza constante (homocedasticidad). En este caso, la línea roja que representa la media de los residuos es prácticamente horizontal, por lo que se puede asumir que la varianza de los residuos es constante.
+
+    El cuarto diagrama "Residuals vs Leverage" muestra si hay observaciones influyentes en el modelo. En este caso, no hay observaciones que se salgan de la línea discontinua roja que representa el límite de influencia (distancia de Cook), por lo que no hay datos atípicos que sesguen el modelo.
+    :::
+
+a.  Realizar un contraste *post-hoc* de comparación de las medias de N02 por pares. ¿Entre qué lugares existe una diferencia estadísticamente significativa en la concentración media de NO2?
+
+    ::: {.callout-note collapse="true"}
+    ## Ayuda
+
     Para realizar un contraste post-hoc de comparación de medias por pares podemos usar la función [`TukeyHSD`](https://rdrr.io/r/stats/TukeyHSD.html) del paquete `stats`.
 
     Otra opción es utilizar la función [`pairwise.t.test`](https://rdrr.io/r/stats/pairwise.t.test.html) del paquete `stats` que aplica la corrección de Bonferroni a los p-valores.
     :::
 
-    :::{.callout-tip collapse="true"}
+    ::: {.callout-tip collapse="true"}
     ## Solución
 
-    :::{.panel-tabset}
+    ::: panel-tabset
     ## Tukey HSD
 
     ```{r}
@@ -145,12 +213,12 @@ a.  Realizar un contraste _post-hoc_ de comparación de las medias de N02 por pa
     :::
 :::
 
-:::{#exr-anova-dos-factores-trigo}
+::: {#exr-anova-dos-factores-trigo}
 El fichero [`trigo.csv`](https://aprendeconalf.es/estadistica-practicas-r/datos/trigo.csv) contiene información sobre la cosecha de trigo (en toneladas) obtenida para dos tipos de semillas y tres tipos de abonos ($A$, $B$ y $C$).
 
 a.  Crear conjunto de datos con los datos de la muestra a partir del fichero [`trigo.csv`](https://aprendeconalf.es/estadistica-practicas-r/datos/trigo.csv).
 
-    :::{.callout-tip collapse="true"}
+    ::: {.callout-tip collapse="true"}
     ## Solución
 
     ```{r}
@@ -158,21 +226,24 @@ a.  Crear conjunto de datos con los datos de la muestra a partir del fichero [`t
     library(tidyverse)
     df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/trigo.csv") |> 
         mutate(semilla = factor(semilla), abono = factor(abono))
+    head(df)
     ```
     :::
 
-a.  Realizar un contraste ANOVA para ver si la cosecha de trigo depende del abono. ¿Cuál es la varianza residual del modelo?
+b.  Realizar un contraste ANOVA para ver si la cosecha de trigo depende del abono. ¿Cuál es la varianza residual del modelo?
 
-    :::{.callout-tip collapse="true"}
+    ::: {.callout-tip collapse="true"}
     ## Solución
+
     Tenemos que realizar el contraste
 
+    ```{=tex}
     \begin{align*}
     H_0 &: \mu_A = \mu_B = \mu_C \\
     H_1 &: \mbox{Existen diferencias entre al menos dos medias}
     \end{align*}
-
-    :::{.panel-tabset}
+    ```
+    ::: panel-tabset
     ## `aov`
 
     ```{r}
@@ -192,24 +263,26 @@ a.  Realizar un contraste ANOVA para ver si la cosecha de trigo depende del abon
         kable()
     ```
     :::
-    
+
     Como el p-valor del contraste es $0.0108$ que es menor que el nivel de significación $\alpha=0.05$, rechazamos la hipótesis nula y se concluye que existen diferencias estadísticamente significativas entre las medias de las cosechas de trigo de los distintos abonos, y por tanto, la cosecha depende del tipo de abono.
 
     La varianza residual del modelo es $8.891$.
     :::
 
-a.  Realizar un contraste ANOVA para ver si la cosecha de trigo depende del abono y del tipo de semilla. ¿Cuánto se reduce la varianza residual al incluir el tipo de semilla en el modelo?
+c.  Realizar un contraste ANOVA para ver si la cosecha de trigo depende del abono y del tipo de semilla. ¿Cuánto se reduce la varianza residual al incluir el tipo de semilla en el modelo?
 
-    :::{.callout-note collapse="true"}
+    ::: {.callout-note collapse="true"}
     ## Ayuda
+
     Para realizar un contraste ANOVA de dos factores sin interacción se puede utilizar tanto la función `aov` como la función `lm` pero incluyendo la fórmula del modelo `vd ~ f1 + f2`, donde `vd` es la variable dependiente, `f1` es el primer factor y `f2` el segundo.
     :::
 
-    :::{.callout-tip collapse="true"}
+    ::: {.callout-tip collapse="true"}
     ## Solución
+
     Tenemos que realizar el contraste ANOVA de dos factores sin interacción.
 
-    :::{.panel-tabset}
+    ::: panel-tabset
     ## `aov`
 
     ```{r}
@@ -229,24 +302,26 @@ a.  Realizar un contraste ANOVA para ver si la cosecha de trigo depende del abon
         kable()
     ```
     :::
-    
-    Como tanto el p-valor correspondiente a la semilla, que es prácticamente $0$, como el correspondiente al abono, que es $0.002$, son menores que el nivel de significación $\alpha=0.05$,  rechazamos la hipótesis nula y se concluye que la cosecha depende tanto del tipo de semilla como del tipo de abono.
+
+    Como tanto el p-valor correspondiente a la semilla, que es prácticamente $0$, como el correspondiente al abono, que es $0.002$, son menores que el nivel de significación $\alpha=0.05$, rechazamos la hipótesis nula y se concluye que la cosecha depende tanto del tipo de semilla como del tipo de abono.
 
     Al incluir el tipo de semilla en el modelo, la varianza residual se reduce de $8.8689$ a $6.3528$, por lo que este modelo explica mejor la variabilidad de la cosecha.
     :::
 
-a.  Incluir en el modelo anterior también la interacción entre el tipo de semilla y el tipo de abono. ¿Es significativa la interacción entre los dos factores? ¿Cuánto se reduce la varianza residual al incluir la interacción en el modelo?
+d.  Incluir en el modelo anterior también la interacción entre el tipo de semilla y el tipo de abono. ¿Es significativa la interacción entre los dos factores? ¿Cuánto se reduce la varianza residual al incluir la interacción en el modelo?
 
-    :::{.callout-note collapse="true"}
+    ::: {.callout-note collapse="true"}
     ## Ayuda
+
     Para realizar un contraste ANOVA de dos factores con interacción se puede utilizar tanto la función `aov` como la función `lm` pero incluyendo la fórmula del modelo `vd ~ f1 * f2`, donde `vd` es la variable dependiente, `f1` es el primer factor y `f2` el segundo.
     :::
 
-    :::{.callout-tip collapse="true"}
+    ::: {.callout-tip collapse="true"}
     ## Solución
+
     Tenemos que realizar el contraste ANOVA de dos factores con interacción.
 
-    :::{.panel-tabset}
+    ::: panel-tabset
     ## `aov`
 
     ```{r}
@@ -266,17 +341,17 @@ a.  Incluir en el modelo anterior también la interacción entre el tipo de semi
         kable()
     ```
     :::
-    
+
     Al igual que antes, tanto el tipo de semilla como el tipo de abono son significativos en el modelo, pero además lo es su interacción ya que el p-valor correspondiente es $0.0483$ que es menor que el nivel de significación $\alpha = 0.05$.
 
     Al incluir la interacción entre el tipo de semilla y el tipo de abono en el modelo, la varianza residual se reduce de $6.3528$ a $5.9391$, por lo que este modelo explica todavía mejor la variabilidad de la cosecha.
     :::
 
-a.  Realizar un diagrama de interacción entre los factores con las medias de los distintos grupos experimentales.
+e.  Realizar un diagrama de interacción entre los factores con las medias de los distintos grupos experimentales.
 
-    :::{.callout-tip collapse="true"}
+    ::: {.callout-tip collapse="true"}
     ## Solución
-    
+
     ```{r}
     df |> 
         group_by(semilla, abono) |> 
@@ -289,13 +364,13 @@ a.  Realizar un diagrama de interacción entre los factores con las medias de lo
     Como se aprecia en el diagrama, las líneas que unen las medias no son paralelas, lo que significa que hay interacción entre el tipo de semilla y el tipo de abono.
     :::
 
-a.  Realizar un contraste _post-hoc_ para comparar las medias de los distintos grupos experimentales por pares. ¿Qué combinación de semilla y abono ofrece el mayor rendimiento de la cosecha?
+f.  Realizar un contraste *post-hoc* para comparar las medias de los distintos grupos experimentales por pares. ¿Qué combinación de semilla y abono ofrece el mayor rendimiento de la cosecha?
 
-    :::{.callout-tip collapse="true"}
+    ::: {.callout-tip collapse="true"}
     ## Solución
 
     Primero comparamos las medias de los grupos según el tipo de abono.
-    
+
     ```{r}
     TukeyHSD(aov(cosecha ~ abono, data = df)) |> 
         tidy() |> 
@@ -329,10 +404,245 @@ a.  Realizar un contraste _post-hoc_ para comparar las medias de los distintos g
     :::
 :::
 
+::: {#exr-anova-medidas-repetidas}
+El fichero [`cata-vinos.csv`](https://aprendeconalf.es/estadistica-practicas-r/datos/cata-vinos.csv) contiene información la puntuación obtenida por unos vinos en una cata realizada por 15 expertos.
+
+a.  Crear conjunto de datos con los datos de la muestra a partir del fichero [`cata-vinos.csv`](https://aprendeconalf.es/estadistica-practicas-r/datos/cata-vinos.csv).
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    library(tidyverse)
+    df <- read_csv("datos/cata-vinos.csv")
+    head(df)
+    ```
+    :::
+
+a.  Dibujar un diagrama de líneas las puntuaciones de cada catador.
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    df_largo <- df |> 
+        # Generamos un identificador para cada individuo.
+        mutate(id = 1:nrow(df)) |>
+        # Convertimos el data frame a formato largo.
+        pivot_longer(cols = -id, names_to = "Vino", values_to = "Puntuación") |> 
+        # Convertimos el id y el momento en factores.
+        mutate_at(c("id", "Vino"), as.factor)
+
+    # Dibujamos el diagrama de líneas.
+    df_largo |> ggplot(aes(x = Vino, y = Puntuación, group = id, color = id)) +
+        geom_line()
+    ```
+
+    A primera vista, parece que las puntuaciones del vino B son más bajas.
+    :::
+
+a.  Realizar un contraste ANOVA para ver si hay diferencias estadísticamente significativas entre las medias del peso en los tres momentos.
+
+    ::: {.callout-note collapse="true"}
+    ## Ayuda
+    Para realizar un contraste ANOVA de medidas repetidas se puede utilizar la función `aov` del paquete `Stats` introduciendo en el modelo el termino de error `Error(id/Vino)`. 
+    
+    También se puede utilizar como la función [`anova_test`](https://rpkgs.datanovia.com/rstatix/reference/anova_test.html) del paquete [`rstatix`](https://rpkgs.datanovia.com/rstatix/index.html), introduciendo la variable dependiente en el argumento `dv`, la variable identificadora en el argumento `wid` y la variable de medidas repetidas en el argumento `within`.
+    :::
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    Tenemos que realizar el contraste ANOVA de medidas repetidas ya que los tres vinos se catan por las mismas personas.
+
+    ::: panel-tabset
+    ## `aov`
+
+    ```{r}
+    modelo <- aov(Puntuación ~ Vino + Error(id/Vino), data = df_largo) 
+    modelo  |>  
+        tidy() |> 
+        kable()
+    ```
+
+    ## `anova_test` (`rstatix`)
+
+    ```{r}
+    library(knitr)
+    library(broom)
+    library(rstatix)
+    anova <- anova_test(data = df_largo, dv = Puntuación, wid = id, within = Vino)
+    get_anova_table(anova) |>
+        kable()
+    ```
+
+    ## `lmer` (`lme4`)
+
+    ```{r}
+    library(lme4)
+    lmer(Puntuación ~ Vino + (1|id), data = df_largo) |> 
+    anova(data.frame(ames = NULL, check.rows = FALSE, check.names = TRUE, stringsAsFactors = default.stringsAsFactors())) |>
+        tidy() |> 
+        kable()
+    ```
+    :::
+
+    Como el p-valor del contraste es $0.0001 < 0.05$ podemos rechazar la hipótesis nula de igualdad de medias y concluimos que existen diferencias significativas entre las puntuaciones medias de al menos dos vinos.
+    :::
+
+a.  Realizar un contraste de comparación de medias por pares para ver entre qué vinos existen diferencias estadísticamente significativas en la puntuación media.
+
+    ::: {.callout-note collapse="true"}
+    ## Ayuda
+
+    Para realizar un contraste post-hoc de comparación de medias por pares podemos usar la función [`pairwise.t.test`](https://rdrr.io/r/stats/pairwise.t.test.html) del paquete `stats` que aplica la corrección de Bonferroni a los p-valores.
+    :::
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    pwc <- df_largo |> 
+        pairwise_t_test(Puntuación~Vino, paired = TRUE, p.adjust.method = "bonferroni")
+    pwc |> 
+        kable()
+    ```
+
+    A la vista de los p-valores de la comparación por pares existe una diferencia estadísticamente muy significativa entre el la puntuación media de los vinos A y B (p-valor 0.002 < 0.01), y una diferencia estadísticamente significativa entre las puntuaciones medias de los vinos B y C (p-valor 0.015 < 0.05), pero no existe una diferencia estadísticamente significativa entre la puntuación media de los vinos A y C (p-valor 0.129 > 0.05).
+    :::
+
+a.  Dibujar los diagramas de cajas de las puntuaciones de los tres vinos, mostrando las diferencias significativas entre los vinos.
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    library(ggpubr)
+    pwc <- pwc |> add_xy_position(x = "Vino")
+    ggboxplot(df_largo, x = "Vino", y = "Puntuación", fill = "Vino", alpha = 0.5) +
+        stat_pvalue_manual(pwc) +
+        labs(
+            subtitle = get_test_label(anova, detailed = TRUE),
+            caption = get_pwc_label(pwc)
+        )
+    ```
+    :::
+:::
+
+
+<!-- ::: {#exr-anova-medidas-repetidas}
+TODO: Añadir ejercicios de ANOVA mixto.
+
+El fichero [`pesos-dieta.csv`](https://aprendeconalf.es/estadistica-practicas-r/datos/pesos-dieta.csv) contiene información sobre el peso de una muestra de mujeres con sobrepeso que han seguido una dieta de adelgazamiento durante dos meses. El peso de cada mujer se ha medido al inicio de la dieta, transcurrido un mes y al final de la misma transcurridos dos meses. También se ha medido si la mujer ha hecho ejercicio o no durante la dieta.
+
+a.  Crear conjunto de datos con los datos de la muestra a partir del fichero [`pesos-dieta.csv`](https://aprendeconalf.es/estadistica-practicas-r/datos/pesos-dieta.csv).
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    library(tidyverse)
+    df <- read.csv("datos/pesos-dieta.csv")
+    head(df)
+    ```
+    :::
+
+a.  Dibujar un diagrama de líneas con la evolución del peso de cada mujer a lo largo de los tres momentos según si ha realizado ejercicio o no.
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+```{r}
+df_largo <- df |>
+    # Generamos un identificador para cada individuo.
+    mutate(id = 1:nrow(df)) |>
+    # Convertimos el data frame a formato largo.
+    pivot_longer(cols = c("peso0", "peso1", "peso2"), names_to = "momento", values_to = "peso") |> 
+    # Convertimos el id y el momento en factores.
+    convert_as_factor(id, momento, ejercicio)
+
+# Dibujamos el diagrama de líneas.
+df_largo |> ggplot(aes(x = momento, y = peso, group = id)) +
+    geom_line() +
+    facet_wrap(~ejercicio)
+```
+
+    Como se puede apreciar en el diagrama la evolución del peso de las mujeres decrece a lo largo de los tres momentos, especialmente en las mujeres que han hecho ejercicio, aunque hay algunas excepciones.
+    :::
+
+a.  Realizar un contraste ANOVA para ver si hay diferencias estadísticamente significativas entre las medias del peso en los tres momentos teniendo en cuenta si se hace o no ejercicio.
+
+    ::: {.callout-note collapse="true"}
+    ## Ayuda
+    Para realizar un contraste ANOVA de medidas repetidas se puede utilizar tanto la función `aov`.
+    :::
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    Tenemos que realizar el contraste ANOVA mixto ya que el ejercicio es un factor independiente, pero el momento es un factor dependiente pues se ha repetido la medida del peso en las mismas mujeres.
+
+    ::: panel-tabset
+    ## `aov`
+
+    ```{r}
+    library(broom)
+    modelo <- aov(peso ~ momento * ejercicio + Error(id/ejercicio), data = df_largo) 
+    modelo  |>  
+        tidy() |> 
+        kable()
+    ```
+
+    ## `anova_test`
+
+    ```{r}
+    library(knitr)
+    library(rstatix)
+    anova <- anova_test(data = df_largo, dv = peso, wid = id, between = ejercicio, within = momento)
+    get_anova_table(anova) |>
+        kable()
+    ```
+
+    ## `lmer` (`lme4`)
+
+    ```{r}
+    library(lme4)
+    lmer(peso ~ momento * ejercicio + (1|id), data = df_largo) |> 
+    anova(data.frame(ames = NULL, check.rows = FALSE, check.names = TRUE, stringsAsFactors = default.stringsAsFactors())) |>
+        tidy() |> 
+        kable()
+    ```
+    :::
+
+    Como el p-valor del contraste es $0.0007 < 0.05$ podemos rechazar la hipótesis nula de igualdad de medias y concluimos que existen diferencias significativas entre los pesos medios de al menos dos momentos.
+    :::
+
+a.  Realizar un contraste de comparación de medias por pares para ver entre qué momentos existen diferencias estadísticamente significativas en el peso.
+
+    ::: {.callout-note collapse="true"}
+    ## Ayuda
+
+    Para realizar un contraste post-hoc de comparación de medias por pares podemos usar la función [`pairwise.t.test`](https://rdrr.io/r/stats/pairwise.t.test.html) del paquete `stats` que aplica la corrección de Bonferroni a los p-valores.
+    :::
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    pwc <- df_largo |> 
+        pairwise_t_test(peso~momento, paired = TRUE, p.adjust.method = "bonferroni")
+    pwc |> 
+        kable()
+    ```
+
+    Existe una diferencia muy significativa entre el peso medio de las mujeres al inicio y a la mitad de la dieta (p-valor < $0.01$), pero no entre el peso a la mitad y al final de la dieta (p-valor > 0.05).
+    :::
+
+::: -->
 
 ## Ejercicios propuestos
 
-:::{#exr-anova-un-factor-evau}
+::: {#exr-anova-un-factor-evau}
 La tabla siguiente contiene las notas medias en la prueba de acceso a la universidad (EVAU) de una muestra de alumnos de los cinco institutos de una ciudad.
 
 $$
@@ -353,4 +663,7 @@ $$
 
 a.  Dibujar el diagrama de cajas y puntos de las notas de cada centro con sus respectivas medias. ¿Se observan diferencias entre los centros en el diagrama?
 
+a.  Realizar un contraste ANOVA para ver si hay diferencias estadísticamente significativas entre las notas medias de los cinco centros.
+
+a.  Realizar un contraste _post-hoc_ de comparación de las medias de las notas de los cinco centros por pares. ¿Entre qué centros existen diferencias estadísticamente significativas en la nota media?
 :::

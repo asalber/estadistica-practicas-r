@@ -39,14 +39,14 @@ book:
   chapters:
     - index.qmd
     - 01-intro.qmd
-    - 02-preprocesamiento-datos.qmd
-    - 03-frecuencias-graficos.qmd
-    - 04-descriptiva.qmd
-    - 05-regresion.qmd
-    - 06-distribuciones-probabilidad.qmd
-    - 07-intervalos-confianza-una-poblacion.qmd
-    - 08-intervalos-confianza-comparacion-dos-poblaciones.qmd
-    - 09-contrastes-hipotesis-parametricos-una-y-dos-poblaciones.qmd
+    - 02-tipos-datos.qmd
+    - 03-preprocesamiento-datos.qmd
+    - 04-frecuencias-graficos.qmd
+    - 05-descriptiva.qmd
+    - 06-regresion.qmd
+    - 07-distribuciones-probabilidad.qmd
+    - 08-intervalos-confianza.qmd
+    - 09-contrastes-hipotesis-parametricos.qmd
     - 10-anova.qmd
     
 #bibliography: references.bib
@@ -60,27 +60,7 @@ format:
     html-math-method: mathjax
     code-overflow: wrap
     code-link: true
-  pdf:
-    documentclass: scrreport
-    papersize: a4
-    template-partials:
-      - before-body.tex
-    titlegraphic: img/logos/sticker-estadistica-r.png
-    institution: CEU San Pablo
-    email: asalber@ceu.es
-    web: https://aprendeconalf.es
-    logo: img/logos/aprendeconalf.png
-    include-in-header:
-      - preamble.tex
-      - macros.tex
-    keep-tex: true
-    #mainfont: TeX Gyre Termes
-    #mainfontoptions:
-    #  - Numbers=Lowercase
-    #  - Numbers=Proportional    
-    
-  epub:
-    cover-image: img/logos/sticker-estadistica-r.png
+ 
 
 
 

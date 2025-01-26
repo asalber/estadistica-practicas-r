@@ -10,3 +10,9 @@ forcats
 lubridate
 knitr
 broom
+carData
+car
+rstatix
+Matrix
+lme4
+ggpubr

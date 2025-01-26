@@ -1,5 +1,3 @@
-knitr
-broom
 tidyverse
 ggplot2
 tibble
@@ -10,9 +8,11 @@ dplyr
 stringr
 forcats
 lubridate
-rstatix
-ggpubr
-Matrix
-lme4
+knitr
+broom
 carData
 car
+rstatix
+Matrix
+lme4
+ggpubr

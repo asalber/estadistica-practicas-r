@@ -8,26 +8,20 @@ servicio de todas aquellas disciplinas que, como la Estadística, requieren mane
 Actualmente, prácticamente nadie se plantea hacer un estudio estadístico serio sin la ayuda de un buen programa de
 análisis de datos.
 
-\emph{R} es un potente lenguaje de programación que incluye multitud de funciones para la representación y el análisis de
+**R** es un potente lenguaje de programación que incluye multitud de funciones para la representación y el análisis de
 datos.
 Fue desarrollado por Robert Gentleman y Ross Ihaka en la Universidad de Auckland en Nueva Zelanda, aunque actualmente es mantenido por una enorme comunidad científica en todo el mundo.
 
-```{r rlogo, echo=F, out.width = '25%', fig.align = 'center', fig.cap = "Logotipo de R"}
-knitr::include_graphics(rep("img/logos/Rlogo.png"))
-```
+![Logotipo de R](img/logos/Rlogo.png){width=25%}
 
 Las ventajas de R frente a otros programas habituales de análisis de datos, como pueden ser SPSS, SAS o Matlab, son múltiples:
 
 - Es software libre y por tanto gratuito. Puede descargarse desde la web \url{http://www.r-project.org/}.
-- Es multiplataforma. Existen versiones para Windows, Macintosh, Linux y otras plataformas.
+- Es multiplataforma. Existen versiones para Windows, Mac, Linux y otras plataformas.
 - Está avalado y en constante desarrollo por una amplia comunidad científica distribuida por todo el mundo que lo utiliza como estándar para el análisis de datos.
-- Cuenta con multitud de paquetes para todo tipo de análisis estadísticos y representaciones gráficas, desde los más
-habituales, hasta los más novedosos y sofisticados que no incluyen otros programas. Los paquetes están organizados y
-documentados en un [repositorio CRAN](https://cran.r-project.org/) (Comprehensive R Archive Network) desde donde pueden descargarse libremente. 
-- Es programable, lo que permite que el usuario pueda crear fácilmente sus propias funciones o paquetes para
-análisis de datos específicos.
-Existen multitud de libros, manuales y tutoriales libres que permiten su aprendizaje e ilustran el análisis
-estadístico de datos en distintas disciplinas científicas como las Matemáticas, la Física, la Biología, la Psicología, la Medicina, etc.
+- Cuenta con multitud de paquetes para todo tipo de análisis estadísticos y representaciones gráficas, desde los más habituales, hasta los más novedosos y sofisticados que no incluyen otros programas. Los paquetes están organizados y documentados en un [repositorio CRAN](https://cran.r-project.org/) (Comprehensive R Archive Network) desde donde pueden descargarse libremente. 
+- Es programable, lo que permite que el usuario pueda crear fácilmente sus propias funciones o paquetes para análisis de datos específicos.
+- Existen multitud de libros, manuales y tutoriales libres que permiten su aprendizaje e ilustran el análisis estadístico de datos en distintas disciplinas científicas como las Matemáticas, la Física, la Biología, la Psicología, la Medicina, etc.
 
 ## Instalación de R
 
@@ -37,12 +31,53 @@ El intérprete de R se arranca desde la terminal, aunque en Windows incorpora su
 
 ## Entornos de desarrollo 
 
-Por defecto el entorno de trabajo de R es en línea de comandos, lo que significa que los cálculos y los análisis se realizan mediante comandos o instrucciones que el usuario teclea en una ventana de texto. No obstante, existen distintas
-interfaces gráficas de usuario que facilitan su uso, sobre todo para usuarios noveles. Algunas de ellas, como las que se enumeran a continuación, son completos entornos de desarrollo que facilitan la gestión de cualquier proyecto:
+Por defecto el entorno de trabajo de R es en línea de comandos, lo que significa que los cálculos y los análisis se realizan mediante comandos o instrucciones que el usuario teclea en una ventana de texto. No obstante, existen distintas interfaces gráficas de usuario que facilitan su uso, sobre todo para usuarios noveles. Algunas de ellas, como las que se enumeran a continuación, son completos entornos de desarrollo que facilitan la gestión de cualquier proyecto:
 
 - [RStudio](https://www.rstudio.com/). Probablemente el entorno de desarrollo más extendido para programar con R ya que incorpora multitud de utilidades para facilitar la programación con R.
+
+![Entorno de desarrollo RStudio](img/rstudio.png){width=800}
+
 - [RKWard](https://rkward.kde.org). Es otra otro de los entornos de desarrollo más completos que además incluye a posibilidad de añadir nuevos menús y cuadros de diálogo personalizados.
+
+![Entorno de desarrollo RKWard](img/rkward.png){width=800}
+
+- [Jupyter Lab](https://jupyter.org/). Es un entorno de desarrollo interactivo que permite la creación de documentos que contienen código, texto, gráficos. Aunque no es un entorno de desarrollo específico para R, incluye un kernel para R que permite ejecutar código R en los documentos.
+
+![Entorno de desarrollo Jupyter Lab](img/jupyter-lab.png){width=800}
 
 - [Visual Studio Code](https://code.visualstudio.com/). Es un entorno de desarrollo de propósito general ampliamente extendido. Aunque no es un entorno de desarrollo específico para R, incluye una extensión con utilidades que facilitan mucho el desarrollo con R.
 
+![Entorno de desarrollo Visual Studio Code](img/vscode-r.png){width=800}
 
+## Instalación de paquetes
+
+R es un lenguaje de programación modular, lo que significa que su funcionalidad se extiende mediante paquetes. Los paquetes son colecciones de funciones, datos y documentación sobre el uso de esas funciones o conjuntos de datos. 
+
+El repositorio de paquetes más importante es [CRAN](https://cran.r-project.org/) (Comprehensive R Archive Network), pero existen otros repositorios como [Bioconductor](https://www.bioconductor.org/) que contiene paquetes específicos para el análisis de datos biológicos.
+
+### Instalación de paquetes desde CRAN
+
+Para instalar un paquete en R basta con ejecutar la función `install.packages()` con el nombre del paquete que se desea instalar. Por ejemplo, para instalar el paquete `ggplot2` que es uno de los paquetes más utilizados para realizar gráficos en R, basta con ejecutar el siguiente comando:
+
+```r
+install.packages("ggplot2")
+```
+
+Los ubicación de los paquete instalados en R depende del sistema operativo, pero puede consultarse en la variable `.libPaths()`.
+
+### Instalación de paquetes desde Bioconductor
+
+Para instalar un paquete desde Bioconductor es necesario instalar primero el paquete `BiocManager` y después utilizar la función `BiocManager::install()` con el nombre del paquete que se desea instalar. Por ejemplo, para instalar el paquete `DESeq2` que es uno de los paquetes más utilizados para el análisis de datos de expresión génica, basta con ejecutar el siguiente comando:
+
+```r
+install.packages("BiocManager")
+BiocManager::install("DESeq2")
+```
+
+## Actualización de paquetes
+
+Cada cierto tiempo conviene actualizar los paquetes instalados en R para asegurarse de que se dispone de las últimas versiones de los mismos. Para ello se puede utilizar la función `update.packages()`. Por ejemplo, para actualizar todos los paquetes instalados en R sin necesidad de confirmación por parte del usuario, basta con ejecutar el siguiente comando:
+
+```r
+update.packages(ask = FALSE)
+```

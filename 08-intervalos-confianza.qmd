@@ -1,0 +1,729 @@
+---
+title: Intervalos de confianza
+knitr: 
+    opts_chunk: 
+      R.options:
+        warning: false
+lang: es
+---
+
+## Ejercicios Resueltos
+
+Para la realización de esta práctica se requieren los siguientes paquetes:
+
+```r
+library(tidyverse)
+# Incluye los siguientes paquetes:
+# - dplyr: para el preprocesamiento y manipulación de datos.
+# - ggplot2: para la representación gráfica.
+# - purrr: para aplicar funciones a vectores.
+library(broom) # para convertir las listas con los resúmenes de los modelos de regresión a formato organizado.
+library(tidymodels) # para realizar contrastes de hipótesis en formato tidy.
+library(samplingbook) # para el cálculo de tamaños muestrales.
+library(knitr) # para el formateo de tablas.
+```
+
+:::{#exr-intervalo-media-principio-activo}
+Se sabe que para que un fármaco sea efectivo, la concentración de su principio activo debe ser de al menos $16$ mg/mm$^3$. Una farmacia va a comprar un lote de este medicamento, pero antes quiere asegurarse de que los medicamentos del lote son efectivos y para ello analiza la concentración de principio activo en una muestra aleatoria de $10$ envases tomados del lote, obteniendo los siguientes resultados en mg/mm$^{3}$:
+
+$$
+17.6 \quad 19.2 \quad 21.3 \quad 15.1 \quad 17.6 \quad 18.9 \quad 16.2 \quad 18.3 \quad 19.0 \quad 16.4
+$$
+
+a.  Crear un conjunto de datos con los datos de la muestra.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    df <- data.frame(concentracion = c(17.6, 19.2, 21.3, 15.1, 17.6, 18.9, 16.2, 18.3, 19.0, 16.4 ))
+    ```
+    :::
+
+a.  Calcular la concentración media de principio activo de la muestra. ¿Puede afirmarse que los medicamentos del lote son efectivos?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    mean(df$concentracion)
+    ```
+
+    A pesar de la concentración media está por encima de $16$ mg/mm$^3$, se trata de una estimación puntual, y por tanto, no podemos garantizar que la media poblacional esté por encima de $16$ mg/mm$^3$. ¿Puede afirmarse con este nivel de confianza que los medicamentos del lote son efectivos?
+    :::
+
+a.  Calcular el intervalo de confianza para la media de la concentración del lote con nivel de confianza del $95\%$ (nivel de significación $\alpha =0.05$). ¿Puede afirmarse ahora que los medicamentos del lote son efectivos?
+
+    :::{.callout-note collapse="true"}
+    ## Ayuda
+    Para calcular el intervalo de confianza para la media de una población podemos utilizar la función [`t.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test) del paquete `stats`.
+
+    Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función `tidy` del paquete [`broom`](https://broom.tidymodels.org/index.html).
+
+    También podemos usar la función [`t_test`](https://infer.tidymodels.org/reference/t_test.html?q=t_test#null) de la colección de paquetes `tidymodels`, que ofrece ya la salida en formato `tidy`.
+    :::
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    :::{.panel-tabset}
+    ## `stats`
+
+    ```{r}
+    t1 <- t.test(df$concentracion)
+    t1$conf.int
+    ```
+
+    Para mostrar la salida en formato de tabla.
+
+    ```{r}
+    library(tidyverse)
+    library(broom)
+    library(knitr)
+    tidy(t1) |> 
+        select(estimate, conf.low, conf.high) |> 
+        kable()
+    ```
+
+    ## `tidymodels`
+
+    ```{r}
+    #| message : false
+    library(tidymodels)
+    df |> 
+        t_test(response = concentracion) |> 
+        select(estimate, lower_ci, upper_ci) |> 
+        kable()
+    ```
+    :::
+
+    Como el intervalo entero está por encima de $16$ mg/mm$^3$, podemos afirmar con una confianza del $95\%$ que la concentración media de principio activo del lote está por encima de $16$ mg/mm$^3$ y por tanto podemos concluir que los medicamentos del lote son efectivos.
+    :::
+
+a.  ¿Puede afirmarse que los medicamentos del lote son efectivos con un $99\%$ de confianza?
+
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    t2 <- t.test(df$concentracion, conf.level = 0.99)
+    t2$conf.int
+    ```
+
+    Como el intervalo entero sigue estando por encima de $16$ mg/mm$^3$, podemos afirmar con una confianza del $99\%$ que los medicamentos del lote son efectivos.
+    :::
+
+a.  Si definimos la precisión del intervalo como la inversa de su amplitud, ¿cómo afecta a la precisión del intervalo de confianza el tomar niveles de significación cada vez más altos? ¿Cuál puede ser la explicación?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    cat(paste0("Amplitud intervalo 95%: ", t1$conf.int[2] - t1$conf.int[1]))
+    cat(paste0("Amplitud intervalo 99%: ", t2$conf.int[2] - t2$conf.int[1]))
+    ```
+
+    Como se ve, al aumentar el nivel de confianza del intervalo, la precisión disminuye. Ello es debido a que para tener más confianza de capturar el verdadero valor de la media en el intervalo, debemos hacer mayor el intervalo.
+    :::
+
+a.  ¿Qué tamaño muestral sería necesario para obtener una estimación del contenido medio de principio activo con un margen de error de $\pm 0.5$ mg/mm$^3$ y una confianza del 95%?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    El tamaño muestral necesario para construir un intervalo de confianza para la media depende del nivel de confianza deseado ($0.95$ en este caso), del error o semiamplitud del intervalo deseado ($0.5$ en este caso) y de la desviación típica poblacional, que no se conoce, pero se puede estimar mediante la cuasidesviación típica muestral.
+
+    ```{r}
+    library(samplingbook)
+    sample.size.mean(e = 0.5, S = sd(df$concentracion), level = 0.95)
+    ```
+    :::
+:::
+
+:::{#exr-intervalo-media-grasa-leche}
+Una central de productos lácteos recibe diariamente la leche de dos granjas $X$ e $Y$. Para analizar la calidad de la leche, durante una temporada, se controla el porcentaje de materia grasa de la leche que proviene de ambas granjas, con los siguientes resultados:
+
+$$
+\begin{array}{c|c}
+X & Y \\
+\hline
+\begin{array}[t]{rr}
+3.4 & 3.4 \\
+3.2 & 3.5 \\
+3.3 & 3.3 \\
+3.2 & 3.2 \\
+3.3 & 3.0 \\
+3.1 & 3.2 \\
+\end{array}
+&
+\begin{array}[t]{rr}
+2.8 & 2.9 \\
+3.0 & 3.2 \\
+3.2 & 3.1 \\
+2.9 & 2.9 \\
+3.1 & 3.2 \\
+2.9 & 3.1 \\
+3.3 & 3.2 \\
+3.2 & 3.3 \\
+\end{array}
+\end{array}
+$$
+
+
+a.  Crear un conjunto de datos con los datos de la muestra.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    #| message: false
+    library(tidyverse)
+    df <- tibble(
+        grasa = c(3.4, 3.2, 3.3, 3.2, 3.3, 3.1, 3.4, 3.5, 3.3, 3.2, 3.0, 3.2, 2.8, 3.0, 3.2, 2.9, 3.1, 2.9, 3.3, 3.2, 2.9, 3.2, 3.1, 2.9, 3.2, 3.1, 3.2, 3.3),
+        granja = factor(c(rep("X", 12), rep("Y", 16)))
+    )
+    ```
+    :::
+
+a.  Calcular el contenido medio de materia grasa de la muestra de leche cada granja y los respectivos intervalos de confianza con un $95\%$ de confianza. Dibujar los intervalos de confianza obtenidos.
+
+    :::{.callout-note collapse="true"}
+    ## Ayuda
+    Para calcular el intervalo de confianza para la media de una población podemos utilizar la función [`t.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/t.test) del paquete `stats`. 
+
+    También podemos usar la función `t_test` de la colección de paquetes `tidymodels`, que ofrece ya la salida en formato `tidy`.
+
+    Otra opción es utilizar la función [`mean_ci`](https://www.rdocumentation.org/packages/qwraps2/versions/0.5.2/topics/mean_ci) del paquete `qwraps2`.
+    :::
+    
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    :::{.panel-tabset}
+    ## `stats`
+
+    ```{r}
+    library(knitr)
+    df |> 
+        group_by(granja) |>
+        summarise("Media" = mean(grasa, na.rm = T), 
+        "IC 95% Inf" = t.test(grasa)$conf.int[1], 
+        "IC 95% Sup" = t.test(grasa)$conf.int[2]) |> 
+        kable()
+    ```
+
+    Otra opción es anidando los data frames de cada granja y aplicar el test t para cada grupo.
+
+    ```{r}
+    tabla_ic <- df |> 
+        nest(data = -granja) |> 
+        mutate(test = map(data, ~ tidy(t.test(.x$grasa)))) |> 
+        unnest(test) |> 
+        select(granja, estimate, conf.low, conf.high) 
+        
+    tabla_ic |> 
+        kable()
+    ```
+
+    ## `tidymodels`
+
+    ```{r}
+    library(tidymodels)
+    df |> 
+        nest(data = -granja) |> 
+        mutate(test = map(data, ~ t_test(x = .x, response = grasa))) |> 
+        unnest(test) |> 
+        select(granja, estimate, lower_ci, upper_ci) |> 
+        kable()
+    ```
+    :::
+
+    Ahora dibujamos los intervalos de confianza.
+
+    ```{r}
+    tabla_ic  |> 
+        ggplot(aes(x = granja, y = estimate, color = granja)) +
+        geom_point(size = 3) +
+        geom_errorbar(aes(ymin = conf.low, ymax = conf.high), width = 0.2) +
+        labs(title = "Intervalos de confianza del 95% para la media", x = "Granja", y = "Porcentaje de grasa")
+    ```
+    :::
+
+
+a.  A la vista de los intervalos de confianza obtenidos ¿Existen diferencias estadísticamente significativas entre los contenidos medios de grasa de la leche de las dos granjas? En tal caso, ¿qué granja produce leche con más grasa?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    Como los intervalos no se solapan, es decir, no tienen valores en común, podemos concluir que los contenidos medios de grasa de las leches de las dos granjas son significativamente diferentes con un $95\%$ de confianza. Además se aprecia que el intervalo de la granja $X$ tiene valores mayores que el de la granja $Y$, por lo que la leche de la granja $X$ tiene más contenido de grasa que la de la granja $Y$.
+    :::
+
+a.  Repetir los cálculos anteriores tomando una confianza del $99\%$. ¿Existen diferencias estadísticamente significativas entre el contenido medio de grasa de las leches de las dos granjas con este nivel de confianza?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    :::{.panel-tabset}
+    ## `stats`
+
+    ```{r}
+    tabla_ic_99 <- df |> 
+        nest(data = -granja) |> 
+        mutate(test = map(data, ~ tidy(t.test(.x$grasa, conf.level = 0.99)))) |> 
+        unnest(test) |> 
+        select(granja, estimate, conf.low, conf.high) 
+        
+    tabla_ic_99 |> 
+        kable()
+    ```
+
+    ## `tidymodels`
+
+    ```{r}
+    library(tidymodels)
+    df |> 
+        nest(data = -granja) |> 
+        mutate(test = map(data, ~ t_test(x = .x, response = grasa, conf_level = 0.99))) |> 
+        unnest(test) |> 
+        select(granja, estimate, lower_ci, upper_ci) |> 
+        kable()
+    ```
+    :::
+
+    Ahora dibujamos los intervalos de confianza.
+
+    ```{r}
+    tabla_ic_99  |> 
+        ggplot(aes(x = granja, y = estimate, color = granja)) +
+        geom_point(size = 3) +
+        geom_errorbar(aes(ymin = conf.low, ymax = conf.high), width = 0.2) +
+        labs(title = "Intervalos de confianza del 99% para la media", x = "Granja", y = "Porcentaje de grasa")
+    ```
+
+    Como se ve, ahora los dos intervalos se solapan y por tanto las medias del contenido de grasa de las leches de las dos granjas podrían ser iguales. Por tanto, no existen diferencias estadísticamente significativas entre el contenido medio de grasa de las leches de las dos granjas con un $99º%$ de confianza.
+    :::
+:::
+
+:::{#exr-uso-biblioteca}
+El conjunto de datos [`biblioteca.csv`](https://aprendeconalf.es/estadistica-practicas-r/datos/biblioteca.csv) contiene los resultados de una encuesta realizada en una universidad, sobre si el alumnado utiliza habitualmente (al menos una vez a la semana) la biblioteca.
+
+a.  Crear conjunto de datos con los datos de la muestra a partir del fichero [`biblioteca.csv`](https://aprendeconalf.es/estadistica-practicas-r/datos/biblioteca.csv).
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    #| message: false
+    library(tidyverse)
+    df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/biblioteca.csv")
+    ```
+    :::
+
+a.  Calcular el intervalo de confianza con $\alpha=0.01$ para la proporción del alumnado que utiliza habitualmente la biblioteca. ¿Cómo es la precisión del intervalo?
+
+    :::{.callout-note collapse="true"}
+    ## Ayuda
+    Para calcular el intervalo de confianza para la proporción de una población podemos utilizar la función [`prop.test`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/prop.test) del paquete `stats`.
+
+    Si queremos mostrar la salida del test en formato de tabla podemos utilizar la función `tidy` del paquete [`broom`](https://broom.tidymodels.org/index.html).
+
+    También podemos usar la función [`prop_test`](https://infer.tidymodels.org/reference/prop_test.html) de la colección de paquetes `tidymodels`, que ofrece ya la salida en formato `tidy`.
+    :::
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    
+    :::{.panel-tabset}
+    ## `stats`
+
+    ```{r}
+    #| message: false
+    library(broom)
+    library(knitr)
+    frec <- table(df$respuesta)
+    tidy(prop.test(frec["si"], nrow(df), conf.level = 0.99)) |> 
+    select(estimate, conf.low, conf.high) |> 
+    kable()
+    ```
+
+    ## `tidymodels`
+
+    ```{r}
+    #| message: false
+    library(tidymodels)
+    library(knitr)
+    df  |> 
+        prop_test(response = respuesta, conf_level = 0.99) |> 
+        mutate(estimate = nrow(df[df$respuesta == "si", ]) / nrow(df)) |> 
+        select(estimate, lower_ci, upper_ci) |> 
+        kable()
+    ```
+    :::
+
+    Se trata de un intervalo poco preciso, ya que su amplitud es bastante grande.
+    :::
+
+a.  ¿Qué tamaño muestral sería necesario para obtener una estimación de la proporción de alumnos que utilizan regularmente la biblioteca con un margen de error de un $1\%$ y una confianza del $95\%$? 
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    El tamaño muestral necesario para construir un intervalo de confianza para la media depende del nivel de confianza deseado ($0.95$ en este caso), del error o semiamplitud del intervalo deseado ($0.01$ en este caso) y de proporción poblacional, que no se conoce, pero se puede estimar mediante la proporción muestral.
+
+    ```{r}
+    library(samplingbook)
+    sample.size.prop(e = 0.01, P = frec["si"]/nrow(df), level = 0.95)
+    ```
+    :::
+
+a.  Calcular los intervalo de confianza para las proporciones de chicas y chicos que utilizan regularmente la biblioteca. ¿Existe una diferencia estadísticamente significativa entre la proporción de chicas y chicos que utilizan regularmente la biblioteca? En tal caso, ¿quiénes utilizan más la biblioteca?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    :::{.panel-tabset}
+    ## `stats`
+    
+    ```{r}
+    df |> 
+        group_by(sexo) |> 
+        count(respuesta) |> 
+        mutate(test = map(n, \(x) tidy(prop.test(x, sum(n))))) |>     
+        unnest(test) |>
+        filter(respuesta == "si") |> 
+        select(sexo, respuesta, n, estimate, conf.low, conf.high) |>  
+        kable() 
+    ```
+
+    ## `tidymodels`
+
+    ```{r}
+    df |> 
+        nest(data = -sexo) |>  
+        mutate(test = map(data, ~ prop_test(x = .x, response = respuesta, success = "si"))) |>  
+        mutate(estimate = map(data, ~ nrow(.x[.x$respuesta == "si", ]) / nrow(.x))) |>    
+        unnest(c(test, estimate)) |>
+        select(sexo, estimate, lower_ci, upper_ci) |>  
+        kable() 
+    ```
+    :::
+
+    Como los intervalos de confianza para las proporciones de chicos y chicas que utilizan regularmente la biblioteca no se solapan, es decir, no tienen valores en común, podemos concluir que existe una diferencia estadísticamente significativa entre ambas proporciones con un $95\%$ de confianza. Como además el intervalo de confianza para la proporción de chicas está claramente por encima del de chicos, se concluye que hay más chicas utilizan regularmente la biblioteca.
+    :::
+:::
+
+:::{#exr-intencion-voto}
+En un sondeo preelectoral se ha tomado una muestra de $500$ personas y se ha observado que $220$ votarían al partido $A$ y $180$ votarían al partido $B$.
+
+a.  Calcular el intervalo de confianza para el porcentaje de voto al partido $A$.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    #| message: false
+    library(broom)
+    library(knitr)
+    tidy(prop.test(220, 500)) |> 
+    select(estimate, conf.low, conf.high) |> 
+    mutate(across(everything(), ~ .x * 100)) |> 
+    kable()
+    ```
+    :::
+
+a.  Calcular el intervalo de confianza para el porcentaje de voto al partido $B$.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    tidy(prop.test(180, 500)) |> 
+    select(estimate, conf.low, conf.high) |> 
+    mutate(across(everything(), ~ .x * 100)) |> 
+    kable()
+    ```
+    :::
+
+a.  A la vista de los intervalos de confianza, ¿se puede asegurar con un $95\%$ de confianza qué partido ganará las elecciones?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    Como ambos intervalos se solapan, no existe una diferencia estadísticamente significativa entre los porcentajes de votos a ambos partidos, y por tanto, no se puede asegurar con un $95\%$ de confianza qué partido ganará las elecciones.
+    :::
+:::
+
+:::{#exr-intervalo-diferencia-medias-datos-pareados-campaña-publicidad}
+Para ver si una campaña de publicidad sobre un fármaco ha influido en sus ventas, se tomó una muestra de 8 farmacias y se midió el número de unidades de dicho fármaco vendidas durante un mes, antes y después de la campaña, obteniéndose los siguientes resultados: 
+
+$$
+\begin{array}{|c|c|c|c|c|c|c|c|c|}
+\hline 
+\mbox{Antes} & 147 & 163 & 121 & 205 & 132 & 190 & 176 & 147 \\
+\hline 
+\mbox{Después} & 150 & 171 & 132 & 208 & 141 & 184 & 182 & 145\\ 
+\hline
+\end{array}
+$$
+
+a.  Crear un conjunto de datos con los datos de la muestra.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    df <- data.frame(
+        antes = c(147, 163, 121, 205, 132, 190, 176, 147),
+        despues = c(150, 171, 132, 208, 141, 184, 182, 145))
+    ```
+    :::
+
+a.  Calcular las ventas medias antes y después de la campaña de publicidad. ¿Ha aumentado la campaña las ventas medias?, ¿crees que los resultados son estadísticamente significativos? 
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    library(kableExtra)
+    library(tidyverse)
+    df |> 
+        # Calculamos la media de las columnas antes y despues del data frame.
+        summarize(across(antes:despues, ~ mean(.x, na.rm = TRUE))) |> 
+        # Renombramos los nombres de las columnas del data frame resultante.
+        rename(`Ventas medias antes` = antes, `Ventas medias despues` = despues) |> 
+        # Mostramos por pantalla en formato tabla.
+        kbl()
+    ```
+
+    A pesar de que las ventas medias después de la campaña de publicidad han aumentado en la muestra, no podemos concluir que las medias poblacionales han aumentado significativamente ya que se trata de estimaciones puntuales que no tienen en cuenta el error en la estimación.
+    :::
+
+a.  Calcular el intervalo de confianza para la media de la diferencia entre las ventas de después y antes de la campaña de publicidad. ¿Existen pruebas suficientes para afirmar con un $95\%$ de confianza que la campaña de publicidad ha aumentado las ventas?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    library(broom)
+    # Añadimos al data frame una nueva variable con la diferencia entre las ventas de después y antes
+    df$incremento <- df$despues - df$antes
+    # Aplicamos el test de la t de student para una muestra.
+    tidy(t.test(df$incremento)) |> 
+        # Obtenemos la estimación de la media de la diferencia entre las ventas de después y antes y el intervalo de confianza del 95%.
+        select(estimate, conf.low, conf.high) |> 
+        # Mostramos por pantalla en formato tabla.
+        kable()
+    ```
+
+    Podemos llegar a este mismo intervalo de confianza sin necesitad de calcular previamente la diferencia entre las ventas de después y antes, pasándole directamente las dos variables a comparar a la función `t.test` añadiendo el parámetro `paired = TRUE`.
+
+    ```{r}
+    # Aplicamos el test de la t de student para muestras pareadas.
+    tidy(t.test(df$despues, df$antes, paired = TRUE)) |> 
+        # Obtenemos la estimación de la media de la diferencia entre las ventas de después y antes y el intervalo de confianza del 95%.
+        select(estimate, conf.low, conf.high) |> 
+        kable()
+    ```
+
+    Como el intervalo contiene tanto valores negativos como positivos, y en particular contiene el 0, no podemos concluir que existen diferencias significativas entre las ventas medias de después y antes, y por tanto no hay pruebas suficientes para afirmar con un $95\%$ de confianza que la campaña de publicidad es efectiva.
+    :::
+
+a.  Si añadimos a la muestra dos nuevas farmacia con unas ventas antes de $155$ y $160$ unidades y unas ventas después de $170$ y $180$ unidades respectivamente, ¿qué efecto tendrán sobre el intervalo de confianza para la media de la diferencia entre las ventas de después y antes de la campaña de publicidad? ¿Podemos afirmar ahora con un $95\%$ de confianza que la campaña de publicidad ha aumentado las ventas? En tal caso, ¿en cuanto se incrementarán las ventas medias?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    Como las ventas se han incrementado bastante en estas dos nuevas farmacias, la media de la diferencia entre las ventas de después y antes de la campaña de publicidad y el correspondiente intervalo de confianza se desplazará hacia la derecha, es decir, aumentará.
+
+    ```{r}
+    # Añadimos al data frame los datos de la nueva farmacia.
+    df <- rbind(df, c(155, 170, 170-155), c(160, 180, 180 - 160))
+    # Volvemos a calcular el intervalo de confianza para la media de la diferencia entre las ventas de después y antes.
+    tidy(t.test(df$incremento)) |> 
+        select(estimate, conf.low, conf.high) |> 
+        kable()
+    ```
+
+    Como ahora el intervalo es completamente positivo, podemos afirmar con un $95\%$ de confianza que la media de la diferencia entre las ventas de después y antes de la campaña de publicidad es positiva, es decir ha habido un incremento estadísticamente significativo de las ventas después de la campaña y el incremento medio estará entre $1.1789$ y $12.2211$ unidades más al mes.
+    :::
+
+:::
+
+:::{#exr-intervalo-diferencia-medias-leche}
+Una central de productos lácteos recibe diariamente la leche de dos granjas $X$ e $Y$. Para analizar la calidad de la leche, durante una temporada, se controla el porcentaje de materia grasa de la leche que proviene de ambas granjas, con los siguientes resultados:
+
+$$
+\begin{array}{c|c}
+X & Y \\
+\hline
+\begin{array}[t]{rr}
+3.4 & 3.4 \\
+3.2 & 3.5 \\
+3.3 & 3.3 \\
+3.2 & 3.2 \\
+3.3 & 3.0 \\
+3.1 & 3.2 \\
+\end{array}
+&
+\begin{array}[t]{rr}
+2.8 & 2.9 \\
+3.0 & 3.2 \\
+3.2 & 3.1 \\
+2.9 & 2.9 \\
+3.1 & 3.2 \\
+2.9 & 3.1 \\
+3.3 & 3.2 \\
+3.2 & 3.3 \\
+\end{array}
+\end{array}
+$$
+
+
+a.  Crear un conjunto de datos con los datos de la muestra.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    #| message: false
+    library(tidyverse)
+    df <- tibble(
+        grasa = c(3.4, 3.2, 3.3, 3.2, 3.3, 3.1, 3.4, 3.5, 3.3, 3.2, 3.0, 3.2, 2.8, 3.0, 3.2, 2.9, 3.1, 2.9, 3.3, 3.2, 2.9, 3.2, 3.1, 2.9, 3.2, 3.1, 3.2, 3.3),
+        granja = factor(c(rep("X", 12), rep("Y", 16)))
+    )
+    ```
+    :::
+
+a.  Calcular el intervalo de confianza para el cociente de varianzas del porcentaje de materia grasa de la leche procedente de ambas granjas. ¿Existen diferencias estadísticamente significativas entre las varianzas de la grasa de las leches de las dos granjas?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    #| message: false
+    library(broom)
+    library(knitr)
+    # Aplicamos el test F de Fisher para la comparación de varianzas.
+    tidy(var.test(grasa ~ granja, data = df)) |> 
+    # Obtenemos la estimación del cociente de varianzas de la grasa de la leche de las granjas y el intervalo de confianza del 95%.
+        select(estimate, conf.low, conf.high) |> 
+        # Mostramos por pantalla en formato tabla.
+        kable()
+    ```
+
+    Como el intervalo de confianza contiene el valor $1$, no podemos afirmar que haya diferencias estadísticamente significativas entre las varianzas del porcentaje de materia grasa de las leches de las dos granjas, y por tanto podemos asumir que la variabilidad es parecida en ambas granjas.
+    :::
+
+a.  Calcular el intervalo de confianza para la diferencia en el porcentaje medio de materia grasa de la leche procedente de las dos granjas. ¿Se puede concluir que existen diferencias significativas en el porcentaje medio de grasa de la leche de las dos granjas? En tal caso, ¿qué leche tiene mayor porcentaje de grasa?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    # Aplicamos el test de la t de student para muestras independientes con varianzas iguales.
+    tidy(t.test(grasa ~ granja, equal.var = TRUE, data = df)) |> 
+    # Obtenemos la estimación de la diferencia de las medias de la grasa de la leche de las granjas y el intervalo de confianza del 95%.
+        select(estimate, conf.low, conf.high) |> 
+        # Mostramos por pantalla en formato tabla.
+        kable()
+    ```
+
+    :::{.callout-warning}
+    La función `t.test` calcula el intervalo de confianza para la diferencia de medias de primer nivel (en este caso $X$) y el segundo nivel (en este caso $Y$) del factor `granja`. Si se desea obtener el intervalo para diferencia de medias entre $Y$ y $X$ es necesario reordenar los niveles del factor.
+    :::
+
+    Como el intervalo de confianza es completamente positivo, y por tanto no contiene el $0$, podemos afirmar con un $95\%$ de confianza que existen diferencias estadísticamente entre el porcentaje de grasa de ambas granjas. Como además el intervalo es para la diferencia entre las medias del porcentaje de leche de la granja $X$ y de la granja $Y$, podemos concluir que el porcentaje medio de grasa de la leche de la granja $X$ es significativamente mayor que el de la granja $Y$.
+    :::
+:::
+
+:::{#exr-intervalo-comparacion-proporciones-uso-biblioteca}
+El conjunto de datos [`biblioteca.csv`](https://aprendeconalf.es/estadistica-practicas-r/datos/biblioteca.csv) contiene los resultados de una encuesta realizada en una universidad, sobre si el alumnado utiliza habitualmente (al menos una vez a la semana) la biblioteca.
+
+a.  Crear conjunto de datos con los datos de la muestra a partir del fichero [`biblioteca.csv`](https://aprendeconalf.es/estadistica-practicas-r/datos/biblioteca.csv).
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    #| message: false
+    library(tidyverse)
+    df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/biblioteca.csv")
+    ```
+    :::
+
+a.  Calcular el intervalo de confianza para la diferencia entre las proporciones de chicos y chicas que utilizan habitualmente la biblioteca. ¿Existen diferencias significativas entre las proporciones de chicos y chicas que usan habitualmente la biblioteca? En tal caso, ¿quienes utilizan más la biblioteca?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    # Calculamos las frecuencias absolutas y los tamaños muestrales de las muestras de ambos sexos.
+    df2 <- df |> 
+        group_by(sexo) |> 
+        count(respuesta, name = "frec") |> 
+        mutate(n = sum(frec)) |> 
+        filter(respuesta == "si")
+            
+    # Aplicamos el test de comparación de proporciones.
+    tidy(prop.test(df2$frec, df2$n)) |> 
+    # Obtenemos la estimación de la diferencia de las proporciones de chicos y chicas que utilizan habitualmente la biblioteca y el intervalo de confianza del 95%.
+        select(estimate1, estimate2, conf.low, conf.high) |> 
+        # Mostramos por pantalla en formato tabla.
+        kable()
+    ```
+
+    :::{.callout-warning}
+    La función `prop.test` calcula el intervalo de confianza para la diferencia de proporciones de la primera muestra (en este caso chicos) la segunda (en este caso chicas). Si se desea obtener el intervalo para diferencia de proporciones entre chicas y chicos es necesario introducir primero las frecuencias de las chicas.
+    :::
+
+    Como el intervalo de confianza es completamente negativo, y por tanto no contiene el $0$, podemos afirmar con un $95\%$ de confianza que existen diferencias estadísticamente significativas entre la proporción de chicos y chicas que utilizan habitualmente la biblioteca. Como además el intervalo de confianza es para la diferencia entre la proporción de chicos y chicas, se puede concluir que la proporción de chicas que usan habitualmente la biblioteca es significativamente mayor que la de chicos.
+    :::
+:::
+
+:::{#exr-intervalo-comparacion-proporciones-aprobados}
+Un profesor universitario ha tenido dos grupos de clase a lo largo del año: uno con horario de mañana y otro de tarde. En el de mañana, sobre un total de 80 alumnos, han aprobado 55; y en el de tarde, sobre un total de 90 alumnos, han aprobado 32. 
+
+a.  ¿Existen diferencias significativas en el porcentaje de aprobados de los dos grupos? En tal caso, ¿en qué turno hay un porcentaje mayor de aprobados y cuánto mayor es?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}  
+    # Aplicamos el test de comparación de proporciones.
+    tidy(prop.test(c(55, 32), c(80, 90))) |> 
+    # Obtenemos la estimación de la diferencia de las proporciones de chicos y chicas que utilizan habitualmente la biblioteca y el intervalo de confianza del 95%.
+        select(estimate1, estimate2, conf.low, conf.high) |> 
+        # Multiplicamos por 100 todas las columnas para obtener porcentajes.
+        mutate(across(everything(), ~ .x * 100)) |> 
+        # Mostramos por pantalla en formato tabla.
+        kable()
+    ```
+
+    Como el intervalo de confianza es completamente positivo, y por tanto no contiene el $0$, podemos afirmar con un $95\%$ de confianza que existen diferencias estadísticamente significativas entre el porcentaje de aprobados en los turnos de mañana y tarde. Como además el intervalo de confianza es para la diferencia entre el porcentaje de aprobados en la mañana y el porcentaje de aprobados en la tarde, se puede concluir que la proporción de aprobados en la mañana es significativamente mayor que en la tarde, en particular, entre un $17.83\%$ y un $48.55\%$ mayor.
+    :::
+
+a.  ¿Puede concluirse que las diferencias son debidas al turno horario?
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    No puede concluirse que la diferencia entre el porcentaje de aprobados de la mañana y la tarde sea debido al factor horario, ya que las diferencias podrían deberse a otros factores como el tipo de alumnos, el profesor, la metodología, el examen, etc. Para poder concluir que la causa de la diferencia en el porcentaje de aprobados es el turno horario, el resto de factores deberían ser iguales en la mañana y la tarde.
+    :::
+:::
+
+## Ejercicios propuestos
+
+:::{#exr-intervalos-confianza-1-poblacion-neonatos}
+El conjunto de datos [`neonatos`](https://aprendeconalf.es/estadistica-practicas-r/datos/neonatos.csv) contiene información sobre una muestra de 320 recién nacidos en un hospital durante un año que cumplieron el tiempo normal de gestación. 
+
+a.  Calcular el intervalo de confianza del $99\%$ para el peso medio de los recién nacidos. ¿Entre qué valores estará el
+peso medio?
+
+a.  Calcular el intervalo de confianza para la puntuación media del Apgar al minuto de nacer y compararlo con el de la
+puntuación Apgar a los 5 minutos. ¿Existe una diferencia estadísticamente significativa entre las medias de las dos puntuaciones?
+
+a.  Calcular el intervalo de confianza para el porcentaje de niños con peso menor o igual que $2.5$ Kg en el grupo de
+las madres que han fumado durante el embarazo y en el de las que no. ¿Podemos afirmar con un $95\%$ de confianza que el que la madre fume influye significativamente en el peso de los recién nacidos?
+:::
+
+:::{#exr-intervalos-confianza-1-poblacion-piezas-defectuosas}
+En una fábrica de componentes electrónicos, hay dos máquinas que producen un mismo tipo de chips. Se ha tomado una muestra de chips de cada máquina y se ha observado que en la primera máquina hubo 12 chips defectuosos de un total de 200, mientras que en la segunda máquina hubo un total de 10 chips defectuosos de un total de 300. ¿Se puede afirmar con un $90\%$ de confianza que la segunda máquina produce menos chips defectuosos que la primera?
+:::
+

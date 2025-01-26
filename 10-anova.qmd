@@ -5,14 +5,13 @@ knitr:
       R.options:
         warning: false
 lang: es
-bibliography: references.bib
 ---
 
 ## Ejercicios Resueltos
 
 Para la realización de esta práctica se requieren los siguientes paquetes:
 
-``` r
+```r
 library(tidyverse)
 # Incluye los siguientes paquetes:
 # - dplyr: para el preprocesamiento y manipulación de datos.
@@ -92,6 +91,8 @@ a.  Realizar un contraste ANOVA para ver si hay diferencias estadísticamente si
     #### Normalidad
 
     ```{r}
+    library(knitr)
+    library(broom)
     shapiro.test(df$nitrogeno) |> 
         tidy() |> 
         kable()

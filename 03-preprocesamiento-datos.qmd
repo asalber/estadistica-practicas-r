@@ -1,0 +1,755 @@
+---
+title: Preprocesamiento de datos
+lang: es
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+```{r paquetes, echo = F}
+library(knitr)
+library(kableExtra)
+```
+
+Esta práctica contiene ejercicios que muestran como preprocesar un conjunto de datos en R. El preprocesamiento de datos es una tarea fundamental en el análisis de datos que consiste en la limpieza, transformación y preparación de los datos para su análisis. El preprocesamiento de datos incluye tareas como 
+
+- Limpieza de datos.
+- Imputación de valores perdidos.
+- Recodificación de variables.
+- Creación de nuevas variables.
+- Transformación de variables.
+- Selección de variables.
+- Fusión de datos.
+- Reestructuración del conjunto de datos.
+
+## Ejercicios Resueltos
+
+Para la realización de esta práctica se requieren los siguientes paquetes.
+
+```{r}
+library(tidyverse) 
+# Incluye los siguientes paquetes:
+# - readr: para la lectura de ficheros csv. 
+# - dplyr: para el preprocesamiento y manipulación de datos.
+```
+
+:::{#exr-preprocesamiento-1}
+La siguiente tabla contiene los ingresos y gastos de una empresa durante el primer trimestre del año.
+
+```{r, echo = F}
+df1 <- data.frame(
+    Mes = c("Enero", "Febrero", "Marzo", "Abril"),
+    Ingresos = c(45000, 41500, 51200, 49700),
+    Gastos = c(33400, 35400, 35600, 36300), 
+    Impuestos = c(6450, 6300, 7100, 6850)
+    )
+df1 |>
+    kable()
+```
+
+a.  Crear un data frame con los datos de la tabla.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    ```{r}
+    df <- data.frame(
+        Mes = c("Enero", "Febrero", "Marzo", "Abril"),
+        Ingresos = c(45000, 41500, 51200, 49700),
+        Gastos = c(33400, 35400, 35600, 36300),
+        Impuestos = c(6450, 6300, 7100, 6850)
+        )
+    df 
+    ```
+    :::
+
+a.  Crear una nueva columna con los beneficios de cada mes (ingresos - gastos - impuestos).
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con las funciones del paquete `base` de R.
+
+    ```{r}
+    df$Beneficios <- df$Ingresos - df$Gastos - df$Impuestos
+    df
+    ```
+
+    ## Tidyverse
+    Con la función [`mutate`](https://dplyr.tidyverse.org/reference/mutate.html) del paquete `dplyr` de `tidyverse`. La función `mutate` permite añadir nuevas columnas a un data frame mediante una fórmula puede hacer referencia a las columnas existentes.
+
+    ```{r}
+    df <- df |>
+        mutate(Beneficios = Ingresos - Gastos - Impuestos)
+    df
+    ```
+    :::
+    :::
+
+a.  Crear una nueva columna con el factor `Balance` con dos posibles categorías: `positivo` si ha habido beneficios y `negativo` si ha habido pérdidas.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con la función `cut` del paquete `base` de R. La función `cut(vector, breaks, labels)` divide el vector `vector` en intervalos delimitados por los elementos del vector `breaks` y crea un factor asignando a cada intervalo una etiqueta del vector `labels`.
+
+    ```{r}
+    df$Balance <- cut(df$Beneficios, breaks = c(-Inf, 0, Inf), labels = c("negativo", "positivo"))
+    df
+    ```
+    
+    ## Tidyverse
+    Con la función `mutate` del paquete `dplyr` de `tidyverse`.
+
+    ```{r}
+    df <- df |>
+        mutate(Balance = cut(Beneficios, breaks = c(-Inf, 0, Inf), labels = c("negativo", "positivo")))
+    df
+    ```
+    :::
+    :::
+
+a.  Filtrar el conjunto de datos para quedarse con los nombres de los meses y los beneficios de los meses con balance positivo. 
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con las funciones del paquete `base` de R.
+
+    ```{r}
+    df[df$Balance == "positivo", c("Mes", "Beneficios")]
+    ```
+    
+    ## Tidyverse
+    Con las funciones [`filter`](https://dplyr.tidyverse.org/reference/filter.html) y [`select`](https://dplyr.tidyverse.org/reference/select.html) del paquete `dplyr` de `tidyverse`. La función `filter` permite seleccionar las filas de un data frame que cumplen una condición. La función `select` permite seleccionar las columnas de un data frame.
+
+    ```{r}
+    df |>
+        filter(Balance == "positivo") |> 
+        select(Mes, Beneficios)
+    ```
+    :::
+    :::
+:::
+
+:::{#exr-preprocesamiento-2}
+El fichero [`colesterol.csv`](datos/colesterol.csv) contiene información de una muestra de pacientes donde se han medido la edad, el sexo, el peso, la altura y el nivel de colesterol, además de su nombre.
+
+a.  Crear un data frame con los datos de todos los pacientes del estudio a partir del fichero [`colesterol.csv`](datos/colesterol.csv).
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con las funciones del paquete `base` de R.
+
+    ```{r}
+    df <- read.csv("https://aprendeconalf.es/estadistica-practicas-r/datos/colesterol.csv")
+    head(df)
+    ```
+    
+    ## Tidyverse
+    Con la función [`read_csv`](https://readr.tidyverse.org/reference/read_delim.html) del paquete del paquete [`readr`](https://readr.tidyverse.org/index.html) de `tidyverse`.
+
+    ```{r}
+    df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/colesterol.csv")
+    head(df)
+    ```
+    :::
+    :::
+
+a.  Crear una nueva columna con el índice de masa corporal, usando la siguiente fórmula 
+
+    $$
+    \mbox{IMC} = \frac{\mbox{Peso (kg)}}{\mbox{Altura (cm)}^2}
+    $$
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con las funciones del paquete `base` de R.
+
+    ```{r}
+    df$imc <- round(df$peso/df$altura^2)
+    head(df)
+    ```
+
+    ## Tidyverse
+    Con la función `mutate` del paquete `dplyr` de `tidyverse`.    
+
+    ```{r}
+    df <- df |> mutate(imc = round(peso/altura^2))
+    head(df)
+    ```
+    :::
+    :::
+
+a.  Crear una nueva columna con la variable `obesidad` recodificando la columna `imc` en las siguientes categorías.
+
+    | Rango IMC | Categoría |
+    |:-|:-|
+    |Menor de 18.5 | Bajo peso |
+    |De 18.5 a 24.5 | Saludable |
+    |De 24.5 a 30 | Sobrepeso |
+    |Mayor de 30 | Obeso |
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con la función `cut` del paquete `base` de R.
+
+    ```{r}
+    df$Obesidad <- cut(df$imc, breaks = c(0, 18.5, 24.5, 30, Inf), labels = c("Bajo peso", "Saludable", "Sobrepeso", "Obeso"))
+    head(df)
+    ```
+
+    ## Tidyverse
+    Con las funciones del paquete `dplyr` de `tidyverse`.
+
+    ```{r}
+    df <- df |>
+        mutate(Obesidad = cut(imc, breaks = c(0, 18.5, 24.5, 30, Inf), labels = c("Bajo peso", "Saludable", "Sobrepeso", "Obeso")))
+    head(df)
+    ```
+    :::
+    :::
+
+a.  Seleccionar las columnas `nombre`, `sexo` y `edad`.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con las funciones del paquete `base` de R.
+
+    ```{r}
+    df[, c("nombre", "sexo", "edad")]
+    ```
+
+    ## Tidyverse
+    Con la función `select` del paquete `dplyr` de `tidyverse`.
+
+    ```{r}
+    df |> select(nombre, sexo, edad)
+    ```
+    :::
+    :::
+
+a.  Anonimizar los datos eliminando la columna `nombre`.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con las funciones del paquete `base` de R.
+
+    ```{r}
+    df[, -1]
+    ```
+
+    ## Tidyverse
+    Con las funciones del paquete `dplyr` de `tidyverse`.
+    ```{r}
+    df |> select(-nombre)
+    ```
+    :::
+    :::
+
+a.  Reordenar las columnas poniendo la columna `sexo` antes que la columna `edad`.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con las funciones del paquete `base` de R.
+
+    ```{r}
+    df[, c(1, 3, 2, 4, 5, 6)]
+    ```
+
+    ## Tidyverse
+    Con la función `select` del paquete `dplyr` de `tidyverse`.
+
+    ```{r}
+    df |> select(nombre, sexo, edad, everything())
+    ```
+    :::
+    :::
+
+a.  Filtrar el data frame para quedarse con las mujeres.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con las funciones del paquete `base` de R.
+
+    ```{r}
+    df[df$sexo == "M", ]
+    ```
+
+    ## Tidyverse
+    Con la función filter del paquete `dplyr` de `tidyverse`.
+
+    ```{r}
+    df |> filter(sexo == "M")
+    ```
+    :::
+    :::
+
+a.  Filtrar el data frame para quedarse con los hombres mayores de 30 años.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con las funciones del paquete `base` de R.
+
+    ```{r}
+    df[df$sexo == "H" & df$edad > 30, ]    
+    ```
+
+    ## Tidyverse
+    Con la función `filter` paquete `dplyr` de `tidyverse`.
+
+    ```{r}
+    df |> filter( sexo == "H" & edad > 30)
+    ```
+    :::
+    :::
+
+a.  Filtrar el data frame para eliminar las filas con datos perdidos en la columna `colesterol`.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con las funciones del paquete `base` de R. La función `is.na` devuelve `TRUE` cuando se aplica a un valor perdido `NA`. Cuando se aplica a un vector devuelve un vector lógico con `TRUE` en las posiciones con valores perdidos y `FALSE` en las posiciones con valores no perdidos.
+
+    ```{r}
+    df[!is.na(df$colesterol), ]
+    ```
+
+    ## Tidyverse
+    Con la función filter del paquete `dplyr` de `tidyverse`.
+
+    ```{r}
+    df |> filter(!is.na(colesterol))
+    ```
+    :::
+    :::
+
+a.  Imputar los valores perdidos en la columna `colesterol` con la media de los valores no perdidos.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con la función `mean` del paquete `base` de R. La función `mean` calcula la media de un vector. Para que no se tengan en cuenta los valores perdidos se puede usar el argumento `na.rm = TRUE`.
+
+    ```{r}
+    media_colesterol <- mean(df$colesterol, na.rm = TRUE)
+    df$colesterol[is.na(df$colesterol)] <- media_colesterol
+    df
+    ```
+
+    ## Tidyverse
+    Con la función `mutate` del paquete `dplyr` de `tidyverse`. La función `ifelse` permite asignar un valor a un vector en función de una condición.
+
+    ```{r}
+    df <- df |>
+        mutate(colesterol = ifelse(is.na(colesterol), mean(colesterol, na.rm = TRUE), colesterol))
+    df
+    ```
+    :::
+    :::
+
+a.  Ordenar el data frame según la columna `nombre`.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con la función `order` del paquete `base` de R. La función `order` devuelve un vector con los índices de las filas ordenadas de menor a mayor.
+
+    ```{r}
+    df[order(df$nombre), ]
+    ```
+
+    ## Tidyverse
+    Con la función [`arrange`](https://dplyr.tidyverse.org/reference/arrange.html) del paquete `dplyr` de `tidyverse`.
+
+    ```{r}
+    df |> arrange(nombre)
+    ```
+    :::
+    :::
+
+a.  Ordenar el data frame ascendentemente por la columna `sexo` y descendentemente por la columna `edad`.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con las funciones del paquete `base` de R.
+
+    ```{r}
+    df[order(df$sexo, -df$edad), ]
+    ```
+
+    ## Tidyverse
+    Con la función `arrange` del paquete `dplyr` de `tidyverse`. Para que la ordenación sea descendente con respecto a una variable se tiene que usar la función `desc` sobre la variable.
+    
+    ```{r}
+    df |>
+        arrange(sexo, desc(edad))
+    ```
+    :::
+    :::
+:::
+
+:::{#exr-preprocesamiento-3}
+El fichero [`notas-curso2.csv`](datos/notas-curso2.csv) contiene las notas de las asignaturas de un curso en varios grupos de alumnos.
+
+a.  Crear un data frame con los datos del curso a partir del fichero [`notas-curso2.csv`](datos/notas-curso2.csv).
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/notas-curso2.csv")
+    df
+    ```
+    :::
+
+a.  Convertir el data frame a formato largo. 
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    Para convertir un data frame de formato ancho a largo se puede usar la función [`pivot_longer`](https://tidyr.tidyverse.org/reference/pivot_longer.html) del paquete `tidyr` de `tidyverse`.
+
+    ```{r}
+    df_largo <- df |> pivot_longer(notaA:notaE, names_to = "Asignatura", values_to = "Nota")
+    df_largo
+    ```
+    :::
+
+a.  Crear una nueva columna con la variable `calificación` que contenga las calificaciones de cada asignatura.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    df_largo <- df_largo |>
+        mutate(Califiación = cut(Nota, breaks = c(0, 4.99, 6.99, 8.99, 10), labels = c("SS", "AP", "NT", "SB")))
+    df_largo
+    ```
+    :::
+
+a.  Filtrar el conjunto de datos para obtener las asignaturas y las notas de las mujeres del grupo A, ordenadas de mayor a menor.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    df_largo |>
+        filter(sexo == "Mujer", grupo == "A") |>
+        select(Asignatura, Nota) |>
+        arrange(desc(Nota))
+    ```
+    :::
+:::
+
+:::{#exr-preprocesamiento-4}
+Se ha diseñado un ensayo clínico aleatorizado, doble-ciego y controlado con placebo, para estudiar el efecto de dos alternativas terapéuticas en el control de la hipertensión arterial. Se han reclutado 100 pacientes hipertensos y estos han sido distribuidos aleatoriamente en tres grupos de tratamiento. A uno de los grupos (control) se le administró un placebo, a otro grupo se le administró un inhibidor de la enzima conversora de la angiotensina (IECA) y al otro un tratamiento combinado de un diurético y un Antagonista del Calcio. Las variables respuesta final fueron las presiones arteriales sistólica y diastólica.
+
+Los datos con las claves de aleatorización han sido introducidos en una base de datos que reside en la central de aleatorización, mientras que los datos clínicos han sido archivados en dos archivos distintos, uno para cada uno de los dos centros participantes en el estudio.
+
+Las variables almacenadas en estos archivos clínicos son las siguientes:
+
+- CLAVE: Clave de aleatorización
+- NOMBRE: Iniciales del paciente
+- F_NACIM: Fecha de Nacimiento
+- F_INCLUS: Fecha de inclusión
+- SEXO: Sexo (0: Hombre 1: Mujer)
+- ALTURA: Altura en cm.
+- PESO: Peso en Kg.
+- PAD_INI: Presión diastólica basal (inicial)
+- PAD_FIN: Presión diastólica final
+- PAS_INI: Presión sistólica basal (inicial)
+- PAS_FIN:  Presión sistólica final
+
+El archivo de claves de aleatorización contiene sólo dos variables.
+
+- CLAVE: Clave de aleatorización
+- FARMACO: Fármaco administrado (0: Placebo, 1: IECA,  2:Ca Antagonista + diurético)
+
+a.  Crear un data frame con los datos de los pacientes del hospital A del fichero de Excel [datos-hospital-a.xls](datos/hipertension/datos-hospital-a.xls).
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    library(readxl)
+    dfA <- read_excel("datos/hipertension/datos-hospital-a.xls")
+    head(dfA)
+    ```
+    :::
+
+a.  Crear un data frame con los datos de los pacientes del hospital B del fichero csv [datos-hospital-b.csv](datos/hipertension/datos-hospital-b.csv).
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    dfB <- read_csv("datos/hipertension/datos-hospital-b.csv")
+    head(dfB)
+    ```
+    :::
+
+a.  Fusionar los datos de los dos hospitales en un nuevo data frame.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con la función `rbind` del paquete `base` de R.
+
+    ```{r}
+    df <- rbind(dfA, dfB)
+    head(df)
+    ```
+
+    ## Tidyverse
+    Con la función [`bind_rows`](https://dplyr.tidyverse.org/reference/bind.html) del paquete `dplyr` de `tidyverse`.
+
+    ```{r}
+    df <- dfA |> bind_rows(dfB)
+    head(df)
+    ```
+    :::
+    :::
+
+a.  Crear un data frame con los datos de las claves de aleatorización del fichero csv [claves-aleatorizacion.csv](datos/hipertension/claves-aleatorizacion.csv).
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    claves <- read_csv("datos/hipertension/claves-aleatorizacion.csv")
+    head(claves)
+    ```
+    :::
+
+a.  Fusionar el data frame con los datos clínicos y el data frame con claves de aleatorización en un nuevo data frame.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    Para fusionar las columnas de dos data frames usando una misma columna como clave en ambos data frames se puede la función [`left_join`](https://dtplyr.tidyverse.org/reference/left_join.dtplyr_step.html) del paquete `dplyr` de `tidyverse`.
+    
+    ```{r}
+    df <- df |> left_join(claves, by = "CLAVE")
+    head(df)
+    ```
+    :::
+
+a.  Convertir la columna del sexo en un factor con dos niveles: `Hombre` y `Mujer`.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con la función del paquete `base` de R.
+
+    ```{r}
+    df$SEXO <- factor(df$SEXO, levels = c(0, 1), labels = c("Hombre", "Mujer"))
+    head(df)
+    ```
+
+    ## Tidyverse
+    Con la función `mutate` del paquete `dplyr` de `tidyverse`.
+
+    ```r
+    df <- df |> mutate(SEXO = factor(SEXO, levels = c(0, 1), labels = c("Hombre", "Mujer")))
+    head(df)
+    ```
+
+    ```{r, echo=FALSE}
+    head(df)
+    ```
+    :::
+    :::
+
+a.  Crear una nueva columna con la edad de los pacientes en el momento de inclusión en el estudio.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con la función del paquete `base` de R.
+
+    ```{r}
+    df$EDAD <- as.numeric(difftime(df$F_INCLUS, df$F_NACIM, units = "days")/365)
+    head(df[, c("F_NACIM", "F_INCLUS", "EDAD")])
+    ```
+
+    ## Tidyverse
+    Con las funciones `interval` y `time_length` del paquete `lubridate` de `tidyverse`. La función `interval` permite crear un intervalo de tiempo entre dos fechas y la función `time_length` permite calcular la longitud de un intervalo en una determinada unidad de tiempo.
+
+    ```{r}
+    df <- df |> mutate(AGE = time_length(interval(F_NACIM, F_INCLUS), "years"))
+    head(df |>  select(F_NACIM, F_INCLUS, AGE))
+    ```
+    :::
+    :::
+
+a.  Crear una nueva columna con el índice de masa corporal (IMC) de los pacientes.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con las funciones del paquete `base` de R.
+
+    ```{r}
+    df$IMC <- df$PESO/(df$ALTURA/100)^2
+    head(df[, c("PESO", "ALTURA", "IMC")])
+    ```
+
+    ## Tidyverse
+    Con la función `mutate` del paquete `dplyr` de `tidyverse`.
+
+    ```{r}
+    df <- df |> mutate(IMC = PESO/(ALTURA/100)^2)
+    head(df |> select(PESO, ALTURA, IMC))
+    ```
+    :::
+    :::
+
+a.  Crear una nueva columna para la evolución de la presión arterial diastólica y otra con la evolución de la presión arterial sistólica.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con las funciones del paquete `base` de R.
+
+    ```{r}
+    df$EVOL_PAD <- df$PAD_FIN - df$PAD_INI
+    df$EVOL_PAS <- df$PAS_FIN - df$PAS_INI
+    head(df[, c("PAD_INI", "PAD_FIN", "EVOL_PAD", "PAS_INI", "PAS_FIN", "EVOL_PAS")])
+    ```
+
+    ## Tidyverse
+    Con la función `mutate` del paquete `dplyr` de `tidyverse`.
+
+    ```{r}
+    df <- df |> mutate(EVOL_PAD = PAD_FIN - PAD_INI, EVOL_PAS = PAS_FIN - PAS_INI)
+    head(df |> select(PAD_INI, PAD_FIN, EVOL_PAD, PAS_INI, PAS_FIN, EVOL_PAS))
+    ```
+    :::
+    :::
+
+a.  Guardar el data frame en un fichero csv.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con la función `write.csv` del paquete `base` de R.
+
+    ```{r}
+    write.csv(df, "datos/hipertension/datos-ensayo-clinico.csv")
+    ```
+
+    ## Tidyverse
+    Con la función `write_csv` del paquete `readr` de `tidyverse`.
+
+    ```{r}
+    df  |> write_csv("datos/hipertension/datos-ensayo-clinico.csv")
+    ```
+    :::
+    :::
+:::
+
+## Ejercicios Propuestos
+
+:::{#exr-preprocesaimento-5}
+Los ficheros [`vinos-blancos.xls`](datos/vinos-blancos.xls) y [vinos-tintos.csv](datos/vinos-tintos.csv) contienen información sobre las características de vinos blancos y tintos portugueses de la denominación "Vinho Verde". Las variables almacenadas en estos archivos son las siguientes:
+
+| Variable             | Descripción                                                           | Tipo (unidades)        |
+|----------------------------------------|-----------------------------------------------------------------------|------------------------|
+| tipo                 | Tipo de vino                                                          | Factor (blanco, tinto) |
+| meses.barrica        | Mesesde envejecimiento en barrica                               | Numérica(meses)  |
+| acided.fija          | Cantidadde ácidotartárico                                 | Numérica(g/dm3)  |
+| acided.volatil       | Cantidad de ácido acético                                             | Numérica(g/dm3)  |
+| acido.citrico        | Cantidad de ácidocítrico                                        | Numérica(g/dm3)  |
+| azucar.residual      | Cantidad de azúcarremanente después de la fermentación          | Numérica(g/dm3)  |
+| cloruro.sodico       | Cantidad de clorurosódico                                       | Numérica(g/dm3)  |
+| dioxido.azufre.libre | Cantidad de dióxido de azufreen formalibre                | Numérica(mg/dm3) |
+| dioxido.azufre.total | Cantidadde dióxido de azufretotal en forma libre o ligada | Numérica(mg/dm3) |
+| densidad             | Densidad                                                              | Numérica(g/cm3)  |
+| ph                   | pH                                                                    | Numérica(0-14)   |
+| sulfatos             | Cantidadde sulfato de potasio                                   | Numérica(g/dm3)  |
+| alcohol              | Porcentajede contenidode alcohol                          | Numérica(0-100)  |
+| calidad              | Calificación otorgada porun panel de expertos                   | Numérica(0-10)   |
+
+a.  Crear un data frame con los datos de los vinos blancos partir del fichero de Excel [`vinos-blancos.xlsx`](datos/vinos-blancos.xlsx).
+
+a.  Crear un data frame con los datos de los vinos tintos partir del fichero csv [`vinos-tintos.csv`](datos/vinos-tintos.csv).
+
+a.  Fusionar los datos de los vinos blancos y tintos en un nuevo data frame.
+
+a.  Convertir el tipo de vino en un factor.
+
+a.  Imputar los valores perdidos del alcohol con la media de los valores no perdidos para cada tipo de vino.
+
+a.  Crear un factor `Envejecimiento` recodificando la variable `meses.barrica` en las siguientes categorías.
+
+    | Rango en meses | Categoría |
+    |:-|:-|
+    | Menos de 3 | Joven |
+    | Entre 3 y 12 | Crianza |
+    | Entre 12 y 18 | Reserva |
+    | Más de 18 | Gran reserva |
+
+a.  Crear un factor `Dulzor` recodificando la variable `azucar.residual` en las siguientes categorías.
+
+    | Rango azúcar | Categoría |
+    |:-|:-|
+    | Menos de 4 | Seco |
+    | Más de 4 y menos de 12 | Semiseco |
+    | Más de 12 y menos de 45 | Semidulce |
+    | Más de 45 | Dulce |
+
+a.  Filtrar el conjunto de datos para quedarse con los vinos Reserva o Gran Reserva con una calidad superior a 7 y ordenar el data frame por calidad de forma descendente.
+
+a.  ¿Cuántos vinos blancos con un contenido en alcohol superior al 12% y una calidad superior a 8 hay en el conjunto de datos?
+:::

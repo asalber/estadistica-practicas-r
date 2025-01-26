@@ -1,0 +1,70 @@
+---
+title: Agrupamiento
+knitr: 
+    opts_chunk: 
+      R.options:
+        warning: false
+lang: es
+bibliography: references.bib
+---
+
+## Ejercicios Resueltos
+
+Para la realización de esta práctica se requieren los siguientes paquetes:
+
+``` r
+library(tidyverse)
+# Incluye los siguientes paquetes:
+# - dplyr: para el preprocesamiento y manipulación de datos.
+# - ggplot2: para la creación de gráficos.
+library(broom) # para convertir las listas con los resúmenes de los modelos de regresión a formato organizado.
+library(rstatix) # para realizar ANOVAs de medidas repetidas y mixtos.
+library(lme4) # para construir modelos lineales mixtos.
+library(knitr) # para el formateo de tablas.
+```
+
+::: {#exr-anova-un-factor-contaminacion}
+Se quiere comparar la contaminación por dióxido de nitrógeno (NO2) en tres lugares distintos de una ciudad $A$, $B$ y $C$ y para ello se han medido las concentraciones de NO2 en cada lugar en una muestra aleatoria de días, obteniendo los resultados de la siguiente tabla.
+
+$$
+\begin{array}{lrrrrrrrrrrrr}
+\hline
+A & 19.8 & 21.1 & 28.2 & 22.3 & 22.5 & 28.9 & 23.8 & 16.9 \\
+B & 31.6 & 32.8 & 41.1 & 36.8 & 37.0 & 35.6 & 32.2 & 43.9 & 37.5 & 25.2 \\
+C & 37.2 & 30.2 & 26.6 & 31.7 & 26.8 & 28.6 & 29.2 & 22.9 & 38.0 & 33.9 & 26.2 & 40.5 \\
+\hline
+\end{array}
+$$
+
+a.  Crear un conjunto de datos con los datos de la muestra.
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    df <- data.frame(nitrogeno = c(19.8, 21.1, 28.2, 22.3, 22.5, 28.9, 23.8, 16.9, 31.6, 32.8, 41.1, 36.8, 37.0, 35.6, 32.2, 43.9, 37.5, 25.2, 37.2, 30.2, 26.6, 31.7, 26.8, 28.6, 29.2, 22.9, 38.0, 33.9, 26.2, 40.5),
+    lugar = rep(c("A", "B", "C"), c(8, 10, 12)))
+    ```
+    :::
+
+a.  Dibujar el diagrama de cajas con los puntos correspondientes a las mediciones de cada lugar y sus medias. A la vista del diagrama, ¿crees que existen diferencias significativas entre los niveles de NO2 de los tres lugares?
+
+    ::: {.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    #| message: false
+    library(tidyverse)
+    media <- mean(df$nitrogeno)
+    df |> 
+        ggplot(aes(x = lugar, y = nitrogeno, fill = lugar)) +
+        geom_boxplot(alpha = 0.5) +
+        geom_point() + 
+        stat_summary(fun = mean, geom = "point", size = 3, color = "red") +
+        geom_hline(yintercept = media, color = "red") +
+        geom_text(aes(x = 0.7, y = media + 0.5, label = "Media global") )
+    ```
+
+    Como se puede apreciar en el diagrama existen diferencias muy claras entre los niveles de NO2 de los tres lugares, especialmente entre $B$ y $A$.
+    :::
+:::

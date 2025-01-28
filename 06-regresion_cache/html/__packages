@@ -5,3 +5,8 @@ tidyr
 purrr
 broom
 kableExtra
+tidyverse
+tibble
+stringr
+forcats
+lubridate

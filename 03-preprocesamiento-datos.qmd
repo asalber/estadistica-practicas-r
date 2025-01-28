@@ -1,15 +1,14 @@
 ---
 title: Preprocesamiento de datos
+knitr: 
+    opts_chunk: 
+      R.options:
+        warning: false
 lang: es
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-```
-
-```{r paquetes, echo = F}
-library(knitr)
-library(kableExtra)
 ```
 
 Esta práctica contiene ejercicios que muestran como preprocesar un conjunto de datos en R. El preprocesamiento de datos es una tarea fundamental en el análisis de datos que consiste en la limpieza, transformación y preparación de los datos para su análisis. El preprocesamiento de datos incluye tareas como 
@@ -27,11 +26,12 @@ Esta práctica contiene ejercicios que muestran como preprocesar un conjunto de 
 
 Para la realización de esta práctica se requieren los siguientes paquetes.
 
-```{r}
+```r
 library(tidyverse) 
 # Incluye los siguientes paquetes:
 # - readr: para la lectura de ficheros csv. 
 # - dplyr: para el preprocesamiento y manipulación de datos.
+# - lubridate: para el procesamiento de fechas.
 ```
 
 :::{#exr-preprocesamiento-1}
@@ -261,7 +261,8 @@ a.  Anonimizar los datos eliminando la columna `nombre`.
     ```
 
     ## Tidyverse
-    Con las funciones del paquete `dplyr` de `tidyverse`.
+    Con la función `select` del paquete `dplyr` de `tidyverse`.
+
     ```{r}
     df |> select(-nombre)
     ```
@@ -523,7 +524,7 @@ a.  Crear un data frame con los datos de los pacientes del hospital B del ficher
     ## Solución
 
     ```{r}
-    dfB <- read_csv("datos/hipertension/datos-hospital-b.csv")
+    dfB <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/hipertension/datos-hospital-b.csv")
     head(dfB)
     ```
     :::
@@ -558,7 +559,7 @@ a.  Crear un data frame con los datos de las claves de aleatorización del fiche
     ## Solución
 
     ```{r}
-    claves <- read_csv("datos/hipertension/claves-aleatorizacion.csv")
+    claves <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/hipertension/claves-aleatorizacion.csv")
     head(claves)
     ```
     :::
@@ -702,7 +703,7 @@ a.  Guardar el data frame en un fichero csv.
 ## Ejercicios Propuestos
 
 :::{#exr-preprocesaimento-5}
-Los ficheros [`vinos-blancos.xls`](datos/vinos-blancos.xls) y [vinos-tintos.csv](datos/vinos-tintos.csv) contienen información sobre las características de vinos blancos y tintos portugueses de la denominación "Vinho Verde". Las variables almacenadas en estos archivos son las siguientes:
+Los ficheros [`vinos-blancos.xls`](datos/vinos-blancos.xls) y [`vinos-tintos.csv`](datos/vinos-tintos.csv) contienen información sobre las características de vinos blancos y tintos portugueses de la denominación "Vinho Verde". Las variables almacenadas en estos archivos son las siguientes:
 
 | Variable             | Descripción                                                           | Tipo (unidades)        |
 |----------------------------------------|-----------------------------------------------------------------------|------------------------|

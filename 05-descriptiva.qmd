@@ -1,12 +1,18 @@
 ---
 title: Estadística Descriptiva
-keep-md: true
 lang: es
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
+
+Esta práctica contiene ejercicios que muestran cómo realizar un análisis descriptivo de un conjunto de datos mediante estadísticos muestrales, como por ejemplo:
+
+- Medidas de tendencia central: media, mediana y moda.
+- Medidas de posición: cuartiles y percentiles.
+- Medidas de dispersión: rango, rango intercuartílico, varianza, desviación típica y coeficiente de variación.
+- Medidas de forma: coeficiente de asimetría y coeficiente de apuntamiento.
 
 ## Ejercicios Resueltos
 
@@ -21,7 +27,6 @@ library(vtable) # para resúmenes estadísticos.
 library(skimr) # para resúmenes estadísticos.
 library(summarytools) # para resúmenes estadísticos.
 library(knitr) # para el formateo de tablas.
-library(kableExtra) # para personalizar el formato de las tablas.
 ```
 
 :::{#exr-descriptiva-1}
@@ -73,6 +78,7 @@ a.  Calcular la moda.
     :::{.callout-tip collapse="true"}
     ## Solución
     El paquete base de R no tiene implementada ninguna función para calcular la moda, así que definiremos nuestra propia función.
+    
     ```{r}
     moda <- function(x) {
     u <- unique(x) # Vector con los valores de la muestra sin repetir (sin ordenar).
@@ -129,7 +135,7 @@ a.  Calcular el rango.
     ```
     :::
 
-a.  Calcular el rango intecuartílico. 
+a.  Calcular el rango intercuartílico. 
 
     :::{.callout-tip collapse="true"}
     ## Solución
@@ -143,6 +149,7 @@ a.  Calcular la varianza
     :::{.callout-tip collapse="true"}
     ## Solución
     R dispone de la función `var` para calcular la _cuasivarianza_ o _varianza corregida_ $\sum \frac{(x_i-\bar x)^2}{n-1}$, pero no dispone de una función para calcular la varianza, de manera que para calcularla hay que corregir la cuasivarianza.
+    
     ```{r}
     n <- nrow(df)
     # Cuasivarianza
@@ -157,6 +164,7 @@ a.  Calcular la desviación típica.
     :::{.callout-tip collapse="true"}
     ## Solución
     R dispone de la función `sd` para calcular la _cuasidesviación típica_ o _desviación típica corregida_ $\sqrt{\sum \frac{(x_i-\bar x)^2}{n-1}}$, pero no dispone de una función para calcular la desviación típica, de manera que para calcularla hay que corregir la cuasidesviación típica.
+    
     ```{r}
     n <- nrow(df)
     # Cuasidesviación típica
@@ -196,7 +204,6 @@ a.  Calcular el coeficiente de apuntamiento.
     Para calcular el coeficiente de apuntamiento se utiliza el paquete _moments_.
 
     ```{r}
-    library(moments)
     kurtosis(df$hijos)
     ```
 
@@ -213,25 +220,31 @@ a.  Crear un data frame con los datos de todos los pacientes del estudio a parti
     ## Solución 
     ```{r}
     df <- read.csv("https://aprendeconalf.es/estadistica-practicas-r/datos/colesterol.csv")
-    df
+    head(df)
     ```
     :::
 
 a.  Calcular el tamaño muestral según el sexo.
 
     :::{.callout-tip collapse="true"}
-    ## Solución 1
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con la función [`table`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/table) del paquete base de R.
+
     ```{r}
     table(df$sexo)
     ```
-    :::
+    
+    ## Tidyverse
+    Con la función [`count`](https://aprendeconalf.es/manual-r/06-preprocesamiento.html#conteo-del-n%C3%BAmero-de-observaciones) del paquete `dplyr` de `tidyverse`.
 
-    :::{.callout-tip collapse="true"}
-    ## Solución 2
     ```{r}
     library(dplyr)
     count(df, sexo)
     ```
+    :::
     :::
 
 a.  Calcular la media y la desviación típica del nivel de colesterol sin tener en cuenta los datos perdidos.
@@ -239,84 +252,81 @@ a.  Calcular la media y la desviación típica del nivel de colesterol sin tener
     :::{.callout-tip collapse="true"}
     ## Solución 
     ```{r}
-    print(paste("Media:", mean(df$colesterol, na.rm = TRUE)))
-    print(paste("Desviación típica:", sd(df$colesterol, na.rm = TRUE)))
+    # Media
+    mean(df$colesterol, na.rm = TRUE)
+    # Desviación típica:
+    sd(df$colesterol, na.rm = TRUE)
     ```
     :::
 
 a.  Realizar un resumen estadístico con la media, el mínimo, los cuartiles y el máximo.
 
     :::{.callout-tip collapse="true"}
-    ## Solución 1
-    Usando el paquete base de R.
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con la función [`summary`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/summary) del paquete `base` de R.
 
     ```{r}
     summary(df)
     ```
-    :::
-
-    :::{.callout-tip collapse="true"}
-    ## Solución 2
-    Usando la función `st` del paquete [`vtable`](https://cran.r-project.org/web/packages/vtable/vignettes/sumtable.html).
+    
+    ## vtable
+    Con la función `st` del paquete [`vtable`](https://cran.r-project.org/web/packages/vtable/vignettes/sumtable.html).
     
     ```{r}
     library(vtable)
     st(df)
     ```
-    :::
-
-    :::{.callout-tip collapse="true"}
-    ## Solución 3
-    Usando la función `skim` del paquete [`skimr`](https://cran.r-project.org/web/packages/skimr/vignettes/skimr.html).
+    
+    ## skimr
+    Con la función `skim` del paquete [`skimr`](https://cran.r-project.org/web/packages/skimr/vignettes/skimr.html).
     
     ```{r}
     library(skimr)
     skim(df)
     ```
-    :::
-
-    :::{.callout-tip collapse="true"}
-    ## Solución 4
-    Usando las funciones `descr` y `dfSummary` del paquete [`summarytools`](https://cran.r-project.org/web/packages/summarytools/vignettes/introduction.html).
+    
+    ## summarytools
+    Con las funciones `descr` y `dfSummary` del paquete [`summarytools`](https://cran.r-project.org/web/packages/summarytools/vignettes/introduction.html).
     
     ```{r}
     library(summarytools)
     descr(df) |>
-    kable() |>
-    kable_styling()
+    kable()
 
     print(dfSummary(df, plain.ascii = FALSE, style = "grid"), method = "render")
     ```
+    :::
     :::
 
 a.  ¿En qué variable es más representativa la media?
 
     :::{.callout-tip collapse="true"}
-    ## Solución 1
-    Usando la función `sumtable` del paquete [`vtable`](https://cran.r-project.org/web/packages/vtable/vignettes/sumtable.html).
+    ## Solución
+    :::{.panel-tabset}
+
+    ## vtable
+    Con la función (https://cran.r-project.org/web/packages/vtable/vignettes/sumtable.html) del paquete `vtable`.
+
     ```{r}
-    library(vtable)
     sumtable(df, summ = c('mean(x)', 'sd(x)', 'sd(x)/mean(x)'),
     summ.names = c("Media", "Desviación Típica", "Coef. Variación"))
     ```
+    
+    ## Tidyverse
+    Con las funciones [`summarise`](https://dplyr.tidyverse.org/reference/summarise.html) y [`across`](https://dplyr.tidyverse.org/reference/across.html) del paquete `dplyr` de `tidyverse`.
 
-    La variable con el coeficiente de variación más pequeño es la altura, por lo que es la que tiene la media más representativa.
-    :::
-
-    :::{.callout-tip collapse="true"}
-    ## Solución 2
-    Usando las funciones `summarise` y `across` del paquete `dplyr`.
     ```{r}
-    library(dplyr)
+    library(tidyverse)
     summarise(df, across(.cols = where(is.numeric), .fns = list(Media = ~ mean(.x, na.rm = T), `Desviación Típica` = ~ sd(.x, na.rm = T), `Coef. Variación` = ~ sd(.x, na.rm=T) / mean(.x, na.rm=T)))) |>
-    kable() |>
-    kable_styling()
+    kable()
     ```
-    :::
 
-    :::{.callout-tip collapse="true"}
-    ## Solución 3
-    Usando las funciones `group_by` y `summarise` del paquete `dplyr` y pivotando el data frame a formato largo.
+    ## Tidyverse 2
+    Pivotando el datra frame con  [`pivot_longer`](https://tidyr.tidyverse.org/reference/pivot_longer.html) y agrupando con [`group_by`](https://dplyr.tidyverse.org/reference/group_by.html).
+
     ```{r}
     library(tidyverse)
     df |> select(where(is.numeric)) |> 
@@ -325,38 +335,40 @@ a.  ¿En qué variable es más representativa la media?
         summarise("Media" = mean(Valor, na.rm = T), 
         "Desviación Típica" = sd(Valor, na.rm = T),
         "Coef. Variación" = sd(Valor, na.rm = T) / mean(Valor, na.rm = T)) |>
-        kable() |>
-        kable_styling()
+        kable()
     ```
+
+    :::
 
     La variable con el coeficiente de variación más pequeño es la altura, por lo que es la que tiene la media más representativa.
     :::
-
     
 a.  Realizar un resumen estadístico con el coeficiente de asimetría y el coeficiente de apuntamiento del peso y la estatura según el sexo. ¿Qué grupo tiene peso más normal, los hombres o las mujeres? ¿Y una estatura más normal?
 
     :::{.callout-tip collapse="true"}
-    ## Solución 1
-    Usando la función `sumtable` del paquete [`vtable`](https://cran.r-project.org/web/packages/vtable/vignettes/sumtable.html).
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con la función `sumtable` del paquete [`vtable`](https://cran.r-project.org/web/packages/vtable/vignettes/sumtable.html).
+
     ```{r}
     library(vtable)
     sumtable(df, vars = c("peso", "altura"), group = "sexo", summ = c('skewness(x)', 'kurtosis(x)'),
     summ.names = c("Coef. Asimetría", "Coef. Apuntamiento"))
     ```
-    :::
-
-    :::{.callout-tip collapse="true"}
-    ## Solución 2
-    Usando las funciones `group_by` y `summarise` del paquete [`dplyr`]().
+    
+    ## Tidyverse
+    Con las funciones [`group_by`](https://dplyr.tidyverse.org/reference/group_by.html), [`summarise`](https://dplyr.tidyverse.org/reference/summarise.html) y [`across`](https://dplyr.tidyverse.org/reference/across.html) del paquete `dplyr` de `tidyverse`.
     
     ```{r}
     library(dplyr)
     df |> select(sexo, peso, altura) |>
     group_by(sexo) |>
     summarise(across(.cols = everything(), .fns = list("Coef. Asimetría" = ~ skewness(.x, na.rm = T), "Coef. Apuntamiento" = ~ kurtosis(.x, na.rm = T)))) |>
-    kable() |>
-    kable_styling()
+    kable()
     ```
+    :::
 
     Las mujeres tienen un peso más normal ya que tanto el coeficiente de asimetría como el de apuntamiento están más próximos a 0. Lo mismo ocurre con la altura.
     :::
@@ -368,21 +380,6 @@ a.  Realizar un resumen estadístico con el coeficiente de asimetría y el coefi
 El fichero [`renta-media-comunidades-autonomas.csv`](datos/renta-media-comunidades-autonomas.csv) contiene información sobre la renta neta media por persona de las comunidades autónomas desde 2008 a 2021. 
 
 a.  Crear un data frame con los datos de las rentas medias por persona de las comunidades a partir del fichero [`renta-media-comunidades-autonomas.csv`](datos/renta-media-comunidades-autonomas.csv).
-
-    :::{.callout-tip collapse="true"}
-    ## Solución 
-
-    ```{r, echo = F}
-    df <- read_csv2("datos/renta-media-comunidades-autonomas-2.csv")
-    df <- read_csv2("datos/renta-media-comunidades-autonomas-3.csv")
-    df <- read_csv2("datos/renta-media-comunidades-autonomas-4.csv")
-    ```
-
-    ```{r}
-    df <- read_csv2("https://aprendeconalf.es/estadistica-practicas-r/datos/renta-media-comunidades-autonomas.csv")
-    df
-    ```
-    :::
 
 a.  Realizar un resumen estadístico con la media y la desviación típica, mínimo, cuartiles y máximo de todas las rentas medias.
 

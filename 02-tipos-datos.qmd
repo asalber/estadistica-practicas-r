@@ -1,31 +1,25 @@
 ---
 title: Tipos y estructuras de datos
+knitr: 
+    opts_chunk: 
+      R.options:
+        warning: false
 lang: es
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-```
-
-```{r paquetes, echo = F}
-library(knitr)
-library(kableExtra)
-set.seed(1234)
-```
-
 Esta práctica contiene ejercicios que muestran cómo trabajar con los tipos y estructuras de datos en R. En concreto, las estructuras de datos que se utilizan son
 
-    - Vectores.
-    - Factores.
-    - Matrices.
-    - Listas.
-    - Dataframes.
+- Vectores.
+- Factores.
+- Matrices.
+- Listas.
+- Dataframes.
 
 ## Ejercicios Resueltos
 
 Para la realización de esta práctica se requieren los siguientes paquetes.
 
-```{r}
+```r
 library(tidyverse) 
 # Incluye los siguientes paquetes:
 # - readr: para la lectura de ficheros csv. 
@@ -227,6 +221,39 @@ a.  Seleccionar los días pares del vector.
     dias[c(FALSE, TRUE)]
     ```
     :::
+    :::
+
+a.  Concatenar los elementos del vector en una cadena de texto.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    La función `paste(vector, collapse = " ")` permite concatenar los elementos de un vector en una cadena de texto separados por un espacio.
+
+    ```{r}
+    paste(dias, collapse = " ")
+    ```
+    :::
+
+a.  Concatenar los elementos del vector en una cadena de texto separados por comas.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+
+    ```{r}
+    semana <- paste(dias, collapse = ", ")
+    semana
+    ```
+    :::
+
+a.  Dividir la cadena anterior en subcadenas usando como separador la coma.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    La función `strsplit(cadena, separador)` permite dividir una cadena de texto en subcadenas usando como separador el valor de `separador`.
+
+    ```{r}
+    strsplit(semana, ", ")
+    ```
     :::
 :::
 
@@ -500,8 +527,7 @@ a.  Añadir una nueva columna con los siguientes impuestos pagados.
     ```{r, echo = F}
     df1[-4, ] |>
         select(Mes, Impuestos) |>
-        kable() |>
-        kable_styling(full_width = F)
+        kable()
     ```
 
     :::{.callout-tip collapse="true"}

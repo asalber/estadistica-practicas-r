@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.40">
+<meta name="generator" content="quarto-1.7.6">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>3&nbsp; Preprocesamiento de datos – Prácticas de Estadística con R</title>
 <style>
@@ -68,12 +68,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dece3bd051e391dd7205a6b15f93dc59.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-ed04999718f06b735b1f8009dce43b94.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-20113cbb85fc39cad5b8d615ed7b1347.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8d84315e6ae7d8f2232a6ca32c2f4107.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-46a88caea08e5b9a1975204fd2ee7243.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-7368de09804af36951760694b4897ece.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-25ffad7f0af90357009d3d89c5cf009f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-76b743b3e273da8290aa3362365c9085.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -313,12 +313,11 @@ window.Quarto = {
 <section id="ejercicios-resueltos" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="ejercicios-resueltos">
 <span class="header-section-number">3.1</span> Ejercicios Resueltos</h2>
 <p>Para la realización de esta práctica se requieren los siguientes paquetes.</p>
-<div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> </span>
 <span><span class="co"># Incluye los siguientes paquetes:</span></span>
 <span><span class="co"># - readr: para la lectura de ficheros csv. </span></span>
-<span><span class="co"># - dplyr: para el preprocesamiento y manipulación de datos.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<span><span class="co"># - dplyr: para el preprocesamiento y manipulación de datos.</span></span>
+<span><span class="co"># - lubridate: para el procesamiento de fechas.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="exr-preprocesamiento-1" class="theorem exercise">
 <p><span class="theorem-title"><strong>Ejercicio 3.1</strong></span> La siguiente tabla contiene los ingresos y gastos de una empresa durante el primer trimestre del año.</p>
 <div class="cell">
@@ -905,7 +904,7 @@ Solución
 </div>
 </div>
 <div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
-<p>Con las funciones del paquete <code>dplyr</code> de <code>tidyverse</code>.</p>
+<p>Con la función <code>select</code> del paquete <code>dplyr</code> de <code>tidyverse</code>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">nombre</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1683,7 +1682,7 @@ Solución
 <div id="callout-22" class="callout-22-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dfB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"datos/hipertension/datos-hospital-b.csv"</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dfB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://aprendeconalf.es/estadistica-practicas-r/datos/hipertension/datos-hospital-b.csv"</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 90 Columns: 12
 ── Column specification ────────────────────────────────────────────────────────
@@ -1794,7 +1793,7 @@ Solución
 <div id="callout-24" class="callout-24-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">claves</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"datos/hipertension/claves-aleatorizacion.csv"</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">claves</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://aprendeconalf.es/estadistica-practicas-r/datos/hipertension/claves-aleatorizacion.csv"</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 100 Columns: 2
 ── Column specification ────────────────────────────────────────────────────────
@@ -2154,7 +2153,7 @@ Solución
 </section><section id="ejercicios-propuestos" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="ejercicios-propuestos">
 <span class="header-section-number">3.2</span> Ejercicios Propuestos</h2>
 <div id="exr-preprocesaimento-5" class="theorem exercise">
-<p><span class="theorem-title"><strong>Ejercicio 3.5</strong></span> Los ficheros <a href="datos/vinos-blancos.xls"><code>vinos-blancos.xls</code></a> y <a href="datos/vinos-tintos.csv">vinos-tintos.csv</a> contienen información sobre las características de vinos blancos y tintos portugueses de la denominación “Vinho Verde”. Las variables almacenadas en estos archivos son las siguientes:</p>
+<p><span class="theorem-title"><strong>Ejercicio 3.5</strong></span> Los ficheros <a href="datos/vinos-blancos.xls"><code>vinos-blancos.xls</code></a> y <a href="datos/vinos-tintos.csv"><code>vinos-tintos.csv</code></a> contienen información sobre las características de vinos blancos y tintos portugueses de la denominación “Vinho Verde”. Las variables almacenadas en estos archivos son las siguientes:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 29%">

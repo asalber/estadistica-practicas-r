@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.40">
+<meta name="generator" content="quarto-1.7.6">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>5&nbsp; Estadística Descriptiva – Prácticas de Estadística con R</title>
 <style>
@@ -68,12 +68,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dece3bd051e391dd7205a6b15f93dc59.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-ed04999718f06b735b1f8009dce43b94.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-20113cbb85fc39cad5b8d615ed7b1347.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8d84315e6ae7d8f2232a6ca32c2f4107.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-46a88caea08e5b9a1975204fd2ee7243.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-7368de09804af36951760694b4897ece.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-25ffad7f0af90357009d3d89c5cf009f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-76b743b3e273da8290aa3362365c9085.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -128,11 +128,11 @@ window.Quarto = {
 </script>
 <meta property="og:title" content="5&nbsp; Estadística Descriptiva – Prácticas de Estadística con R">
 <meta property="og:description" content="">
-<meta property="og:image" content="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAADcAAAEKCAQAAAAcQQUKAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kBGRMNCT/8Co8AAAETSURBVHja7dZdDsFQFIVRFaMzAkbICEyP11s/oelub5yu/SbIipwmvuG+W3P7VbXi3KF9cXl7yNMwj2i/fhi/dXz58C3662rfDofD4XC4LtzTv3n2v/t1Q5snyzRn2yq1b9fzUbku0pkfOZ2Jw+FwONwfcjozOOEXXO3b4XA4HA63BU5nBqczg6t9OxwOh8PhtsDpzOB0ZnC1b4fD4XA4XBdO+AVXm9OZOBwOh8PhJk1nBleb05k4HA6Hw+EmTWcGJ/yCq307HA6Hw+G2wOnM4HRmcLVvh8PhcDjcFjidGZzODK727XA4HA6H68IJv+Bqcz905tydm+N97cy5Gz/rtW+Hw+FwOFwXrmdnLr/at1uZewBxe0ESBJWlqgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyNS0wMS0yNVQxOToxMzowOSswMDowMJspljUAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjUtMDEtMjVUMTk6MTM6MDkrMDA6MDDqdC6JAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDI1LTAxLTI1VDE5OjEzOjA5KzAwOjAwvWEPVgAAAABJRU5ErkJggg==">
+<meta property="og:image" content="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAADcAAAEKCAQAAAAcQQUKAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kBHBUFEdcalFEAAAETSURBVHja7dZdDsFQFIVRFaMzAkbICEyP11s/oelub5yu/SbIipwmvuG+W3P7VbXi3KF9cXl7yNMwj2i/fhi/dXz58C3662rfDofD4XC4LtzTv3n2v/t1Q5snyzRn2yq1b9fzUbku0pkfOZ2Jw+FwONwfcjozOOEXXO3b4XA4HA63BU5nBqczg6t9OxwOh8PhtsDpzOB0ZnC1b4fD4XA4XBdO+AVXm9OZOBwOh8PhJk1nBleb05k4HA6Hw+EmTWcGJ/yCq307HA6Hw+G2wOnM4HRmcLVvh8PhcDjcFjidGZzODK727XA4HA6H68IJv+Bqcz905tydm+N97cy5Gz/rtW+Hw+FwOFwXrmdnLr/at1uZewBxe0ESBJWlqgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyNS0wMS0yOFQyMTowNToxNyswMDowMOQE9p4AAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjUtMDEtMjhUMjE6MDU6MTcrMDA6MDCVWU4iAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDI1LTAxLTI4VDIxOjA1OjE3KzAwOjAwwkxv/QAAAABJRU5ErkJggg==">
 <meta property="og:site_name" content="Prácticas de Estadística con R">
 <meta name="twitter:title" content="5&nbsp; Estadística Descriptiva – Prácticas de Estadística con R">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAADcAAAEKCAQAAAAcQQUKAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kBGRMNCT/8Co8AAAETSURBVHja7dZdDsFQFIVRFaMzAkbICEyP11s/oelub5yu/SbIipwmvuG+W3P7VbXi3KF9cXl7yNMwj2i/fhi/dXz58C3662rfDofD4XC4LtzTv3n2v/t1Q5snyzRn2yq1b9fzUbku0pkfOZ2Jw+FwONwfcjozOOEXXO3b4XA4HA63BU5nBqczg6t9OxwOh8PhtsDpzOB0ZnC1b4fD4XA4XBdO+AVXm9OZOBwOh8PhJk1nBleb05k4HA6Hw+EmTWcGJ/yCq307HA6Hw+G2wOnM4HRmcLVvh8PhcDjcFjidGZzODK727XA4HA6H68IJv+Bqcz905tydm+N97cy5Gz/rtW+Hw+FwOFwXrmdnLr/at1uZewBxe0ESBJWlqgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyNS0wMS0yNVQxOToxMzowOSswMDowMJspljUAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjUtMDEtMjVUMTk6MTM6MDkrMDA6MDDqdC6JAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDI1LTAxLTI1VDE5OjEzOjA5KzAwOjAwvWEPVgAAAABJRU5ErkJggg==">
+<meta name="twitter:image" content="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAADcAAAEKCAQAAAAcQQUKAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kBHBUFEdcalFEAAAETSURBVHja7dZdDsFQFIVRFaMzAkbICEyP11s/oelub5yu/SbIipwmvuG+W3P7VbXi3KF9cXl7yNMwj2i/fhi/dXz58C3662rfDofD4XC4LtzTv3n2v/t1Q5snyzRn2yq1b9fzUbku0pkfOZ2Jw+FwONwfcjozOOEXXO3b4XA4HA63BU5nBqczg6t9OxwOh8PhtsDpzOB0ZnC1b4fD4XA4XBdO+AVXm9OZOBwOh8PhJk1nBleb05k4HA6Hw+EmTWcGJ/yCq307HA6Hw+G2wOnM4HRmcLVvh8PhcDjcFjidGZzODK727XA4HA6H68IJv+Bqcz905tydm+N97cy5Gz/rtW+Hw+FwOFwXrmdnLr/at1uZewBxe0ESBJWlqgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyNS0wMS0yOFQyMTowNToxNyswMDowMOQE9p4AAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjUtMDEtMjhUMjE6MDU6MTcrMDA6MDCVWU4iAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDI1LTAxLTI4VDIxOjA1OjE3KzAwOjAwwkxv/QAAAABJRU5ErkJggg==">
 <meta name="twitter:site" content="@aprendeconalf">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -300,7 +300,14 @@ window.Quarto = {
   
 
 
-</header><section id="ejercicios-resueltos" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="ejercicios-resueltos">
+</header><p>Esta práctica contiene ejercicios que muestran cómo realizar un análisis descriptivo de un conjunto de datos mediante estadísticos muestrales, como por ejemplo:</p>
+<ul>
+<li>Medidas de tendencia central: media, mediana y moda.</li>
+<li>Medidas de posición: cuartiles y percentiles.</li>
+<li>Medidas de dispersión: rango, rango intercuartílico, varianza, desviación típica y coeficiente de variación.</li>
+<li>Medidas de forma: coeficiente de asimetría y coeficiente de apuntamiento.</li>
+</ul>
+<section id="ejercicios-resueltos" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="ejercicios-resueltos">
 <span class="header-section-number">5.1</span> Ejercicios Resueltos</h2>
 <p>Para la realización de esta práctica se requieren los siguientes paquetes:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> </span>
@@ -310,8 +317,7 @@ window.Quarto = {
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://nickch-k.github.io/vtable/">vtable</a></span><span class="op">)</span> <span class="co"># para resúmenes estadísticos.</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/skimr/">skimr</a></span><span class="op">)</span> <span class="co"># para resúmenes estadísticos.</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dcomtois/summarytools">summarytools</a></span><span class="op">)</span> <span class="co"># para resúmenes estadísticos.</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span> <span class="co"># para el formateo de tablas.</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/">kableExtra</a></span><span class="op">)</span> <span class="co"># para personalizar el formato de las tablas.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span> <span class="co"># para el formateo de tablas.</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="exr-descriptiva-1" class="theorem exercise">
 <p><span class="theorem-title"><strong>Ejercicio 5.1</strong></span> En una encuesta a 25 matrimonios sobre el número de hijos que tenían se obtuvieron los siguientes datos:</p>
 <table class="caption-top table">
@@ -568,7 +574,7 @@ Solución
 </div>
 </li>
 <li>
-<p>Calcular el rango intecuartílico.</p>
+<p>Calcular el rango intercuartílico.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -722,8 +728,7 @@ Solución
 <div class="callout-body-container callout-body">
 <p>Para calcular el coeficiente de apuntamiento se utiliza el paquete <em>moments</em>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">moments</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/kurtosis.html">kurtosis</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">hijos</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/moments/man/kurtosis.html">kurtosis</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">hijos</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.71169</code></pre>
 </div>
@@ -754,23 +759,15 @@ Solución
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"https://aprendeconalf.es/estadistica-practicas-r/datos/colesterol.csv"</span><span class="op">)</span></span>
-<span><span class="va">df</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                            nombre edad sexo peso altura colesterol
-1     José Luis Martínez Izquierdo   18    H   85   1.79        182
-2                   Rosa Díaz Díaz   32    M   65   1.73        232
-3            Javier García Sánchez   24    H   NA   1.81        191
-4              Carmen López Pinzón   35    M   65   1.70        200
-5             Marisa López Collado   46    M   51   1.58        148
-6                Antonio Ruiz Cruz   68    H   66   1.74        249
-7          Antonio Fernández Ocaña   51    H   62   1.72        276
-8            Pilar Martín González   22    M   60   1.66         NA
-9             Pedro Gálvez Tenorio   35    H   90   1.94        241
-10         Santiago Reillo Manzano   46    H   75   1.85        280
-11           Macarena Álvarez Luna   53    M   55   1.62        262
-12      José María de la Guía Sanz   58    H   78   1.87        198
-13 Miguel Angel Cuadrado Gutiérrez   27    H  109   1.98        210
-14           Carolina Rubio Moreno   20    M   61   1.77        194</code></pre>
+<pre><code>                        nombre edad sexo peso altura colesterol
+1 José Luis Martínez Izquierdo   18    H   85   1.79        182
+2               Rosa Díaz Díaz   32    M   65   1.73        232
+3        Javier García Sánchez   24    H   NA   1.81        191
+4          Carmen López Pinzón   35    M   65   1.70        200
+5         Marisa López Collado   46    M   51   1.58        148
+6            Antonio Ruiz Cruz   68    H   66   1.74        249</code></pre>
 </div>
 </div>
 </div>
@@ -785,12 +782,20 @@ Solución
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Solución 1
+Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Base</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Tidyverse</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>Con la función <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/table"><code>table</code></a> del paquete base de R.</p>
 <div class="cell">
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">sexo</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -800,20 +805,8 @@ H M
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solución 2
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-19" class="callout-19-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Con la función <a href="https://aprendeconalf.es/manual-r/06-preprocesamiento.html#conteo-del-n%C3%BAmero-de-observaciones"><code>count</code></a> del paquete <code>dplyr</code> de <code>tidyverse</code>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">sexo</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -826,9 +819,42 @@ Solución 2
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
 </li>
 <li>
 <p>Calcular la media y la desviación típica del nivel de colesterol sin tener en cuenta los datos perdidos.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solución
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Media</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">colesterol</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 220.2308</code></pre>
+</div>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Desviación típica:</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">colesterol</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 39.84795</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Realizar un resumen estadístico con la media, el mínimo, los cuartiles y el máximo.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -841,35 +867,16 @@ Solución
 </div>
 <div id="callout-20" class="callout-20-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell">
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Media:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">colesterol</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Media: 220.230769230769"</code></pre>
-</div>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Desviación típica:"</span>, <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">colesterol</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Desviación típica: 39.8479481825473"</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>Realizar un resumen estadístico con la media, el mínimo, los cuartiles y el máximo.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solución 1
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-21" class="callout-21-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Usando el paquete base de R.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Base</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">vtable</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false">skimr</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-4" role="tab" aria-controls="tabset-2-4" aria-selected="false">summarytools</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>Con la función <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/summary"><code>summary</code></a> del paquete <code>base</code> de R.</p>
 <div class="cell">
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -892,21 +899,8 @@ Solución 1
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solución 2
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-22" class="callout-22-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Usando la función <code>st</code> del paquete <a href="https://cran.r-project.org/web/packages/vtable/vignettes/sumtable.html"><code>vtable</code></a>.</p>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>Con la función <code>st</code> del paquete <a href="https://cran.r-project.org/web/packages/vtable/vignettes/sumtable.html"><code>vtable</code></a>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://nickch-k.github.io/vtable/">vtable</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://nickch-k.github.io/vtable/reference/sumtable.html">st</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -999,21 +993,8 @@ Solución 2
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solución 3
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-23" class="callout-23-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Usando la función <code>skim</code> del paquete <a href="https://cran.r-project.org/web/packages/skimr/vignettes/skimr.html"><code>skimr</code></a>.</p>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<p>Con la función <code>skim</code> del paquete <a href="https://cran.r-project.org/web/packages/skimr/vignettes/skimr.html"><code>skimr</code></a>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/skimr/">skimr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1190,34 +1171,20 @@ Solución 3
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solución 4
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-24" class="callout-24-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Usando las funciones <code>descr</code> y <code>dfSummary</code> del paquete <a href="https://cran.r-project.org/web/packages/summarytools/vignettes/introduction.html"><code>summarytools</code></a>.</p>
+<div id="tabset-2-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-4-tab">
+<p>Con las funciones <code>descr</code> y <code>dfSummary</code> del paquete <a href="https://cran.r-project.org/web/packages/summarytools/vignettes/introduction.html"><code>summarytools</code></a>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dcomtois/summarytools">summarytools</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/summarytools/man/descr.html">descr</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<table class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">altura</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">colesterol</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">edad</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">peso</th>
+<th style="text-align: left;"></th>
+<th style="text-align: right;">altura</th>
+<th style="text-align: right;">colesterol</th>
+<th style="text-align: right;">edad</th>
+<th style="text-align: right;">peso</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -1461,7 +1428,7 @@ Solución 4
 <td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
 </tr>
 </tbody></table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADcAAAEKCAQAAAAcQQUKAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kBGRMNCT/8Co8AAAETSURBVHja7dZdDsFQFIVRFaMzAkbICEyP11s/oelub5yu/SbIipwmvuG+W3P7VbXi3KF9cXl7yNMwj2i/fhi/dXz58C3662rfDofD4XC4LtzTv3n2v/t1Q5snyzRn2yq1b9fzUbku0pkfOZ2Jw+FwONwfcjozOOEXXO3b4XA4HA63BU5nBqczg6t9OxwOh8PhtsDpzOB0ZnC1b4fD4XA4XBdO+AVXm9OZOBwOh8PhJk1nBleb05k4HA6Hw+EmTWcGJ/yCq307HA6Hw+G2wOnM4HRmcLVvh8PhcDjcFjidGZzODK727XA4HA6H68IJv+Bqcz905tydm+N97cy5Gz/rtW+Hw+FwOFwXrmdnLr/at1uZewBxe0ESBJWlqgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyNS0wMS0yNVQxOToxMzowOSswMDowMJspljUAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjUtMDEtMjVUMTk6MTM6MDkrMDA6MDDqdC6JAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDI1LTAxLTI1VDE5OjEzOjA5KzAwOjAwvWEPVgAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAADcAAAEKCAQAAAAcQQUKAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kBHBUFEdcalFEAAAETSURBVHja7dZdDsFQFIVRFaMzAkbICEyP11s/oelub5yu/SbIipwmvuG+W3P7VbXi3KF9cXl7yNMwj2i/fhi/dXz58C3662rfDofD4XC4LtzTv3n2v/t1Q5snyzRn2yq1b9fzUbku0pkfOZ2Jw+FwONwfcjozOOEXXO3b4XA4HA63BU5nBqczg6t9OxwOh8PhtsDpzOB0ZnC1b4fD4XA4XBdO+AVXm9OZOBwOh8PhJk1nBleb05k4HA6Hw+EmTWcGJ/yCq307HA6Hw+G2wOnM4HRmcLVvh8PhcDjcFjidGZzODK727XA4HA6H68IJv+Bqcz905tydm+N97cy5Gz/rtW+Hw+FwOFwXrmdnLr/at1uZewBxe0ESBJWlqgAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyNS0wMS0yOFQyMTowNToxNyswMDowMOQE9p4AAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjUtMDEtMjhUMjE6MDU6MTcrMDA6MDCVWU4iAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDI1LTAxLTI4VDIxOjA1OjE3KzAwOjAwwkxv/QAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">14 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1483,7 +1450,7 @@ Solución 4
 </tr>
 </tbody></table></td>
 <td style="text-align: left; vertical-align: middle;">12 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kBGRMNCT/8Co8AAAFSSURBVHja7dzLCcJAFEBRI1ZnBVqhVmB7uh3dyImMH7xnJyTyuDBZPWa5biK2nx7g1xQMFQztxh/2PTtP/fwdlpmz2L+PD+/kxUd7ePaCT8+dZb2OJCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYuluom7tTaL5pltHDBuK79viek0lmzzLqSKKCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGXbqj7Xbaudxzu9PvTYOsXBzuSqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGBoGVfxTl96jd6njRuIS41MRxIVDBUM3QB5IxYydzivEAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyNS0wMS0yNVQxOToxMzowOSswMDowMJspljUAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjUtMDEtMjVUMTk6MTM6MDkrMDA6MDDqdC6JAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDI1LTAxLTI1VDE5OjEzOjA5KzAwOjAwvWEPVgAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kBHBUFEdcalFEAAAFSSURBVHja7dzLCcJAFEBRI1ZnBVqhVmB7uh3dyImMH7xnJyTyuDBZPWa5biK2nx7g1xQMFQztxh/2PTtP/fwdlpmz2L+PD+/kxUd7ePaCT8+dZb2OJCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYuluom7tTaL5pltHDBuK79viek0lmzzLqSKKCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGXbqj7Xbaudxzu9PvTYOsXBzuSqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGBoGVfxTl96jd6njRuIS41MRxIVDBUM3QB5IxYydzivEAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyNS0wMS0yOFQyMTowNToxNyswMDowMOQE9p4AAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjUtMDEtMjhUMjE6MDU6MTcrMDA6MDCVWU4iAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDI1LTAxLTI4VDIxOjA1OjE3KzAwOjAwwkxv/QAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">14 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1512,7 +1479,7 @@ Solución 4
 <td style="text-align: left; padding: 0 4px 0 2px; border: 0;">)</td>
 </tr>
 </tbody></table></td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAGIAAAA3CAQAAABd71fBAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kBGRMNCT/8Co8AAACgSURBVGje7djBCYAwEADBRKzOCrRCrSDt6TcRBMknm2Pn50Nx4SJ4+U7zW0a/gBGRItb64pzogBz5IyKlbfS7/VSaqxDjZASFERRGUBhBYQSFERRGUBhBYQTF6x+79D1lsFwvOCZadqRq2RFjnEJENGfiGj5Pe+65C7U86/2shBgnIyiMoDCCwggKIyiMoDCCwggKIyjiLc9mFWKcjKB4AMlDC+F+elCbAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI1LTAxLTI1VDE5OjEzOjA5KzAwOjAwmymWNQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNS0wMS0yNVQxOToxMzowOSswMDowMOp0LokAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjUtMDEtMjVUMTk6MTM6MDkrMDA6MDC9YQ9WAAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAGIAAAA3CAQAAABd71fBAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kBHBUFEdcalFEAAACgSURBVGje7djBCYAwEADBRKzOCrRCrSDt6TcRBMknm2Pn50Nx4SJ4+U7zW0a/gBGRItb64pzogBz5IyKlbfS7/VSaqxDjZASFERRGUBhBYQSFERRGUBhBYQTF6x+79D1lsFwvOCZadqRq2RFjnEJENGfiGj5Pe+65C7U86/2shBgnIyiMoDCCwggKIyiMoDCCwggKIyjiLc9mFWKcjKB4AMlDC+F+elCbAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI1LTAxLTI4VDIxOjA1OjE3KzAwOjAw5AT2ngAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNS0wMS0yOFQyMTowNToxNyswMDowMJVZTiIAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjUtMDEtMjhUMjE6MDU6MTcrMDA6MDDCTG/9AAAAAElFTkSuQmCC" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">14 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1534,7 +1501,7 @@ Solución 4
 </tr>
 </tbody></table></td>
 <td style="text-align: left; vertical-align: middle;">12 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kBGRMNCT/8Co8AAAFbSURBVHja7dzBbYMwAEBRiJguEzQTthNkvfTqVr08aCAR/90iIQRfMgfb8fyYIi5HP8C7KRgqGFrGH/Y9+8LP38d89MuuNT74svou0zRd4dr70W/9TxqSqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGDox7Zz3Xl/Rr/26Z9x571pSKKCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqFNZ++Y5y6x7HUU0o7BbIFFrt5zQaYhiQqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoZ2nKJ+Hbq6cBvWC04ZbMsfOBqSqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYGgep7c/O6zoT+Oc/lwj05BEBUMFQ99UMBOPZ+QYAQAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyNS0wMS0yNVQxOToxMzowOSswMDowMJspljUAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjUtMDEtMjVUMTk6MTM6MDkrMDA6MDDqdC6JAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDI1LTAxLTI1VDE5OjEzOjA5KzAwOjAwvWEPVgAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kBHBUFEdcalFEAAAFbSURBVHja7dzBbYMwAEBRiJguEzQTthNkvfTqVr08aCAR/90iIQRfMgfb8fyYIi5HP8C7KRgqGFrGH/Y9+8LP38d89MuuNT74svou0zRd4dr70W/9TxqSqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGDox7Zz3Xl/Rr/26Z9x571pSKKCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqFNZ++Y5y6x7HUU0o7BbIFFrt5zQaYhiQqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoZ2nKJ+Hbq6cBvWC04ZbMsfOBqSqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYGgep7c/O6zoT+Oc/lwj05BEBUMFQ99UMBOPZ+QYAQAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyNS0wMS0yOFQyMTowNToxNyswMDowMOQE9p4AAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjUtMDEtMjhUMjE6MDU6MTcrMDA6MDCVWU4iAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDI1LTAxLTI4VDIxOjA1OjE3KzAwOjAwwkxv/QAAAABJRU5ErkJggg==" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">13 (92.9%)</td>
 <td style="text-align: center;">1 (7.1%)</td>
 </tr>
@@ -1556,7 +1523,7 @@ Solución 4
 </tr>
 </tbody></table></td>
 <td style="text-align: left; vertical-align: middle;">14 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kBGRMNCT/8Co8AAAFfSURBVHja7dyxbcMwFEDBKPB0mSCZMJnA6yUtHbh5BEFB8F3nwqbwAKqgvnz8vlG8n30BVyNYJFh0Gz/svp/9TC74eey9znG52/SvLPEx8Z37qVdsS0aCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRUvGzmfn7Xevt2K+f9Gc/sy8/fzE/d7VHtmSkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFg0cn/vbPX7MOTr+HhyUsFW/HwxJaMBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEix6OqHe/oHBF/870z3xl4BpsyUiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLDoGI/xv53pPzXO6R8aNbZkJFgkWPQHoAkVNpKup5gAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjUtMDEtMjVUMTk6MTM6MDkrMDA6MDCbKZY1AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDI1LTAxLTI1VDE5OjEzOjA5KzAwOjAw6nQuiQAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyNS0wMS0yNVQxOToxMzowOSswMDowML1hD1YAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kBHBUFEdcalFEAAAFfSURBVHja7dyxbcMwFEDBKPB0mSCZMJnA6yUtHbh5BEFB8F3nwqbwAKqgvnz8vlG8n30BVyNYJFh0Gz/svp/9TC74eey9znG52/SvLPEx8Z37qVdsS0aCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRUvGzmfn7Xevt2K+f9Gc/sy8/fzE/d7VHtmSkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFgkWCRYJFg0cn/vbPX7MOTr+HhyUsFW/HwxJaMBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEix6OqHe/oHBF/870z3xl4BpsyUiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLBIsEiwSLDoGI/xv53pPzXO6R8aNbZkJFgkWPQHoAkVNpKup5gAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjUtMDEtMjhUMjE6MDU6MTcrMDA6MDDkBPaeAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDI1LTAxLTI4VDIxOjA1OjE3KzAwOjAwlVlOIgAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyNS0wMS0yOFQyMTowNToxNyswMDowMMJMb/0AAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">14 (100.0%)</td>
 <td style="text-align: center;">0 (0.0%)</td>
 </tr>
@@ -1578,13 +1545,16 @@ Solución 4
 </tr>
 </tbody></table></td>
 <td style="text-align: left; vertical-align: middle;">13 distinct values</td>
-<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kBGRMNCT/8Co8AAAFiSURBVHja7d1BTsJAGIBRazgdJ9AT6gm4Hm5HF2ZeQx3A7+1ISGm+ZLr4aTvb9SXidfUJPJqCoYKh0/jh1tezz+kDvm2rQ/xmPLnT7qNMOU9967KuBWtJooKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhg287v2fzTxG8Dzfq/+Ng+54iaEmigqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhJ5zpz/+5sccTBjv2FUktSVQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDD0bUS9bsOAY+fwt/Rjpr9qw4CZ373cxXYGLUlUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwtI3D9I+Hmaz/rfFlRVuNTEsSFQwVDH0BYZcWNs7B9l8AAAAldEVYdGRhdGU6Y3JlYXRlADIwMjUtMDEtMjVUMTk6MTM6MDkrMDA6MDCbKZY1AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDI1LTAxLTI1VDE5OjEzOjA5KzAwOjAw6nQuiQAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyNS0wMS0yNVQxOToxMzowOSswMDowML1hD1YAAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
+<td style="text-align: left; vertical-align: middle; padding: 0; background-color: transparent;"><img src="data:image/png;base64,%20iVBORw0KGgoAAAANSUhEUgAAAJgAAABuCAQAAABxABKuAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAD/h4/MvwAAAAd0SU1FB+kBHBUFEdcalFEAAAFiSURBVHja7d1BTsJAGIBRazgdJ9AT6gm4Hm5HF2ZeQx3A7+1ISGm+ZLr4aTvb9SXidfUJPJqCoYKh0/jh1tezz+kDvm2rQ/xmPLnT7qNMOU9967KuBWtJooKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhg287v2fzTxG8Dzfq/+Ng+54iaEmigqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhgqGCoYKhJ5zpz/+5sccTBjv2FUktSVQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDD0bUS9bsOAY+fwt/Rjpr9qw4CZ373cxXYGLUlUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwVDBUMFQwtI3D9I+Hmaz/rfFlRVuNTEsSFQwVDH0BYZcWNs7B9l8AAAAldEVYdGRhdGU6Y3JlYXRlADIwMjUtMDEtMjhUMjE6MDU6MTcrMDA6MDDkBPaeAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDI1LTAxLTI4VDIxOjA1OjE3KzAwOjAwlVlOIgAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyNS0wMS0yOFQyMTowNToxNyswMDowMMJMb/0AAAAASUVORK5CYII=" class="img-fluid" style="border:none;background-color:transparent;padding:0;max-width:max-content;"></td>
 <td style="text-align: center;">13 (92.9%)</td>
 <td style="text-align: center;">1 (7.1%)</td>
 </tr>
 </tbody>
 </table>
-<p>Generated by <a href="https://github.com/dcomtois/summarytools">summarytools</a> 1.0.1 (<a href="https://www.r-project.org/">R</a> version 4.4.1)<br>2025-01-25</p>
+<p>Generated by <a href="https://github.com/dcomtois/summarytools">summarytools</a> 1.0.1 (<a href="https://www.r-project.org/">R</a> version 4.4.2)<br>2025-01-28</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1595,22 +1565,33 @@ Solución 4
 <li>
 <p>¿En qué variable es más representativa la media?</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Solución 1
+Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Usando la función <code>sumtable</code> del paquete <a href="https://cran.r-project.org/web/packages/vtable/vignettes/sumtable.html"><code>vtable</code></a>.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">vtable</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Tidyverse</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false">Tidyverse 2</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<p>Con la función (https://cran.r-project.org/web/packages/vtable/vignettes/sumtable.html) del paquete <code>vtable</code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://nickch-k.github.io/vtable/">vtable</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://nickch-k.github.io/vtable/reference/sumtable.html">sumtable</a></span><span class="op">(</span><span class="va">df</span>, summ <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'mean(x)'</span>, <span class="st">'sd(x)'</span>, <span class="st">'sd(x)/mean(x)'</span><span class="op">)</span>,</span>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://nickch-k.github.io/vtable/reference/sumtable.html">sumtable</a></span><span class="op">(</span><span class="va">df</span>, summ <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'mean(x)'</span>, <span class="st">'sd(x)'</span>, <span class="st">'sd(x)/mean(x)'</span><span class="op">)</span>,</span>
 <span>summ.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Media"</span>, <span class="st">"Desviación Típica"</span>, <span class="st">"Coef. Variación"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in sumtable(df, summ = c("mean(x)", "sd(x)", "sd(x)/mean(x)"), summ.names = c("Media", : Factor variables ignore custom summ options. Cols 1 and 2 are count and percentage.
+Beware combining factors with a custom summ unless factor.numeric = TRUE.</code></pre>
+</div>
 <div class="cell-output-display">
 <table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Summary Statistics</caption>
@@ -1667,43 +1648,42 @@ Solución 1
 </table>
 </div>
 </div>
-<p>La variable con el coeficiente de variación más pequeño es la altura, por lo que es la que tiene la media más representativa.</p>
 </div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solución 2
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-26" class="callout-26-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Usando las funciones <code>summarise</code> y <code>across</code> del paquete <code>dplyr</code>.</p>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<p>Con las funciones <a href="https://dplyr.tidyverse.org/reference/summarise.html"><code>summarise</code></a> y <a href="https://dplyr.tidyverse.org/reference/across.html"><code>across</code></a> del paquete <code>dplyr</code> de <code>tidyverse</code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span>.cols <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, .fns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>Media <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, `Desviación Típica` <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, `Coef. Variación` <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">.x</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">.x</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 5%">
+<col style="width: 10%">
+<col style="width: 9%">
+<col style="width: 6%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
 <thead><tr class="header">
-<th style="text-align: right;" data-quarto-table-cell-role="th">edad_Media</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">edad_Desviación Típica</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">edad_Coef. Variación</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">peso_Media</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">peso_Desviación Típica</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">peso_Coef. Variación</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">altura_Media</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">altura_Desviación Típica</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">altura_Coef. Variación</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">colesterol_Media</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">colesterol_Desviación Típica</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">colesterol_Coef. Variación</th>
+<th style="text-align: right;">edad_Media</th>
+<th style="text-align: right;">edad_Desviación Típica</th>
+<th style="text-align: right;">edad_Coef. Variación</th>
+<th style="text-align: right;">peso_Media</th>
+<th style="text-align: right;">peso_Desviación Típica</th>
+<th style="text-align: right;">peso_Coef. Variación</th>
+<th style="text-align: right;">altura_Media</th>
+<th style="text-align: right;">altura_Desviación Típica</th>
+<th style="text-align: right;">altura_Coef. Variación</th>
+<th style="text-align: right;">colesterol_Media</th>
+<th style="text-align: right;">colesterol_Desviación Típica</th>
+<th style="text-align: right;">colesterol_Coef. Variación</th>
 </tr></thead>
 <tbody><tr class="odd">
 <td style="text-align: right;">38.21429</td>
@@ -1723,38 +1703,24 @@ Solución 2
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solución 3
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-27" class="callout-27-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Usando las funciones <code>group_by</code> y <code>summarise</code> del paquete <code>dplyr</code> y pivotando el data frame a formato largo.</p>
+<div id="tabset-3-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-3-tab">
+<p>Pivotando el datra frame con <a href="https://tidyr.tidyverse.org/reference/pivot_longer.html"><code>pivot_longer</code></a> y agrupando con <a href="https://dplyr.tidyverse.org/reference/group_by.html"><code>group_by</code></a>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, names_to <span class="op">=</span> <span class="st">"Variable"</span>, values_to <span class="op">=</span> <span class="st">"Valor"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Variable</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="st">"Media"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Valor</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, </span>
 <span>    <span class="st">"Desviación Típica"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">Valor</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>,</span>
 <span>    <span class="st">"Coef. Variación"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">Valor</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Valor</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<table class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">Variable</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Media</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Desviación Típica</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">Coef. Variación</th>
+<th style="text-align: left;">Variable</th>
+<th style="text-align: right;">Media</th>
+<th style="text-align: right;">Desviación Típica</th>
+<th style="text-align: right;">Coef. Variación</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -1785,6 +1751,9 @@ Solución 3
 </table>
 </div>
 </div>
+</div>
+</div>
+</div>
 <p>La variable con el coeficiente de variación más pequeño es la altura, por lo que es la que tiene la media más representativa.</p>
 </div>
 </div>
@@ -1793,22 +1762,33 @@ Solución 3
 <li>
 <p>Realizar un resumen estadístico con el coeficiente de asimetría y el coeficiente de apuntamiento del peso y la estatura según el sexo. ¿Qué grupo tiene peso más normal, los hombres o las mujeres? ¿Y una estatura más normal?</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Solución 1
+Solución
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-28" class="callout-28-contents callout-collapse collapse">
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Usando la función <code>sumtable</code> del paquete <a href="https://cran.r-project.org/web/packages/vtable/vignettes/sumtable.html"><code>vtable</code></a>.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">Base</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">Tidyverse</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<p>Con la función <code>sumtable</code> del paquete <a href="https://cran.r-project.org/web/packages/vtable/vignettes/sumtable.html"><code>vtable</code></a>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://nickch-k.github.io/vtable/">vtable</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://nickch-k.github.io/vtable/">vtable</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://nickch-k.github.io/vtable/reference/sumtable.html">sumtable</a></span><span class="op">(</span><span class="va">df</span>, vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"peso"</span>, <span class="st">"altura"</span><span class="op">)</span>, group <span class="op">=</span> <span class="st">"sexo"</span>, summ <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'skewness(x)'</span>, <span class="st">'kurtosis(x)'</span><span class="op">)</span>,</span>
 <span>summ.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Coef. Asimetría"</span>, <span class="st">"Coef. Apuntamiento"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in sumtable(df, vars = c("peso", "altura"), group = "sexo", summ = c("skewness(x)", : Factor variables ignore custom summ options. Cols 1 and 2 are count and percentage.
+Beware combining factors with a custom summ unless factor.numeric = TRUE.</code></pre>
+</div>
 <div class="cell-output-display">
 <table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Summary Statistics</caption>
@@ -1859,36 +1839,29 @@ M
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solución 2
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-29" class="callout-29-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Usando las funciones <code>group_by</code> y <code>summarise</code> del paquete <a href=""><code>dplyr</code></a>.</p>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<p>Con las funciones <a href="https://dplyr.tidyverse.org/reference/group_by.html"><code>group_by</code></a>, <a href="https://dplyr.tidyverse.org/reference/summarise.html"><code>summarise</code></a> y <a href="https://dplyr.tidyverse.org/reference/across.html"><code>across</code></a> del paquete <code>dplyr</code> de <code>tidyverse</code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">sexo</span>, <span class="va">peso</span>, <span class="va">altura</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">sexo</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span>.cols <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>, .fns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"Coef. Asimetría"</span> <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/pkg/moments/man/skewness.html">skewness</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>, <span class="st">"Coef. Apuntamiento"</span> <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/pkg/moments/man/kurtosis.html">kurtosis</a></span><span class="op">(</span><span class="va">.x</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 21%">
+<col style="width: 24%">
+<col style="width: 23%">
+<col style="width: 26%">
+</colgroup>
 <thead><tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">sexo</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">peso_Coef. Asimetría</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">peso_Coef. Apuntamiento</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">altura_Coef. Asimetría</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">altura_Coef. Apuntamiento</th>
+<th style="text-align: left;">sexo</th>
+<th style="text-align: right;">peso_Coef. Asimetría</th>
+<th style="text-align: right;">peso_Coef. Apuntamiento</th>
+<th style="text-align: right;">altura_Coef. Asimetría</th>
+<th style="text-align: right;">altura_Coef. Apuntamiento</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -1909,6 +1882,9 @@ Solución 2
 </table>
 </div>
 </div>
+</div>
+</div>
+</div>
 <p>Las mujeres tienen un peso más normal ya que tanto el coeficiente de asimetría como el de apuntamiento están más próximos a 0. Lo mismo ocurre con la altura.</p>
 </div>
 </div>
@@ -1921,54 +1897,7 @@ Solución 2
 <div id="exr-descriptiva-3" class="theorem exercise">
 <p><span class="theorem-title"><strong>Ejercicio 5.3</strong></span> El fichero <a href="datos/renta-media-comunidades-autonomas.csv"><code>renta-media-comunidades-autonomas.csv</code></a> contiene información sobre la renta neta media por persona de las comunidades autónomas desde 2008 a 2021.</p>
 <ol type="a">
-<li>
-<p>Crear un data frame con los datos de las rentas medias por persona de las comunidades a partir del fichero <a href="datos/renta-media-comunidades-autonomas.csv"><code>renta-media-comunidades-autonomas.csv</code></a>.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solución
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-30" class="callout-30-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv2</a></span><span class="op">(</span><span class="st">"https://aprendeconalf.es/estadistica-practicas-r/datos/renta-media-comunidades-autonomas.csv"</span><span class="op">)</span></span>
-<span><span class="va">df</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 19 × 15
-   Comunidad      `2021` `2020` `2019` `2018` `2017` `2016` `2015` `2014` `2013`
-   &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
- 1 Andalucía        9915   9990   9160   9258   9116   8398   7942   8079   8408
- 2 Aragón          13345  13097  12300  11990  12110  11649  12427  12037  12022
- 3 Asturias Prin…  12861  12786  12523  12085  12244  12060  11427  11251  11211
- 4 Balears Illes   11235  12658  12410  13240  12665  12222  10828  10660  10386
- 5 Canarias        10161   9935   9487   8964   8863   8702   8640   8302   8513
- 6 Cantabria       12848  12748  12205  11239  11293  10670  10494   9824   9843
- 7 Castilla y Le…  12656  12697  12003  11949  11239  10815  10570  10406  10760
- 8 Castilla - La…  10257  10485   9715   9533   9045   8731   8498   8545   8425
- 9 Cataluña        14159  14170  13527  13338  12712  12660  12283  12205  12111
-10 Comunitat Val…  11237  11332  10611  10232   9801   9265   9098   9144   9375
-11 Extremadura      9500   9147   8796   8503   8250   8674   8469   7729   8224
-12 Galicia         11453  11469  11218  11239  10753  10439  10212  10235  10106
-13 Madrid Comuni…  14836  14580  14199  13279  13099  12647  12534  12597  12823
-14 Murcia Región…   9931   9850   8956   9111   8702   8273   7924   7767   8253
-15 Navarra Comun…  15269  15094  13937  13585  13583  13408  13300  13221  13608
-16 País Vasco      15544  15813  15300  14722  14397  14345  13836  14281  14312
-17 Rioja La        12913  13504  12697  12029  12131  11589  11132  11120  10686
-18 Ceuta           10397   9853  10164   9784   9676   9435   8512   8712   9336
-19 Melilla         12012  11427  11733  12507  10161  10883  10027  11619  11313
-# ℹ 5 more variables: `2012` &lt;dbl&gt;, `2011` &lt;dbl&gt;, `2010` &lt;dbl&gt;, `2009` &lt;dbl&gt;,
-#   `2008` &lt;dbl&gt;</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</li>
+<li><p>Crear un data frame con los datos de las rentas medias por persona de las comunidades a partir del fichero <a href="datos/renta-media-comunidades-autonomas.csv"><code>renta-media-comunidades-autonomas.csv</code></a>.</p></li>
 <li><p>Realizar un resumen estadístico con la media y la desviación típica, mínimo, cuartiles y máximo de todas las rentas medias.</p></li>
 <li><p>Realizar un resumen estadístico con la media y la desviación típica de las rentas medias de cada año.</p></li>
 <li><p>¿Qué año presenta una menor variabilidad relativa?</p></li>

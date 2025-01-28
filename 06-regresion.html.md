@@ -6,29 +6,7 @@ lang: es
 
 
 
-
-
-
-
-
-
-## Ejercicios Resueltos
-
-Para la realización de esta práctica se requieren los siguientes paquetes:
-
-``` r
-library(tidyverse) 
-# Incluye los siguientes paquetes:
-# - readr: para la lectura de ficheros csv. 
-# - dplyr: para el preprocesamiento y manipulación de datos.
-# - tidyr: para la organización de los datos.
-# - purrr: para aplicar funciones a vectores. 
-library(broom) # para convertir las listas con los resúmenes de los modelos de regresión a formato organizado.
-library(knitr) # para el formateo de tablas.
-library(kableExtra) # para personalizar el formato de las tablas.
-```
-
-También se necesita conocer las ecuaciones de los principales modelos de regresión, que se resumen en la siguiente tabla.
+Esta práctica contiene ejercicios que muestran como construir modelos de regresión simple que describen la relación entre dos variables cuantitativas. En particular se muestra cómo construir los siguientes modelos:
 
 | Modelo                  |      Ecuación general      |
 |:------------------------|:--------------------------:|
@@ -41,6 +19,20 @@ También se necesita conocer las ecuaciones de los principales modelos de regres
 | Inverso                 |         $y=a+b/x$          |
 | Curva S o Sigmoidal     |       $y= e^{a+b/x}$       |
 
+## Ejercicios Resueltos
+
+Para la realización de esta práctica se requieren los siguientes paquetes:
+
+```r
+library(tidyverse) 
+# Incluye los siguientes paquetes:
+# - readr: para la lectura de ficheros csv. 
+# - dplyr: para el preprocesamiento y manipulación de datos.
+# - tidyr: para la organización de los datos.
+# - purrr: para aplicar funciones a vectores. 
+library(broom) # para convertir las listas con los resúmenes de los modelos de regresión a formato organizado.
+library(knitr) # para el formateo de tablas.
+```
 
 ::: {#exr-regresion-1}
 Se han medido dos variables $X$ e $Y$ en 10 individuos obteniendo los siguientes resultados:
@@ -60,11 +52,6 @@ a.  Crear un conjunto de datos con las variables `x` e `y`.
     ::: {.callout-tip collapse="true"}
     ## Solución
 
-
-
-
-
-
     ::: {.cell}
     
     ```{.r .cell-code}
@@ -74,25 +61,17 @@ a.  Crear un conjunto de datos con las variables `x` e `y`.
     )
     ```
     :::
-
-
-
-
-
     :::
 
 a.  Dibujar el diagrama de dispersión correspondiente. ¿Qué tipo de modelo de regresión se ajusta mejor a la nube de puntos?
 
     ::: {.callout-tip collapse="true"}
-    ## Solución 1
+    ## Solución
+    :::{.panel-tabset}
 
-    Para dibujar un diagrama de dispersión se puede usar la función [`plot`](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot) del paquete `graphics`.
+    ## Base
+    Con la función [`plot`](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot) del paquete `graphics`.
     
-
-
-
-
-
     ::: {.cell}
     
     ```{.r .cell-code}
@@ -103,27 +82,33 @@ a.  Dibujar el diagrama de dispersión correspondiente. ¿Qué tipo de modelo de
     ![](06-regresion_files/figure-html/unnamed-chunk-2-1.png){width=672}
     :::
     :::
-
-
-
-
-
-    :::
-
-    :::{.callout-tip collapse="true"}
-    ## Solución 2
-
-    Otra alternativa es usar la función la función [`geom_point`](https://aprendeconalf.es/manual-r/07-graficos.html#diagramas-de-puntos) del paquete `ggplot2`.
-
-
-
-
-
+  
+    ## Tidyverse
+    Con la función [`geom_point`](https://aprendeconalf.es/manual-r/07-graficos.html#diagramas-de-puntos) del paquete `ggplot2` de `tidyverse`.
 
     ::: {.cell}
     
     ```{.r .cell-code}
-    library(ggplot2)
+    library(tidyverse)
+    ```
+    
+    ::: {.cell-output .cell-output-stderr}
+    
+    ```
+    ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+    ✔ forcats   1.0.0     ✔ stringr   1.5.1
+    ✔ lubridate 1.9.4     ✔ tibble    3.2.1
+    ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ✖ dplyr::filter()          masks stats::filter()
+    ✖ kableExtra::group_rows() masks dplyr::group_rows()
+    ✖ dplyr::lag()             masks stats::lag()
+    ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+    ```
+    
+    
+    :::
+    
+    ```{.r .cell-code}
     ggplot(df, aes(x = x, y = y)) +
         geom_point(col = "red") +
         labs(title = "Diagrama de dispersión", x = "X", y = "Y")
@@ -133,11 +118,7 @@ a.  Dibujar el diagrama de dispersión correspondiente. ¿Qué tipo de modelo de
     ![](06-regresion_files/figure-html/unnamed-chunk-3-1.png){width=672}
     :::
     :::
-
-
-
-
-
+    :::
 
     El tipo de modelo que mejor se ajusta es lineal, ya que todos los puntos están alineados.
     :::
@@ -146,13 +127,7 @@ a.  Calcular la recta de regresión de $Y$ sobre $X$.
 
     ::: {.callout-tip collapse="true"}
     ## Solución
-
     Para ajustar un modelo de regresión se utiliza la función [`lm`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/lm) del paquete `stats`. Esta función requiere que se le pase como parámetro la fórmula del modelo de regresión que debe tener la sintaxis `y ~ f(x)`, donde `y` es la variable dependiente en el modelo, `x` es la variable independiente, y `f(x)` es una expresión matemática que describe el modelo.
-
-
-
-
-
 
     ::: {.cell}
     
@@ -198,11 +173,6 @@ a.  Calcular la recta de regresión de $Y$ sobre $X$.
     :::
     :::
 
-
-
-
-
-
     La recta de regresión de $Y$ sobre $X$ es $y = 2 + 3 x$.
     :::
 
@@ -212,11 +182,6 @@ a.  Obtener el coeficiente de regresión de la recta anterior e interpretarlo.
     ## Solución
 
     El coeficiente de regresión es la pendiente de la recta de regresión
-
-
-
-
-
 
     ::: {.cell}
     
@@ -234,27 +199,18 @@ a.  Obtener el coeficiente de regresión de la recta anterior e interpretarlo.
     :::
     :::
 
-
-
-
-
-
     El coeficiente de regresión de $Y$ sobre $X$ vale 3, lo que indica que $Y$ aumenta 3 unidades por cada unidad que aumenta $X$.
     :::
 
 a.  Dibujar la recta de regresión de $Y$ sobre $X$ sobre el diagrama de dispersión. ¿Cómo son los residuos del modelo de regresión?
 
-
     ::: {.callout-tip collapse="true"}
-    ## Solución 1
+    ## Solución
+    :::{.panel-tabset}
 
-    Para dibujar la recta de regresión se puede usar la función [`abline`](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/abline) del paquete `graphics`.
+    ## Base
+    Con la función [`abline`](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/abline) del paquete `graphics`.
     
-
-
-
-
-
     ::: {.cell}
     
     ```{.r .cell-code}
@@ -267,21 +223,8 @@ a.  Dibujar la recta de regresión de $Y$ sobre $X$ sobre el diagrama de dispers
     :::
     :::
 
-
-
-
-
-    :::
-
-    :::{.callout-tip collapse="true"}
-    ## Solución 2
-
-    Otra alternativa es usar la geometría de ajuste de regresión por mínimos cuadrados [`geom_smooth`](https://aprendeconalf.es/manual-r/07-graficos.html#interpolaci%C3%B3n-y-ajustes-de-regresi%C3%B3n) del paquete `ggplot2`.
-
-
-
-
-
+    ## Tidyverse
+    Con la función [`geom_smooth`](https://aprendeconalf.es/manual-r/07-graficos.html#interpolaci%C3%B3n-y-ajustes-de-regresi%C3%B3n) del paquete `ggplot2` de `tidyverse`.
 
     ::: {.cell}
     
@@ -306,11 +249,7 @@ a.  Dibujar la recta de regresión de $Y$ sobre $X$ sobre el diagrama de dispers
     ![](06-regresion_files/figure-html/unnamed-chunk-7-1.png){width=672}
     :::
     :::
-
-
-
-
-
+    :::
 
     Como la recta pasa por todos los puntos del diagrama de dispersión, los residuos son nulos.
     :::
@@ -319,11 +258,6 @@ a.  Calcular el coeficiente de determinación del modelo lineal e interpretarlo.
 
     ::: {.callout-tip collapse="true"}
     ## Solución
-
-
-
-
-
 
     ::: {.cell}
     
@@ -351,11 +285,6 @@ a.  Calcular el coeficiente de determinación del modelo lineal e interpretarlo.
     :::
     :::
 
-
-
-
-
-
     Como el coeficiente de determinación lineal vale 1, el ajuste de la recta de regresión es perfecto.
     :::
 
@@ -363,11 +292,6 @@ a.  Calcular la recta de regresión de $X$ sobre $Y$. ¿Coincide con la recta de
 
     ::: {.callout-tip collapse="true"}
     ## Solución
-
-
-
-
-
 
     ::: {.cell}
     
@@ -413,11 +337,6 @@ a.  Calcular la recta de regresión de $X$ sobre $Y$. ¿Coincide con la recta de
     :::
     :::
 
-
-
-
-
-
     La recta de regresión de $X$ sobre $Y$ es $x = -0.6666667 + 0.3333333 x$, que es la misma que la recta de $Y$ sobre $X$, ya que el ajuste es perfecto, y tanto los residuos en $Y$ como los residuos en $X$ valen cero para esta recta.
     :::
 :::
@@ -429,11 +348,6 @@ a.  Crear un data frame con los datos de las horas de estudio y los suspensos a 
 
     :::{.callout-tip collapse="true"} 
     ## Solución
-
-
-
-
-
 
     ::: {.cell}
     
@@ -458,47 +372,32 @@ a.  Crear un data frame con los datos de las horas de estudio y los suspensos a 
     :::
     
     ```{.r .cell-code}
-    df
+    head(df)
     ```
     
     ::: {.cell-output .cell-output-stdout}
     
     ```
-    # A tibble: 30 × 2
-       Horas Suspensos
-       <dbl>     <dbl>
-     1   3.5         1
-     2   0.6         5
-     3   2.8         1
-     4   2.5         3
-     5   2.6         1
-     6   3.9         0
-     7   1.5         3
-     8   0.7         3
-     9   3.6         1
-    10   3.7         1
-    # ℹ 20 more rows
+    # A tibble: 6 × 2
+      Horas Suspensos
+      <dbl>     <dbl>
+    1   3.5         1
+    2   0.6         5
+    3   2.8         1
+    4   2.5         3
+    5   2.6         1
+    6   3.9         0
     ```
     
     
     :::
     :::
-
-
-
-
-
     :::
 
 a.  Dibujar el diagrama de dispersión correspondiente. ¿Qué tipo de modelo de regresión se ajusta mejor a la nube de puntos?
 
     :::{.callout-tip collapse="true"}
     ## Solución 
-
-
-
-
-
 
     ::: {.cell}
     
@@ -514,11 +413,6 @@ a.  Dibujar el diagrama de dispersión correspondiente. ¿Qué tipo de modelo de
     :::
     :::
 
-
-
-
-
-
     El tipo de modelo que mejor se ajusta es lineal, ya que hay una tendencia lineal en la nube de puntos y además es inversa.
     :::
 
@@ -526,11 +420,6 @@ a.  Calcular la recta de regresión de los suspensos sobre las horas de estudio.
 
     ::: {.callout-tip collapse="true"}
     ## Solución
-
-
-
-
-
 
     ::: {.cell}
     
@@ -566,11 +455,6 @@ a.  Calcular la recta de regresión de los suspensos sobre las horas de estudio.
     :::
     :::
 
-
-
-
-
-
     La recta de regresión de los suspensos sobre las horas es $\textsf{suspensos}= 4.8491273 + -1.2299972 \textsf{horas}$.
     :::
 
@@ -578,11 +462,6 @@ a.  Obtener el coeficiente de regresión de la recta anterior e interpretarlo.
 
     ::: {.callout-tip collapse="true"}
     ## Solución
-
-
-
-
-
 
     ::: {.cell}
     
@@ -600,11 +479,6 @@ a.  Obtener el coeficiente de regresión de la recta anterior e interpretarlo.
     :::
     :::
 
-
-
-
-
-
     El coeficiente de regresión de los suspensos sobre las horas de estudio vale  -1.2299972, lo que indica que por cada hora de estudio se obtendrán 1.2299972 suspensos menos al final del curso.
     :::
 
@@ -613,11 +487,6 @@ a.  Dibujar la recta de regresión  sobre el diagrama de dispersión. ¿El ajust
 
     :::{.callout-tip collapse="true"}
     ## Solución
-
-
-
-
-
 
     ::: {.cell}
     
@@ -643,11 +512,6 @@ a.  Dibujar la recta de regresión  sobre el diagrama de dispersión. ¿El ajust
     :::
     :::
 
-
-
-
-
-
     En este caso el ajuste no es perfecto, ya que es imposible que la recta pase por todos los puntos como ocurría en el ejercicio anterior. Por tanto, el ajuste es peor.
     :::
 
@@ -655,11 +519,6 @@ a.  Calcular el coeficiente de determinación del modelo lineal e interpretarlo.
 
     ::: {.callout-tip collapse="true"}
     ## Solución
-
-
-
-
-
 
     ::: {.cell}
     
@@ -677,11 +536,6 @@ a.  Calcular el coeficiente de determinación del modelo lineal e interpretarlo.
     :::
     :::
 
-
-
-
-
-
     Como el coeficiente de determinación lineal vale 0.8154995 que está bastante próximo a 1, el ajuste es bueno, y el modelo puede utilizarse con fines predictivos.
     :::
 
@@ -689,11 +543,6 @@ a.  Utilizar la recta de regresión para predecir el número de suspensos corres
 
     ::: {.callout-tip collapse="true"}
     ## Solución
-
-
-
-
-
 
     ::: {.cell}
     
@@ -712,11 +561,6 @@ a.  Utilizar la recta de regresión para predecir el número de suspensos corres
     :::
     :::
 
-
-
-
-
-
     La predicción será fiable ya que el coeficiente de determinación está próximo a 1 y el tamaño de la muestra no es muy pequeño.
     :::
 
@@ -726,11 +570,6 @@ a.  Según el modelo lineal, ¿cuántas horas diarias tendrá que estudiar como 
     ## Solución
 
     Como ahora queremos predecir el número de horas de estudio, necesitamos calcular la recta de regresión de la horas sobre los suspensos.
-
-
-
-
-
 
     ::: {.cell}
     
@@ -749,11 +588,6 @@ a.  Según el modelo lineal, ¿cuántas horas diarias tendrá que estudiar como 
     
     :::
     :::
-
-
-
-
-
     :::
 :::
 
@@ -774,11 +608,6 @@ a.  Crear un data frame con los datos del tiempo y la concentración de alcohol.
     ::: {.callout-tip collapse="true"}
     ## Solución
 
-
-
-
-
-
     ::: {.cell}
     
     ```{.r .cell-code}
@@ -786,30 +615,8 @@ a.  Crear un data frame con los datos del tiempo y la concentración de alcohol.
         Tiempo = c(30, 60, 90, 120, 150, 180, 210),
         Alcohol = c(1.6, 1.7, 1.5, 1.1, 0.7, 0.2, 2.1)
     )
-    df
     ```
-    
-    ::: {.cell-output .cell-output-stdout}
-    
-    ```
-      Tiempo Alcohol
-    1     30     1.6
-    2     60     1.7
-    3     90     1.5
-    4    120     1.1
-    5    150     0.7
-    6    180     0.2
-    7    210     2.1
-    ```
-    
-    
     :::
-    :::
-
-
-
-
-
     :::
 
 a.  Calcular el coeficiente de correlación lineal. ¿Existe relación lineal entre la concentración de alcohol y el tiempo que pasa?
@@ -818,11 +625,6 @@ a.  Calcular el coeficiente de correlación lineal. ¿Existe relación lineal en
     ## Solución
 
     Para calcular el coeficiente de correlación lineal de Pearson se puede utilar la función [`cor`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/cor) del paquete `stats`.
-
-
-
-
-
 
     ::: {.cell}
     
@@ -840,11 +642,6 @@ a.  Calcular el coeficiente de correlación lineal. ¿Existe relación lineal en
     :::
     :::
 
-
-
-
-
-
     El valore del coeficiente de correlación lineal es muy bajo, por lo que aparentemente no hay relación lineal entre la concentración de alcohol en sangre y el tiempo que pasa.
     :::
 
@@ -852,11 +649,6 @@ a.  Dibujar el diagrama de dispersión correspondiente y la recta de regresión 
 
     :::{.callout-tip collapse="true"}
     ## Solución 
-
-
-
-
-
 
     ::: {.cell}
     
@@ -882,11 +674,6 @@ a.  Dibujar el diagrama de dispersión correspondiente y la recta de regresión 
     :::
     :::
 
-
-
-
-
-
     El ajuste es malo porque hay un dato atípico que no sigue la misma tendencia que el resto. 
     :::
 
@@ -894,11 +681,6 @@ a.  Eliminar el dato atípico y calcular la recta de la concentración de alcoho
 
     ::: {.callout-tip collapse="true"}
     ## Solución
-
-
-
-
-
 
     ::: {.cell}
     
@@ -936,11 +718,6 @@ a.  Eliminar el dato atípico y calcular la recta de la concentración de alcoho
     :::
     :::
 
-
-
-
-
-
     La recta de regresión de la concentración de alcohol en sangre sobre el tiempo es $\textsf{alcohol}= 2.1733333 + -0.0099048 \textsf{tiempo}$.
 
     El modelo ha mejorado notablemente ya que ahora el coeficiente de determinación lineal $R^2=0.8914286$, que está muy próximo a 1.
@@ -950,11 +727,6 @@ a.  Según el modelo de regresión lineal, ¿a qué velocidad metaboliza esta pe
 
     ::: {.callout-tip collapse="true"}
     ## Solución
-
-
-
-
-
 
     ::: {.cell}
     
@@ -972,11 +744,6 @@ a.  Según el modelo de regresión lineal, ¿a qué velocidad metaboliza esta pe
     :::
     :::
 
-
-
-
-
-
     Así pues, la velocidad de metabolización del alcohol es 0.0099048 g/l$\cdot$min.
     :::
 
@@ -986,11 +753,6 @@ a.  Si la concentración máxima de alcohol en la sangre que permite la ley para
     ## Solución
 
     Como ahora queremos predecir el tiempo, necesitamos calcular la recta de regresión del tiempo sobre la concentración de alcohol.
-
-
-
-
-
 
     ::: {.cell}
     
@@ -1010,11 +772,6 @@ a.  Si la concentración máxima de alcohol en la sangre que permite la ley para
     :::
     :::
 
-
-
-
-
-
     Aunque el coeficiente de determinación lineal está próximo a 1, el tamaño muestral es demasiado pequeño para que la predicción sea fiable.
     :::
 :::
@@ -1027,15 +784,10 @@ a.  Crear un data frame con los datos del PIB y los años a partir del fichero [
     :::{.callout-tip collapse="true"} 
     ## Solución
 
-
-
-
-
-
     ::: {.cell}
     
     ```{.r .cell-code}
-    library(readr)
+    library(tidyverse)
     df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/pib-usa.csv")
     ```
     
@@ -1055,36 +807,26 @@ a.  Crear un data frame con los datos del PIB y los años a partir del fichero [
     :::
     
     ```{.r .cell-code}
-    df
+    head(df)
     ```
     
     ::: {.cell-output .cell-output-stdout}
     
     ```
-    # A tibble: 76 × 2
-         Año   PIB
-       <dbl> <dbl>
-     1  1947  244.
-     2  1948  267.
-     3  1949  276.
-     4  1950  282.
-     5  1951  338.
-     6  1952  362.
-     7  1953  390.
-     8  1954  387.
-     9  1955  415.
-    10  1956  443.
-    # ℹ 66 more rows
+    # A tibble: 6 × 2
+        Año   PIB
+      <dbl> <dbl>
+    1  1947  244.
+    2  1948  267.
+    3  1949  276.
+    4  1950  282.
+    5  1951  338.
+    6  1952  362.
     ```
     
     
     :::
     :::
-
-
-
-
-
     :::
 
 a.  Dibujar el diagrama de dispersión que represente la evolución anual del PIB. ¿Qué tipo de modelo de regresión se ajusta mejor a la nube de puntos?
@@ -1092,15 +834,9 @@ a.  Dibujar el diagrama de dispersión que represente la evolución anual del PI
     :::{.callout-tip collapse="true"}
     ## Solución 
 
-
-
-
-
-
     ::: {.cell}
     
     ```{.r .cell-code}
-    library(ggplot2)
     ggplot(df, aes(x = Año, y = PIB)) +
         geom_point(col = "red") +
         labs(title = "Evolución del PIB de Estados Unidos", x = "Año", y = "PIB en billones dólares")
@@ -1111,11 +847,6 @@ a.  Dibujar el diagrama de dispersión que represente la evolución anual del PI
     :::
     :::
 
-
-
-
-
-
     A la vista de la forma de la nube de puntos parece que la evolución del PIB es exponencial.
     :::
 
@@ -1124,15 +855,9 @@ a.  Dibujar el diagrama de dispersión del logaritmo del PIB y los años.
     :::{.callout-tip collapse="true"}
     ## Solución 
 
-
-
-
-
-
     ::: {.cell}
     
     ```{.r .cell-code}
-    library(dplyr)
     df <- mutate(df, logPIB = log(PIB)) 
     ggplot(df, aes(x = Año, y = logPIB)) +
             geom_point(col = "red") +
@@ -1144,11 +869,6 @@ a.  Dibujar el diagrama de dispersión del logaritmo del PIB y los años.
     :::
     :::
 
-
-
-
-
-
     La nube de puntos tienen una clara forma lineal, lo que confirma que la evolución del PIB es exponencial.
     :::
 
@@ -1156,11 +876,6 @@ a.  Calcular el modelo de regresión exponencial del PIB sobre los años.
 
     ::: {.callout-tip collapse="true"}
     ## Solución
-
-
-
-
-
 
     ::: {.cell}
     
@@ -1196,11 +911,6 @@ a.  Calcular el modelo de regresión exponencial del PIB sobre los años.
     :::
     :::
 
-
-
-
-
-
     El modelo de regresión exponencial que mejor explica la evolución del PIB es $\textsf{PIB}= e^{-121.4998223 + 0.065271 \textsf{Año}}$.
     :::
 
@@ -1208,11 +918,6 @@ a.  ¿Cuál es la tasa de crecimiento porcentual anual del PIB?
 
     ::: {.callout-tip collapse="true"}
     ## Solución
-
-
-
-
-
 
     ::: {.cell}
     
@@ -1230,11 +935,6 @@ a.  ¿Cuál es la tasa de crecimiento porcentual anual del PIB?
     :::
     :::
 
-
-
-
-
-
     El coeficiente de regresión de los suspensos sobre las horas de estudio vale  0.065271, lo que indica que la tasa de crecimiento anual del PIB es 6.5271024%.
     :::
 
@@ -1244,15 +944,9 @@ a.  Dibujar el modelo de regresión exponencial sobre el diagrama de dispersión
     :::{.callout-tip collapse="true"}
     ## Solución
 
-
-
-
-
-
     ::: {.cell}
     
     ```{.r .cell-code}
-    library(ggplot2)
     ggplot(df, aes(x = Año, y = PIB)) +
             geom_point(col = "red") +
             geom_smooth(method = "glm", method.args = list(family=gaussian(link="log")))
@@ -1295,11 +989,6 @@ a.  Dibujar el modelo de regresión exponencial sobre el diagrama de dispersión
     :::
     :::
 
-
-
-
-
-
     En este caso el ajuste no es perfecto, ya que es imposible que la recta pase por todos los puntos como ocurría en el ejercicio anterior. Por tanto, el ajuste es peor.
     :::
 
@@ -1308,11 +997,6 @@ a.  ¿Es el modelo de regresión exponencial un buen modelo para explicar la evo
 
     ::: {.callout-tip collapse="true"}
     ## Solución
-
-
-
-
-
 
     ::: {.cell}
     
@@ -1330,11 +1014,6 @@ a.  ¿Es el modelo de regresión exponencial un buen modelo para explicar la evo
     :::
     :::
 
-
-
-
-
-
     Como el coeficiente de determinación lineal vale 0.9834876 que está bastante próximo a 1, el ajuste es bueno, y el modelo exponencial explica muy bien la evolución del PIB.
     :::
 
@@ -1342,11 +1021,6 @@ a.  Utilizar el modelo de regresión exponencial para predecir el PIB del año 2
 
     ::: {.callout-tip collapse="true"}
     ## Solución
-
-
-
-
-
 
     ::: {.cell}
     
@@ -1366,11 +1040,6 @@ a.  Utilizar el modelo de regresión exponencial para predecir el PIB del año 2
     :::
     :::
 
-
-
-
-
-
     La predicción será fiable ya que el coeficiente de determinación está próximo a 1, el tamaño de la muestra no es muy pequeño y el año para el que se realiza la predicción no está lejos del rango de años de la muestra.
     :::
 
@@ -1380,11 +1049,6 @@ a.  ¿Cuándo se alcanzará un PIB de 50000 billones de dólares?
     ## Solución
 
     Como ahora queremos predecir el año en el que se alcanzará el PIB dado, necesitamos construir el modelo de regresión de los años sobre el PIB. Como la relación entre el PIB y los años es exponencial, la relación entre los años y el PIB será la inversa, es decir, el modelo logarítmico.
-
-
-
-
-
 
     ::: {.cell}
     
@@ -1420,17 +1084,7 @@ a.  ¿Cuándo se alcanzará un PIB de 50000 billones de dólares?
     :::
     :::
 
-
-
-
-
-
     El modelo de regresión logarítmico de los años sobre el PIB es $\textsf{Año}= 1863.4980331 + 15.0677514 \log(\textsf{PIB})$.
-
-
-
-
-
 
     ::: {.cell}
     
@@ -1448,11 +1102,6 @@ a.  ¿Cuándo se alcanzará un PIB de 50000 billones de dólares?
     
     :::
     :::
-
-
-
-
-
     :::
 :::
 
@@ -1464,15 +1113,10 @@ a.  Crear un data frame con los datos de la dieta a partir del fichero [`dieta.c
     :::{.callout-tip collapse="true"} 
     ## Solución
 
-
-
-
-
-
     ::: {.cell}
     
     ```{.r .cell-code}
-    library(readr)
+    library(tidyverse)
     df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/dieta.csv")
     ```
     
@@ -1518,11 +1162,6 @@ a.  Crear un data frame con los datos de la dieta a partir del fichero [`dieta.c
     
     :::
     :::
-
-
-
-
-
     :::
 
 a.  Dibujar el diagrama de dispersión de los kilos perdidos en función del número de días con la dieta. ¿Qué tipo de modelo de regresión se ajusta mejor a la nube de puntos?
@@ -1530,15 +1169,9 @@ a.  Dibujar el diagrama de dispersión de los kilos perdidos en función del nú
     :::{.callout-tip collapse="true"}
     ## Solución 
 
-
-
-
-
-
     ::: {.cell}
     
     ```{.r .cell-code}
-    library(ggplot2)
     ggplot(df, aes(x = dias, y = peso.perdido)) +
         geom_point(col = "red") +
         labs(title = "Diagrama de dispersión del peso perdido y los días de dieta", x = "Días de dieta", y = "Peso perdido en Kg")
@@ -1549,11 +1182,6 @@ a.  Dibujar el diagrama de dispersión de los kilos perdidos en función del nú
     :::
     :::
 
-
-
-
-
-
     La nube de puntos es bastante difusa aunque parece apreciarse una tendencia logarítmica o sigmoidal.
     :::
 
@@ -1562,19 +1190,10 @@ a.  Calcular los coeficientes de determinación lineal, cuadrático, exponencial
     ::: {.callout-tip collapse="true"}
     ## Solución
 
-
-
-
-
-
     ::: {.cell}
     
     ```{.r .cell-code}
-    library(dplyr)
-    library(tidyr)
-    library(purrr)
     library(broom)
-    library(kableExtra)
     # Construimos un data frame con el ajuste de los modelos.
     modelos <- tibble(
             Lineal = list(lm(peso.perdido ~ dias, df)),
@@ -1597,61 +1216,25 @@ a.  Calcular los coeficientes de determinación lineal, cuadrático, exponencial
         
     modelos  |>
         select(Tipo_Modelo, r.squared)  |> 
-        kable(col.names = c("Tipo de Modelo", "R²")) |>
-        kable_styling(full_width = F)
+        kable(col.names = c("Tipo de Modelo", "R²"))
     ```
     
     ::: {.cell-output-display}
-
-    `````{=html}
-    <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-     <thead>
-      <tr>
-       <th style="text-align:left;"> Tipo de Modelo </th>
-       <th style="text-align:right;"> R² </th>
-      </tr>
-     </thead>
-    <tbody>
-      <tr>
-       <td style="text-align:left;"> Sigmoidal </td>
-       <td style="text-align:right;"> 0.6662170 </td>
-      </tr>
-      <tr>
-       <td style="text-align:left;"> Potencial </td>
-       <td style="text-align:right;"> 0.5684490 </td>
-      </tr>
-      <tr>
-       <td style="text-align:left;"> Inverso </td>
-       <td style="text-align:right;"> 0.5583853 </td>
-      </tr>
-      <tr>
-       <td style="text-align:left;"> Cuadratico </td>
-       <td style="text-align:right;"> 0.5397848 </td>
-      </tr>
-      <tr>
-       <td style="text-align:left;"> Logaritmico </td>
-       <td style="text-align:right;"> 0.5254856 </td>
-      </tr>
-      <tr>
-       <td style="text-align:left;"> Lineal </td>
-       <td style="text-align:right;"> 0.4356390 </td>
-      </tr>
-      <tr>
-       <td style="text-align:left;"> Exponencial </td>
-       <td style="text-align:right;"> 0.4308936 </td>
-      </tr>
-    </tbody>
-    </table>
     
-    `````
-
+    
+    |Tipo de Modelo |        R²|
+    |:--------------|---------:|
+    |Sigmoidal      | 0.6662170|
+    |Potencial      | 0.5684490|
+    |Inverso        | 0.5583853|
+    |Cuadratico     | 0.5397848|
+    |Logaritmico    | 0.5254856|
+    |Lineal         | 0.4356390|
+    |Exponencial    | 0.4308936|
+    
+    
     :::
     :::
-
-
-
-
-
 
     El mejor modelo es el Sigmoidal que explica el 66.6216965% de la variabilidad del peso perdido. 
     :::
@@ -1661,15 +1244,9 @@ a.  Dibujar el diagrama de dispersión de los kilos perdidos en función del nú
     :::{.callout-tip collapse="true"}
     ## Solución 
 
-
-
-
-
-
     ::: {.cell}
     
     ```{.r .cell-code}
-    library(ggplot2)
     ggplot(df, aes(x = dias, y = peso.perdido, color = ejercicio)) +
         geom_point() +
         labs(title = "Diagrama de dispersión del peso perdido y los días de dieta", x = "Días de dieta", y = "Peso perdido en Kg")
@@ -1680,11 +1257,6 @@ a.  Dibujar el diagrama de dispersión de los kilos perdidos en función del nú
     :::
     :::
 
-
-
-
-
-
     Claramente la nube de puntos de las personas que hacen ejercicio está por encima de la de los que no hacen ejercicio, lo que indica que hacer ejercicio favorece la pérdida de peso. Los más razonable es construir modelos de regresión para cada grupo.
     :::
 
@@ -1692,11 +1264,6 @@ a.  ¿Qué tipo de modelo explica mejor la relación entre el peso perdido y los
 
     ::: {.callout-tip collapse="true"}
     ## Solución
-
-
-
-
-
 
     ::: {.cell}
     
@@ -1721,18 +1288,17 @@ a.  ¿Qué tipo de modelo explica mejor la relación entre el peso perdido y los
         # Desanidamos el resumen (se obtiene una columna para cada parámetro del resumen del ajuste de los modelos).
         unnest(Resumen)  |> 
         # Ordenamos el data frame por la columna ejercicio y por el coeficiente de determinación.
-        arrange(ejercicio, -r.squared)  
+        arrange(ejercicio, -r.squared)
+        
     modelos |> 
         select(ejercicio, Tipo_Modelo, r.squared)  |> 
         kable(col.names = c("Ejercicio", "Tipo de Modelo", "R²")) |>
-        pack_rows(index = table(modelos$ejercicio))  |> 
-        kable_styling(full_width = F)
+        pack_rows(index = table(modelos$ejercicio))
     ```
     
     ::: {.cell-output-display}
-
     `````{=html}
-    <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+    <table>
      <thead>
       <tr>
        <th style="text-align:left;"> Ejercicio </th>
@@ -1817,14 +1383,8 @@ a.  ¿Qué tipo de modelo explica mejor la relación entre el peso perdido y los
     </table>
     
     `````
-
     :::
     :::
-
-
-
-
-
 
     El mejor modelo en el grupo de los que hacen ejercicio es el inverso y en el grupo de los que no el sigmoidal. Los modelos han mejorado bastante con respecto al modelo anterior, sobre todo el del grupo de personas que hace ejercicio.
     :::
@@ -1835,11 +1395,11 @@ a.  Construir el mejor modelo de regresión del peso perdido sobre los días de 
     ## Solución
 
     Construimos el modelo inverso para el grupo de las personas que hacen ejercicio.
+    
+    :::{.panel-tabset}
 
-
-
-
-
+    ## Base
+    Con la función [`lm`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/lm) del paquete `stats`.
 
     ::: {.cell}
     
@@ -1876,28 +1436,41 @@ a.  Construir el mejor modelo de regresión del peso perdido sobre los días de 
     :::
     :::
 
+    ## Tidyverse
 
-
-
-
-
-    <!-- ```{r}
+    ::: {.cell}
+    
+    ```{.r .cell-code}
     df |>
         nest_by(ejercicio) |> 
-        filter(ejercicio == "si") |>
-        mutate(modelo = list(lm(peso.perdido ~ I(1/dias), df))) |>
-        summarize(tidy(modelo)) |>
-        kable() |>
-        kable_styling()
-    ``` -->
+        mutate(modelo = list(tidy(lm(peso.perdido ~ I(1/dias), data = data)))) |> 
+        unnest(modelo) |>
+        filter(ejercicio == "si")
+    ```
+    
+    ::: {.cell-output .cell-output-stdout}
+    
+    ```
+    # A tibble: 2 × 7
+    # Groups:   ejercicio [1]
+      ejercicio               data term        estimate std.error statistic  p.value
+      <chr>     <list<tibble[,2]>> <chr>          <dbl>     <dbl>     <dbl>    <dbl>
+    1 si                  [20 × 2] (Intercept)     21.6     0.765     28.2  2.42e-16
+    2 si                  [20 × 2] I(1/dias)     -255.     25.6       -9.99 9.12e- 9
+    ```
+    
+    
+    :::
+    :::
+    :::
 
     Y ahora el modelo sigmoidal para el grupo de las personas que no hacen ejercicio.
+
+    :::{.panel-tabset}
+
+    ## Base
+    Con la función [`lm`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/lm) del paquete `stats`.
     
-
-
-
-
-
     ::: {.cell}
     
     ```{.r .cell-code}
@@ -1933,10 +1506,33 @@ a.  Construir el mejor modelo de regresión del peso perdido sobre los días de 
     :::
     :::
 
+    ## Tidyverse
 
-
-
-
+    ::: {.cell}
+    
+    ```{.r .cell-code}
+    df |>
+        nest_by(ejercicio) |> 
+        mutate(modelo = list(tidy(lm(log(peso.perdido) ~ I(1/dias), data = data)))) |> 
+        unnest(modelo) |>
+        filter(ejercicio == "no")
+    ```
+    
+    ::: {.cell-output .cell-output-stdout}
+    
+    ```
+    # A tibble: 2 × 7
+    # Groups:   ejercicio [1]
+      ejercicio               data term        estimate std.error statistic  p.value
+      <chr>     <list<tibble[,2]>> <chr>          <dbl>     <dbl>     <dbl>    <dbl>
+    1 no                  [20 × 2] (Intercept)     2.87     0.102     28.1  2.55e-16
+    2 no                  [20 × 2] I(1/dias)     -24.4      3.41      -7.16 1.15e- 6
+    ```
+    
+    
+    :::
+    :::
+    :::
     :::
 
 a.  Según los mejores modelos de regresión en cada caso, ¿cuántos kilos perderá una persona que hace ejercicio tras 100 días de dieta? ¿Y una que no hace ejercicio?
@@ -1945,11 +1541,6 @@ a.  Según los mejores modelos de regresión en cada caso, ¿cuántos kilos perd
     ## Solución
 
     Hacemos primero la predicción del peso perdido para la persona que hace ejercicio usando el modelo inverso.
-
-
-
-
-
 
     ::: {.cell}
     
@@ -1968,18 +1559,8 @@ a.  Según los mejores modelos de regresión en cada caso, ¿cuántos kilos perd
     :::
     :::
 
-
-
-
-
-
     Y ahora hacemos la predicción del peso perdido para la persona que no hace ejercicio usando el modelo sigmoidal.
     
-
-
-
-
-
     ::: {.cell}
     
     ```{.r .cell-code}
@@ -1997,23 +1578,8 @@ a.  Según los mejores modelos de regresión en cada caso, ¿cuántos kilos perd
     
     :::
     :::
-
-
-
-
-
     :::
 :::
-
-<!-- ```{r}
-library(ggplot2)
-ggplot(df, aes(x = dias, y = peso.perdido, color = ejercicio)) +
-    geom_point() +
-    geom_smooth(method = "lm", formula = y ~ I(1/x)) +
-    geom_smooth(method = "glm", formula = y ~ I(1/x), method.args = list(family=gaussian(link="log")), linetype = 2) +
-    labs(title = "Diagrama de dispersión del peso perdido y los días de dieta", x = "Días de dieta", y = "Peso perdido en Kg") +
-    scale_linetype_manual(values = c("solid", "dashed"), name  ="Tipo de modelo", breaks=c("Inverso", "Sigmoidal"), labels=c("Inv", "Sig"))
-``` -->
 
 ## Ejercicios propuestos
 

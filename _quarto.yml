@@ -61,6 +61,27 @@ format:
     code-overflow: wrap
     code-link: true
  
-
+  pdf:
+    latex-engine: xelatex
+    documentclass: scrreport
+    papersize: a4
+    template-partials:
+      - before-body.tex
+    titlegraphic: img/logos/sticker-estadistica-r.png
+    institution: CEU San Pablo
+    email: asalber@ceu.es
+    web: https://aprendeconalf.es
+    logo: img/logos/aprendeconalf.png
+    include-in-header:
+      - preamble.tex
+      - macros.tex
+    keep-tex: true
+    #mainfont: TeX Gyre Termes
+    #mainfontoptions:
+    #  - Numbers=Lowercase
+    #  - Numbers=Proportional    
+    
+  epub:
+    cover-image: img/logos/sticker-estadistica-r.png
 
 

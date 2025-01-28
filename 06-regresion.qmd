@@ -8,23 +8,7 @@ lang: es
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
-## Ejercicios Resueltos
-
-Para la realización de esta práctica se requieren los siguientes paquetes:
-
-``` r
-library(tidyverse) 
-# Incluye los siguientes paquetes:
-# - readr: para la lectura de ficheros csv. 
-# - dplyr: para el preprocesamiento y manipulación de datos.
-# - tidyr: para la organización de los datos.
-# - purrr: para aplicar funciones a vectores. 
-library(broom) # para convertir las listas con los resúmenes de los modelos de regresión a formato organizado.
-library(knitr) # para el formateo de tablas.
-library(kableExtra) # para personalizar el formato de las tablas.
-```
-
-También se necesita conocer las ecuaciones de los principales modelos de regresión, que se resumen en la siguiente tabla.
+Esta práctica contiene ejercicios que muestran como construir modelos de regresión simple que describen la relación entre dos variables cuantitativas. En particular se muestra cómo construir los siguientes modelos:
 
 | Modelo                  |      Ecuación general      |
 |:------------------------|:--------------------------:|
@@ -37,6 +21,20 @@ También se necesita conocer las ecuaciones de los principales modelos de regres
 | Inverso                 |         $y=a+b/x$          |
 | Curva S o Sigmoidal     |       $y= e^{a+b/x}$       |
 
+## Ejercicios Resueltos
+
+Para la realización de esta práctica se requieren los siguientes paquetes:
+
+```r
+library(tidyverse) 
+# Incluye los siguientes paquetes:
+# - readr: para la lectura de ficheros csv. 
+# - dplyr: para el preprocesamiento y manipulación de datos.
+# - tidyr: para la organización de los datos.
+# - purrr: para aplicar funciones a vectores. 
+library(broom) # para convertir las listas con los resúmenes de los modelos de regresión a formato organizado.
+library(knitr) # para el formateo de tablas.
+```
 
 ::: {#exr-regresion-1}
 Se han medido dos variables $X$ e $Y$ en 10 individuos obteniendo los siguientes resultados:
@@ -67,26 +65,26 @@ a.  Crear un conjunto de datos con las variables `x` e `y`.
 a.  Dibujar el diagrama de dispersión correspondiente. ¿Qué tipo de modelo de regresión se ajusta mejor a la nube de puntos?
 
     ::: {.callout-tip collapse="true"}
-    ## Solución 1
+    ## Solución
+    :::{.panel-tabset}
 
-    Para dibujar un diagrama de dispersión se puede usar la función [`plot`](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot) del paquete `graphics`.
+    ## Base
+    Con la función [`plot`](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot) del paquete `graphics`.
     
     ```{r}
     plot(df$x, df$y, xlab = "X", ylab = "Y", main = "Diagrama de dispersión")
     ```
-    :::
-
-    :::{.callout-tip collapse="true"}
-    ## Solución 2
-
-    Otra alternativa es usar la función la función [`geom_point`](https://aprendeconalf.es/manual-r/07-graficos.html#diagramas-de-puntos) del paquete `ggplot2`.
+  
+    ## Tidyverse
+    Con la función [`geom_point`](https://aprendeconalf.es/manual-r/07-graficos.html#diagramas-de-puntos) del paquete `ggplot2` de `tidyverse`.
 
     ```{r}
-    library(ggplot2)
+    library(tidyverse)
     ggplot(df, aes(x = x, y = y)) +
         geom_point(col = "red") +
         labs(title = "Diagrama de dispersión", x = "X", y = "Y")
     ```
+    :::
 
     El tipo de modelo que mejor se ajusta es lineal, ya que todos los puntos están alineados.
     :::
@@ -95,7 +93,6 @@ a.  Calcular la recta de regresión de $Y$ sobre $X$.
 
     ::: {.callout-tip collapse="true"}
     ## Solución
-
     Para ajustar un modelo de regresión se utiliza la función [`lm`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/lm) del paquete `stats`. Esta función requiere que se le pase como parámetro la fórmula del modelo de regresión que debe tener la sintaxis `y ~ f(x)`, donde `y` es la variable dependiente en el modelo, `x` es la variable independiente, y `f(x)` es una expresión matemática que describe el modelo.
 
     ```{r}
@@ -122,22 +119,20 @@ a.  Obtener el coeficiente de regresión de la recta anterior e interpretarlo.
 
 a.  Dibujar la recta de regresión de $Y$ sobre $X$ sobre el diagrama de dispersión. ¿Cómo son los residuos del modelo de regresión?
 
-
     ::: {.callout-tip collapse="true"}
-    ## Solución 1
+    ## Solución
+    :::{.panel-tabset}
 
-    Para dibujar la recta de regresión se puede usar la función [`abline`](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/abline) del paquete `graphics`.
+    ## Base
+    Con la función [`abline`](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/abline) del paquete `graphics`.
     
     ```{r}
     plot(df$x, df$y, xlab = "X", ylab = "Y", main = "Diagrama de dispersión")
     abline(recta_y_x)
     ```
-    :::
 
-    :::{.callout-tip collapse="true"}
-    ## Solución 2
-
-    Otra alternativa es usar la geometría de ajuste de regresión por mínimos cuadrados [`geom_smooth`](https://aprendeconalf.es/manual-r/07-graficos.html#interpolaci%C3%B3n-y-ajustes-de-regresi%C3%B3n) del paquete `ggplot2`.
+    ## Tidyverse
+    Con la función [`geom_smooth`](https://aprendeconalf.es/manual-r/07-graficos.html#interpolaci%C3%B3n-y-ajustes-de-regresi%C3%B3n) del paquete `ggplot2` de `tidyverse`.
 
     ```{r}
     library(ggplot2)
@@ -146,6 +141,7 @@ a.  Dibujar la recta de regresión de $Y$ sobre $X$ sobre el diagrama de dispers
         geom_smooth(method = "lm") +
         labs(title = "Diagrama de dispersión", x = "X", y = "Y")
     ```
+    :::
 
     Como la recta pasa por todos los puntos del diagrama de dispersión, los residuos son nulos.
     :::
@@ -187,7 +183,7 @@ a.  Crear un data frame con los datos de las horas de estudio y los suspensos a 
     ```{r}
     library(readr)
     df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/horas-estudio.csv")
-    df
+    head(df)
     ```
     :::
 
@@ -308,7 +304,6 @@ a.  Crear un data frame con los datos del tiempo y la concentración de alcohol.
         Tiempo = c(30, 60, 90, 120, 150, 180, 210),
         Alcohol = c(1.6, 1.7, 1.5, 1.1, 0.7, 0.2, 2.1)
     )
-    df
     ```
     :::
 
@@ -396,9 +391,9 @@ a.  Crear un data frame con los datos del PIB y los años a partir del fichero [
     ## Solución
 
     ```{r}
-    library(readr)
+    library(tidyverse)
     df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/pib-usa.csv")
-    df
+    head(df)
     ```
     :::
 
@@ -408,7 +403,6 @@ a.  Dibujar el diagrama de dispersión que represente la evolución anual del PI
     ## Solución 
 
     ```{r}
-    library(ggplot2)
     ggplot(df, aes(x = Año, y = PIB)) +
         geom_point(col = "red") +
         labs(title = "Evolución del PIB de Estados Unidos", x = "Año", y = "PIB en billones dólares")
@@ -423,7 +417,6 @@ a.  Dibujar el diagrama de dispersión del logaritmo del PIB y los años.
     ## Solución 
 
     ```{r}
-    library(dplyr)
     df <- mutate(df, logPIB = log(PIB)) 
     ggplot(df, aes(x = Año, y = logPIB)) +
             geom_point(col = "red") +
@@ -465,7 +458,6 @@ a.  Dibujar el modelo de regresión exponencial sobre el diagrama de dispersión
     ## Solución
 
     ```{r}
-    library(ggplot2)
     ggplot(df, aes(x = Año, y = PIB)) +
             geom_point(col = "red") +
             geom_smooth(method = "glm", method.args = list(family=gaussian(link="log")))
@@ -530,7 +522,7 @@ a.  Crear un data frame con los datos de la dieta a partir del fichero [`dieta.c
     ## Solución
 
     ```{r}
-    library(readr)
+    library(tidyverse)
     df <- read_csv("https://aprendeconalf.es/estadistica-practicas-r/datos/dieta.csv")
     df
     ```
@@ -542,7 +534,6 @@ a.  Dibujar el diagrama de dispersión de los kilos perdidos en función del nú
     ## Solución 
 
     ```{r}
-    library(ggplot2)
     ggplot(df, aes(x = dias, y = peso.perdido)) +
         geom_point(col = "red") +
         labs(title = "Diagrama de dispersión del peso perdido y los días de dieta", x = "Días de dieta", y = "Peso perdido en Kg")
@@ -557,11 +548,7 @@ a.  Calcular los coeficientes de determinación lineal, cuadrático, exponencial
     ## Solución
 
     ```{r}
-    library(dplyr)
-    library(tidyr)
-    library(purrr)
     library(broom)
-    library(kableExtra)
     # Construimos un data frame con el ajuste de los modelos.
     modelos <- tibble(
             Lineal = list(lm(peso.perdido ~ dias, df)),
@@ -584,8 +571,7 @@ a.  Calcular los coeficientes de determinación lineal, cuadrático, exponencial
         
     modelos  |>
         select(Tipo_Modelo, r.squared)  |> 
-        kable(col.names = c("Tipo de Modelo", "R²")) |>
-        kable_styling(full_width = F)
+        kable(col.names = c("Tipo de Modelo", "R²"))
     ```
 
     El mejor modelo es el Sigmoidal que explica el `r modelos[1, "r.squared"]*100`% de la variabilidad del peso perdido. 
@@ -597,7 +583,6 @@ a.  Dibujar el diagrama de dispersión de los kilos perdidos en función del nú
     ## Solución 
 
     ```{r}
-    library(ggplot2)
     ggplot(df, aes(x = dias, y = peso.perdido, color = ejercicio)) +
         geom_point() +
         labs(title = "Diagrama de dispersión del peso perdido y los días de dieta", x = "Días de dieta", y = "Peso perdido en Kg")
@@ -632,12 +617,12 @@ a.  ¿Qué tipo de modelo explica mejor la relación entre el peso perdido y los
         # Desanidamos el resumen (se obtiene una columna para cada parámetro del resumen del ajuste de los modelos).
         unnest(Resumen)  |> 
         # Ordenamos el data frame por la columna ejercicio y por el coeficiente de determinación.
-        arrange(ejercicio, -r.squared)  
+        arrange(ejercicio, -r.squared)
+        
     modelos |> 
         select(ejercicio, Tipo_Modelo, r.squared)  |> 
         kable(col.names = c("Ejercicio", "Tipo de Modelo", "R²")) |>
-        pack_rows(index = table(modelos$ejercicio))  |> 
-        kable_styling(full_width = F)
+        pack_rows(index = table(modelos$ejercicio))
     ```
 
     El mejor modelo en el grupo de los que hacen ejercicio es el inverso y en el grupo de los que no el sigmoidal. Los modelos han mejorado bastante con respecto al modelo anterior, sobre todo el del grupo de personas que hace ejercicio.
@@ -649,28 +634,50 @@ a.  Construir el mejor modelo de regresión del peso perdido sobre los días de 
     ## Solución
 
     Construimos el modelo inverso para el grupo de las personas que hacen ejercicio.
+    
+    :::{.panel-tabset}
+
+    ## Base
+    Con la función [`lm`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/lm) del paquete `stats`.
 
     ```{r}
     inverso_ejercicio <- lm(peso.perdido ~ I(1/dias), df[df$ejercicio == "si", ])
     summary(inverso_ejercicio)
     ```
 
-    <!-- ```{r}
+    ## Tidyverse
+
+    ```{r}
     df |>
         nest_by(ejercicio) |> 
-        filter(ejercicio == "si") |>
-        mutate(modelo = list(lm(peso.perdido ~ I(1/dias), df))) |>
-        summarize(tidy(modelo)) |>
-        kable() |>
-        kable_styling()
-    ``` -->
+        mutate(modelo = list(tidy(lm(peso.perdido ~ I(1/dias), data = data)))) |> 
+        unnest(modelo) |>
+        filter(ejercicio == "si")
+    ```
+    :::
 
     Y ahora el modelo sigmoidal para el grupo de las personas que no hacen ejercicio.
+
+    :::{.panel-tabset}
+
+    ## Base
+    Con la función [`lm`](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/lm) del paquete `stats`.
     
     ```{r}
     sigmoidal_no_ejercicio <- lm(log(peso.perdido) ~ I(1/dias), df[df$ejercicio == "no", ])
     summary(sigmoidal_no_ejercicio)
     ```
+
+    ## Tidyverse
+
+    ```{r}
+    df |>
+        nest_by(ejercicio) |> 
+        mutate(modelo = list(tidy(lm(log(peso.perdido) ~ I(1/dias), data = data)))) |> 
+        unnest(modelo) |>
+        filter(ejercicio == "no")
+    ```
+    :::
     :::
 
 a.  Según los mejores modelos de regresión en cada caso, ¿cuántos kilos perderá una persona que hace ejercicio tras 100 días de dieta? ¿Y una que no hace ejercicio?
@@ -692,16 +699,6 @@ a.  Según los mejores modelos de regresión en cada caso, ¿cuántos kilos perd
     ```
     :::
 :::
-
-<!-- ```{r}
-library(ggplot2)
-ggplot(df, aes(x = dias, y = peso.perdido, color = ejercicio)) +
-    geom_point() +
-    geom_smooth(method = "lm", formula = y ~ I(1/x)) +
-    geom_smooth(method = "glm", formula = y ~ I(1/x), method.args = list(family=gaussian(link="log")), linetype = 2) +
-    labs(title = "Diagrama de dispersión del peso perdido y los días de dieta", x = "Días de dieta", y = "Peso perdido en Kg") +
-    scale_linetype_manual(values = c("solid", "dashed"), name  ="Tipo de modelo", breaks=c("Inverso", "Sigmoidal"), labels=c("Inv", "Sig"))
-``` -->
 
 ## Ejercicios propuestos
 

@@ -335,6 +335,28 @@ a.  Filtrar el data frame para quedarse con los hombres mayores de 30 años.
     :::
     :::
 
+a.  Filtrar el data frame para quedarse con las filas sin valores perdidos.
+
+    :::{.callout-tip collapse="true"}
+    ## Solución
+    :::{.panel-tabset}
+
+    ## Base
+    Con la función `na.omit` del paquete `base` de R. La función `na.omit` elimina las filas con valores perdidos.
+
+    ```{r}
+    na.omit(df)
+    ```
+
+    ## Tidyverse
+    Con la función `drop_na` del paquete `tidyr` de `tidyverse`.
+
+    ```{r}
+    df |> drop_na()
+    ```
+    :::
+    :::
+
 a.  Filtrar el data frame para eliminar las filas con datos perdidos en la columna `colesterol`.
 
     :::{.callout-tip collapse="true"}

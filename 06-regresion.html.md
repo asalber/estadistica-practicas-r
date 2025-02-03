@@ -83,7 +83,7 @@ a.  Dibujar el diagrama de dispersión correspondiente. ¿Qué tipo de modelo de
     :::
     :::
   
-    ## Tidyverse
+    ## tidyverse
     Con la función [`geom_point`](https://aprendeconalf.es/manual-r/07-graficos.html#diagramas-de-puntos) del paquete `ggplot2` de `tidyverse`.
 
     ::: {.cell}
@@ -223,7 +223,7 @@ a.  Dibujar la recta de regresión de $Y$ sobre $X$ sobre el diagrama de dispers
     :::
     :::
 
-    ## Tidyverse
+    ## tidyverse
     Con la función [`geom_smooth`](https://aprendeconalf.es/manual-r/07-graficos.html#interpolaci%C3%B3n-y-ajustes-de-regresi%C3%B3n) del paquete `ggplot2` de `tidyverse`.
 
     ::: {.cell}
@@ -1436,7 +1436,7 @@ a.  Construir el mejor modelo de regresión del peso perdido sobre los días de 
     :::
     :::
 
-    ## Tidyverse
+    ## tidyverse
 
     ::: {.cell}
     
@@ -1506,7 +1506,7 @@ a.  Construir el mejor modelo de regresión del peso perdido sobre los días de 
     :::
     :::
 
-    ## Tidyverse
+    ## tidyverse
 
     ::: {.cell}
     

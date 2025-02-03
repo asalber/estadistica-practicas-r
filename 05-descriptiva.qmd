@@ -237,7 +237,7 @@ a.  Calcular el tamaño muestral según el sexo.
     table(df$sexo)
     ```
     
-    ## Tidyverse
+    ## tidyverse
     Con la función [`count`](https://aprendeconalf.es/manual-r/06-preprocesamiento.html#conteo-del-n%C3%BAmero-de-observaciones) del paquete `dplyr` de `tidyverse`.
 
     ```{r}
@@ -315,7 +315,7 @@ a.  ¿En qué variable es más representativa la media?
     summ.names = c("Media", "Desviación Típica", "Coef. Variación"))
     ```
     
-    ## Tidyverse
+    ## tidyverse
     Con las funciones [`summarise`](https://dplyr.tidyverse.org/reference/summarise.html) y [`across`](https://dplyr.tidyverse.org/reference/across.html) del paquete `dplyr` de `tidyverse`.
 
     ```{r}
@@ -324,7 +324,7 @@ a.  ¿En qué variable es más representativa la media?
     kable()
     ```
 
-    ## Tidyverse 2
+    ## tidyverse 2
     Pivotando el datra frame con  [`pivot_longer`](https://tidyr.tidyverse.org/reference/pivot_longer.html) y agrupando con [`group_by`](https://dplyr.tidyverse.org/reference/group_by.html).
 
     ```{r}
@@ -349,7 +349,7 @@ a.  Realizar un resumen estadístico con el coeficiente de asimetría y el coefi
     ## Solución
     :::{.panel-tabset}
 
-    ## Base
+    ## vtable
     Con la función `sumtable` del paquete [`vtable`](https://cran.r-project.org/web/packages/vtable/vignettes/sumtable.html).
 
     ```{r}
@@ -358,7 +358,7 @@ a.  Realizar un resumen estadístico con el coeficiente de asimetría y el coefi
     summ.names = c("Coef. Asimetría", "Coef. Apuntamiento"))
     ```
     
-    ## Tidyverse
+    ## tidyverse
     Con las funciones [`group_by`](https://dplyr.tidyverse.org/reference/group_by.html), [`summarise`](https://dplyr.tidyverse.org/reference/summarise.html) y [`across`](https://dplyr.tidyverse.org/reference/across.html) del paquete `dplyr` de `tidyverse`.
     
     ```{r}

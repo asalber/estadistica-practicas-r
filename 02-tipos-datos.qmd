@@ -542,7 +542,7 @@ a.  Añadir una nueva columna con los siguientes impuestos pagados.
     df
     ```
 
-    ## Tidyverse
+    ## tidyverse
     Con las funciones del paquete `dplyr` de `tidyverse`.
 
     ```{r}
@@ -572,7 +572,7 @@ a.  Añadir una nueva fila con los siguientes datos de Abril.
     df
     ```
     
-    ## Tidyverse
+    ## tidyverse
     Con las funciones del paquete `dplyr` de `tidyverse`.
 
     ```{r, echo = F}
@@ -627,7 +627,7 @@ a.  Crear un data frame con los datos de todos los pacientes del estudio a parti
     head(df)
     ```
     
-    ## Tidyverse
+    ## tidyverse
     Con la función [`read_csv`](https://readr.tidyverse.org/reference/read_delim.html) del paquete del paquete [`readr`](https://readr.tidyverse.org/index.html) de `tidyverse`.
 
     ```{r}
@@ -650,7 +650,7 @@ a.  Mostrar las variables del data frame.
     colnames(df)
     ```
     
-    ## Tidyverse
+    ## tidyverse
     Con la función [`glimpse`](https://dplyr.tidyverse.org/reference/glimpse.html?q=read_csv#undefined) del paquete [`dplyr`](https://dplyr.tidyverse.org/index.html) de `tidyverse`. Esta función muestra las columnas del data frame en filas, de manera que permite ver todas las columnas de un data frame cuando este tiene muchas columnas.
 
     ```{r}
@@ -685,7 +685,7 @@ a.  Mostrar 5 filas aleatorias del data frame.
     df[sample(nrow(df), 5), ]
     ```
 
-    ## Tidyverse
+    ## tidyverse
 
     La función `sample_n(dataframe, n)` del paquete `dplyr` de `tidyverse` permite seleccionar `n` filas aleatorias del data frame `dataframe`.
 
@@ -708,7 +708,7 @@ a.  Obtener los datos de colesterol de los pacientes.
     df$colesterol
     ```
 
-    ## Tidyverse
+    ## tidyverse
     Con la función [`select`](https://dplyr.tidyverse.org/reference/select.html) del paquete [`dplyr`](https://dplyr.tidyverse.org/index.html) de `tidyverse`.
 
     ```{r}
@@ -730,7 +730,7 @@ a.  Obtener los datos del quinto paciente.
     df[5, ]
     ```
 
-    ## Tidyverse
+    ## tidyverse
     Con la función [`slice`](https://dplyr.tidyverse.org/reference/slice.html) del paquete [`dplyr`](https://dplyr.tidyverse.org/index.html) de `tidyverse`.
 
     ```{r}

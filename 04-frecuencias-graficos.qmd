@@ -69,7 +69,7 @@ a.  Construir la tabla de frecuencias.
     kable(tabla_frec)
     ```
 
-    ## Tidyverse
+    ## tidyverse
     Con la función [`count`](https://aprendeconalf.es/manual-r/06-preprocesamiento.html#conteo-del-n%C3%BAmero-de-observaciones) del paquete `dplyr` de `tidyverse`.
 
     ```{r}
@@ -102,7 +102,7 @@ a.  Dibujar el diagrama de barras de las frecuencias absolutas, relativas, absol
     barplot(Fi, col = "steelblue", main="Distribución acumulada del número de hijos", xlab="Hijos", ylab="Frecuencia relativa acumulada")
     ```
     
-    ## Tidyverse
+    ## tidyverse
     Con la función [`geom_bar`](https://aprendeconalf.es/manual-r/07-graficos.html#diagramas-de-barras) del paquete `ggplot2` de `tidyverse`.
 
     ```{r}
@@ -140,7 +140,7 @@ a.  Dibujar el polígono de frecuencias relativas.
     plot(fi, type = "l", col = "steelblue", main="Distribución del número de hijos", xlab="Hijos", ylab="Frecuencia relativa")
     ```
     
-    ## Tidyverse
+    ## tidyverse
     Con la función la función [`geom_line`](https://aprendeconalf.es/manual-r/07-graficos.html#diagramas-de-lineas) del paquete `ggplot2` de `tidyverse`.
 
     ```{r}
@@ -189,7 +189,7 @@ a.  Dibujar el diagrama de cajas. ¿Existe algún dato atípico? En el caso de q
     boxplot(df$llamadas, col = "steelblue", main="Distribución del número de llamadas", horizontal = T, xlab="Número de llamadas")
     ```
     
-    ## Tidyverse
+    ## tidyverse
     Con la función la función [`geom_boxplot`](https://aprendeconalf.es/manual-r/07-graficos.html#diagramas-de-cajas) del paquete `ggplot2` de `tidyverse`.
 
     ```{r}
@@ -212,7 +212,7 @@ a.  Dibujar el diagrama de cajas. ¿Existe algún dato atípico? En el caso de q
     df <- df[df$llamadas != 50, , drop = F]
     ```
 
-    ## Tidyverse
+    ## tidyverse
     Con la función `filter` del paquete `dplyr` de `tidyverse`.
 
     ```{r}
@@ -248,7 +248,7 @@ a.  Construir la tabla de frecuencias agrupando en 5 clases.
     kable(tabla_frec)
     ```
  
-    ## Tidyverse
+    ## tidyverse
     Con la fución [`count`](https://aprendeconalf.es/manual-r/06-preprocesamiento.html#conteo-del-n%C3%BAmero-de-observaciones) del paquete `dplyr` de `tidyverse`.
 
     ```{r}
@@ -285,7 +285,7 @@ a.  Dibujar el histograma de frecuencias absolutas, relativas, absolutas acumula
     histo$counts <- cumsum(ni)/sum(ni)
     plot(histo, col = "steelblue", main="Distribución acumulada del número de llamadas", xlab="Llamadas", ylab="Frecuencia relativa acumulada", )
     ```
-    ## Tidyverse
+    ## tidyverse
     Con la función la función [`geom_histogram`](https://aprendeconalf.es/manual-r/07-graficos.html#histogramas) del paquete `ggplot2` de `tidyverse`.
 
     ```{r}
@@ -326,7 +326,7 @@ a.  Dibujar el polígono de frecuencias relativas acumuladas (ojiva).
     plot(cortes, Fi, type = "l", col = "steelblue", main = "Distribución acumulada del número de llamadas", xlab = "Número de llamadas", ylab = "Frecuencia relativa acumulada")
     ```
     
-    ## Tidyverse
+    ## tidyverse
     Con la función [`geom_line`](https://aprendeconalf.es/manual-r/07-graficos.html#histogramas) del paquete `ggplot2` de `tidyverse`.
 
     ```{r}
@@ -382,7 +382,7 @@ a.  Construir la tabla de frecuencias.
     kable(tabla_frec)
     ```
 
-    ## Tidyverse
+    ## tidyverse
     Con la fución [`count`](https://aprendeconalf.es/manual-r/06-preprocesamiento.html#conteo-del-n%C3%BAmero-de-observaciones) del paquete `dplyr` de `tidyverse`.
 
     ```{r}
@@ -409,7 +409,7 @@ a.  Dibujar el diagrama de sectores.
     pie(ni, col = 1:length(ni), main = "Distribución de los grupos sanguíneos")
     ```
 
-    ## Tidyverse
+    ## tidyverse
     Con las fuciones [`geom_bar`](https://aprendeconalf.es/manual-r/07-graficos.html#diagrama-de-sectores) y `coor_polar` del paquete `ggplot2` de `tidyverse`.
 
     ```{r}
@@ -459,7 +459,7 @@ a.  Calcular los tamaños muestrales según `estado_civil`.
     table(df$estado_civil)
     ```
 
-    ## Tidyverse
+    ## tidyverse
     Con las funciones [`groub_by`](https://dplyr.tidyverse.org/reference/group_by.html), [`summarise`](https://dplyr.tidyverse.org/reference/summarise.html) y [`n`](https://dplyr.tidyverse.org/reference/context.html) del paquete `dplyr` de `tidyverse`.
     
     ```{r}
